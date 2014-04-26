@@ -57,11 +57,11 @@ public class UserMenuFragment extends Fragment {
 		public void onClick(View v) {
 			int id = v.getId();
 			if (id == R.id.user_modi_bth) {
-				changeFragment(new UserModifyFragment());
+				changeFragment(new UserInformationFragment());
 			} else if (id == R.id.bp_view_bth) {
 				changeFragment(new InputBPFragment());
 			} else if (id == R.id.medical_bth) {
-				changeFragment(new UserModifyFragment());
+				changeFragment(new UserInformationFragment());
 			} else if (id == R.id.habit_menu_btn) {
 				changeFragment(new HabitFragment());
 			} else if (id == R.id.alram_bth) {
@@ -79,10 +79,10 @@ public class UserMenuFragment extends Fragment {
 //			
 //			medNotiBtn.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 //			medNotiBtn.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-//			medNotiBtn.setText("����˸�");
+//			medNotiBtn.setText("占쏙옙占쏙옙舡占�);
 //			clinicNotiBtn.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 //			clinicNotiBtn.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-//			clinicNotiBtn.setText("����湮�˸�");
+//			clinicNotiBtn.setText("占쏙옙占쏙옙疫�옙舡占�);
 //			LinearLayout temp = new LinearLayout(act);
 //			temp.addView(medNotiBtn);
 //			temp.addView(clinicNotiBtn);
@@ -92,8 +92,8 @@ public class UserMenuFragment extends Fragment {
 			
 //			alramDialog.setView(temp);
 //			alramDialog.setView(medNotiBtn);
-//			alramDialog.setView(clinicNotiBtn);
-			String[] temp ={"����˸�","����湮�˸�"}; 
+//			alramDialog.setView(clinicNotiBtn); 
+			String[] temp = {"hello", "world"};
 			
 			alramDialog.setItems(temp, new DialogInterface.OnClickListener() {
 				

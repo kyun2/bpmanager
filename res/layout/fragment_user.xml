@@ -17,7 +17,7 @@
             android:layout_margin="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:text="사용자 등록"
+            android:text="사용자 정보"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
@@ -172,8 +172,6 @@
                         android:layout_weight="1"
                         android:ems="10"
                         android:inputType="number" >
-
-                        <requestFocus />
                     </EditText>
 
                     <TextView
@@ -280,12 +278,14 @@
                     android:layout_weight="1"
                     android:orientation="vertical" >
 
+                    <!--
                     <CheckBox
                         android:id="@+id/high_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="고혈압"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                    -->
 
                     <CheckBox
                         android:id="@+id/glucos_check"
@@ -301,12 +301,14 @@
                         android:text="신장질환"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+                    <!-- 
                     <CheckBox
                         android:id="@+id/coronary_check"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="관상동맥질환"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
+                    -->
                 </LinearLayout>
             </TableRow>
 

@@ -51,7 +51,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.frag_viewer, new PlaceholderFragment()).commit();
+					.add(R.id.frag_viewer, new HomeFragment()).commit();
 		}
 		
 		mDBHelper = new DBHelper(getApplicationContext());

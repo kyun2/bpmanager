@@ -50,7 +50,7 @@ public class PrivacyFragment extends Fragment{
 
 //				Log.d(TAG, "fragmentReplace " + reqNewFragmentIndex);
 
-				newFragment = new UserFragment(); 
+				newFragment = new UserInformationFragment(); 
 
 				// replace fragment
 				final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
