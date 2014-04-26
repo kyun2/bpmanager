@@ -19,10 +19,12 @@ import com.example.bpmanager.DB.DBhandler;
  * 
  * @author Kyun
  *
- *1. 목표 혈압 출력
- *2. 현재 혈압 저장(수축기,이완기, 날짜)
- *3. 자료 화면(그래프, 표) 이동
- *4. 날짜 선택( 측정일 눌렀을 때)
+ *1. 목표 혈압 출력 //(완)
+ *2. 최종 혈압 입력일이 한달 이상이면 알림  //(완)
+ *3. 현재 혈압 저장(수축기,이완기, 날짜) //(완)
+ * 3-1. 입력된 혈압을 목표 혈압과 비교하여 팝업 메시지 발생
+ *4. 자료 화면(그래프, 표) 이동
+ *5. 날짜 선택(측정일 눌렀을 때) //(완)
  */
 public class InputBPFragment extends Fragment{
 
@@ -61,15 +63,18 @@ public class InputBPFragment extends Fragment{
 			sysMax.setText( String.valueOf(recommendBloodPressure.getSystolic())+ "/");
 			diaMax.setText(String.valueOf(recommendBloodPressure.getDiastolic()));
 		}else {
-			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-			alert.setMessage("");
-			alert.show();
-			Fragment next = new BPViewFragment();
+			//Toast.makeText(getActivity(), "목표혈압 계산을 위한 정보를 입력하세요", Toast.LENGTH_SHORT).show();
+			new AlertDialog.Builder(getActivity())./*setTitle("Argh").*/setMessage("목표 혈압 계산을 위한 정보 입력 화면으로 이동합니다.").setNeutralButton("Close", null).show();
+			Fragment next = new UserInformationFragment();
 			replaceFragment(next);	
 		}
 		//		Button button = (Button) view.findViewById(R.id.bt_ok);
 		//		button.setOnClickListener(this);
 
+		//최종 혈압 입력일로 부터 30일이 지났으면 혈압 입력 메시지 발생
+		if(BloodPressure.IsExpiredBPData())
+			new AlertDialog.Builder(getActivity())./*setTitle("Argh").*/setMessage("마지막으로 혈압을 입력한지 한달이 지났습니다.").setNeutralButton("Close", null).show();
+		
 		return view;
 	}
 
@@ -91,13 +96,18 @@ public class InputBPFragment extends Fragment{
 
 		private void insertBloodPressure() {
 			try{
+				int isystolic = Integer.valueOf(diastolic.getText().toString());
+				int idiastolic = Integer.valueOf(systolic.getText().toString());
+
+				if(isystolic > 300 || isystolic < 30) throw new NumberFormatException(); 
+				if(idiastolic > 300 || idiastolic < 30) throw new NumberFormatException(); 
+				
 				if(BloodPressure.insertToDB(new BloodPressure(
-						Integer.valueOf(diastolic.getText().toString()), 
-						Integer.valueOf(systolic.getText().toString()), 
-						bptime.getText().toString()
-						)) > 0){Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();}
+						isystolic, idiastolic, bptime.getText().toString())) > 0){
+					Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();
+				}
 			}catch(NumberFormatException e){
-				Toast.makeText(getActivity(), "숫자만 입력하세요", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
 			}catch(Exception e){}
 		}
 	};

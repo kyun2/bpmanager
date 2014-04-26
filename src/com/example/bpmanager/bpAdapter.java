@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class bpAdapter extends ArrayAdapter<bp> {
+public class bpAdapter extends ArrayAdapter<BloodPressure> {
 	
-	List<bp> value;
+	List<BloodPressure> value;
 	private final Context ctx;
 	private final LayoutInflater mInflater;
 	final String TAG = "MainActivity";
 	private final FragmentManager manager;
 	
-	public bpAdapter(Context context, int resource, List<bp> objects, FragmentManager f) {
+	public bpAdapter(Context context, int resource, List<BloodPressure> objects, FragmentManager f) {
 		super(context, resource, objects);
 		value = objects;
 		
@@ -40,7 +40,7 @@ public class bpAdapter extends ArrayAdapter<bp> {
         TextView sys = (TextView) v.findViewById(R.id.systolic_item);
         TextView dia = (TextView) v.findViewById(R.id.diastolic_item);
         TextView time = (TextView) v.findViewById(R.id.bptime_item);
-        bp temp = value.get(position);
+        BloodPressure temp = value.get(position);
         sys.setText(String.valueOf(temp.getSystolic()));
         dia.setText(String.valueOf(temp.getDiastolic()));
         time.setText(String.valueOf(temp.getBpdatetime()));
