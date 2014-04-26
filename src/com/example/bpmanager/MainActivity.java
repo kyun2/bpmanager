@@ -1,22 +1,20 @@
 package com.example.bpmanager;
 
-import java.util.List;
-
-import com.example.bpmanager.DB.DBHelper;
-//import com.example.bpmanager.DB.DBhandler;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.bpmanager.DB.DBHelper;
+//import com.example.bpmanager.DB.DBhandler;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -63,6 +61,8 @@ public class MainActivity extends ActionBarActivity {
 			showNewUserDialog();
 		}
 		
+		
+		
 		//Toast.makeText(this, "activity start", 3000).show();
 		//DBhandler handle = new DBhandler(this);
 		//handle.readOpen();
@@ -83,10 +83,10 @@ public class MainActivity extends ActionBarActivity {
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("알림");
-		alert.setMessage("고혈압 관리 앱에 오신 것을 환영합니다.\n 개인정보보호정책은 다음과 같습니다.");
+		alert.setTitle("�븣由�");
+		alert.setMessage("怨좏삁�븬 愿�由� �빋�뿉 �삤�떊 寃껋쓣 �솚�쁺�빀�땲�떎.\n 媛쒖씤�젙蹂대낫�샇�젙梨낆� �떎�쓬怨� 媛숈뒿�땲�떎.");
 		alert.setCancelable(false);
-		alert.setPositiveButton("개인정보보호정책", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("媛쒖씤�젙蹂대낫�샇�젙梨�", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -102,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("사용자 등록", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("�궗�슜�옄 �벑濡�", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
