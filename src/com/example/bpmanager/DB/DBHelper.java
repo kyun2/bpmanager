@@ -50,43 +50,17 @@ public class DBHelper extends SQLiteOpenHelper
 	}
 	
 	// Custom Methods ----------------------------------------
-	public void insertUserData(String name, String email, int sex, String birthdate, float height, float weight, float waist, int hypertension, int glucose, int kidney, int coronary)
+	public void insertData(String dbName, ContentValues values)
 	{
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
 			
-			ContentValues values = new ContentValues();
-			values.put(DBUser.User.COLUMN_NAME, name);
-			values.put(DBUser.User.COLUMN_SEX, sex);
-			values.put(DBUser.User.COLUMN_BIRTH, birthdate);
-			values.put(DBUser.User.COLUMN_HEIGHT, height);
-			values.put(DBUser.User.COLUMN_WEIGHT, weight);
-			values.put(DBUser.User.COLUMN_WAIST, waist);
-			values.put(DBUser.User.COLUMN_HYPER, hypertension);
-			values.put(DBUser.User.COLUMN_GLUCOSE, glucose);
-			values.put(DBUser.User.COLUMN_KIDNEY, kidney);
-			values.put(DBUser.User.COLUMN_CORONARY, coronary);
-			
-			long rowId = db.insert(DBUser.User.TB_NAME, null, values);
+			db.insert(dbName, null, values);
 		}
 		catch (SQLiteException e)
 		{
-		
-		}
-	}
-	
-	public void isUserRegistered()
-	{
-		try
-		{
-			SQLiteDatabase db = getReadableDatabase();
 			
-			
-		}
-		catch (SQLiteException e)
-		{
-			Log.e("DB: ", "Open Failed");
 		}
 	}
 }
