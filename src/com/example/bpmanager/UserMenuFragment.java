@@ -26,29 +26,27 @@ public class UserMenuFragment extends Fragment {
 	
 	Button basic;
 	Button bp;
-	Button medMenu;
+	Button medication;
 	Button habit;
 	Button alramMenu;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user_menu, container, false);
-
 		
 		basic = (Button) view.findViewById(R.id.user_modi_bth);
 		bp = (Button) view.findViewById(R.id.bp_view_bth);
 		habit = (Button) view.findViewById(R.id.habit_menu_btn);
-		medMenu = (Button) view.findViewById(R.id.medical_bth);
+		medication = (Button) view.findViewById(R.id.medical_bth);
 		alramMenu = (Button) view.findViewById(R.id.alram_bth);
 		
 		basic.setOnClickListener(clickListen);
 		bp.setOnClickListener(clickListen);
-		medMenu.setOnClickListener(clickListen);
+		medication.setOnClickListener(clickListen);
 		habit.setOnClickListener(clickListen);
 		alramMenu.setOnClickListener(clickListen);
 		
 		return view;
-
 	}
 	
 	View.OnClickListener clickListen = new View.OnClickListener() {
@@ -57,28 +55,21 @@ public class UserMenuFragment extends Fragment {
 
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			Fragment next;
 			int id = v.getId();
-			if(id == R.id.user_modi_bth){
-				next = new UserModifyFragment();
-				changeFragment(next);
-			}else if(id == R.id.bp_view_bth){
-				next = new InputBPFragment();
-				changeFragment(next);
-			}else if(id == R.id.medical_bth){
-				next = new UserModifyFragment();
-				changeFragment(next);
-			}else if(id == R.id.habit_menu_btn){
-				next = new HabitFragment();
-				changeFragment(next);
-			}else if(id == R.id.alram_bth){
-				popupAlramDialog();
+			if (id == R.id.user_modi_bth) {
+				changeFragment(new UserModifyFragment());
+			} else if (id == R.id.bp_view_bth) {
+				changeFragment(new InputBPFragment());
+			} else if (id == R.id.medical_bth) {
+				changeFragment(new UserModifyFragment());
+			} else if (id == R.id.habit_menu_btn) {
+				changeFragment(new HabitFragment());
+			} else if (id == R.id.alram_bth) {
+				popupAlarmDialog();
 			}
-			
 		}
 
-		private void popupAlramDialog() {
+		private void popupAlarmDialog() {
 			FragmentActivity act = getActivity();
 			//RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			// TODO Auto-generated method stub

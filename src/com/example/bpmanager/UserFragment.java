@@ -115,7 +115,7 @@ public class UserFragment extends Fragment{
 		private void insertDB() {
 			// TODO Auto-generated method stub
 			handle = handle.open();
-			user u = new user();
+			UserData u = new UserData();
 			u.name = name.getText().toString();
 			u.email = email.getText().toString();
 			if(gender.getCheckedRadioButtonId() == R.id.radio_male){
@@ -150,14 +150,13 @@ public class UserFragment extends Fragment{
 			}
 			
 			long retval =handle.insertUser(u);
-			List<user> value = handle.getUsers();
+			List<UserData> value = handle.getUsers();
 			if(!value.isEmpty()){
-				user us =value.get(value.size() - 1);
+				UserData us =value.get(value.size() - 1);
 				String text = "modifed user :\n"
-						+DBhandler.KEY+"="+us.getKey()+"\n"
 						+DBhandler.NAME+"="+us.getName()+"\n"
 						+DBhandler.EMAIL+"="+us.getEmail()+"\n"
-						+DBhandler.GENDER+"="+us.getGender()+"\n"
+						+DBhandler.GENDER+"="+us.getSex()+"\n"
 						+DBhandler.BIRTH+"="+us.getBirth()+"\n"
 						+DBhandler.HEIGHT+"="+us.getHeight()+"\n"
 						+DBhandler.WEIGHT+"="+us.getWeight()+"\n"

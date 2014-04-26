@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class UserModifyFragment extends Fragment{
 	DBhandler handle;
-	user u;
+	UserData u;
 	
 	EditText name;
 	EditText email;
@@ -76,13 +76,13 @@ public class UserModifyFragment extends Fragment{
 		// TODO Auto-generated method stub
 		handle = new DBhandler(getActivity());
 		handle = handle.readOpen();
-		List<user> retval = handle.getUsers();
+		List<UserData> retval = handle.getUsers();
 		if(!retval.isEmpty()){
 		u = retval.get(retval.size() - 1);
 
 		name.setText(u.getName());
 		email.setText(u.getEmail());
-		if(u.getGender() == 1){
+		if(u.getSex() == 1){
 			gender.check(R.id.radio_male);
 		}else{
 			gender.check(R.id.radio_female);
@@ -109,13 +109,13 @@ public class UserModifyFragment extends Fragment{
 		
 		
 	}
-	private user setUser(Cursor cu) {
+	private UserData setUser(Cursor cu) {
 		// TODO Auto-generated method stub
-		user retval = new user();
-		retval.setKey(cu.getInt(0));
+		UserData retval = new UserData();
+		//retval.setKey(cu.getInt(0));
 		retval.setName(cu.getString(1));
 		retval.setEmail(cu.getString(2));
-		retval.setGender(cu.getInt(3));
+		retval.setSex(cu.getInt(3));
 		retval.setBirth(cu.getString(4));
 		retval.setHeight(cu.getString(5));
 		retval.setWeight(cu.getString(6));
@@ -203,7 +203,7 @@ public class UserModifyFragment extends Fragment{
 			}
 			
 //			long retval =handle.insertUser(u);
-			long retval = handle.updateUser(u.getKey(), u);
+//			long retval = handle.updateUser(u.getKey(), u);
 			
 //			Cursor cu = handle.getUsers();
 //			if(cu.getCount() > 0){
@@ -235,14 +235,14 @@ public class UserModifyFragment extends Fragment{
 			// TODO Auto-generated method stub
 			handle = new DBhandler(getActivity());
 			handle = handle.open();
-			List<user> retval = handle.getUsers();
+			List<UserData> retval = handle.getUsers();
 			if(!retval.isEmpty()){
-				user us = retval.get(retval.size());
+				UserData us = retval.get(retval.size());
 				String text = "modifed user :\n"
-						+DBhandler.KEY+"="+us.getKey()+"\n"
+						//+DBhandler.KEY+"="+us.getKey()+"\n"
 						+DBhandler.NAME+"="+us.getName()+"\n"
 						+DBhandler.EMAIL+"="+us.getEmail()+"\n"
-						+DBhandler.GENDER+"="+us.getGender()+"\n"
+						+DBhandler.GENDER+"="+us.getSex()+"\n"
 						+DBhandler.BIRTH+"="+us.getBirth()+"\n"
 						+DBhandler.HEIGHT+"="+us.getHeight()+"\n"
 						+DBhandler.WEIGHT+"="+us.getWeight()+"\n"
@@ -263,7 +263,7 @@ public class UserModifyFragment extends Fragment{
 			// TODO Auto-generated method stub
 			handle = new DBhandler(getActivity());
 			handle = handle.open();
-			user u = new user();
+			UserData u = new UserData();
 			u.name = name.getText().toString();
 			u.email = email.getText().toString();
 			if(gender.getCheckedRadioButtonId() == R.id.radio_male){
@@ -298,14 +298,14 @@ public class UserModifyFragment extends Fragment{
 			}
 			
 			long retval =handle.insertUser(u);
-			List<user> value = handle.getUsers();
+			List<UserData> value = handle.getUsers();
 			if(!value.isEmpty()){
-				user us =value.get(value.size() - 1);
+				UserData us =value.get(value.size() - 1);
 				String text = "modifed user :\n"
-						+DBhandler.KEY+"="+us.getKey()+"\n"
+						//+DBhandler.KEY+"="+us.getKey()+"\n"
 						+DBhandler.NAME+"="+us.getName()+"\n"
 						+DBhandler.EMAIL+"="+us.getEmail()+"\n"
-						+DBhandler.GENDER+"="+us.getGender()+"\n"
+						+DBhandler.GENDER+"="+us.getSex()+"\n"
 						+DBhandler.BIRTH+"="+us.getBirth()+"\n"
 						+DBhandler.HEIGHT+"="+us.getHeight()+"\n"
 						+DBhandler.WEIGHT+"="+us.getWeight()+"\n"
