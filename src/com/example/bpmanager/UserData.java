@@ -30,6 +30,18 @@ public class UserData {
 	
 	public UserData()
 	{
+		mName = "";
+		mEmail = "";
+		mSex = 0;
+		mBirth = "";
+		mHeight = 0f;
+		mWeight = 0f;
+		mWaist = 0f;
+		mHypertension = 0;
+		mGlucose = 0;
+		mKidney = 0;
+		mCoronary = 0;
+		
 		mLoaded = false;
 	}
 	
@@ -86,6 +98,7 @@ public class UserData {
 	{	
 		ContentValues values = new ContentValues();
 		values.put(DBUser.User.COLUMN_NAME, mName);
+		values.put(DBUser.User.COLUMN_EMAIL, mEmail);
 		values.put(DBUser.User.COLUMN_SEX, mSex);
 		values.put(DBUser.User.COLUMN_BIRTH, mBirth);
 		values.put(DBUser.User.COLUMN_HEIGHT, mHeight);
@@ -100,6 +113,7 @@ public class UserData {
 			MainActivity.mDBHelper.updateData(DBUser.User.TB_NAME, values, null, null);
 		else
 			MainActivity.mDBHelper.insertData(DBUser.User.TB_NAME, values);
+		this.getData();
 	}
 	
 	public Boolean IsLoaded()
@@ -111,12 +125,15 @@ public class UserData {
 	{
 		int age = 0;
 		
-		String[] strs = mBirth.split("/");
-		if (mBirth.length() > 0 && strs.length > 0)
+		if (mBirth != "")
 		{
-			Calendar currentDate = Calendar.getInstance();
-			int currYear = currentDate.get(Calendar.YEAR);
-			age = currYear - Integer.parseInt(strs[0]);
+			String[] strs = mBirth.split("/");
+			if (strs.length > 0)
+			{
+				Calendar currentDate = Calendar.getInstance();
+				int currYear = currentDate.get(Calendar.YEAR);
+				age = currYear - Integer.parseInt(strs[0]);
+			}
 		}
 		return age;
 	}

@@ -1,18 +1,16 @@
 package com.example.bpmanager;
 
 import java.util.Calendar;
-import java.util.List;
-
-import com.example.bpmanager.DB.DBhandler;
 
 import android.app.DatePickerDialog;
-import android.database.Cursor;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -21,11 +19,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UserModifyFragment extends Fragment
+public class UserInformationFragment extends Fragment
 {
-	//DBhandler handle;
-	//UserData u;
-	
 	EditText name;
 	EditText email;
 	EditText height;
@@ -34,10 +29,10 @@ public class UserModifyFragment extends Fragment
 	EditText birth;
 	RadioGroup gender;
 	
-	CheckBox hyper;
+	//CheckBox hyper;
 	CheckBox glucose;
 	CheckBox kidney;
-	CheckBox coronary;
+	//CheckBox coronary;
 	
 	Calendar c = Calendar.getInstance();
     int cyear = c.get(Calendar.YEAR);
@@ -50,14 +45,9 @@ public class UserModifyFragment extends Fragment
 
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		
-//		Button button = (Button) view.findViewById(R.id.bt_ok);
-//		button.setOnClickListener(this);
-		
-		TextView tv = (TextView)view.findViewById(R.id.htmlview);
-		tv.setText("湲곕낯�뺣낫 愿�━");
-		
 		Button modify = (Button)view.findViewById(R.id.user_commit);
 		modify.setOnClickListener(click);
+		
 		name = (EditText)view.findViewById(R.id.edit_name);
 		email = (EditText)view.findViewById(R.id.edit_email);
 		gender = (RadioGroup)view.findViewById(R.id.gender_radio);
@@ -67,10 +57,10 @@ public class UserModifyFragment extends Fragment
 		birth = (EditText)view.findViewById(R.id.edit_birth);
 		birth.setOnFocusChangeListener(focus);
 //		birth.setOnClickListener(click);
-		hyper = (CheckBox)view.findViewById(R.id.high_check);
+		//hyper = (CheckBox)view.findViewById(R.id.high_check);
 		glucose = (CheckBox)view.findViewById(R.id.glucos_check);
 		kidney = (CheckBox)view.findViewById(R.id.kidney_check);
-		coronary = (CheckBox)view.findViewById(R.id.coronary_check);
+		//coronary = (CheckBox)view.findViewById(R.id.coronary_check);
 		
 		setView();
 
@@ -93,10 +83,10 @@ public class UserModifyFragment extends Fragment
 		height.setText(Float.toString(uData.getHeight()));
 		weight.setText(Float.toString(uData.getWeight()));
 		waist.setText(Float.toString(uData.getWaist()));
-		hyper.setChecked(uData.getHypertension() == 1);
+		//hyper.setChecked(uData.getHypertension() == 1);
 		glucose.setChecked(uData.getGlucose() == 1);
 		kidney.setChecked(uData.getKidney() == 1);
-		coronary.setChecked(uData.getCoronary() == 1);
+		//coronary.setChecked(uData.getCoronary() == 1);
 	}
 	
 	private void viewToast(String text) {
@@ -135,9 +125,14 @@ public class UserModifyFragment extends Fragment
 			// TODO Auto-generated method stub
 			switch(v.getId()){
 			case R.id.user_commit :
+				// Store Data to DB
 				updateUserData();
 				UserData uData = MainActivity.mUserData;
 				uData.submitData();
+				// Hide keyboard
+				InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+				// Go back
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				fm.popBackStack();
 				break;
@@ -153,7 +148,7 @@ public class UserModifyFragment extends Fragment
 			if (gender.getCheckedRadioButtonId() == R.id.radio_male)
 				uData.setSex(1);
 			else
-				uData.setSex(0);
+				uData.setSex(2);
 			uData.setBirth(birth.getText().toString());
 			try
 			{
@@ -179,10 +174,10 @@ public class UserModifyFragment extends Fragment
 			{
 				uData.setWaist(0f);
 			}
-			uData.setHypertension(hyper.isChecked() ? 1 : 0);
+			//uData.setHypertension(hyper.isChecked() ? 1 : 0);
 			uData.setGlucose(glucose.isChecked() ? 1 : 0);
 			uData.setKidney(kidney.isChecked() ? 1 : 0);
-			uData.setCoronary(coronary.isChecked() ? 1 : 0);
+			//uData.setCoronary(coronary.isChecked() ? 1 : 0);
 		}
 		
 		/*
