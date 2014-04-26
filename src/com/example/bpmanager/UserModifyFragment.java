@@ -54,7 +54,7 @@ public class UserModifyFragment extends Fragment
 //		button.setOnClickListener(this);
 		
 		TextView tv = (TextView)view.findViewById(R.id.htmlview);
-		tv.setText("기본정보 관리");
+		tv.setText("湲곕낯�뺣낫 愿�━");
 		
 		Button modify = (Button)view.findViewById(R.id.user_commit);
 		modify.setOnClickListener(click);
