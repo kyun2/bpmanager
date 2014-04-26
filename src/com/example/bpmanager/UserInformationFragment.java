@@ -2,15 +2,19 @@ package com.example.bpmanager;
 
 import java.util.Calendar;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -124,24 +128,82 @@ public class UserInformationFragment extends Fragment
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch(v.getId()){
-			case R.id.user_commit :
-				// Store Data to DB
-				updateUserData();
-				UserData uData = MainActivity.mUserData;
-				uData.submitData();
+			case R.id.user_commit:
 				// Hide keyboard
 				InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-				// Go back
-				FragmentManager fm = getActivity().getSupportFragmentManager();
-				fm.popBackStack();
+				if (getActivity().getCurrentFocus() != null)
+					imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+				if (checkInputData())
+				{
+					UserData uData = MainActivity.mUserData;
+					// modify
+					if (uData.IsLoaded())
+					{
+						// Go back
+						FragmentManager fm = getActivity().getSupportFragmentManager();
+						fm.popBackStack();
+					}
+					else // regist
+					{
+						// Go Home
+						MainActivity activity = (MainActivity) getActivity();
+						activity.fragmentReplace(MainActivity.FRAGMENT_HOME);
+						// Footer show
+						MainActivity.showFooter();
+					}
+					// Store Data to DB				
+					updateUserData();
+					uData.submitData();
+				}
+				else
+				{
+					AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+					alert.setMessage("사용자정보를 모두 입력하여 주세요.").setTitle("오류");
+					alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					alert.show();
+				}							
 				break;
 			}
 			
 		}
+		
+		private boolean checkInputData()
+		{
+			// name
+			if (name.length() == 0)
+				return false;
+			
+			// email
+			if (email.length() == 0 || !email.getText().toString().contains("@"))
+				return false;
+			
+			// birth date
+			if (birth.length() == 0 || !birth.getText().toString().matches("[0-9]{4}/[0-9]+/[0-9]+"))
+				return false;
+			
+			// height
+			if (height.length() == 0)
+				return false;
+			
+			// weight
+			if (weight.length() == 0)
+				return false;
+			
+			// waist
+			if (waist.length() == 0)
+				return false;
+			
+			return true;
+		}
 			
 		public void updateUserData(){
-			UserData uData = MainActivity.mUserData;
+			UserData uData = MainActivity.mUserData;			
 			
 			uData.setName(name.getText().toString());
 			uData.setEmail(email.getText().toString());

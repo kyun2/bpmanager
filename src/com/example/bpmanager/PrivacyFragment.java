@@ -17,7 +17,7 @@ public class PrivacyFragment extends Fragment{
 			Bundle savedInstanceState) {
 		group = container;
 		Button privacy;
-		Button insertUser;
+		Button regist;
 
 		View view = inflater.inflate(R.layout.fragment_privacy, container, false);
 
@@ -26,26 +26,27 @@ public class PrivacyFragment extends Fragment{
 //		BitmapDrawable dr = (BitmapDrawable) view.getContext().getResources().getDrawable(R.drawable.bp_graph);
 //        img.setImageDrawable(dr);
 //        f.addView(img);
-		privacy = (Button)view.findViewById(R.id.privacy_bth);
-		insertUser = (Button)view.findViewById(R.id.user_insert_bth);
+		privacy = (Button)view.findViewById(R.id.bth_privacy);
+		regist = (Button)view.findViewById(R.id.bth_regist);
 		
 		privacy.setOnClickListener(click);
-		insertUser.setOnClickListener(click);
-
-
+		regist.setOnClickListener(click);
 
 		return view;
 	}
+	
 	View.OnClickListener click = new View.OnClickListener() {
 		
 		@Override
 		public void onClick(View v) {
-			switch (v.getId()){
-			case R.id.privacy_bth:
+			switch (v.getId())
+			{			
+			case R.id.bth_privacy:
 				PrivacyDialogFragment privacy = new PrivacyDialogFragment();
 				privacy.show(getFragmentManager(), "TAG");
 				break;
-			case R.id.user_insert_bth:
+				
+			case R.id.bth_regist:
 				Fragment newFragment = null;
 
 //				Log.d(TAG, "fragmentReplace " + reqNewFragmentIndex);

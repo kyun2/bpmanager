@@ -29,6 +29,13 @@ public class MainActivity extends ActionBarActivity {
 	
 	public static DBHelper mDBHelper;
 	public static UserData mUserData;
+	
+	//private static Button home;
+	private static Button data;
+	private static Button bp;
+	private static Button med;
+	private static Button habit;
+	private static Button user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,31 +43,38 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		
-		Button menu_home = (Button) findViewById(R.id.home_menu);
-		menu_home.setOnClickListener(clickListener);
-		Button menu_data = (Button) findViewById(R.id.mydata_menu);
-		menu_data.setOnClickListener(clickListener);
-		Button menu_bp = (Button) findViewById(R.id.mybp_menu);
-		menu_bp.setOnClickListener(clickListener);
-		Button menu_med = (Button) findViewById(R.id.mymedicin_menu);
-		menu_med.setOnClickListener(clickListener);
-		Button menu_habit = (Button) findViewById(R.id.myhabit_menu);
-		menu_habit.setOnClickListener(clickListener);
-		Button menu_user = (Button) findViewById(R.id.user_menu);
-		menu_user.setOnClickListener(clickListener);
+		//home = (Button) findViewById(R.id.home_menu);
+		//home.setOnClickListener(clickListener);
+		data = (Button) findViewById(R.id.mydata_menu);
+		data.setOnClickListener(clickListener);
+		bp = (Button) findViewById(R.id.mybp_menu);
+		bp.setOnClickListener(clickListener);
+		med = (Button) findViewById(R.id.mymedicin_menu);
+		med.setOnClickListener(clickListener);
+		habit = (Button) findViewById(R.id.myhabit_menu);
+		habit.setOnClickListener(clickListener);
+		user = (Button) findViewById(R.id.user_menu);
+		user.setOnClickListener(clickListener);
 		
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.frag_viewer, new HomeFragment()).commit();
-		}
+		Fragment initFragment = null;
 		
 		mDBHelper = new DBHelper(getApplicationContext());
 		mUserData = new UserData();
 		if (!mUserData.getData())
 		{
-			showNewUserDialog();
+			//showNewUserDialog();
+			MainActivity.hideFooter();
+			initFragment = new PrivacyFragment();
+		}
+		else
+		{
+			initFragment = new HomeFragment();
 		}
 		
+		if (savedInstanceState == null) {
+			getSupportFragmentManager().beginTransaction()
+					.add(R.id.frag_viewer, initFragment).commit();
+		}
 		
 		
 		//Toast.makeText(this, "activity start", 3000).show();
@@ -80,13 +94,31 @@ public class MainActivity extends ActionBarActivity {
 		
 	}
 	
+	public static void showFooter() {
+		//home.setVisibility(View.VISIBLE);
+		data.setVisibility(View.VISIBLE);
+		bp.setVisibility(View.VISIBLE);
+		med.setVisibility(View.VISIBLE);
+		habit.setVisibility(View.VISIBLE);
+		user.setVisibility(View.VISIBLE);	
+	}
+	
+	public static void hideFooter() {
+		//home.setVisibility(View.INVISIBLE);
+		data.setVisibility(View.INVISIBLE);
+		bp.setVisibility(View.INVISIBLE);
+		med.setVisibility(View.INVISIBLE);
+		habit.setVisibility(View.INVISIBLE);
+		user.setVisibility(View.INVISIBLE);	
+	}
+	
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("�븣由�");
-		alert.setMessage("怨좏삁�븬 愿�由� �빋�뿉 �삤�떊 寃껋쓣 �솚�쁺�빀�땲�떎.\n 媛쒖씤�젙蹂대낫�샇�젙梨낆� �떎�쓬怨� 媛숈뒿�땲�떎.");
+		alert.setTitle("占쎈르�깍옙");
+		alert.setMessage("�⑥쥚�곻옙釉��울옙�깍옙 占쎈퉳占쎈퓠 占쎌궎占쎈뻿 野껉퍔��占쎌넎占쎌겫占쎈�占쎈빍占쎈뼄.\n 揶쏆뮇�ㅿ옙�숃퉪��궖占쎌깈占쎌젟筌�굞占�占쎈뼄占쎌벉�⑨옙 揶쏆늿�울옙�뀐옙��");
 		alert.setCancelable(false);
-		alert.setPositiveButton("媛쒖씤�젙蹂대낫�샇�젙梨�", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("揶쏆뮇�ㅿ옙�숃퉪��궖占쎌깈占쎌젟筌�옙", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -102,7 +134,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("�궗�슜�옄 �벑濡�", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("占쎄텢占쎌뒠占쎌쁽 占쎈쾻嚥∽옙", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -116,6 +148,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void fragmentReplace(int reqNewFragmentIndex) {
+		mCurrentFragmentIndex = reqNewFragmentIndex;
 
 		Fragment newFragment = null;
 
@@ -136,7 +169,6 @@ public class MainActivity extends ActionBarActivity {
 
 	private Fragment getFragment(int idx) {
 		Fragment newFragment = null;
-
 		
 		switch (idx) {
 		case FRAGMENT_HOME:
@@ -172,35 +204,29 @@ public class MainActivity extends ActionBarActivity {
 
 			switch (v.getId()) {
 
-			case R.id.home_menu:
-				mCurrentFragmentIndex = FRAGMENT_HOME;
-				fragmentReplace(mCurrentFragmentIndex);
-				break;
+			//case R.id.home_menu:
+			//	mCurrentFragmentIndex = FRAGMENT_HOME;
+			//	fragmentReplace(mCurrentFragmentIndex);
+			//	break;
 			case R.id.mydata_menu:
-				mCurrentFragmentIndex = FRAGMENT_DATA;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_DATA);
 				break;
 			case R.id.mybp_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_BP;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_BP);
 				break;
 			case R.id.myhabit_menu:
-				mCurrentFragmentIndex =MainActivity.FRAGMENT_HABIT;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_HABIT);
 				break;
 			case R.id.user_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_USER;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_USER);
 				break;
 			case R.id.mymedicin_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_MED;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_MED);
 				break;
 			}
 
 		}
 	};
-
 	
 
 	@Override

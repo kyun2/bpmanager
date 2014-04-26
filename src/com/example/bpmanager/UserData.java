@@ -25,7 +25,7 @@ public class UserData {
 	int mKidney;
 	int mCoronary;
 	
-	Boolean mLoaded;
+	boolean mLoaded;
 	
 	
 	public UserData()
@@ -45,7 +45,7 @@ public class UserData {
 		mLoaded = false;
 	}
 	
-	public Boolean getData()
+	public boolean getData()
 	{
 		try
 		{
@@ -95,7 +95,7 @@ public class UserData {
 	}
 	
 	public void submitData()
-	{	
+	{
 		ContentValues values = new ContentValues();
 		values.put(DBUser.User.COLUMN_NAME, mName);
 		values.put(DBUser.User.COLUMN_EMAIL, mEmail);
@@ -116,7 +116,7 @@ public class UserData {
 		this.getData();
 	}
 	
-	public Boolean IsLoaded()
+	public boolean IsLoaded()
 	{
 		return mLoaded;
 	}
@@ -138,12 +138,12 @@ public class UserData {
 		return age;
 	}
 	
-	public Boolean hasGlucoseDisease()
+	public boolean hasGlucoseDisease()
 	{
 		return (mGlucose == 1);
 	}
 	
-	public Boolean hasKidneyDisease()
+	public boolean hasKidneyDisease()
 	{
 		return (mKidney == 1);
 	}	
