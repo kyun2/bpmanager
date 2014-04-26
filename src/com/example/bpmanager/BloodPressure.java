@@ -44,6 +44,7 @@ public class BloodPressure {
 		SimpleDateFormat sm = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS", Locale.KOREA);
 		values.put(DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME, sm.format(new Date()));
 		MainActivity.mDBHelper.insertData(DBBloodPressure.BloodPressure.TB_NAME, values);
+		//dd
 	}
 	
 }
