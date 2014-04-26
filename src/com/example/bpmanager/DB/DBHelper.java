@@ -50,18 +50,21 @@ public class DBHelper extends SQLiteOpenHelper
 	}
 	
 	// Custom Methods ----------------------------------------
-	public void insertData(String tableName, ContentValues values)
+	public long insertData(String tableName, ContentValues values)
 	{
+		long rID = -1;
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
 			
-			db.insert(tableName, null, values);
+			rID = db.insert(tableName, null, values);
+			
 		}
 		catch (SQLiteException e)
 		{
 			
 		}
+		return rID;
 	}
 	
 	public void updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
