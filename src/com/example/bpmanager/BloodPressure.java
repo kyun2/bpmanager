@@ -72,12 +72,13 @@ public class BloodPressure {
 	
 	//추천 혈압 조회
 	public static BloodPressure getRecommendBloodPressure(){
+		if(!MainActivity.mUserData.IsLoaded()) return null;
 		
 		int age = MainActivity.mUserData.getAge(); 
 		boolean isGlucose = MainActivity.mUserData.hasGlucoseDisease();
 		boolean isKidney = MainActivity.mUserData.hasKidneyDisease(); 
 		
-		int recommendSystolic = 0;
+		int recommendSystolic = 150;
 		int recommendDiastolic = 90;
 		if(age > 60 && !( isGlucose || isKidney )) recommendSystolic = 150;
 		else recommendSystolic = 140;	
