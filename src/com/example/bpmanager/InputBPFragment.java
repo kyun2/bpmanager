@@ -52,12 +52,14 @@ public class InputBPFragment extends Fragment{
 		bptime.setOnFocusChangeListener(focus);
 
 		TextView sysMax = (TextView) view.findViewById(R.id.systolic_max);
+		TextView diaMax = (TextView) view.findViewById(R.id.diastolic_max);
 
 		//목표 혈압 출력 -> 없으면 경고창후 정보 입력부분으로 이동
 		BloodPressure recommendBloodPressure = BloodPressure.getRecommendBloodPressure();
 		if(recommendBloodPressure != null)
 		{
-			sysMax.setText( String.valueOf(recommendBloodPressure.getSystolic())+ "/" +  String.valueOf(recommendBloodPressure.getDiastolic()));
+			sysMax.setText( String.valueOf(recommendBloodPressure.getSystolic())+ "/");
+			diaMax.setText(String.valueOf(recommendBloodPressure.getDiastolic()));
 		}else {
 			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 			alert.setMessage("");
@@ -65,8 +67,8 @@ public class InputBPFragment extends Fragment{
 			Fragment next = new BPViewFragment();
 			replaceFragment(next);	
 		}
-//		Button button = (Button) view.findViewById(R.id.bt_ok);
-//		button.setOnClickListener(this);
+		//		Button button = (Button) view.findViewById(R.id.bt_ok);
+		//		button.setOnClickListener(this);
 
 		return view;
 	}
@@ -88,13 +90,15 @@ public class InputBPFragment extends Fragment{
 		}
 
 		private void insertBloodPressure() {
-		
-			if(BloodPressure.insertToDB(new BloodPressure(
-					Integer.valueOf(diastolic.getText().toString()), 
-					Integer.valueOf(systolic.getText().toString()), 
-					bptime.getText().toString()
-					
-			)) > 0){Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();}
+			try{
+				if(BloodPressure.insertToDB(new BloodPressure(
+						Integer.valueOf(diastolic.getText().toString()), 
+						Integer.valueOf(systolic.getText().toString()), 
+						bptime.getText().toString()
+						)) > 0){Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();}
+			}catch(NumberFormatException e){
+				Toast.makeText(getActivity(), "숫자만 입력하세요", Toast.LENGTH_SHORT).show();
+			}catch(Exception e){}
 		}
 	};
 

@@ -60,7 +60,7 @@ public class BloodPressure {
 		this.datetime = datetime;
 	}
 	
-	
+	//DB에 혈압을 추가
 	public static long insertToDB(BloodPressure bp){
 		ContentValues values = new ContentValues();
 		values.put(DBBloodPressure.BloodPressure.COLUMN_SYS, bp.getSystolic());
@@ -70,10 +70,22 @@ public class BloodPressure {
 		return MainActivity.mDBHelper.insertData(DBBloodPressure.BloodPressure.TB_NAME, values);
 	}
 	
+	//추천 혈압 조회
 	public static BloodPressure getRecommendBloodPressure(){
-		return new BloodPressure(150,90);
+		
+		int age = MainActivity.mUserData.getAge(); 
+		boolean isGlucose = MainActivity.mUserData.hasGlucoseDisease();
+		boolean isKidney = MainActivity.mUserData.hasKidneyDisease(); 
+		
+		int recommendSystolic = 0;
+		int recommendDiastolic = 90;
+		if(age > 60 && !( isGlucose || isKidney )) recommendSystolic = 150;
+		else recommendSystolic = 140;	
+		
+		return new BloodPressure(recommendSystolic,recommendDiastolic);
+	
 	}
 	
-	
+	//최종 혈압 조회
 	
 }
