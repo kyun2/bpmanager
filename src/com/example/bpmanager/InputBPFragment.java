@@ -1,10 +1,5 @@
 package com.example.bpmanager;
 
-import java.util.Date;
-import java.util.List;
-
-import com.example.bpmanager.DB.DBhandler;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -16,12 +11,22 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.bpmanager.DB.DBhandler;
+
+/**
+ * 
+ * @author Kyun
+ *
+ *1. ¸ñÇ¥ Ç÷¾Ð Ãâ·Â
+ *2. ÇöÀç Ç÷¾Ð ÀúÀå(¼öÃà±â,ÀÌ¿Ï±â, ³¯Â¥)
+ *3. ÀÚ·á È­¸é(±×·¡ÇÁ, Ç¥) ÀÌµ¿
+ *4. ³¯Â¥ ¼±ÅÃ( ÃøÁ¤ÀÏ ´­·¶À» ¶§)
+ */
 public class InputBPFragment extends Fragment{
 	
 	DBhandler handle;
-	Button inputbth;
+	Button inputbth; 
 	Button bpviewbth;
 	
 	EditText systolic;
@@ -46,31 +51,25 @@ public class InputBPFragment extends Fragment{
 		bptime.setOnFocusChangeListener(focus);
 		
 		TextView sysMax = (TextView) view.findViewById(R.id.systolic_max);
-		handle = new DBhandler(getActivity());
-		handle.open();
-		List<user> us = handle.getUsers();
-		handle.close();
-		if(!us.isEmpty()){
-			user temp = us.get(us.size()-1);
-			String[] arr = temp.getBirth().split("/");
-			int year = Integer.valueOf(arr[0]);
-			Date today = new Date();
-			if((today.getYear() - year) < 79 && 
-					(temp.getCoronary() == 1 || 
-					temp.getHypertension() == 1 || 
-					temp.getGlucose() == 1 || 
-					temp.getKidney() == 1)){
-				sysMax.setText("140/");
-			}
+		
+		//¸ñÇ¥ Ç÷¾Ð Ãâ·Â -> ¾øÀ¸¸é °æ°íÃ¢ÈÄ Á¤º¸ ÀÔ·ÂºÎºÐÀ¸·Î ÀÌµ¿
+		BloodPressure recommendBloodPressure = BloodPressure.getRecommendBloodPressure();
+		if(recommendBloodPressure != null)
+		{
+			sysMax.setText( String.valueOf(recommendBloodPressure.getSystolic())+ "/" +  String.valueOf(recommendBloodPressure.getDiastolic()));
+		}else {
+			AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+			alert.setMessage("");
+			alert.show();
+			Fragment next = new BPViewFragment();
+			replaceFragment(next);	
 		}
-		
-		
-
 //		Button button = (Button) view.findViewById(R.id.bt_ok);
 //		button.setOnClickListener(this);
 
 		return view;
 	}
+	
 	View.OnClickListener click = new View.OnClickListener() {
 		
 		@Override
@@ -78,46 +77,36 @@ public class InputBPFragment extends Fragment{
 			// TODO Auto-generated method stub
 			switch(v.getId()){
 			case R.id.inputbp_btn:
-				inputBP();
+				insertBloodPressure();
 				break;
 			case R.id.bpview_bth:
 				Fragment next = new BPViewFragment();
-				changeFragment(next);
+				replaceFragment(next);
 				break;
 			}
-			
 		}
-
-		private void changeFragment(Fragment next) {
-			// TODO Auto-generated method stub
-			final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
-					.beginTransaction();
-
-			transaction.replace(R.id.frag_viewer, next);
-			transaction.addToBackStack(null);
-			// Commit the transaction
-			transaction.commit();
-			
-		}
-
 		
+		private void insertBloodPressure() {
+			BloodPressure.insertToDB(new BloodPressure(
+					Integer.valueOf(diastolic.getText().toString()), 
+					Integer.valueOf(systolic.getText().toString()), 
+					bptime.getText().toString()
+					)
+			);
+		}
 	};
-	private void inputBP() {
-		// TODO Auto-generated method stub
-		bp value = new bp();
-		value.setBpdatetime(bptime.getText().toString());
-		value.setDiastolic(Integer.valueOf(diastolic.getText().toString()));
-		value.setSystolic(Integer.valueOf(systolic.getText().toString()));
-		handle = new DBhandler(getActivity());
-		handle.open();
-		long retval = handle.insertBP(value);
-		if(retval > 0){
-			Toast.makeText(getActivity(), "insert bp success", 2000).show();
-		}
-		handle.close();
-		
-	}
 	
+	private void replaceFragment(Fragment next) {	
+		// TODO Auto-generated method stub
+		final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
+				.beginTransaction();
+
+		transaction.replace(R.id.frag_viewer, next);
+		transaction.addToBackStack(null);
+		// Commit the transaction
+		transaction.commit();
+	}
+
 	View.OnFocusChangeListener focus = new View.OnFocusChangeListener() {
 		
 		@Override
@@ -125,12 +114,11 @@ public class InputBPFragment extends Fragment{
 			// TODO Auto-generated method stub
 			if(v.getId() == R.id.edit_bpinput_time && hasFocus){
 				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-				alert.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½");
+				alert.setTitle("Ç÷¾Ð ÃøÁ¤ÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä.");
 				final DateTimePicker dt = new DateTimePicker(getActivity());
 				
-				
 				alert.setView(dt);
-				alert.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
+				alert.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -142,9 +130,7 @@ public class InputBPFragment extends Fragment{
 						String time =String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute);
 						bptime.setText(time);
 						dialog.dismiss();
-						
 						// TODO Auto-generated method stub
-						
 					}
 				});
 				alert.show();
