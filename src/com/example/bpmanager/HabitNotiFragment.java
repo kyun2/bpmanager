@@ -50,9 +50,9 @@ public class HabitNotiFragment extends Fragment {
 		handle = new DBhandler(getActivity());
 		handle.open();
 		// Toast.makeText(getActivity(), "check3", 300).show();
-		List<user> uslist = handle.getUsers();
+		List<UserData> uslist = handle.getUsers();
 		List<habit> hablist = handle.getHabits();
-		user us = null;
+		UserData us = null;
 		habit hab = null;
 		// Toast.makeText(getActivity(), "check4", 300).show();
 		handle.close();
@@ -133,7 +133,7 @@ public class HabitNotiFragment extends Fragment {
 			t = t.replace("TARGET", String.valueOf(tweight));
 			if (gap > 0) {
 				eval = EvaText.E18;
-				eval = eval.replace("INPUT", us.getWeight())
+				eval = eval.replace("INPUT", Float.toString(us.getWeight()))
 						.replace("TARGET", String.valueOf(tweight))
 						.replace("GAP", String.valueOf(gap));
 				recm = RecomendText.R18;
@@ -144,7 +144,7 @@ public class HabitNotiFragment extends Fragment {
 				weightNoti.add(value);
 			} else {
 				eval = EvaText.E17;
-				eval = eval.replace("INPUT", us.getWeight()).replace("TARGET",
+				eval = eval.replace("INPUT", Float.toString(us.getWeight())).replace("TARGET",
 						String.valueOf(tweight));
 				recm = RecomendText.R17;
 				Map<String, String> value = new HashMap<String,String>();
@@ -155,19 +155,19 @@ public class HabitNotiFragment extends Fragment {
 			}
 
 			int twaist;
-			if ((us.getGender() == 1)) {
+			if ((us.getSex() == 1)) {
 				t = TargetText.T7;
 				twaist = 102;
-				if (Integer.valueOf(us.getWaist()) > twaist) {
+				if (us.getWaist() > twaist) {
 
 					eval = EvaText.E19;
 					eval = eval
-							.replace("INPUT", us.getWaist())
+							.replace("INPUT", Float.toString(us.getWaist()))
 							.replace("TARGET", "102")
 							.replace(
 									"GAP",
-									String.valueOf(Integer.valueOf(us
-											.getWaist()) - 102));
+									String.valueOf(us
+											.getWaist() - 102));
 					recm = RecomendText.R19;
 					Map<String, String> value = new HashMap<String,String>();
 					value.put("T", t);
@@ -178,7 +178,7 @@ public class HabitNotiFragment extends Fragment {
 				} else {
 					eval = EvaText.E20;
 
-					eval = eval.replace("INPUT", us.getWaist()).replace(
+					eval = eval.replace("INPUT", Float.toString(us.getWaist())).replace(
 							"TARGET", "102");
 					recm = RecomendText.R20;
 					Map<String, String> value = new HashMap<String,String>();
@@ -190,16 +190,15 @@ public class HabitNotiFragment extends Fragment {
 			} else {
 				t = TargetText.T7;
 				twaist = 88;
-				if (Integer.valueOf(us.getWaist()) > twaist) {
+				if (us.getWaist() > twaist) {
 
 					eval = EvaText.E19;
 					eval = eval
-							.replace("INPUT", us.getWaist())
+							.replace("INPUT", Float.toString(us.getWaist()))
 							.replace("TARGET", "102")
 							.replace(
 									"GAP",
-									String.valueOf(Integer.valueOf(us
-											.getWaist()) - 102));
+									String.valueOf(us.getWaist() - 102));
 					recm = RecomendText.R19;
 					Map<String, String> value = new HashMap<String,String>();
 					value.put("T", t);
@@ -209,7 +208,7 @@ public class HabitNotiFragment extends Fragment {
 				} else {
 					eval = EvaText.E20;
 
-					eval = eval.replace("INPUT", us.getWaist()).replace(
+					eval = eval.replace("INPUT", Float.toString(us.getWaist())).replace(
 							"TARGET", "102");
 					recm = RecomendText.R20;
 					Map<String, String> value = new HashMap<String,String>();
@@ -256,7 +255,7 @@ public class HabitNotiFragment extends Fragment {
 				examNoti.add(value);
 			}
 
-			if (us.getGender() == 1 && (Double.valueOf(us.getWeight()) > 60)) {
+			if (us.getSex() == 1 && (Double.valueOf(us.getWeight()) > 60)) {
 				t = TargetText.T4;
 				int alDay = hab.getAlcholeDay();
 				int alWeek = hab.getAlcholeWeek();

@@ -86,7 +86,7 @@ public class UserFragment extends Fragment{
 			// TODO Auto-generated method stub
 			switch(v.getId()){
 			case R.id.user_commit :
-				insertDB();
+				//insertDB();
 
 //				Log.d(TAG, "fragmentReplace " + reqNewFragmentIndex);
 
@@ -111,7 +111,7 @@ public class UserFragment extends Fragment{
 			}
 			
 		}
-
+/*
 		private void insertDB() {
 			// TODO Auto-generated method stub
 			handle = handle.open();
@@ -172,6 +172,7 @@ public class UserFragment extends Fragment{
 			handle.close();
 			
 		}
+		*/
 	};
 	
 	private void DialogDatePicker(){
