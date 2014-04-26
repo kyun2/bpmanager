@@ -7,7 +7,7 @@ import com.example.bpmanager.bp;
 import com.example.bpmanager.clinicAlram;
 import com.example.bpmanager.habit;
 import com.example.bpmanager.medalram;
-import com.example.bpmanager.user;
+import com.example.bpmanager.UserData;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -182,12 +182,12 @@ public class DBhandler
 		db.close();
 	}
 
-	public long insertUser(user u) {
+	public long insertUser(UserData u) {
 		ContentValues value = new ContentValues();
 
 		value.put(NAME, u.getName());
 		value.put(DBhandler.EMAIL, u.getEmail());
-		value.put(DBhandler.GENDER, u.getGender());
+		value.put(DBhandler.GENDER, u.getSex());
 		value.put(DBhandler.BIRTH, u.getBirth());
 		value.put(DBhandler.HEIGHT, u.getHeight());
 		value.put(DBhandler.WEIGHT, u.getWeight());
@@ -205,8 +205,8 @@ public class DBhandler
 		return (db.delete(usertable, KEY + " = " + index, null) > 0);
 	}
 
-	public List<user> getUsers() {
-		List<user> retval = new ArrayList<user>();
+	public List<UserData> getUsers() {
+		List<UserData> retval = new ArrayList<UserData>();
 		Cursor cu = db.query(usertable, new String[] { KEY, NAME, EMAIL,
 				GENDER, BIRTH, HEIGHT, WEIGHT, WAIST, HYPER, GLUCOSE, KIDNEY,
 				CORONARY }, null, null, null, null, null);
@@ -224,8 +224,8 @@ public class DBhandler
 		return retval;
 	}
 
-	public user getUser(long index) {
-		user u = new user();
+	public UserData getUser(long index) {
+		UserData u = new UserData();
 		Cursor cu = db.query(usertable, new String[] { KEY, NAME, EMAIL,
 				GENDER, BIRTH, HEIGHT, WEIGHT, WAIST, HYPER, GLUCOSE, KIDNEY,
 				CORONARY }, KEY + " = " + index, null, null, null, null);
@@ -240,17 +240,17 @@ public class DBhandler
 
 	}
 
-	private user setUser(Cursor cu) {
+	private UserData setUser(Cursor cu) {
 		// TODO Auto-generated method stub
-		user retval = new user();
-		retval.setKey(cu.getInt(0));
+		UserData retval = new UserData();
+		//retval.setKey(cu.getInt(0));
 		retval.setName(cu.getString(1));
 		retval.setEmail(cu.getString(2));
-		retval.setGender(cu.getInt(3));
+		retval.setSex(cu.getInt(3));
 		retval.setBirth(cu.getString(4));
-		retval.setHeight(cu.getString(5));
-		retval.setWeight(cu.getString(6));
-		retval.setWaist(cu.getString(7));
+		retval.setHeight(cu.getFloat(5));
+		retval.setWeight(cu.getFloat(6));
+		retval.setWaist(cu.getFloat(7));
 		retval.setHypertension(cu.getInt(8));
 		retval.setGlucose(cu.getInt(9));
 		retval.setKidney(cu.getInt(10));
@@ -259,13 +259,13 @@ public class DBhandler
 		return retval;
 	}
 
-	public int updateUser(long index, user u) {
+	public int updateUser(long index, UserData u) {
 		String strWhere = KEY + " = " + index;
 		ContentValues value = new ContentValues();
 
 		value.put(NAME, u.getName());
 		value.put(DBhandler.EMAIL, u.getEmail());
-		value.put(DBhandler.GENDER, u.getGender());
+		value.put(DBhandler.GENDER, u.getSex());
 		value.put(DBhandler.BIRTH, u.getBirth());
 		value.put(DBhandler.HEIGHT, u.getHeight());
 		value.put(DBhandler.WEIGHT, u.getWeight());
@@ -613,6 +613,5 @@ public class DBhandler
 		}
 		return retval;
 	}
-	
 
 }

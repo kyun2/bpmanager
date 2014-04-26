@@ -30,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
 	public final static int FRAGMENT_USER = 5;
 	
 	public static DBHelper mDBHelper;
+	public static UserData mUserData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,11 @@ public class MainActivity extends ActionBarActivity {
 		}
 		
 		mDBHelper = new DBHelper(getApplicationContext());
-		
+		mUserData = new UserData();
+		if (!mUserData.getData())
+		{
+			showNewUserDialog();
+		}
 		
 		//Toast.makeText(this, "activity start", 3000).show();
 		//DBhandler handle = new DBhandler(this);
@@ -78,10 +83,10 @@ public class MainActivity extends ActionBarActivity {
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("ȯ���մϴ�");
-		alert.setMessage("���а� �ۿ� ���Ű��� ȯ���մϴ�.\n��Ȱ�� ����� ���Ͽ� ����� ����� �����մϴ�.");
+		alert.setTitle("알림");
+		alert.setMessage("고혈압 관리 앱에 오신 것을 환영합니다.\n 개인정보보호정책은 다음과 같습니다.");
 		alert.setCancelable(false);
-		alert.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("개인정보보호정책", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -97,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("���", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("사용자 등록", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

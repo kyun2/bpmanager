@@ -48,10 +48,10 @@ public class InputBPFragment extends Fragment{
 		TextView sysMax = (TextView) view.findViewById(R.id.systolic_max);
 		handle = new DBhandler(getActivity());
 		handle.open();
-		List<user> us = handle.getUsers();
+		List<UserData> us = handle.getUsers();
 		handle.close();
 		if(!us.isEmpty()){
-			user temp = us.get(us.size()-1);
+			UserData temp = us.get(us.size()-1);
 			String[] arr = temp.getBirth().split("/");
 			int year = Integer.valueOf(arr[0]);
 			Date today = new Date();

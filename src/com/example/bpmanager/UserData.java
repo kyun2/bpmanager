@@ -2,9 +2,11 @@ package com.example.bpmanager;
 
 import com.example.bpmanager.DB.DBUser;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 public class UserData {
 	
@@ -28,7 +30,7 @@ public class UserData {
 		mLoaded = false;
 	}
 	
-	public Boolean GetData()
+	public Boolean getData()
 	{
 		try
 		{
@@ -77,11 +79,41 @@ public class UserData {
 		return mLoaded;
 	}
 	
+	public void submitData()
+	{	
+		ContentValues values = new ContentValues();
+		values.put(DBUser.User.COLUMN_NAME, mName);
+		values.put(DBUser.User.COLUMN_SEX, mSex);
+		values.put(DBUser.User.COLUMN_BIRTH, mBirth);
+		values.put(DBUser.User.COLUMN_HEIGHT, mHeight);
+		values.put(DBUser.User.COLUMN_WEIGHT, mWeight);
+		values.put(DBUser.User.COLUMN_WAIST, mWaist);
+		values.put(DBUser.User.COLUMN_HYPER, mHypertension);
+		values.put(DBUser.User.COLUMN_GLUCOSE, mGlucose);
+		values.put(DBUser.User.COLUMN_KIDNEY, mKidney);
+		values.put(DBUser.User.COLUMN_CORONARY, mCoronary);
+
+		if (IsLoaded())
+			MainActivity.mDBHelper.updateData(DBUser.User.TB_NAME, values, null, null);
+		else
+			MainActivity.mDBHelper.insertData(DBUser.User.TB_NAME, values);
+	}
+	
 	public Boolean IsLoaded()
 	{
 		return mLoaded;
 	}
-
+	
+	public int getAge()
+	{
+		int age = 0;
+		
+		Log.i("birthdate:", mBirth);
+		
+		return age;
+	}
+	
+	// getter/setter
 	public String getName() 
 	{
 		return mName;

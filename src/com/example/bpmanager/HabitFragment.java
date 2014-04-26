@@ -32,7 +32,7 @@ public class HabitFragment extends Fragment{
 	Button stress;
 	Button notification;
 	habit hpoint = new habit();
-	user us = new user();
+	UserData us = new UserData();
 	int count = 0;
 	LayoutInflater inf;
 	int q1v, q2v,q3v,q4v,q5v;
@@ -110,7 +110,7 @@ public class HabitFragment extends Fragment{
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			count = 0;
-			builder.setTitle("5(Ç×»ó ÀÖ¾ú´Ù) ~ 1(ÀüÇô ¾ø¾ú´Ù)");
+			builder.setTitle("5(ï¿½×»ï¿½ ï¿½Ö¾ï¿½ï¿½) ~ 1(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)");
 			ScrollView stress = (ScrollView) inf.inflate(R.layout.stress_content, null);
 			RadioGroup q1Value = (RadioGroup) stress.findViewById(R.id.q1_value);
 			RadioGroup q2Value = (RadioGroup) stress.findViewById(R.id.q2_value);
@@ -226,7 +226,7 @@ public class HabitFragment extends Fragment{
 			
 			
 			builder.setView(stress);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -251,11 +251,11 @@ public class HabitFragment extends Fragment{
 		private void smokingDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("ÇöÁ¦ ´ã¹è¸¦ ÇÇ¿ì½Ê´Ï±î?");
+			builder.setMessage("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½è¸¦ ï¿½Ç¿ï¿½Ê´Ï±ï¿½?");
 //			final EditText wText = new EditText(getActivity());
 //			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 //			builder.setView(wText);
-			builder.setPositiveButton("¿¹", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -266,7 +266,7 @@ public class HabitFragment extends Fragment{
 				}
 			}
 			);
-			builder.setNegativeButton("¾Æ´Ï¿À", new DialogInterface.OnClickListener() {
+			builder.setNegativeButton("ï¿½Æ´Ï¿ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -281,9 +281,9 @@ public class HabitFragment extends Fragment{
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("ÀÏ À½ÁÖ·®(ÀÜ) : ");
+			dayText.setText("ï¿½ï¿½ ï¿½ï¿½ï¿½Ö·ï¿½(ï¿½ï¿½) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("ÁÖ°£ À½ÁÖ È½¼ö");
+			weekText.setText("ï¿½Ö°ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½");
 			
 			 LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 			
@@ -312,7 +312,7 @@ public class HabitFragment extends Fragment{
 			
 			
 			builder.setView(Items);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -330,13 +330,13 @@ public class HabitFragment extends Fragment{
 		private void examDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//			builder.setMessage("ÇöÁ¦ Çã¸®µÑ·¹¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+//			builder.setMessage("ï¿½ï¿½ï¿½ï¿½ ï¿½ã¸®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("ÀÏ ¿îµ¿½Ã°£(ºÐ) : ");
+			dayText.setText("ï¿½ï¿½ ï¿½îµ¿ï¿½Ã°ï¿½(ï¿½ï¿½) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("ÁÖ°£ ¿îµ¿ È½¼ö : ");
+			weekText.setText("ï¿½Ö°ï¿½ ï¿½îµ¿ È½ï¿½ï¿½ : ");
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("¿îµ¿°­µµ°¡ ³ô´Ù°í »ý°¢ÇÏ½Ê´Ï±î?");
+			hardText.setText("ï¿½îµ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½Ï½Ê´Ï±ï¿½?");
 			
 			 LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 			
@@ -378,7 +378,7 @@ public class HabitFragment extends Fragment{
 //			final EditText wText = new EditText(getActivity());
 //			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 //			builder.setView(wText);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -396,16 +396,16 @@ public class HabitFragment extends Fragment{
 		private void waistDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("ÇöÁ¦ Çã¸®µÑ·¹¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+			builder.setMessage("ï¿½ï¿½ï¿½ï¿½ ï¿½ã¸®ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					us.setWaist(wText.getText().toString());
+					us.setWaist(Float.parseFloat(wText.getText().toString()));
 						dialog.dismiss();
 						Toast.makeText(getActivity(), "waist is : "+wText.getText().toString(), 500).show();
 					
@@ -419,16 +419,16 @@ public class HabitFragment extends Fragment{
 		private void weightDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("ÇöÁ¦ Ã¼ÁßÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+			builder.setMessage("ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					us.setWeight(wText.getText().toString());
+					us.setWeight(Float.parseFloat(wText.getText().toString()));
 						dialog.dismiss();
 						Toast.makeText(getActivity(), "weight is : "+wText.getText().toString(), 500).show();
 					
@@ -442,17 +442,17 @@ public class HabitFragment extends Fragment{
 		private void slatDialig() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			String[] question = {"»ýÃ¼¼Òº¸´Ù´Â ±èÄ¡¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-					"º°¹Ì¹äÀÌ³ª µ¤¹ä Á¾·ù¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-					"¼­¾ç½Ä ¿ä¸®º¸´Ù Áß±¹½Ä, ÀÏº»½Ä ¿ä¸®¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-					"¸»¸° »ý¼±ÀÌ³ª °íµî¾î ÀÚ¹Ý °°Àº °ÍÀ» ÁÁ¾ÆÇÑ´Ù.",
-					"¸í¶õÁ£ °°Àº Á£°¥·ù°¡ ½ÄÅ¹¿¡ ¾øÀ¸¸é ¼·¼·ÇÏ´Ù.",
-					"À½½Ä(³ª¹° ¶Ç´Â ÅÁ Á¾·ù)ÀÌ ½Ì°Å¿ì¸é ¼Ò±ÝÀÌ³ª °£ÀåÀ» ´õ ³Ö´Â´Ù.",
-					"±¹ÀÌ³ª Âî°³, ±¹¼ö Á¾·ùÀÇ ±¹¹°À» ³²±è¾øÀÌ ¸Ô´Â´Ù.",
-					"Æ¢±èÀÌ³ª Àü, »ý¼±È¸ µî¿¡ °£ÀåÀ» µë»Ò(À½½ÄÀÌ Àá±âµµ·Ï) Âï¾î ¸Ô´Â´Ù.",
-					"¿Ü½ÄÀ» ÇÏ°Å³ª ¹è´ÞÀ» ÀÚÁÖ ½ÃÄÑ ¸Ô´Â´Ù.","¿ä¸®¿¡ ¸¶¿ä³×Áî³ª µå·¹½ÌÀ» °ðÀß »ç¿ëÇÑ´Ù.",
-					"¶ó¸é±¹¹°Àº ³²±ä´Ù.",
-					"Á£°¥ Àå¾ÆÂî¸¦ Àß ¸ÔÁö ¾Ê´Â´Ù."};
+			String[] question = {"ï¿½ï¿½Ã¼ï¿½Òºï¿½ï¿½Ù´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.",
+					"ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.",
+					"ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ä¸®ï¿½ï¿½ï¿½ï¿½ ï¿½ß±ï¿½ï¿½ï¿½, ï¿½Ïºï¿½ï¿½ï¿½ ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.",
+					"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ú¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.",
+					"ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.",
+					"ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½Ì°Å¿ï¿½ï¿½ ï¿½Ò±ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´Â´ï¿½.",
+					"ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½î°³, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.",
+					"Æ¢ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½, ï¿½ï¿½È¸ ï¿½î¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½âµµï¿½ï¿½) ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.",
+					"ï¿½Ü½ï¿½ï¿½ï¿½ ï¿½Ï°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.","ï¿½ä¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î³ª ï¿½å·¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.",
+					"ï¿½ï¿½é±¹ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.",
+					"ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½."};
 			
 				//showDialog(question[i]);
 				//builder.setMessage(question[cset]);
@@ -478,7 +478,7 @@ public class HabitFragment extends Fragment{
 
 					
 				});
-				builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+				builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
