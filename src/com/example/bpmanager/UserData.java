@@ -1,11 +1,14 @@
 package com.example.bpmanager;
 
+import java.util.Calendar;
+
 import com.example.bpmanager.DB.DBUser;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 public class UserData {
@@ -108,10 +111,25 @@ public class UserData {
 	{
 		int age = 0;
 		
-		Log.i("birthdate:", mBirth);
-		
+		String[] strs = mBirth.split("/");
+		if (mBirth.length() > 0 && strs.length > 0)
+		{
+			Calendar currentDate = Calendar.getInstance();
+			int currYear = currentDate.get(Calendar.YEAR);
+			age = currYear - Integer.parseInt(strs[0]);
+		}
 		return age;
 	}
+	
+	public Boolean hasGlucoseDisease()
+	{
+		return (mGlucose == 1);
+	}
+	
+	public Boolean hasKidneyDisease()
+	{
+		return (mKidney == 1);
+	}	
 	
 	// getter/setter
 	public String getName() 
