@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/q1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 한 달 동안, 살아가는데, 정신적 신체적으로 감당하기 힘들다고 느낀 적이 있습니까?" />
+
+        <RadioGroup
+            android:id="@+id/q1_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/q1_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <RadioButton
+                android:id="@+id/q1_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/q1_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/q1_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/q1_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/q2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 한 달 동안, 자신의 생활 신념에 따라 살려고 애쓰다가 좌절을 느낀 적이 있습니까?" />
+
+        <RadioGroup
+            android:id="@+id/q2_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/q2_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <RadioButton
+                android:id="@+id/q2_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/q2_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/q2_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/q2_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/q3_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 한 달 동안, 한 인간으로서 기본적인 요구가 충족되지 않았다고 느낀 적이 있습니까?" />
+
+        <RadioGroup
+            android:id="@+id/q3_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/q3_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <RadioButton
+                android:id="@+id/q3_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/q3_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/q3_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/q3_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/q4_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 한 달 동안, 한 인간으로서 기본적인 요구가 충족되지 않았다고 느낀 적이 있습니까?" />
+
+        <RadioGroup
+            android:id="@+id/q4_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/q4_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <RadioButton
+                android:id="@+id/q4_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/q4_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/q4_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/q4_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/q5_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="지난 한 달 동안, 할 일이 너무 많아 정말 중요한 일들을 잊은 적이 있습니까?" />
+
+        <RadioGroup
+            android:id="@+id/q5_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/q5_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="5" />
+
+            <RadioButton
+                android:id="@+id/q5_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="4" />
+
+            <RadioButton
+                android:id="@+id/q5_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="3" />
+
+            <RadioButton
+                android:id="@+id/q5_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/q5_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+</ScrollView>
