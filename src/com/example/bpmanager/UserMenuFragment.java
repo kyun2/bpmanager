@@ -1,5 +1,7 @@
 package com.example.bpmanager;
 
+import com.example.bpmanager.DB.DBhandler;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -86,10 +88,10 @@ public class UserMenuFragment extends Fragment {
 //			
 //			medNotiBtn.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 //			medNotiBtn.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-//			medNotiBtn.setText("Åõ¾à¾Ë¸²");
+//			medNotiBtn.setText("ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½");
 //			clinicNotiBtn.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
 //			clinicNotiBtn.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-//			clinicNotiBtn.setText("º´¿ø¹æ¹®¾Ë¸²");
+//			clinicNotiBtn.setText("ï¿½ï¿½ï¿½ï¿½æ¹®ï¿½Ë¸ï¿½");
 //			LinearLayout temp = new LinearLayout(act);
 //			temp.addView(medNotiBtn);
 //			temp.addView(clinicNotiBtn);
@@ -100,7 +102,7 @@ public class UserMenuFragment extends Fragment {
 //			alramDialog.setView(temp);
 //			alramDialog.setView(medNotiBtn);
 //			alramDialog.setView(clinicNotiBtn);
-			String[] temp ={"Åõ¾à¾Ë¸²","º´¿ø¹æ¹®¾Ë¸²"}; 
+			String[] temp ={"ï¿½ï¿½ï¿½ï¿½Ë¸ï¿½","ï¿½ï¿½ï¿½ï¿½æ¹®ï¿½Ë¸ï¿½"}; 
 			
 			alramDialog.setItems(temp, new DialogInterface.OnClickListener() {
 				

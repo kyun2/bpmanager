@@ -3,6 +3,8 @@ package com.example.bpmanager;
 import java.util.Date;
 import java.util.List;
 
+import com.example.bpmanager.DB.DBhandler;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -123,12 +125,12 @@ public class InputBPFragment extends Fragment{
 			// TODO Auto-generated method stub
 			if(v.getId() == R.id.edit_bpinput_time && hasFocus){
 				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-				alert.setTitle("Ç÷¾ÐÃøÁ¤½Ã°£");
+				alert.setTitle("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½");
 				final DateTimePicker dt = new DateTimePicker(getActivity());
 				
 				
 				alert.setView(dt);
-				alert.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+				alert.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

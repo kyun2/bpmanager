@@ -2,6 +2,9 @@ package com.example.bpmanager;
 
 import java.util.List;
 
+import com.example.bpmanager.DB.DBHelper;
+//import com.example.bpmanager.DB.DBhandler;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -26,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
 	public final static int FRAGMENT_HABIT = 4;
 	public final static int FRAGMENT_USER = 5;
 	
-	
+	public static DBHelper mDBHelper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,30 +54,34 @@ public class MainActivity extends ActionBarActivity {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.frag_viewer, new PlaceholderFragment()).commit();
 		}
+		
+		mDBHelper = new DBHelper(getApplicationContext());
+		
+		
 		//Toast.makeText(this, "activity start", 3000).show();
-		DBhandler handle = new DBhandler(this);
-		handle.readOpen();
-		List<user> retval = handle.getUsers();
-		if(retval.isEmpty()){
+		//DBhandler handle = new DBhandler(this);
+		//handle.readOpen();
+		//List<user> retval = handle.getUsers();
+		//if(retval.isEmpty()){
 			//Toast.makeText(this, "user not found", 3000).show();
-			handle.close();
-			showNewUserDialog();
+			//handle.close();
+			//showNewUserDialog();
 			
-		}else {
+		//}else {
 			//cu.moveToPosition(cu.getCount() - 1);
 			//Toast.makeText(this, "user found : "+cu.getInt(0)+" "+cu.getString(1), 3000).show();
-			handle.close();
-		}
+			//handle.close();
+		//}
 		
 	}
 	
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("È¯¿µÇÕ´Ï´Ù");
-		alert.setMessage("Ç÷¾Ð°ü¸® ¾Û¿¡ ¿À½Å°ÍÀ» È¯¿µÇÕ´Ï´Ù.\n¿øÈ°ÇÑ »ç¿ëÀ» À§ÇÏ¿© »ç¿ëÀÚ µî·ÏÀ» ½ÃÀÛÇÕ´Ï´Ù.");
+		alert.setTitle("È¯ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
+		alert.setMessage("ï¿½ï¿½ï¿½Ð°ï¿½ ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½Å°ï¿½ï¿½ï¿½ È¯ï¿½ï¿½ï¿½Õ´Ï´ï¿½.\nï¿½ï¿½È°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.");
 		alert.setCancelable(false);
-		alert.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -90,7 +97,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("Ãë¼Ò", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("ï¿½ï¿½ï¿½", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {

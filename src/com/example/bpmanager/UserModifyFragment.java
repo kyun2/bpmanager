@@ -3,6 +3,8 @@ package com.example.bpmanager;
 import java.util.Calendar;
 import java.util.List;
 
+import com.example.bpmanager.DB.DBhandler;
+
 import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;

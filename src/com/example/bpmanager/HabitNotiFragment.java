@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.bpmanager.DB.DBhandler;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -74,33 +76,33 @@ public class HabitNotiFragment extends Fragment {
 		ArrayList<Map<String,String>> stressNoti = new ArrayList<Map<String,String>>();
 
 		Map<String, String> saltType = new HashMap<String, String>();
-		saltType.put("Type", "¼Ò±Ý¼·Ãë°ü¸®");
+		saltType.put("Type", "ï¿½Ò±Ý¼ï¿½ï¿½ï¿½ï¿½");
 		mGroupList.add(saltType);
 		Map<String, String> weightType = new HashMap<String, String>();
-		weightType.put("Type", "Ã¼Áß°ü¸®");
+		weightType.put("Type", "Ã¼ï¿½ß°ï¿½");
 		mGroupList.add(weightType);
 		Map<String, String> waistType = new HashMap<String, String>();
-		waistType.put("Type", "º¹ºÎµÑ·¹°ü¸®");
+		waistType.put("Type", "ï¿½ï¿½ï¿½ÎµÑ·ï¿½ï¿½ï¿½");
 		mGroupList.add(waistType);
 		Map<String, String> examType = new HashMap<String, String>();
-		examType.put("Type", "¿îµ¿°ü¸®");
+		examType.put("Type", "ï¿½îµ¿ï¿½ï¿½");
 		mGroupList.add(examType);
 		Map<String, String> alcholeType = new HashMap<String, String>();
-		alcholeType.put("Type", "¾ËÄÝ¼·Ãë°ü¸®");
+		alcholeType.put("Type", "ï¿½ï¿½ï¿½Ý¼ï¿½ï¿½ï¿½ï¿½");
 		mGroupList.add(alcholeType);
 		Map<String, String> smokingType = new HashMap<String, String>();
-		smokingType.put("Type", "±Ý¿¬°ü¸®");
+		smokingType.put("Type", "ï¿½Ý¿ï¿½ï¿½ï¿½");
 		mGroupList.add(smokingType);
 		Map<String, String> stressType = new HashMap<String, String>();
-		stressType.put("Type", "½ºÆ®·¹½º°ü¸®");
+		stressType.put("Type", "ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		mGroupList.add(stressType);
 		
 
 		if (hab == null) {
 			Toast.makeText(getActivity(), "check1", 300).show();
-			// errDialog("»ýÈ°½À°ü Á¤º¸°¡ ¾ø½À´Ï´Ù.");
+			// errDialog("ï¿½ï¿½È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		} else if (us == null) {
-			// errDialog("»ç¿ëÀÚ Á¤º¸°¡ ¾ø½À´Ï´Ù.");
+			// errDialog("ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
 		} else {
 			int salt = hab.getSalt();
 
@@ -225,7 +227,7 @@ public class HabitNotiFragment extends Fragment {
 				eval = EvaText.E8;
 				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
 						.replace("MINITE", String.valueOf(hab.getExamTime()))
-						.replace("HARDNESS", "°­");
+						.replace("HARDNESS", "ï¿½ï¿½");
 				recm = RecomendText.R8;
 				Map<String, String> value = new HashMap<String,String>();
 				value.put("T", t);
@@ -238,9 +240,9 @@ public class HabitNotiFragment extends Fragment {
 				t = TargetText.T3;
 				String hard;
 				if (hab.getExamHard() == 1) {
-					hard = "°­";
+					hard = "ï¿½ï¿½";
 				} else {
-					hard = "º¸Åë";
+					hard = "ï¿½ï¿½ï¿½ï¿½";
 				}
 				eval = EvaText.E8;
 				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
@@ -380,21 +382,21 @@ public class HabitNotiFragment extends Fragment {
 		
 		ExpandableListAdapter adapter = new SimpleExpandableListAdapter(
 				getActivity(),
-				this.mGroupList, //È­¸é¿¡ »Ñ·ÁÁÙ µ¥ÀÌÅÍ¸¦ È£Ãâ
-				//»ç¿ëÇÒ ¸®½ºÆ®ºä¸¦ È£Ãâ
+				this.mGroupList, //È­ï¿½é¿¡ ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ È£ï¿½ï¿½
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ä¸¦ È£ï¿½ï¿½
 				android.R.layout.simple_expandable_list_item_1,
-				new String[] { "Type" }, //»Ñ·ÁÁÙ °ªÀÇ HashÀÇ key¸¦ Àû¾îÁØ´Ù.
-				new int[] { android.R.id.text1 }, //»Ñ·ÁÁÙ TextView¸¦ ºÒ·¯¿Â´Ù.
-				//»ç¿ëÇÒ º¸Á¶ µ¥ÀÌÅÍ¸¦ È£ÃâÇÑ´Ù.
+				new String[] { "Type" }, //ï¿½Ñ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Hashï¿½ï¿½ keyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø´ï¿½.
+				new int[] { android.R.id.text1 }, //ï¿½Ñ·ï¿½ï¿½ï¿½ TextViewï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Â´ï¿½.
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ È£ï¿½ï¿½ï¿½Ñ´ï¿½.
 				this.mChildList,
 				android.R.layout.simple_expandable_list_item_2,
-				//¹è¿­À» »ç¿ëÇÏ¿© È£Ãâ ÇÒ ¼ö ÀÖ´Ù. ÀÌ °æ¿ì ViewÀÇ ¼ö¿Í ²À ¸Â°Ô Àû¿ëÇØ¾ß ÇÑ´Ù.
+				//ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ È£ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½. ï¿½ï¿½ ï¿½ï¿½ï¿½ Viewï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Â°ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ñ´ï¿½.
 				new String[] { "T", "E", "R" },
-				//StringÀÇ ¼ö¿Í ViewÀÇ ¼ö°¡ 1:1ÀÌ¾î¾ß ÇÑ´Ù.
+				//Stringï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Viewï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 1:1ï¿½Ì¾ï¿½ï¿½ ï¿½Ñ´ï¿½.
 				new int[] { android.R.id.text1, android.R.id.text2, android.R.id.text2 }
 			);
 		this.mListView.setAdapter(adapter);
-//		// Â÷ÀÏµå Å¬¸¯ ÇßÀ» °æ¿ì ÀÌº¥Æ®
+//		// ï¿½ï¿½ï¿½Ïµï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 //		mListView.setOnChildClickListener(new OnChildClickListener() {
 //			@Override
 //			public boolean onChildClick(ExpandableListView parent, View v,
@@ -405,7 +407,7 @@ public class HabitNotiFragment extends Fragment {
 //			}
 //		});
 //
-//		// ±×·ìÀÌ ´ÝÈú °æ¿ì ÀÌº¥Æ®
+//		// ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 //		mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 //			@Override
 //			public void onGroupCollapse(int groupPosition) {
@@ -415,7 +417,7 @@ public class HabitNotiFragment extends Fragment {
 //			}
 //		});
 //
-//		// ±×·ìÀÌ ¿­¸± °æ¿ì ÀÌº¥Æ®
+//		// ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 //		mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 //			@Override
 //			public void onGroupExpand(int groupPosition) {
@@ -435,7 +437,7 @@ public class HabitNotiFragment extends Fragment {
 		// final EditText wText = new EditText(getActivity());
 		// wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		// builder.setView(wText);
-		builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("È®ï¿½ï¿½", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
