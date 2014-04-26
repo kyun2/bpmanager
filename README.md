@@ -1,4 +1,3 @@
 bpmanager
 =========
-
-고혈안 관리 어플리케이션
+bpmanager
