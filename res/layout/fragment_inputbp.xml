@@ -54,7 +54,7 @@
                 android:textSize="50dp" />
 
             <TextView
-                android:id="@+id/diastolic_max"
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
@@ -67,12 +67,11 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/inputbp_btn"
+            android:id="@+id/bpview_bth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:text="입력" />
+            android:layout_marginTop="30dp"
+            android:text="데이터보기" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -144,19 +143,20 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/inputbp_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="입력" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/bpview_bth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="데이터보기" />
 
         </LinearLayout>
 

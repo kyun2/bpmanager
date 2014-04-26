@@ -1,12 +1,16 @@
 package com.example.bpmanager;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.bpmanager.DB.DBBloodPressure;
+import com.example.bpmanager.DB.DBUser;
+import com.example.bpmanager.DB.DBhandler;
 /**
  * 
  * @author Kyun
@@ -15,6 +19,7 @@ import com.example.bpmanager.DB.DBBloodPressure;
  * 1. 혈압을 디비에 삽입
  * 2. 원하는 날짜까지 디비에서 혈압들을 조회
  * 3. 목표 혈압 출력
+ * 4. 마지막 입력값 출력
  * 
  */
 public class BloodPressure {
@@ -70,9 +75,33 @@ public class BloodPressure {
 		return MainActivity.mDBHelper.insertData(DBBloodPressure.BloodPressure.TB_NAME, values);
 	}
 	
-	//추천 혈압 조회
+	//원하는 날짜까지 디비에서 혈압들을 조회
+	public static List<BloodPressure> getLastBPsList(int termday){
+		List<BloodPressure> bps = new ArrayList<BloodPressure>();
+		
+		String strDay = "";
+	
+		String where = DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME+" > "+strDay;
+		String strQry = "";
+		SQLiteDatabase db = MainActivity.mDBHelper.getWritableDatabase();
+		
+		Cursor cursor = db.rawQuery(strQry, null);
+		//if (cursor.getCount() > 0) return null;
+		while(cursor.moveToNext()){
+			int iSystolic = cursor.getInt(cursor.getColumnIndex(DBBloodPressure.BloodPressure.COLUMN_SYS));
+			int iDiastolic= cursor.getInt(cursor.getColumnIndex(DBBloodPressure.BloodPressure.COLUMN_DIA));
+			String strDate = cursor.getString(cursor.getColumnIndex(DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME));	
+		
+			if(iSystolic > 0 && iDiastolic > 0 && strDate != null)
+				bps.add(new BloodPressure(iSystolic, iDiastolic, strDate));
+		}
+		
+		return bps;
+	}
+	
+	//목표 혈압 조회
 	public static BloodPressure getRecommendBloodPressure(){
-		if(!MainActivity.mUserData.IsLoaded()) return null;
+		//**if(!MainActivity.mUserData.IsLoaded()) return null;
 		
 		int age = MainActivity.mUserData.getAge(); 
 		boolean isGlucose = MainActivity.mUserData.hasGlucoseDisease();
@@ -84,9 +113,12 @@ public class BloodPressure {
 		else recommendSystolic = 140;	
 		
 		return new BloodPressure(recommendSystolic,recommendDiastolic);
-	
 	}
 	
-	//최종 혈압 조회
+	//최종 혈압 입력일 이 한달이 지났는지 확인
+	public static boolean IsExpiredBPData(){
+		if(getLastBPsList(30).size() > 0) return false;
+		else return true;
+	}
 	
 }
