@@ -1,5 +1,13 @@
 package com.example.bpmanager;
 
+
+/**
+ * 
+ * @author Kyun
+ *
+ * 혈압에 관한 정보
+ * 현재 혈압 수축기 
+ */
 public class bp {
 	private long id;
 	private int systolic;

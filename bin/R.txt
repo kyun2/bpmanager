@@ -287,7 +287,7 @@ int id bpdate 0x7f0500a5
 int id bplist 0x7f05004f
 int id bptime 0x7f0500a6
 int id bptime_item 0x7f050046
-int id bpview_bth 0x7f050071
+int id bpview_bth 0x7f05006b
 int id button3 0x7f050073
 int id button4 0x7f050074
 int id checkbox 0x7f05002d
@@ -330,7 +330,7 @@ int id icon 0x7f05002a
 int id ifRoom 0x7f05000a
 int id image 0x7f050027
 int id imageView1 0x7f050075
-int id inputbp_btn 0x7f05006b
+int id inputbp_btn 0x7f050071
 int id kidney_check 0x7f05009b
 int id last_clinic 0x7f050054
 int id last_clinic_date 0x7f050057

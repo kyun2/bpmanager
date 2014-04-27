@@ -1,5 +1,5 @@
 package com.example.bpmanager;
 
-public class R {
+public class BloodPressureInfo {
 
 }
