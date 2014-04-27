@@ -1,10 +1,10 @@
 package com.example.bpmanager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -22,6 +22,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.bpmanager.Data.SaltIntakeSurvey;
+import com.example.bpmanager.Data.Survey;
+
 public class HabitFragment extends Fragment{
 	Button slat;
 	Button weight;
@@ -31,12 +34,15 @@ public class HabitFragment extends Fragment{
 	Button smoking;
 	Button stress;
 	Button notification;
-	habit hpoint = new habit();
+	Habit hpoint = new Habit();
 	UserData us = new UserData();
 	int count = 0;
 	LayoutInflater inf;
 	int q1v, q2v,q3v,q4v,q5v;
-	
+
+	Survey saltSurvey = new SaltIntakeSurvey();
+	Map<Integer,Object> q1 = new HashMap<Integer, Object>();
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,8 +50,16 @@ public class HabitFragment extends Fragment{
 		inf = inflater;
 		View view = inflater.inflate(R.layout.fragment_habit, container, false);
 
-//		Button button = (Button) view.findViewById(R.id.bt_ok);
-//		button.setOnClickListener(this);
+		ScrollView scrollView;
+
+
+		scrollView = (ScrollView) view.findViewById(R.id.scrollView1);
+
+		scrollView.setVerticalScrollBarEnabled(true);
+
+
+		//		Button button = (Button) view.findViewById(R.id.bt_ok);
+		//		button.setOnClickListener(this);
 		slat = (Button) view.findViewById(R.id.salt_btn);
 		weight = (Button) view.findViewById(R.id.weight_bth);
 		waist = (Button) view.findViewById(R.id.waist_bth);
@@ -54,7 +68,7 @@ public class HabitFragment extends Fragment{
 		smoking = (Button) view.findViewById(R.id.smoking_bth);
 		stress = (Button) view.findViewById(R.id.stress_btn);
 		notification = (Button) view.findViewById(R.id.habit_noti_bth);
-		
+
 		slat.setOnClickListener(click);
 		weight.setOnClickListener(click);
 		waist.setOnClickListener(click);
@@ -63,13 +77,13 @@ public class HabitFragment extends Fragment{
 		smoking.setOnClickListener(click);
 		stress.setOnClickListener(click);
 		notification.setOnClickListener(click);
-		
+
 
 		return view;
 	}
-	
+
 	View.OnClickListener click = new View.OnClickListener() {
-		
+
 		private Handler mHandler;
 
 		@Override
@@ -77,7 +91,7 @@ public class HabitFragment extends Fragment{
 			// TODO Auto-generated method stub
 			int btnId = v.getId();
 			if(btnId == R.id.salt_btn){
-				slatDialig();
+				saltDialig();
 			}else if(btnId == R.id.weight_bth){
 				//Toast.makeText(getActivity(), "weight btn click", 500).show();
 				weightDialog();
@@ -97,29 +111,29 @@ public class HabitFragment extends Fragment{
 
 				transaction.replace(R.id.frag_viewer, new HabitNotiFragment());
 				transaction.addToBackStack(null);
-//				FragmentManager fm = getActivity().getSupportFragmentManager();
-//				for(int i = 0; i < fm.getBackStackEntryCount(); i++){
-//					fm.popBackStack();
-//				}
-				 //Commit the transaction
+				//				FragmentManager fm = getActivity().getSupportFragmentManager();
+				//				for(int i = 0; i < fm.getBackStackEntryCount(); i++){
+				//					fm.popBackStack();
+				//				}
+				//Commit the transaction
 				transaction.commit();
 			}
-			
+
 		}
 		private void stressDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			count = 0;
-			builder.setTitle("5(�׻� �־��) ~ 1(���� ����)");
+			builder.setTitle("5(항상 있었다) ~ 1(전혀 없었다)");
 			ScrollView stress = (ScrollView) inf.inflate(R.layout.stress_content, null);
 			RadioGroup q1Value = (RadioGroup) stress.findViewById(R.id.q1_value);
 			RadioGroup q2Value = (RadioGroup) stress.findViewById(R.id.q2_value);
 			RadioGroup q3Value = (RadioGroup) stress.findViewById(R.id.q3_value);
 			RadioGroup q4Value = (RadioGroup) stress.findViewById(R.id.q4_value);
 			RadioGroup q5Value = (RadioGroup) stress.findViewById(R.id.q5_value);
-			
+
 			q1Value.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
+
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					// TODO Auto-generated method stub
@@ -140,7 +154,7 @@ public class HabitFragment extends Fragment{
 			});
 
 			q2Value.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
+
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					// TODO Auto-generated method stub
@@ -161,7 +175,7 @@ public class HabitFragment extends Fragment{
 			});
 
 			q3Value.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
+
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					// TODO Auto-generated method stub
@@ -182,7 +196,7 @@ public class HabitFragment extends Fragment{
 			});
 
 			q4Value.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
+
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					// TODO Auto-generated method stub
@@ -203,7 +217,7 @@ public class HabitFragment extends Fragment{
 			});
 
 			q5Value.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
+
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					// TODO Auto-generated method stub
@@ -222,19 +236,19 @@ public class HabitFragment extends Fragment{
 					//Toast.makeText(getActivity(), "q5 : "+q2v, 300).show();
 				}
 			});
-			
-			
-			
+
+
+
 			builder.setView(stress);
-			builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-				
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					hpoint.setStress(getStressPoint());
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "stress is : "+ hpoint.getStress(), 500).show();
-					
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "stress is : "+ hpoint.getStress(), 500).show();
+
 				}
 
 				private double getStressPoint() {
@@ -244,30 +258,30 @@ public class HabitFragment extends Fragment{
 					return retval;
 				}
 			}
-			);
+					);
 			builder.show();
-			
+
 		}
 		private void smokingDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("���� ��踦 �ǿ�ʴϱ�?");
-//			final EditText wText = new EditText(getActivity());
-//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-//			builder.setView(wText);
-			builder.setPositiveButton("��", new DialogInterface.OnClickListener() {
-				
+			builder.setMessage("현제 담배를 피우십니까?");
+			//			final EditText wText = new EditText(getActivity());
+			//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			//			builder.setView(wText);
+			builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "weight is : ", 500).show();
-					
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "weight is : ", 500).show();
+
 				}
 			}
-			);
-			builder.setNegativeButton("�ƴϿ�", new DialogInterface.OnClickListener() {
-				
+					);
+			builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -275,24 +289,24 @@ public class HabitFragment extends Fragment{
 				}
 			});
 			builder.show();
-			
+
 		}
 		private void alcholeDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("�� ���ַ�(��) : ");
+			dayText.setText("일 음주량(잔) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("�ְ� ���� Ƚ��");
-			
-			 LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-			
+			weekText.setText("주간 음주 횟수");
+
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
 			EditText day = new EditText(getActivity());
 			EditText week = new EditText(getActivity());
 			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			
-			
+
+
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
 			dayItem.setLayoutParams(lparam);
@@ -303,51 +317,51 @@ public class HabitFragment extends Fragment{
 			weekItem.setLayoutParams(lparam);
 			weekItem.addView(weekText);
 			weekItem.addView(week);
-			
+
 			LinearLayout Items =  new LinearLayout(getActivity());
 			Items.setOrientation(LinearLayout.VERTICAL);
 			Items.setLayoutParams(lparam);
 			Items.addView(dayItem);
 			Items.addView(weekItem);
-			
-			
+
+
 			builder.setView(Items);
-			builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-				
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
-					
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "weight is : ".toString(), 500).show();
-					
+
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "weight is : ".toString(), 500).show();
+
 				}
 			}
-			);
+					);
 			builder.show();
-			
+
 		}
 		private void examDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//			builder.setMessage("���� �㸮�ѷ��� �Է��ϼ���.");
+			//			builder.setMessage("현제 허리둘레를 입력하세요.");
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("�� ��ð�(��) : ");
+			dayText.setText("일 운동시간(분) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("�ְ� � Ƚ�� : ");
+			weekText.setText("주간 운동 횟수 : ");
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("������� ���ٰ� ���Ͻʴϱ�?");
-			
-			 LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-			
+			hardText.setText("운동강도가 높다고 생각하십니까?");
+
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
 			EditText day = new EditText(getActivity());
 			EditText week = new EditText(getActivity());
 			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			
+
 			CheckBox hard = new CheckBox(getActivity());
 			hard.setText("");
-			
+
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
 			dayItem.setLayoutParams(lparam);
@@ -358,148 +372,128 @@ public class HabitFragment extends Fragment{
 			weekItem.setLayoutParams(lparam);
 			weekItem.addView(weekText);
 			weekItem.addView(week);
-			
+
 			LinearLayout hardItem = new LinearLayout(getActivity());
 			hardItem.setOrientation(LinearLayout.HORIZONTAL);
 			hardItem.setLayoutParams(lparam);
 			hardItem.addView(hardText);
 			hardItem.addView(hard);
-			
+
 			LinearLayout Items =  new LinearLayout(getActivity());
 			Items.setOrientation(LinearLayout.VERTICAL);
 			Items.setLayoutParams(lparam);
 			Items.addView(dayItem);
 			Items.addView(weekItem);
 			Items.addView(hardItem);
-			
-			
+
+
 			builder.setView(Items);
-			
-//			final EditText wText = new EditText(getActivity());
-//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-//			builder.setView(wText);
-			builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-				
+
+			//			final EditText wText = new EditText(getActivity());
+			//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			//			builder.setView(wText);
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					//us.setWaist(wText.getText().toString());
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "waist is : ".toString(), 500).show();
-					
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "waist is : ".toString(), 500).show();
+
 				}
 			}
-			);
+					);
 			builder.show();
-			
+
 		}
+
 		private void waistDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("���� �㸮�ѷ��� �Է��ϼ���.");
+			builder.setMessage("현제 허리둘레를 입력하세요.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
-			builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-				
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					us.setWaist(Float.parseFloat(wText.getText().toString()));
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "waist is : "+wText.getText().toString(), 500).show();
-					
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "waist is : "+wText.getText().toString(), 500).show();
+
 				}
 			}
-			);
+					);
 			builder.show();
-			
+
 		}
 
 		private void weightDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("���� ü���� �Է��ϼ���.");
+			builder.setMessage("현제 체중을 입력하세요.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
-			builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-				
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
 					us.setWeight(Float.parseFloat(wText.getText().toString()));
-						dialog.dismiss();
-						Toast.makeText(getActivity(), "weight is : "+wText.getText().toString(), 500).show();
-					
+					dialog.dismiss();
+					Toast.makeText(getActivity(), "weight is : "+wText.getText().toString(), 500).show();
+
 				}
 			}
-			);
+					);
 			builder.show();
-			
+
 		}
 
-		private void slatDialig() {
+		private void saltDialig() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			q1 = new HashMap<Integer, Object>();
+			
+			builder.setMultiChoiceItems(saltSurvey.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+					if(isChecked) q1.put(which, 1);
+					else q1.put(which, 0);
+				}
+			});
+
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					slatAdviceReportDialig();
+				}
+			});
+			builder.show();
+		}
+
+		private void slatAdviceReportDialig() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			String[] question = {"��ü�Һ��ٴ� ��ġ�� �� �����Ѵ�.",
-					"���̹��̳� ���� ���� �� �����Ѵ�.",
-					"����� �丮���� �߱���, �Ϻ��� �丮�� �� �����Ѵ�.",
-					"���� ���̳� ���� �ڹ� ���� ���� �����Ѵ�.",
-					"����� ���� ������ ��Ź�� ������ �����ϴ�.",
-					"����(���� �Ǵ� �� ����)�� �̰ſ�� �ұ��̳� ������ �� �ִ´�.",
-					"���̳� �, ���� ������ ������ ������� �Դ´�.",
-					"Ƣ���̳� ��, ��ȸ � ������ ���(������ ��⵵��) ��� �Դ´�.",
-					"�ܽ��� �ϰų� ����� ���� ���� �Դ´�.","�丮�� ������ �巹���� ���� ����Ѵ�.",
-					"��鱹���� �����.",
-					"���� ���� �� ���� �ʴ´�."};
-			
-				//showDialog(question[i]);
-				//builder.setMessage(question[cset]);
-				builder.setMultiChoiceItems(question, null, new DialogInterface.OnMultiChoiceClickListener() {
-					
-					int temp = 0;
 
-					@Override
-					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						// TODO Auto-generated method stub
-						if(which < 9 && isChecked){
-							temp++; 
-						}else if(which < 9 && !isChecked){
-							temp--;
-						}else if(which >= 9 && isChecked){
-							temp--;
-						}else if(which >= 9 && !isChecked){
-							temp++;
-						}
-						//Toast.makeText(getActivity(), "count is : "+temp, 500).show();
-						setTotal(temp);
-					}
+			builder.setTitle("소급 섭취량 평가");
+			builder.setMessage( saltSurvey.getSurveyReport(q1));
 
-					
-				});
-				builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-							dialog.dismiss();
-							hpoint.setSalt(count);
-							count = 0;
-							Toast.makeText(getActivity(), "Total count is : "+count, 500).show();
-						
-					}
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
 				}
-				);
-				
-				builder.show();
-				
-			
-		}
-		private void setTotal(int temp) {
-			// TODO Auto-generated method stub
-			count = temp;
-			
+			}
+					);
+			builder.show();
 		}
 	};
 
@@ -507,12 +501,14 @@ public class HabitFragment extends Fragment{
 
 		switch (v.getId()) {
 
-//		case R.id.bt_ok:
-//			Toast.makeText(getActivity(), "One Fragment", Toast.LENGTH_SHORT)
-//					.show();
-//			break;
+		//		case R.id.bt_ok:
+		//			Toast.makeText(getActivity(), "One Fragment", Toast.LENGTH_SHORT)
+		//					.show();
+		//			break;
 
 		}
 	}
 
 }
+
+

@@ -51,9 +51,9 @@ public class HabitNotiFragment extends Fragment {
 		handle.open();
 		// Toast.makeText(getActivity(), "check3", 300).show();
 		List<UserData> uslist = handle.getUsers();
-		List<habit> hablist = handle.getHabits();
+		List<Habit> hablist = handle.getHabits();
 		UserData us = null;
-		habit hab = null;
+		Habit hab = null;
 		// Toast.makeText(getActivity(), "check4", 300).show();
 		handle.close();
 		if (!uslist.isEmpty()) {
@@ -76,33 +76,32 @@ public class HabitNotiFragment extends Fragment {
 		ArrayList<Map<String,String>> stressNoti = new ArrayList<Map<String,String>>();
 
 		Map<String, String> saltType = new HashMap<String, String>();
-		saltType.put("Type", "�ұݼ����");
+		saltType.put("Type", "소금섭취관리");
 		mGroupList.add(saltType);
 		Map<String, String> weightType = new HashMap<String, String>();
-		weightType.put("Type", "ü�߰�");
+		weightType.put("Type", "체중관리");
 		mGroupList.add(weightType);
 		Map<String, String> waistType = new HashMap<String, String>();
-		waistType.put("Type", "���εѷ���");
+		waistType.put("Type", "복부둘레관리");
 		mGroupList.add(waistType);
 		Map<String, String> examType = new HashMap<String, String>();
-		examType.put("Type", "���");
+		examType.put("Type", "운동관리");
 		mGroupList.add(examType);
 		Map<String, String> alcholeType = new HashMap<String, String>();
-		alcholeType.put("Type", "���ݼ����");
+		alcholeType.put("Type", "알콜섭취관리");
 		mGroupList.add(alcholeType);
 		Map<String, String> smokingType = new HashMap<String, String>();
-		smokingType.put("Type", "�ݿ���");
+		smokingType.put("Type", "금연관리");
 		mGroupList.add(smokingType);
 		Map<String, String> stressType = new HashMap<String, String>();
-		stressType.put("Type", "��Ʈ������");
+		stressType.put("Type", "스트레스관리");
 		mGroupList.add(stressType);
-		
 
 		if (hab == null) {
 			Toast.makeText(getActivity(), "check1", 300).show();
-			// errDialog("��Ȱ���� ������ ����ϴ�.");
+			// errDialog("占쏙옙활占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙求占�.");
 		} else if (us == null) {
-			// errDialog("����� ������ ����ϴ�.");
+			// errDialog("占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙求占�.");
 		} else {
 			int salt = hab.getSalt();
 
@@ -226,7 +225,7 @@ public class HabitNotiFragment extends Fragment {
 				eval = EvaText.E8;
 				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
 						.replace("MINITE", String.valueOf(hab.getExamTime()))
-						.replace("HARDNESS", "��");
+						.replace("HARDNESS", "占쏙옙");
 				recm = RecomendText.R8;
 				Map<String, String> value = new HashMap<String,String>();
 				value.put("T", t);
@@ -239,9 +238,9 @@ public class HabitNotiFragment extends Fragment {
 				t = TargetText.T3;
 				String hard;
 				if (hab.getExamHard() == 1) {
-					hard = "��";
+					hard = "강";
 				} else {
-					hard = "����";
+					hard = "보통";
 				}
 				eval = EvaText.E8;
 				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
@@ -381,21 +380,21 @@ public class HabitNotiFragment extends Fragment {
 		
 		ExpandableListAdapter adapter = new SimpleExpandableListAdapter(
 				getActivity(),
-				this.mGroupList, //ȭ�鿡 �ѷ��� �����͸� ȣ��
-				//����� ����Ʈ�並 ȣ��
+				this.mGroupList, //화면에 뿌려줄 데이터를 호출
+				//사용할 리스트뷰를 호출
 				android.R.layout.simple_expandable_list_item_1,
-				new String[] { "Type" }, //�ѷ��� ���� Hash�� key�� ����ش�.
-				new int[] { android.R.id.text1 }, //�ѷ��� TextView�� �ҷ��´�.
-				//����� ���� �����͸� ȣ���Ѵ�.
+				new String[] { "Type" }, //뿌려줄 값의 Hash의 key를 적어준다.
+				new int[] { android.R.id.text1 }, //뿌려줄 TextView를 불러온다.
+				//사용할 보조 데이터를 호출한다.
 				this.mChildList,
 				android.R.layout.simple_expandable_list_item_2,
-				//�迭�� ����Ͽ� ȣ�� �� �� �ִ�. �� ��� View�� ���� �� �°� ����ؾ� �Ѵ�.
+				//배열을 사용하여 호출 할 수 있다. 이 경우 View의 수와 꼭 맞게 적용해야 한다.
 				new String[] { "T", "E", "R" },
-				//String�� ���� View�� ���� 1:1�̾�� �Ѵ�.
+				//String의 수와 View의 수가 1:1이어야 한다.
 				new int[] { android.R.id.text1, android.R.id.text2, android.R.id.text2 }
 			);
 		this.mListView.setAdapter(adapter);
-//		// ���ϵ� Ŭ�� ���� ��� �̺�Ʈ
+//		// 차일드 클릭 했을 경우 이벤트
 //		mListView.setOnChildClickListener(new OnChildClickListener() {
 //			@Override
 //			public boolean onChildClick(ExpandableListView parent, View v,
@@ -406,7 +405,7 @@ public class HabitNotiFragment extends Fragment {
 //			}
 //		});
 //
-//		// �׷��� ���� ��� �̺�Ʈ
+//		// 占쌓뤄옙占쏙옙 占쏙옙占쏙옙 占쏙옙占� 占싱븝옙트
 //		mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 //			@Override
 //			public void onGroupCollapse(int groupPosition) {
@@ -416,7 +415,7 @@ public class HabitNotiFragment extends Fragment {
 //			}
 //		});
 //
-//		// �׷��� ���� ��� �̺�Ʈ
+//		// 占쌓뤄옙占쏙옙 占쏙옙占쏙옙 占쏙옙占� 占싱븝옙트
 //		mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 //			@Override
 //			public void onGroupExpand(int groupPosition) {
@@ -436,7 +435,7 @@ public class HabitNotiFragment extends Fragment {
 		// final EditText wText = new EditText(getActivity());
 		// wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		// builder.setView(wText);
-		builder.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
