@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.example.bpmanager.bp;
 import com.example.bpmanager.clinicAlram;
-import com.example.bpmanager.habit;
+import com.example.bpmanager.Habit;
 import com.example.bpmanager.medalram;
 import com.example.bpmanager.UserData;
 
@@ -429,7 +429,7 @@ public class DBhandler
 	
 	///////////////////////////////////////////////////////////////////////
 
-	public long insertHabit(habit args) {
+	public long insertHabit(Habit args) {
 		ContentValues value = new ContentValues();
 
 		value.put(DBhandler.SALT, args.getSalt());
@@ -449,8 +449,8 @@ public class DBhandler
 		return (db.delete(habittable, KEY + " = " + index, null) > 0);
 	}
 
-	public List<habit> getHabits() {
-		List<habit> retval = new ArrayList<habit>();
+	public List<Habit> getHabits() {
+		List<Habit> retval = new ArrayList<Habit>();
 		Cursor cu = db.query(habittable, new String[] { 
 				DBhandler.KEY, 
 				DBhandler.EXAM_NUM, 
@@ -474,8 +474,8 @@ public class DBhandler
 
 	}
 
-	private habit setHabit(Cursor cu) {
-		habit retval = new habit();
+	private Habit setHabit(Cursor cu) {
+		Habit retval = new Habit();
 		retval.setId(cu.getLong(0));
 		retval.setExamNum(cu.getInt(1));
 		retval.setExamTime(cu.getInt(2));
@@ -488,8 +488,8 @@ public class DBhandler
 		return retval;
 	}
 
-	public habit getHabit(long index) {
-		habit retval = new habit();
+	public Habit getHabit(long index) {
+		Habit retval = new Habit();
 		Cursor cu = db.query(habittable, new String[] { 
 				DBhandler.KEY, 
 				DBhandler.EXAM_NUM, 
@@ -509,7 +509,7 @@ public class DBhandler
 
 	}
 
-	public int updateHabit(long index, habit args) {
+	public int updateHabit(long index, Habit args) {
 		String strWhere = KEY + " = " + index;
 		ContentValues value = new ContentValues();
 

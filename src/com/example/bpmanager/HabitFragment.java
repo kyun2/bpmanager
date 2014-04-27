@@ -284,14 +284,35 @@ public class HabitFragment extends Fragment{
 					// TODO Auto-generated method stub
 					us.setWaist(Float.parseFloat(wText.getText().toString()));
 					dialog.dismiss();
+					waistAdviceReportDialog();
+				}
+			});
+			builder.show();
+		}
+		
+		private void waistAdviceReportDialog() {
+			// TODO Auto-generated method stub
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage("현제 허리둘레를 입력하세요.");
+			final EditText wText = new EditText(getActivity());
+			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			builder.setView(wText);
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					us.setWaist(Float.parseFloat(wText.getText().toString()));
+					dialog.dismiss();
 					Toast.makeText(getActivity(), "waist is : "+wText.getText().toString(), 500).show();
 
 				}
-			}
-					);
+			});
 			builder.show();
-
 		}
+		
+		
+		
 
 
 		private void saltDialig() {
@@ -361,7 +382,6 @@ public class HabitFragment extends Fragment{
 			}
 					);
 			builder.show();
-
 		}
 
 		private void weightAdviceReportDialog() {

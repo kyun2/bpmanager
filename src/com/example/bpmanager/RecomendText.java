@@ -2,26 +2,25 @@ package com.example.bpmanager;
 
 public class RecomendText {
 
-	public static final String R0 = "º¹¾à°ü¸®¿Í »ýÈ°½À°ü °ü¸®´Â Àå±âÀûÀÎ Ç÷¾Ð°ü¸®¿¡ ¸Å¿ì Áß¿äÇÑ ¿äÀÎÀÔ´Ï´Ù.\nº¹¾à°ü¸® ¹× »ýÈ°½À°ü °ü¸®¸¦ À§ÇÑ ¸Þ´º°¡ ÀÖÀ¸´Ï ÀÌ¿ëÇØº¸¼¼¿ä.";
-	public static final String R1 = "Áö±ÝÃ³·³ °ü¸®¸¦ À¯ÁöÇÏµÇ (º¹¾à/¼Ò±Ý¼·Ãë/¿îµ¿/À½ÁÖ/Èí¿¬/½ºÆ®·¹½º/Ã¼Áß/º¹ºÎµÑ·¹) °ü¸®¿¡ ´õ À¯ÀÇÇÏ¼¼¿ä. ÇØ´ç ¸Þ´º¸¦ ÀÌ¿ëÇÏ¸é »ó¼¼ ±Ç°í¸¦ º¼ ¼ö ÀÖ½À´Ï´Ù.";
-	public static final String R2 = "(º¹¾à/¼Ò±Ý¼·Ãë/¿îµ¿/À½ÁÖ/Èí¿¬/½ºÆ®·¹½º/Ã¼Áß/º¹ºÎµÑ·¹) °ü¸®¿¡ ´õ À¯ÀÇÇÏ¼¼¿ä.\nÇØ´ç ¸Þ´º¸¦ ÀÌ¿ëÇÏ¸é »ó¼¼ ±Ç°í¸¦ º¼ ¼ö ÀÖ½À´Ï´Ù.";
+	public static final String R0 = "ë³µì•½ê´€ë¦¬ì™€ ìƒí™œìŠµê´€ ê´€ë¦¬ëŠ” ìž¥ê¸°ì ì¸ í˜ˆì••ê´€ë¦¬ì— ë§¤ìš° ì¤‘ìš”í•œ ìš”ì¸ìž…ë‹ˆë‹¤.\në³µì•½ê´€ë¦¬ ë° ìƒí™œìŠµê´€ ê´€ë¦¬ë¥¼ ìœ„í•œ ë©”ë‰´ê°€ ìžˆìœ¼ë‹ˆ ì´ìš©í•´ë³´ì„¸ìš”.";
+	public static final String R1 = "ì§€ê¸ˆì²˜ëŸ¼ ê´€ë¦¬ë¥¼ ìœ ì§€í•˜ë˜ (ë³µì•½/ì†Œê¸ˆì„­ì·¨/ìš´ë™/ìŒì£¼/í¡ì—°/ìŠ¤íŠ¸ë ˆìŠ¤/ì²´ì¤‘/ë³µë¶€ë‘˜ë ˆ) ê´€ë¦¬ì— ë” ìœ ì˜í•˜ì„¸ìš”. í•´ë‹¹ ë©”ë‰´ë¥¼ ì´ìš©í•˜ë©´ ìƒì„¸ ê¶Œê³ ë¥¼ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.";
+	public static final String R2 = "(ë³µì•½/ì†Œê¸ˆì„­ì·¨/ìš´ë™/ìŒì£¼/í¡ì—°/ìŠ¤íŠ¸ë ˆìŠ¤/ì²´ì¤‘/ë³µë¶€ë‘˜ë ˆ) ê´€ë¦¬ì— ë” ìœ ì˜í•˜ì„¸ìš”.\ní•´ë‹¹ ë©”ë‰´ë¥¼ ì´ìš©í•˜ë©´ ìƒì„¸ ê¶Œê³ ë¥¼ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.";
 	public static final String R3 = "";
-	public static final String R4 = "Áö±ÝÃ³·³ ÀÇ»ç Ã³¹æ¿¡ µû¶ó º¹¿ëÀ» À¯ÁöÇÏ¼¼¿ä.";
-	public static final String R5 = "°íÇ÷¾Ð ¾à¹° º¹¿ëÀº Ç÷¾Ð °ü¸®¿¡ ¸Å¿ì Áß¿äÇÑ ¿äÀÎÀÔ´Ï´Ù.\nÀÇ»ç Ã³¹æ¿¡ µû¶ó º¹¿ëÇÏµµ·Ï ³ë·ÂÇÏ¼¼¿ä. ¾à¹° ¾Ë¸²À» ÀÌ¿ëÇØº¸¼¼¿ä. ";
-	public static final String R6 = "Àú¿°½ÄÀÌ´Â Á¤»ó ¹üÀ§·Î ³·¾ÆÁø Ç÷¾ÐÀ» À¯ÁöÇÏ´Â µ¥¿¡µµ µµ¿òÀÌ µË´Ï´Ù.\nÁö±ÝÃ³·³ Àú¿°½ÄÀÌ¸¦ À¯ÁöÇÏ¼¼¿ä.";
-	public static final String R7 = "¼Ò±Ý ¼·Ãë¸¦ ÁÙÀÌ´Â °ÍÀº Ç÷¾ÐÀÇ »ó½ÂÇÒ À§ÇèÀ» °¨¼Ò½ÃÅ°´Â µ¿½Ã¿¡ ÀÌ¹Ì ³ô¾ÆÁø Ç÷¾ÐÀ» °¨¼Ò½ÃÅ°´Â È¿°ú°¡ ÀÖ½À´Ï´Ù.\nÁ¶±Ý ´ú Â¥°Ô µå¼¼¿ä.";
-	public static final String R8 = "ÀûÀýÇÑ ¿îµ¿Àº Ç÷¾ÐÀ» À¯ÁöÇÏ´Âµ¥ µµ¿òÀÌ µË´Ï´Ù.\nÁö±ÝÃ³·³ ¸ñÇ¥ ¿îµ¿·®À» ÁöÅ°¼¼¿ä.";
-	public static final String R9 = "´ç½ÅÀÇ (¿îµ¿È½¼ö/¿îµ¿½Ã°£/¿îµ¿ °­µµ)°¡ ¸ñÇ¥·®º¸´Ù ºÎÁ·ÇÕ´Ï´Ù. °íÇ÷¾Ð È¯ÀÚ´Â ÀûÀýÇÑ ¿îµ¿¸¸À¸·Î ¼öÃà±â Ç÷¾Ð°ú ÀÌ¿Ï±â Ç÷¾ÐÀ» 5-7mmHg±îÁö ³·Ãâ ¼ö ÀÖ½À´Ï´Ù. ±Ç°í·®¿¡ µû¶ó ¿îµ¿À» ÇØº¸¼¼¿ä.";
-	public static final String R10 = "°úµµÇÑ ¾ËÄÚ¿Ã ¼·Ãë´Â Ç÷¾ÐÀ» »ó½Â½ÃÅµ´Ï´Ù.\nÁö±ÝÃ³·³ ¾ËÄÝ¼·Ãë Á¦ÇÑ·®À» ÁöÅ°¼¼¿ä.";
-	public static final String R11 = "°úµµÇÑ ¾ËÄÚ¿Ã ¼·Ãë´Â Ç÷¾ÐÀ» »ó½Â½ÃÅµ´Ï´Ù.\n´ç½ÅÀÇ ¾ËÄÚ¿Ã ¼·Ãë Á¦ÇÑ·®À» ÁöÅ°¼¼¿ä.";
-	public static final String R12 = "±Ý¿¬Àº ½ÉÇ÷°ü°è ÁúÈ¯ ¹ß»ýÀ²À» ÁÙÀÌ´Â µ¥ ¸Å¿ì Áß¿äÇÑ ¿ä¼ÒÀÔ´Ï´Ù.\nÁö±ÝÃ³·³ ±Ý¿¬ÇÏ¼¼¿ä.";
-	public static final String R13 = "±Ý¿¬Àº ½ÉÇ÷°ü°è ÁúÈ¯ ¹ß»ýÀ²À» ÁÙÀÌ´Â µ¥ ¸Å¿ì Áß¿äÇÑ ¿ä¼ÒÀÔ´Ï´Ù.\n1³â¸¸ ±Ý¿¬ÇØµµ ½ÉÇ÷°ü°èÁúÈ¯ À§ÇèÀ²ÀÌ 50% °¨¼ÒÇÕ´Ï´Ù. ²À ±Ý¿¬ÇÏ¼¼¿ä.";
-	public static final String R14 = "½ºÆ®·¹½º´Â ½ÅÃ¼±â´ÉÀÌ³ª °Ç°­°á°ú¿¡ Á÷Á¢ÀûÀÎ ¿µÇâÀ» ¹ÌÄ¨´Ï´Ù.\n½ºÆ®·¹½º¸¦ °ü¸®ÇÏ´Â °ÍÀÌ ²À ÇÊ¿äÇÕ´Ï´Ù.";
-	public static final String R15 = "½ºÆ®·¹½º´Â ½ÅÃ¼±â´ÉÀÌ³ª °Ç°­°á°ú¿¡ Á÷Á¢ÀûÀÎ ¿µÇâÀ» ¹ÌÄ¨´Ï´Ù.\n½ºÆ®·¹½º Áö¼ö 1.6¹Ì¸¸À¸·Î ½ºÆ®·¹½º¸¦ °ü¸®ÇÏ´Â °ÍÀÌ ²À ÇÊ¿äÇÕ´Ï´Ù. ";
-	public static final String R16 = "½ºÆ®·¹½º´Â ½ÅÃ¼±â´ÉÀÌ³ª °Ç°­°á°ú¿¡ Á÷Á¢ÀûÀÎ ¿µÇâÀ» ¹ÌÄ¨´Ï´Ù.\n½ºÆ®·¹½º Áö¼ö 1.6¹Ì¸¸À¸·Î ½ºÆ®·¹½º¸¦ °ü¸®ÇÏ´Â °ÍÀÌ ²À ÇÊ¿äÇÕ´Ï´Ù. ";
-	public static final String R17 = "°íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ °Ç°­ÇÑ Ã¼ÁßÀ» À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù.\nÁö±ÝÃ³·³ ÀûÁ¤ Ã¼ÁßÀ» À¯ÁöÇÏ¼¼¿ä.";
-	public static final String R18 = "°íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ °Ç°­ÇÑ Ã¼ÁßÀ» À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù.\n°Ç°­ÇÑ BMIÀ¯Áö¸¦ À§ÇØ ¸ñÇ¥ Ã¼Áß±îÁö °¨·®ÀÌ ÇÊ¿äÇÕ´Ï´Ù.";
-	public static final String R19 = "°íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ ÀûÀýÇÑ º¹ºÎµÑ·¹¸¦ À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù.\nÁö±ÝÃ³·³ ÀûÁ¤ º¹ºÎµÑ·¹¸¦ À¯ÁöÇÏ¼¼¿ä.";
-	public static final String R20 = "°íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ ÀûÀýÇÑ º¹ºÎµÑ·¹¸¦ À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù.\nº¹ºÎµÑ·¹¸¦ ÀûÁ¤ º¹ºÎµÑ·¹±îÁö ÁÙÀÌ¼¼¿ä.";
-	
+	public static final String R4 = "ì§€ê¸ˆì²˜ëŸ¼ ì˜ì‚¬ ì²˜ë°©ì— ë”°ë¼ ë³µìš©ì„ ìœ ì§€í•˜ì„¸ìš”.";
+	public static final String R5 = "ê³ í˜ˆì•• ì•½ë¬¼ ë³µìš©ì€ í˜ˆì•• ê´€ë¦¬ì— ë§¤ìš° ì¤‘ìš”í•œ ìš”ì¸ìž…ë‹ˆë‹¤.\nì˜ì‚¬ ì²˜ë°©ì— ë”°ë¼ ë³µìš©í•˜ë„ë¡ ë…¸ë ¥í•˜ì„¸ìš”. ì•½ë¬¼ ì•Œë¦¼ì„ ì´ìš©í•´ë³´ì„¸ìš”. ";
+	public static final String R6 = "ì €ì—¼ì‹ì´ëŠ” ì •ìƒ ë²”ìœ„ë¡œ ë‚®ì•„ì§„ í˜ˆì••ì„ ìœ ì§€í•˜ëŠ” ë°ì—ë„ ë„ì›€ì´ ë©ë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ì €ì—¼ì‹ì´ë¥¼ ìœ ì§€í•˜ì„¸ìš”.";
+	public static final String R7 = "ì†Œê¸ˆ ì„­ì·¨ë¥¼ ì¤„ì´ëŠ” ê²ƒì€ í˜ˆì••ì˜ ìƒìŠ¹í•  ìœ„í—˜ì„ ê°ì†Œì‹œí‚¤ëŠ” ë™ì‹œì— ì´ë¯¸ ë†’ì•„ì§„ í˜ˆì••ì„ ê°ì†Œì‹œí‚¤ëŠ” íš¨ê³¼ê°€ ìžˆìŠµë‹ˆë‹¤.\nì¡°ê¸ˆ ëœ ì§œê²Œ ë“œì„¸ìš”.";
+	public static final String R8 = "ì ì ˆí•œ ìš´ë™ì€ í˜ˆì••ì„ ìœ ì§€í•˜ëŠ”ë° ë„ì›€ì´ ë©ë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ëª©í‘œ ìš´ë™ëŸ‰ì„ ì§€í‚¤ì„¸ìš”.";
+	public static final String R9 = "ë‹¹ì‹ ì˜ (ìš´ë™íšŸìˆ˜/ìš´ë™ì‹œê°„/ìš´ë™ ê°•ë„)ê°€ ëª©í‘œëŸ‰ë³´ë‹¤ ë¶€ì¡±í•©ë‹ˆë‹¤. ê³ í˜ˆì•• í™˜ìžëŠ” ì ì ˆí•œ ìš´ë™ë§Œìœ¼ë¡œ ìˆ˜ì¶•ê¸° í˜ˆì••ê³¼ ì´ì™„ê¸° í˜ˆì••ì„ 5-7mmHgê¹Œì§€ ë‚®ì¶œ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. ê¶Œê³ ëŸ‰ì— ë”°ë¼ ìš´ë™ì„ í•´ë³´ì„¸ìš”.";
+	public static final String R10 = "ê³¼ë„í•œ ì•Œì½”ì˜¬ ì„­ì·¨ëŠ” í˜ˆì••ì„ ìƒìŠ¹ì‹œí‚µë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ì•Œì½œì„­ì·¨ ì œí•œëŸ‰ì„ ì§€í‚¤ì„¸ìš”.";
+	public static final String R11 = "ê³¼ë„í•œ ì•Œì½”ì˜¬ ì„­ì·¨ëŠ” í˜ˆì••ì„ ìƒìŠ¹ì‹œí‚µë‹ˆë‹¤.\në‹¹ì‹ ì˜ ì•Œì½”ì˜¬ ì„­ì·¨ ì œí•œëŸ‰ì„ ì§€í‚¤ì„¸ìš”.";
+	public static final String R12 = "ê¸ˆì—°ì€ ì‹¬í˜ˆê´€ê³„ ì§ˆí™˜ ë°œìƒìœ¨ì„ ì¤„ì´ëŠ” ë° ë§¤ìš° ì¤‘ìš”í•œ ìš”ì†Œìž…ë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ê¸ˆì—°í•˜ì„¸ìš”.";
+	public static final String R13 = "ê¸ˆì—°ì€ ì‹¬í˜ˆê´€ê³„ ì§ˆí™˜ ë°œìƒìœ¨ì„ ì¤„ì´ëŠ” ë° ë§¤ìš° ì¤‘ìš”í•œ ìš”ì†Œìž…ë‹ˆë‹¤.\n1ë…„ë§Œ ê¸ˆì—°í•´ë„ ì‹¬í˜ˆê´€ê³„ì§ˆí™˜ ìœ„í—˜ìœ¨ì´ 50% ê°ì†Œí•©ë‹ˆë‹¤. ê¼­ ê¸ˆì—°í•˜ì„¸ìš”.";
+	public static final String R14 = "ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤.\nìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ê´€ë¦¬í•˜ëŠ” ê²ƒì´ ê¼­ í•„ìš”í•©ë‹ˆë‹¤.";
+	public static final String R15 = "ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤.\nìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ 1.6ë¯¸ë§Œìœ¼ë¡œ ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ê´€ë¦¬í•˜ëŠ” ê²ƒì´ ê¼­ í•„ìš”í•©ë‹ˆë‹¤. ";
+	public static final String R16 = "ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤.\nìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ 1.6ë¯¸ë§Œìœ¼ë¡œ ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ê´€ë¦¬í•˜ëŠ” ê²ƒì´ ê¼­ í•„ìš”í•©ë‹ˆë‹¤. ";
+	public static final String R17 = "ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ê±´ê°•í•œ ì²´ì¤‘ì„ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ì ì • ì²´ì¤‘ì„ ìœ ì§€í•˜ì„¸ìš”.";
+	public static final String R18 = "ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ê±´ê°•í•œ ì²´ì¤‘ì„ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤.\nê±´ê°•í•œ BMIìœ ì§€ë¥¼ ìœ„í•´ ëª©í‘œ ì²´ì¤‘ê¹Œì§€ ê°ëŸ‰ì´ í•„ìš”í•©ë‹ˆë‹¤.";
+	public static final String R19 = "ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ì ì ˆí•œ ë³µë¶€ë‘˜ë ˆë¥¼ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤.\nì§€ê¸ˆì²˜ëŸ¼ ì ì • ë³µë¶€ë‘˜ë ˆë¥¼ ìœ ì§€í•˜ì„¸ìš”.";
+	public static final String R20 = "ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ì ì ˆí•œ ë³µë¶€ë‘˜ë ˆë¥¼ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤.\në³µë¶€ë‘˜ë ˆë¥¼ ì ì • ë³µë¶€ë‘˜ë ˆê¹Œì§€ ì¤„ì´ì„¸ìš”.";	
 }
