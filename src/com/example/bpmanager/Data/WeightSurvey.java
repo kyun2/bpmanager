@@ -21,7 +21,7 @@ public class WeightSurvey implements Survey {
 		float targetWeiht = getTargetWeiht(getHeight());
 		
 		if(weiht < targetWeiht) 
-			return "당신의 몸무게는 "+ weiht+"kg로, 적정 체중 "+targetWeiht+"kg 미만을 잘 유지하고 있습니다.\n 고혈압 환자들은 혈압 감소를 위해 건강한 체중을 유지하는 것이 필요합니다.지금처럼 적정 체중을 유지하세요.";
+			return "당신의 몸무게는 "+ weiht+"kg로, 적정 체중 "+targetWeiht+"kg 미만을 잘 유지하고 있습니다.\n 고혈압 환자들은 혈압 감소를 위해 건강한 체중을 유지하는 것이 필요합니다. 지금처럼 적정 체중을 유지하세요.";
 		else 
 			return "당신의 몸무게는" +weiht+ "kg로, 적정 체중"+targetWeiht+"kg를  "+(weiht - targetWeiht)+"kg 초과하였습니다.\n 고혈압 환자들은 혈압 감소를 위해 건강한 체중을 유지하는 것이 필요합니다. 건강한 BMI유지를 위해 목표 체중까지 감량이 필요합니다.";
 	}

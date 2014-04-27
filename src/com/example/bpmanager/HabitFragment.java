@@ -323,7 +323,7 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			q1 = new HashMap<Integer, Object>();
 
-			builder.setMessage("현제 체중을 입력하세요!.");
+			builder.setMessage("현재 체중을 입력하세요!.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
@@ -366,7 +366,7 @@ public class HabitFragment extends Fragment{
 		private void waistDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("현제 허리둘레를 입력하세요.");
+			builder.setMessage("현재 허리둘레를 입력하세요.");
 			final EditText wText = new EditText(getActivity());
 			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
