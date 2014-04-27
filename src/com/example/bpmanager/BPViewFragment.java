@@ -18,6 +18,11 @@ import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+/**
+ * 
+ * @author Kyun
+ *
+ */
 public class BPViewFragment extends Fragment{
 	DBhandler handle;
 //	RadioGroup last;
@@ -50,6 +55,19 @@ public class BPViewFragment extends Fragment{
 		return view;
 	}
 	private void listPrint(int i) {
+		
+		List<BloodPressure> bps = BloodPressure.getLastBPsList(i);
+//		
+//		FragmentManager fm = getActivity().getSupportFragmentManager();
+//		bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, bps, fm);
+//		bplist.setAdapter(medAdap);
+		
+		
+		
+		
+		
+		/////////////////////////////////////////////////////
+		
 		// TODO Auto-generated method stub
 		int due = (i+1);
 		handle = new DBhandler(getActivity());
@@ -61,9 +79,14 @@ public class BPViewFragment extends Fragment{
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
+		
 		String now = String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute);
 		String befor = String.valueOf(year)+String.valueOf(month-due)+String.valueOf(day)+"0001";
+		
 		List<bp> retval = handle.getBPsByTime(befor, now);
+		
+		
+		
 		handle.close();
 		
 		if(retval.isEmpty()){
@@ -74,9 +97,9 @@ public class BPViewFragment extends Fragment{
         	retval.add(t);
         }
 		
-		FragmentManager fm = getActivity().getSupportFragmentManager();
-		bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, retval, fm);
-		bplist.setAdapter(medAdap);
+		//FragmentManager fm = getActivity().getSupportFragmentManager();
+		//bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, retval, fm);
+		//bplist.setAdapter(medAdap);
 		
 	}
 	SeekBar.OnSeekBarChangeListener seekChange = new SeekBar.OnSeekBarChangeListener() {

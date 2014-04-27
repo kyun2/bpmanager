@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:orientation="horizontal" >
-
+			
+            <!-- 
             <Button
                 android:id="@+id/home_menu"
                 android:layout_width="match_parent"
@@ -28,13 +29,14 @@
                 android:layout_weight="1"
                 android:text="홈"
                 android:textSize="@dimen/menu_btn_size" />
+            -->
 
             <Button
                 android:id="@+id/mydata_menu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="종합기록"
+                android:text="나의 기록"
                 android:textSize="@dimen/menu_btn_size" />
 
             <Button
@@ -50,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="약물관리"
+                android:text="복약관리"
                 android:textSize="@dimen/menu_btn_size" />
 
             <Button
@@ -58,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="생활습관"
+                android:text="생활습관관리"
                 android:textSize="@dimen/menu_btn_size" />
 
             <Button
@@ -66,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="나의정보"
+                android:text="나의 정보"
                 android:textSize="@dimen/menu_btn_size" />
         </LinearLayout>
     </LinearLayout>

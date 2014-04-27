@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="horizontal">
+        
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:gravity="center" >
+	    
+			<ImageView
+				android:id="@+id/medicine_img"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:src="@drawable/abc_ic_clear"
+				android:layout_weight="4" />
+	    
+		</LinearLayout>
+	 	     
+	     <TextView
+	         android:id="@+id/medicine_name"
+	         android:layout_width="match_parent"
+	         android:layout_height="match_parent"
+	         android:layout_margin="5dp"
+	         android:layout_weight="0.5"
+	         android:text="name"
+	         android:textSize="24dp"
+	         android:textStyle="bold" />		
+	    
+	    <Button 
+	        android:id="@+id/medicine_web_open"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        android:layout_weight="1"
+	        android:text="자세히"
+	        android:textSize="12dp" />
+		
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" >
+		
+	    <Button
+	        android:id="@+id/med_btn_took_it"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:padding="5sp"
+	        android:text="복용하기"
+	        android:textSize="24dp"
+	        android:textStyle="bold"
+	        android:layout_span="2" />	    
+	    
+	</LinearLayout>
+    
+	<TableLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/activity_vertical_margin" >
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	       
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="종류"
+	            android:textSize="18dp" />
+	        <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="3"
+	            android:text=""
+	            android:textSize="18dp" />
+	        
+	    </TableRow>
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	        
+	         <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="사용법"
+	            android:textSize="18dp" />
+	        <TextView 
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="3"
+	            android:text=""
+	            android:textSize="18dp" />
+	        
+	    </TableRow>	    
+	</TableLayout>
+	
+	<TableLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/activity_vertical_margin">
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	       
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="알림설정"
+	            android:textSize="18dp" />
+
+	        <CheckBox
+	            android:id="@+id/cb_alarm_ok"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="3" />
+	        
+	    </TableRow>
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	        
+	         <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="알림시간"
+	            android:textSize="18dp" />
+
+	         <EditText
+	             android:id="@+id/edit_alarm_time"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:layout_weight="3"
+	             android:inputType="time" >
+	         </EditText>
+	        
+	    </TableRow>	 
+	    
+	</TableLayout>
+
+</LinearLayout>

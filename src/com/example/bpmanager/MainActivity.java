@@ -1,22 +1,23 @@
 package com.example.bpmanager;
 
-import java.util.List;
-
-import com.example.bpmanager.DB.DBHelper;
-//import com.example.bpmanager.DB.DBhandler;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.bpmanager.DB.DBHelper;
+//import com.example.bpmanager.DB.DBhandler;
+import com.example.bpmanager.DB.INFOMedication;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -30,6 +31,15 @@ public class MainActivity extends ActionBarActivity {
 	public final static int FRAGMENT_USER = 5;
 	
 	public static DBHelper mDBHelper;
+	public static UserData mUserData;
+	public static MedicationScheduleData mMedicationScheduleData;
+	
+	//private static Button home;
+	private static Button data;
+	private static Button bp;
+	private static Button med;
+	private static Button habit;
+	private static Button user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,25 +47,43 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		
-		Button menu_home = (Button) findViewById(R.id.home_menu);
-		menu_home.setOnClickListener(clickListener);
-		Button menu_data = (Button) findViewById(R.id.mydata_menu);
-		menu_data.setOnClickListener(clickListener);
-		Button menu_bp = (Button) findViewById(R.id.mybp_menu);
-		menu_bp.setOnClickListener(clickListener);
-		Button menu_med = (Button) findViewById(R.id.mymedicin_menu);
-		menu_med.setOnClickListener(clickListener);
-		Button menu_habit = (Button) findViewById(R.id.myhabit_menu);
-		menu_habit.setOnClickListener(clickListener);
-		Button menu_user = (Button) findViewById(R.id.user_menu);
-		menu_user.setOnClickListener(clickListener);
+		//home = (Button) findViewById(R.id.home_menu);
+		//home.setOnClickListener(clickListener);
+		data = (Button) findViewById(R.id.mydata_menu);
+		data.setOnClickListener(clickListener);
+		bp = (Button) findViewById(R.id.mybp_menu);
+		bp.setOnClickListener(clickListener);
+		med = (Button) findViewById(R.id.mymedicin_menu);
+		med.setOnClickListener(clickListener);
+		habit = (Button) findViewById(R.id.myhabit_menu);
+		habit.setOnClickListener(clickListener);
+		user = (Button) findViewById(R.id.user_menu);
+		user.setOnClickListener(clickListener);
+		
+		Fragment initFragment = null;
+		
+		mDBHelper = new DBHelper(getApplicationContext());
+		mUserData = new UserData();
+		if (!mUserData.getData())
+		{
+			//showNewUserDialog();
+			MainActivity.hideFooter();
+			initFragment = new PrivacyFragment();
+		}
+		else
+		{
+			initFragment = new HomeFragment();
+		}
+		mMedicationScheduleData = new MedicationScheduleData();
+		mMedicationScheduleData.getData();		
 		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.frag_viewer, new PlaceholderFragment()).commit();
+					.add(R.id.frag_viewer, initFragment).commit();
 		}
 		
-		mDBHelper = new DBHelper(getApplicationContext());
+		// 의약품 정보 만들기
+		INFOMedication.Make();
 		
 		
 		//Toast.makeText(this, "activity start", 3000).show();
@@ -75,13 +103,31 @@ public class MainActivity extends ActionBarActivity {
 		
 	}
 	
+	public static void showFooter() {
+		//home.setVisibility(View.VISIBLE);
+		data.setVisibility(View.VISIBLE);
+		bp.setVisibility(View.VISIBLE);
+		med.setVisibility(View.VISIBLE);
+		habit.setVisibility(View.VISIBLE);
+		user.setVisibility(View.VISIBLE);	
+	}
+	
+	public static void hideFooter() {
+		//home.setVisibility(View.INVISIBLE);
+		data.setVisibility(View.INVISIBLE);
+		bp.setVisibility(View.INVISIBLE);
+		med.setVisibility(View.INVISIBLE);
+		habit.setVisibility(View.INVISIBLE);
+		user.setVisibility(View.INVISIBLE);	
+	}
+	
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("ȯ���մϴ�");
-		alert.setMessage("���а� �ۿ� ���Ű��� ȯ���մϴ�.\n��Ȱ�� ����� ���Ͽ� ����� ����� �����մϴ�.");
+		alert.setTitle("");
+		alert.setMessage("");
 		alert.setCancelable(false);
-		alert.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -97,7 +143,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("���", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -111,6 +157,7 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	public void fragmentReplace(int reqNewFragmentIndex) {
+		mCurrentFragmentIndex = reqNewFragmentIndex;
 
 		Fragment newFragment = null;
 
@@ -128,10 +175,14 @@ public class MainActivity extends ActionBarActivity {
 		transaction.commit();
 
 	}
+	
+	public void changeFragment(Fragment fragment)
+	{
+		getSupportFragmentManager().beginTransaction().replace(R.id.frag_viewer, fragment).addToBackStack(null).commit();
+	}
 
 	private Fragment getFragment(int idx) {
 		Fragment newFragment = null;
-
 		
 		switch (idx) {
 		case FRAGMENT_HOME:
@@ -144,7 +195,7 @@ public class MainActivity extends ActionBarActivity {
 			newFragment = new InputBPFragment();
 			break;
 		case FRAGMENT_MED:
-			newFragment = new MedicationFragment();
+			newFragment = new MedicationTopFragment();
 			break;
 		case FRAGMENT_HABIT:
 			newFragment = new HabitFragment();
@@ -167,35 +218,29 @@ public class MainActivity extends ActionBarActivity {
 
 			switch (v.getId()) {
 
-			case R.id.home_menu:
-				mCurrentFragmentIndex = FRAGMENT_HOME;
-				fragmentReplace(mCurrentFragmentIndex);
-				break;
+			//case R.id.home_menu:
+			//	mCurrentFragmentIndex = FRAGMENT_HOME;
+			//	fragmentReplace(mCurrentFragmentIndex);
+			//	break;
 			case R.id.mydata_menu:
-				mCurrentFragmentIndex = FRAGMENT_DATA;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_DATA);
 				break;
 			case R.id.mybp_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_BP;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_BP);
 				break;
 			case R.id.myhabit_menu:
-				mCurrentFragmentIndex =MainActivity.FRAGMENT_HABIT;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_HABIT);
 				break;
 			case R.id.user_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_USER;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_USER);
 				break;
 			case R.id.mymedicin_menu:
-				mCurrentFragmentIndex = MainActivity.FRAGMENT_MED;
-				fragmentReplace(mCurrentFragmentIndex);
+				fragmentReplace(FRAGMENT_MED);
 				break;
 			}
 
 		}
 	};
-
 	
 
 	@Override
@@ -234,5 +279,10 @@ public class MainActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
-
+	
+	public void OpenBrowser(String url)
+	{
+		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
+		startActivity(viewIntent);
+	}	
 }

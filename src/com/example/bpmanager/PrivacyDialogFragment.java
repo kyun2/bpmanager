@@ -11,13 +11,11 @@ public class PrivacyDialogFragment extends DialogFragment {
 	
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState){
-		AlertDialog.Builder mBuilder = new AlertDialog.Builder(
-				getActivity());
+		AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 		LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
 		mBuilder.setView(mLayoutInflater
 				.inflate(R.layout.privacy_content, null));
-		mBuilder.setTitle("개인보호정책");
-		//mBuilder.setMessage("Dialog Messageeeeeee");
+		mBuilder.setTitle("개인정보보호정책");
 		mBuilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -26,9 +24,9 @@ public class PrivacyDialogFragment extends DialogFragment {
 				dialog.dismiss();
 			}
 		});
-		return mBuilder.create();
-		
+		return mBuilder.create();		
 	}
+	
 	@Override
 	public void onStop() {
 		super.onStop();

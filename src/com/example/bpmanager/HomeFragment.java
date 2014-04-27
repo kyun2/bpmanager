@@ -1,10 +1,12 @@
 package com.example.bpmanager;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment{
 	
@@ -14,8 +16,16 @@ public class HomeFragment extends Fragment{
 
 		View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-//		Button button = (Button) view.findViewById(R.id.bt_ok);
-//		button.setOnClickListener(this);
+		TextView sysMax = (TextView) view.findViewById(R.id.systolic_max);
+		TextView diaMax = (TextView) view.findViewById(R.id.diastolic_max);
+		
+		//목표 혈압 출력 -> 없으면 경고창후 정보 입력부분으로 이동
+		BloodPressure recommendBloodPressure = BloodPressure.getRecommendBloodPressure();
+		if(recommendBloodPressure != null)
+		{
+			sysMax.setText(String.valueOf(recommendBloodPressure.getSystolic())+ "/");
+			diaMax.setText(String.valueOf(recommendBloodPressure.getDiastolic()));
+		}
 
 		return view;
 	}

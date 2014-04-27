@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper 
 {
-	public static final int DATABASE_VERSION = 1;
+	public static final int DATABASE_VERSION = 2;
 	public static final String DATABASE_NAME = "BPManager.db";
 	
 	public DBHelper(Context context)
@@ -26,6 +26,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBMedication.SQL_CREATE);
 		// Lifestyle
 		db.execSQL(DBLifestyle.SQL_CREATE);
+		// MedicationTook
+		db.execSQL(DBMedicationTook.SQL_CREATE);
 	}
 
 	@Override
@@ -39,6 +41,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBMedication.SQL_DROP);
 		// Lifestyle
 		db.execSQL(DBLifestyle.SQL_DROP);
+		// MedicationTook
+		db.execSQL(DBMedicationTook.SQL_DROP);
 		
 		// Refresh
 		onCreate(db);
@@ -50,43 +54,48 @@ public class DBHelper extends SQLiteOpenHelper
 	}
 	
 	// Custom Methods ----------------------------------------
-	public void insertUserData(String name, String email, int sex, String birthdate, float height, float weight, float waist, int hypertension, int glucose, int kidney, int coronary)
+	public long insertData(String tableName, ContentValues values)
+	{
+		long rID = -1;
+		try
+		{
+			SQLiteDatabase db = getWritableDatabase();
+			
+			rID = db.insert(tableName, null, values);
+			
+		}
+		catch (SQLiteException e)
+		{
+			
+		}
+		return rID;
+	}
+	
+	public void updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
 	{
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
 			
-			ContentValues values = new ContentValues();
-			values.put(DBUser.User.COLUMN_NAME, name);
-			values.put(DBUser.User.COLUMN_SEX, sex);
-			values.put(DBUser.User.COLUMN_BIRTH, birthdate);
-			values.put(DBUser.User.COLUMN_HEIGHT, height);
-			values.put(DBUser.User.COLUMN_WEIGHT, weight);
-			values.put(DBUser.User.COLUMN_WAIST, waist);
-			values.put(DBUser.User.COLUMN_HYPER, hypertension);
-			values.put(DBUser.User.COLUMN_GLUCOSE, glucose);
-			values.put(DBUser.User.COLUMN_KIDNEY, kidney);
-			values.put(DBUser.User.COLUMN_CORONARY, coronary);
-			
-			long rowId = db.insert(DBUser.User.TB_NAME, null, values);
+			db.update(tableName, values, whereClause, whereArgs);
 		}
 		catch (SQLiteException e)
 		{
-		
+			
 		}
 	}
 	
-	public void isUserRegistered()
+	public void deleteData(String tableName, String whereClause, String[] whereArgs)
 	{
 		try
 		{
-			SQLiteDatabase db = getReadableDatabase();
+			SQLiteDatabase db = getWritableDatabase();
 			
-			
+			db.delete(tableName, whereClause, whereArgs);
 		}
 		catch (SQLiteException e)
 		{
-			Log.e("DB: ", "Open Failed");
+			
 		}
 	}
 }
