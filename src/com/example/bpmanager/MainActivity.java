@@ -166,6 +166,11 @@ public class MainActivity extends ActionBarActivity {
 		transaction.commit();
 
 	}
+	
+	public void changeFragment(Fragment fragment)
+	{
+		getSupportFragmentManager().beginTransaction().replace(R.id.frag_viewer, fragment).addToBackStack(null).commit();
+	}
 
 	private Fragment getFragment(int idx) {
 		Fragment newFragment = null;
@@ -265,5 +270,5 @@ public class MainActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
-
+	
 }
