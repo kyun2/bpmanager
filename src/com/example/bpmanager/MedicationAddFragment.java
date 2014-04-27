@@ -2,6 +2,10 @@ package com.example.bpmanager;
 
 import java.util.ArrayList;
 
+import com.example.bpmanager.MedicationBaseAdapter.MedicineInfoHolder;
+import com.example.bpmanager.MedicationScheduleData.MedicationSchedule;
+import com.example.bpmanager.DB.INFOMedication;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,23 +21,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MedicationListFragment extends Fragment {
+public class MedicationAddFragment extends Fragment {
 	
 	private ListView mListView;
-	BaseAdapter mListAdapter;
-	//ArrayAdapter<String> mListAdapter;
-	ArrayList<LinearLayout> mMedicineList;
+	MedicationBaseAdapter mListAdapter;
+	ArrayList<MedicationScheduleData.MedicationSchedule> mMedicineList;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_med_medlist, container, false);
+		View view = inflater.inflate(R.layout.fragment_med_add, container, false);
 		
 		mListView = (ListView) view.findViewById(R.id.list_medicine);
-		mMedicineList = new ArrayList<LinearLayout>();
+		mMedicineList = new ArrayList<MedicationScheduleData.MedicationSchedule>();
 		
-		getData(inflater, container);
+		getData();
 		setupList();
 		
 		return view;
@@ -45,33 +48,39 @@ public class MedicationListFragment extends Fragment {
 			return;
 		
 		// พ๎ด๐ลอ
-		//mListAdapter = new ArrayAdapter<String>(getActivity(), R.layout.medicineitem_add, mMedicineList);
 		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList);
 		
 		mListView.setAdapter(mListAdapter);
 		//mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-		/*
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				//Toast.makeText(getActivity(), "POS: " + position + "", Toast.LENGTH_SHORT).show();
-				Log.i("POS", "" + position + ":" + id);
+				MedicationScheduleFragment next = new MedicationScheduleFragment();
+				next.setMedicineId(mListAdapter.getItem(position).mId);
+				Log.i("ID: ", Integer.toString(next.getMedicineId()));
+				((MainActivity)getActivity()).changeFragment(next);
 			}
 		});
-		*/
 	}
 	
-	public void getData(LayoutInflater inflater, ViewGroup container)
+	public void getData()
 	{
 		if (mMedicineList == null)
 			return;
 		
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < INFOMedication.InfoData.size(); i++)
 		{
-			LinearLayout llayout = (LinearLayout)inflater.inflate(R.layout.medicineitem_add, container, false);
-			TextView tv = (TextView)llayout.findViewById(R.id.medicine_name);
-			tv.setText(Integer.toString(i));
-			mMedicineList.add(llayout);
+			INFOMedication info = INFOMedication.getInfoMedicine(i);
+			MedicationScheduleData.MedicationSchedule data = MainActivity.mMedicationScheduleData.getSchedule(info.mId);
+			if (data != null)
+				continue;
+			
+			data = MainActivity.mMedicationScheduleData.new MedicationSchedule();
+			data.mId = info.mId;
+			data.mAmount = 0;
+			data.mCount = 0;
+			
+			mMedicineList.add(data);
 		}
 	}
 }

@@ -26,6 +26,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBMedication.SQL_CREATE);
 		// Lifestyle
 		db.execSQL(DBLifestyle.SQL_CREATE);
+		// MedicationTook
+		db.execSQL(DBMedicationTook.SQL_CREATE);
 	}
 
 	@Override
@@ -39,6 +41,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBMedication.SQL_DROP);
 		// Lifestyle
 		db.execSQL(DBLifestyle.SQL_DROP);
+		// MedicationTook
+		db.execSQL(DBMedicationTook.SQL_DROP);
 		
 		// Refresh
 		onCreate(db);
@@ -74,6 +78,20 @@ public class DBHelper extends SQLiteOpenHelper
 			SQLiteDatabase db = getWritableDatabase();
 			
 			db.update(tableName, values, whereClause, whereArgs);
+		}
+		catch (SQLiteException e)
+		{
+			
+		}
+	}
+	
+	public void deleteData(String tableName, String whereClause, String[] whereArgs)
+	{
+		try
+		{
+			SQLiteDatabase db = getWritableDatabase();
+			
+			db.delete(tableName, whereClause, whereArgs);
 		}
 		catch (SQLiteException e)
 		{

@@ -2,6 +2,8 @@ package com.example.bpmanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -15,6 +17,7 @@ import android.widget.Button;
 
 import com.example.bpmanager.DB.DBHelper;
 //import com.example.bpmanager.DB.DBhandler;
+import com.example.bpmanager.DB.INFOMedication;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -29,6 +32,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	public static DBHelper mDBHelper;
 	public static UserData mUserData;
+	public static MedicationScheduleData mMedicationScheduleData;
 	
 	//private static Button home;
 	private static Button data;
@@ -70,11 +74,16 @@ public class MainActivity extends ActionBarActivity {
 		{
 			initFragment = new HomeFragment();
 		}
+		mMedicationScheduleData = new MedicationScheduleData();
+		mMedicationScheduleData.getData();		
 		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.frag_viewer, initFragment).commit();
 		}
+		
+		// 의약품 정보 만들기
+		INFOMedication.Make();
 		
 		
 		//Toast.makeText(this, "activity start", 3000).show();
@@ -115,10 +124,10 @@ public class MainActivity extends ActionBarActivity {
 	private void showNewUserDialog() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
-		alert.setTitle("占쎈르�깍옙");
-		alert.setMessage("�⑥쥚�곻옙釉��울옙�깍옙 占쎈퉳占쎈퓠 占쎌궎占쎈뻿 野껉퍔��占쎌넎占쎌겫占쎈�占쎈빍占쎈뼄.\n 揶쏆뮇�ㅿ옙�숃퉪��궖占쎌깈占쎌젟筌�굞占�占쎈뼄占쎌벉�⑨옙 揶쏆늿�울옙�뀐옙��");
+		alert.setTitle("");
+		alert.setMessage("");
 		alert.setCancelable(false);
-		alert.setPositiveButton("揶쏆뮇�ㅿ옙�숃퉪��궖占쎌깈占쎌젟筌�옙", new DialogInterface.OnClickListener() {
+		alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -134,7 +143,7 @@ public class MainActivity extends ActionBarActivity {
 				transaction.commit();
 			}
 		});
-		alert.setNegativeButton("占쎄텢占쎌뒠占쎌쁽 占쎈쾻嚥∽옙", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -186,7 +195,7 @@ public class MainActivity extends ActionBarActivity {
 			newFragment = new InputBPFragment();
 			break;
 		case FRAGMENT_MED:
-			newFragment = new MedicationFragment();
+			newFragment = new MedicationTopFragment();
 			break;
 		case FRAGMENT_HABIT:
 			newFragment = new HabitFragment();
@@ -271,4 +280,9 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 	
+	public void OpenBrowser(String url)
+	{
+		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
+		startActivity(viewIntent);
+	}	
 }

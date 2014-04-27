@@ -20,9 +20,9 @@ public class MedicationTopFragment extends Fragment {
 		mTabHost = (FragmentTabHost)view.findViewById(android.R.id.tabhost);
 		mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
-		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("³ªÀÇ ¾à¹°°ü¸®"), MedicationMyDataFragment.class, null);
-		mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("º¹¾à È®ÀÎ/¾Ë¸²"), HomeFragment.class, null);
-		mTabHost.addTab(mTabHost.newTabSpec("tab3").setIndicator("º¹¾à±â·Ï"), HomeFragment.class, null);
+		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("ë‚˜ì˜ ì•½ë¬¼ê´€ë¦¬"), MedicationMyDataFragment.class, null);
+		//mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½/ï¿½Ë¸ï¿½"), HomeFragment.class, null);
+		mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("ë‚˜ì˜ ë³µì•½ê¸°ë¡"), MedicationHistoryFragment.class, null);
 		
 		return view;
 	}

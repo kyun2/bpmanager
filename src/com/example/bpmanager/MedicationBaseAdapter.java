@@ -3,6 +3,7 @@ package com.example.bpmanager;
 import java.util.ArrayList;
 
 import com.example.bpmanager.BaseExpandableAdapter.ViewHolder;
+import com.example.bpmanager.DB.INFOMedication;
 
 import android.content.Context;
 import android.util.Log;
@@ -18,17 +19,17 @@ import android.widget.Toast;
 public class MedicationBaseAdapter extends BaseAdapter {
 	
 	private LayoutInflater inflater = null;
-    private ArrayList<LinearLayout> mList = null;
+    private ArrayList<MedicationScheduleData.MedicationSchedule> mList = null;
     private Context mContext = null;
     
-    private class MedicineInfoHolder
+    public class MedicineInfoHolder
     {
     	public ImageView img = null;
     	public TextView name = null;
     }
     private MedicineInfoHolder infoHolder = null;
 
-    public MedicationBaseAdapter(Context c, ArrayList<LinearLayout> items)
+    public MedicationBaseAdapter(Context c, ArrayList<MedicationScheduleData.MedicationSchedule> items)
     {
     	this.inflater = LayoutInflater.from(c);
     	this.mContext = c;
@@ -41,7 +42,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public LinearLayout getItem(int position) {
+	public MedicationScheduleData.MedicationSchedule getItem(int position) {
 		return this.mList.get(position);
 	}
 
@@ -67,20 +68,21 @@ public class MedicationBaseAdapter extends BaseAdapter {
 		}
 		else
 		{
-			infoHolder = (MedicineInfoHolder)view.getTag();
+			infoHolder = (MedicineInfoHolder)view.getTag();			
 		}
 		
-		// 약 이미지
-		//infoHolder.img.setImageDrawable(null);
+		//Log.i("ID: ", getCount() + " : " + position);
 		
-		// 약 이름
-		infoHolder.name.setText(Integer.toString(position));
-				
-		view.setOnClickListener(buttonClickListener);
+		// Image
+		//infoHolder.img.setBackgroundResource(resid);
 		
+		// Text
+		infoHolder.name.setText(INFOMedication.getInfoMedicine(getItem(position).mId).mName);
+
 		return view;
 	}
 	
+	/*
 	private View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -88,13 +90,5 @@ public class MedicationBaseAdapter extends BaseAdapter {
         	
         }
     };
-	
-	public void setArrayList(ArrayList<LinearLayout> items){
-        this.mList = items;
-    }
-     
-    public ArrayList<LinearLayout> getArrayList(){
-        return this.mList;
-    }
-    
+    */    
 }
