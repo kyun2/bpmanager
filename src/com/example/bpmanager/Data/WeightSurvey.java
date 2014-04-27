@@ -17,13 +17,13 @@ public class WeightSurvey implements Survey {
 	public String getSurveyReport(Map<Integer, Object> q) {
 		
 		float weiht = getWeiht(q);
-		if(weiht < 0) return "Á¤È®ÇÑ °ªÀ» ÀÔ·ÂÇÏ¼¼¿ä";
+		if(weiht < 0) return "ì •í™•í•œ ê°’ì„ ìž…ë ¥í•˜ì„¸ìš”";
 		float targetWeiht = getTargetWeiht(getHeight());
 		
 		if(weiht < targetWeiht) 
-			return "´ç½ÅÀÇ ¸ö¹«°Ô´Â "+ weiht+"kg·Î, ÀûÁ¤ Ã¼Áß "+targetWeiht+"kg ¹Ì¸¸À» Àß À¯ÁöÇÏ°í ÀÖ½À´Ï´Ù.\n °íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ °Ç°­ÇÑ Ã¼ÁßÀ» À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù.Áö±ÝÃ³·³ ÀûÁ¤ Ã¼ÁßÀ» À¯ÁöÇÏ¼¼¿ä.";
+			return "ë‹¹ì‹ ì˜ ëª¸ë¬´ê²ŒëŠ” "+ weiht+"kgë¡œ, ì ì • ì²´ì¤‘ "+targetWeiht+"kg ë¯¸ë§Œì„ ìž˜ ìœ ì§€í•˜ê³  ìžˆìŠµë‹ˆë‹¤.\n ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ê±´ê°•í•œ ì²´ì¤‘ì„ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤.ì§€ê¸ˆì²˜ëŸ¼ ì ì • ì²´ì¤‘ì„ ìœ ì§€í•˜ì„¸ìš”.";
 		else 
-			return "´ç½ÅÀÇ ¸ö¹«°Ô´Â" +weiht+ "kg·Î, ÀûÁ¤ Ã¼Áß"+targetWeiht+"kg¸¦  "+(weiht - targetWeiht)+"kg ÃÊ°úÇÏ¿´½À´Ï´Ù.\n °íÇ÷¾Ð È¯ÀÚµéÀº Ç÷¾Ð °¨¼Ò¸¦ À§ÇØ °Ç°­ÇÑ Ã¼ÁßÀ» À¯ÁöÇÏ´Â °ÍÀÌ ÇÊ¿äÇÕ´Ï´Ù. °Ç°­ÇÑ BMIÀ¯Áö¸¦ À§ÇØ ¸ñÇ¥ Ã¼Áß±îÁö °¨·®ÀÌ ÇÊ¿äÇÕ´Ï´Ù.";
+			return "ë‹¹ì‹ ì˜ ëª¸ë¬´ê²ŒëŠ”" +weiht+ "kgë¡œ, ì ì • ì²´ì¤‘"+targetWeiht+"kgë¥¼  "+(weiht - targetWeiht)+"kg ì´ˆê³¼í•˜ì˜€ìŠµë‹ˆë‹¤.\n ê³ í˜ˆì•• í™˜ìžë“¤ì€ í˜ˆì•• ê°ì†Œë¥¼ ìœ„í•´ ê±´ê°•í•œ ì²´ì¤‘ì„ ìœ ì§€í•˜ëŠ” ê²ƒì´ í•„ìš”í•©ë‹ˆë‹¤. ê±´ê°•í•œ BMIìœ ì§€ë¥¼ ìœ„í•´ ëª©í‘œ ì²´ì¤‘ê¹Œì§€ ê°ëŸ‰ì´ í•„ìš”í•©ë‹ˆë‹¤.";
 	}
 	
 	private float getWeiht(Map<Integer, Object> q){

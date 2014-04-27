@@ -41,6 +41,7 @@ public class HabitFragment extends Fragment{
 
 	Survey saltSurvey = new SaltIntakeSurvey();
 	Survey weightSurvey = new WeightSurvey();
+	Survey waistSurvey = new WaistSurvey();
 
 
 	Map<Integer,Object> q1 = new HashMap<Integer, Object>();
@@ -270,47 +271,7 @@ public class HabitFragment extends Fragment{
 
 		}
 
-		private void waistDialog() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("현제 허리둘레를 입력하세요.");
-			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			builder.setView(wText);
-			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					us.setWaist(Float.parseFloat(wText.getText().toString()));
-					dialog.dismiss();
-					waistAdviceReportDialog();
-				}
-			});
-			builder.show();
-		}
-		
-		private void waistAdviceReportDialog() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("현제 허리둘레를 입력하세요.");
-			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			builder.setView(wText);
-			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					us.setWaist(Float.parseFloat(wText.getText().toString()));
-					dialog.dismiss();
-					Toast.makeText(getActivity(), "waist is : "+wText.getText().toString(), 500).show();
-
-				}
-			});
-			builder.show();
-		}
-		
+	
 		
 		
 
@@ -371,9 +332,9 @@ public class HabitFragment extends Fragment{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 
-					String inputWeiht = wText.getText().toString();
+					String inputText = wText.getText().toString();
 					try{
-						q1.put(0,Float.parseFloat(inputWeiht));
+						q1.put(0,Float.parseFloat(inputText));
 					}catch(NumberFormatException e){
 					}
 					dialog.dismiss();
@@ -401,8 +362,52 @@ public class HabitFragment extends Fragment{
 
 			builder.show();
 		}
+		
+		private void waistDialog() {
+			// TODO Auto-generated method stub
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage("현제 허리둘레를 입력하세요.");
+			final EditText wText = new EditText(getActivity());
+			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			builder.setView(wText);
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					//us.setWaist(Float.parseFloat(wText.getText().toString()));
+					
+					String inputText = wText.getText().toString();
+					try{
+						q1.put(0,Float.parseFloat(inputText));
+					}catch(NumberFormatException e){
+					}
+				
+					dialog.dismiss();
+					waistAdviceReportDialog();
+				}
+			});
+			builder.show();
+		}
+		
+		private void waistAdviceReportDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+			builder.setTitle("복부 둘레 관리 평가");
+			builder.setMessage( waistSurvey.getSurveyReport(q1));
+
+			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+				}
+			});
+
+			builder.show();
+		}
+		
+		
 
 		private void stressDialog() {
 			// TODO Auto-generated method stub
