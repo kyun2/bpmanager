@@ -57,10 +57,10 @@ public class BPViewFragment extends Fragment{
 	private void listPrint(int i) {
 		
 		List<BloodPressure> bps = BloodPressure.getLastBPsList(i);
-		
-		FragmentManager fm = getActivity().getSupportFragmentManager();
-		bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, bps, fm);
-		bplist.setAdapter(medAdap);
+//		
+//		FragmentManager fm = getActivity().getSupportFragmentManager();
+//		bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, bps, fm);
+//		bplist.setAdapter(medAdap);
 		
 		
 		
@@ -97,9 +97,9 @@ public class BPViewFragment extends Fragment{
         	retval.add(t);
         }
 		
-		FragmentManager fm = getActivity().getSupportFragmentManager();
-		bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, retval, fm);
-		bplist.setAdapter(medAdap);
+		//FragmentManager fm = getActivity().getSupportFragmentManager();
+		//bpAdapter medAdap = new bpAdapter(view.getContext(), R.layout.bpitem, retval, fm);
+		//bplist.setAdapter(medAdap);
 		
 	}
 	SeekBar.OnSeekBarChangeListener seekChange = new SeekBar.OnSeekBarChangeListener() {

@@ -134,7 +134,7 @@ public class InputBPFragment extends Fragment{
 				final DateTimePicker dt = new DateTimePicker(getActivity());
 
 				alert.setView(dt);
-				alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+				alert.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

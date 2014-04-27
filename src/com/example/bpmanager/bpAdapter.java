@@ -43,7 +43,7 @@ public class bpAdapter extends ArrayAdapter<BloodPressure> {
         BloodPressure temp = value.get(position);
         sys.setText(String.valueOf(temp.getSystolic()));
         dia.setText(String.valueOf(temp.getDiastolic()));
-        time.setText(String.valueOf(temp.getBpdatetime()));
+        time.setText(String.valueOf(temp.getDatetime()));
         
         
 //        BitmapDrawable dr = (BitmapDrawable) ctx.getResources().getDrawable(R.drawable.ic_launcher);
