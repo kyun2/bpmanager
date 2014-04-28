@@ -13,5 +13,6 @@
     <string name="usuer_bth">USER</string>
     <string name="noti_bp_pre">나이와 임상정보를 고려한 당신의 관리 목표는 수축기 혈압 </string>
     <string name="noti_bp_post">mmHg 입니다.</string>
+    <string name="activity_alarm_reciever">AlarmReciever</string>
 
 </resources>

@@ -15,8 +15,8 @@ public class PrivacyDialogFragment extends DialogFragment {
 		LayoutInflater mLayoutInflater = getActivity().getLayoutInflater();
 		mBuilder.setView(mLayoutInflater
 				.inflate(R.layout.privacy_content, null));
-		mBuilder.setTitle("°³ÀÎÁ¤º¸º¸È£Á¤Ã¥");
-		mBuilder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+		mBuilder.setTitle("ê°œì¸ì •ë³´ë³´í˜¸ì •ì±…");
+		mBuilder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
