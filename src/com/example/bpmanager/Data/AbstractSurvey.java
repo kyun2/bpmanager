@@ -61,12 +61,9 @@ public abstract class AbstractSurvey implements Survey {
 		try
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
-			
-			//strQry = "Select * FROM habit WHERE habit_type=0 ORDER BY _id DESC LIMIT 1";
 					
 			Cursor cursor = db.rawQuery(strQry, null);
 			if(!cursor.moveToNext()) return null;
-			
 			str = cursor.getString(cursor.getColumnIndex(DBHabit.TABLE.COLUMN_ANSWERS));
 			cursor.close();
 			
@@ -80,19 +77,23 @@ public abstract class AbstractSurvey implements Survey {
 	
 	@Override
 	final public int getLastResult() {
-		String strQry = "Select "+ DBHabit.TABLE.COLUMN_RESULT + " FROM " + DBHabit.TABLE.NAME + " WHERE "+DBHabit.TABLE.COLUMN_TYPE+"="+ getType() +" ORDER BY " +  DBHabit.TABLE._ID + " LIMIT 1";
+		String strQry = "Select * FROM " + DBHabit.TABLE.NAME + " WHERE "+DBHabit.TABLE.COLUMN_TYPE+"="+ getType() +" ORDER BY " +  DBHabit.TABLE._ID + " DESC LIMIT 1";
+		
+		int rst = -1;
 		try
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
 			
 			Cursor cursor = db.rawQuery(strQry, null);
-			if(cursor.getCount() == 0) return -1;
-			else return  cursor.getInt(cursor.getColumnIndex(DBHabit.TABLE.COLUMN_RESULT));	
+			if(!cursor.moveToNext()) return -1;
+			rst =  cursor.getInt(cursor.getColumnIndex(DBHabit.TABLE.COLUMN_RESULT));
+			cursor.close();
 		}
 		catch(SQLiteException e)
 		{
 			return -1;
 		}
+		return rst;
 	}
 	
 }

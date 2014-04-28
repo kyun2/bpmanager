@@ -1,9 +1,11 @@
 package com.example.bpmanager.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ExerciseSurvey extends AbstractSurvey {
 
+	private final static int TYPE = 3;
 	@Override
 	public String getSurveyReport() {
 		
@@ -31,31 +33,47 @@ public class ExerciseSurvey extends AbstractSurvey {
 	}
 
 	@Override
-	public String[] getSurveyQuestion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected int getType() {
-		// TODO Auto-generated method stub
-		return 0;
+		return TYPE;
+	}
+	
+	@Override
+	protected int getResult(Map<Integer, Object> q) {
+		int number	= getAnswer(q,0);
+		int time	= getAnswer(q,1);
+		int strength= getAnswer(q,2); //1:높음, 0 : 보통
+		
+		if(number > 3 && time > 60 && strength >0) return 1;
+		else return 0;
 	}
 
 	@Override
 	protected String getAnswer(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return null;
+		StringBuilder str = new StringBuilder();
+		
+		str.append(getAnswer(q,0));
+		str.append(":#:");
+		str.append(getAnswer(q,1));
+		str.append(":#:");
+		str.append(getAnswer(q,2));
+		
+		return str.toString();
 	}
 
-	@Override
-	protected int getResult(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	protected Map<Integer, Object> parseAnswer(String s) {
+		Map<Integer, Object> map = new HashMap<Integer, Object> ();
+		
+		map.put(0, s.split(":#:")[0]);
+		map.put(0, s.split(":#:")[1]);
+		map.put(0, s.split(":#:")[2]);
+		return map;
+	}
+
+	@Override
+	public String[] getSurveyQuestion() {
 		// TODO Auto-generated method stub
 		return null;
 	}

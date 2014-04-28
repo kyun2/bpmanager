@@ -1,9 +1,11 @@
 package com.example.bpmanager.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SmokeSurvey extends AbstractSurvey {
 
+	private final static int TYPE = 5;
 	@Override
 	public String getSurveyReport() {
 		Map<Integer, Object> q = getLastAnswer();
@@ -16,31 +18,37 @@ public class SmokeSurvey extends AbstractSurvey {
 	}
 
 	@Override
-	public String[] getSurveyQuestion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected int getType() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected String getAnswer(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return null;
+		return TYPE;
 	}
 
 	@Override
 	protected int getResult(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return 0;
+		int unsmoking = getAnswer(q, 0);
+		if(unsmoking > 0) return 1;
+		else return -1;
 	}
 
 	@Override
+	protected String getAnswer(Map<Integer, Object> q) {
+		return getAnswer(q,0)+"";
+	}
+
+
+	@Override
 	protected Map<Integer, Object> parseAnswer(String s) {
+		try {
+			Map<Integer, Object> map = new HashMap<Integer, Object>();
+			map.put(0, Integer.parseInt(s));
+			return  map;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public String[] getSurveyQuestion() {
 		// TODO Auto-generated method stub
 		return null;
 	}

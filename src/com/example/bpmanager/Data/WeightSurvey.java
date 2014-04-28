@@ -1,11 +1,13 @@
 package com.example.bpmanager.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.example.bpmanager.MainActivity;
 
 public class WeightSurvey extends AbstractSurvey {
 
+	private final static int TYPE = 1;
 	@Override
 	public String getSurveyReport() {
 		
@@ -37,32 +39,39 @@ public class WeightSurvey extends AbstractSurvey {
 	}
 
 	@Override
+	protected int getType() {
+		return TYPE;
+	}
+	
+	@Override
+	protected int getResult(Map<Integer, Object> q) {
+		if(getWeiht(q) <= getTargetWeiht(getHeight())) 
+			return 1;
+		else
+			return 0;
+	}
+
+	@Override
+	protected String getAnswer(Map<Integer, Object> q) {
+		return getWeiht(q)+"";
+	}
+
+	@Override
+	protected Map<Integer, Object> parseAnswer(String s) {
+		try {
+			Map<Integer, Object> map = new HashMap<Integer, Object>();
+			map.put(0, Float.parseFloat(s));
+			return  map;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
 	public String[] getSurveyQuestion() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	protected int getType() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected String getAnswer(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected int getResult(Map<Integer, Object> q) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	protected Map<Integer, Object> parseAnswer(String s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

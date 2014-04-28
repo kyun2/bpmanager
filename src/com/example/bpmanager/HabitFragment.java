@@ -45,23 +45,6 @@ public class HabitFragment extends Fragment{
 	LayoutInflater inf;
 	int q1v, q2v,q3v,q4v,q5v ;
 
-	Survey saltSurvey = new SaltIntakeSurvey();
-	Survey weightSurvey = new WeightSurvey();
-	Survey waistSurvey = new WaistSurvey();
-	Survey exerciseSurvey = new ExerciseSurvey();
-	Survey drinkSurvey = new DrinkSurvey();
-	Survey smokeSurvey = new SmokeSurvey();
-	Survey stressSurvey = new StressSurvey();
-
-	Map<Integer,Object> answer_salt;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_weight;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_waist;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_exer;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_drink;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_smoke;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_stress;// = new HashMap<Integer, Object>();
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -75,9 +58,6 @@ public class HabitFragment extends Fragment{
 		scrollView = (ScrollView) view.findViewById(R.id.scrollView1);
 		scrollView.setVerticalScrollBarEnabled(true);
 
-
-		//		Button button = (Button) view.findViewById(R.id.bt_ok);
-		//		button.setOnClickListener(this);
 		slat = (Button) view.findViewById(R.id.salt_btn);
 		weight = (Button) view.findViewById(R.id.weight_bth);
 		waist = (Button) view.findViewById(R.id.waist_bth);
@@ -108,19 +88,19 @@ public class HabitFragment extends Fragment{
 			// TODO Auto-generated method stub
 			int btnId = v.getId();
 			if(btnId == R.id.salt_btn){
-				saltDialig();
+				saltDialig(new SaltIntakeSurvey());
 			}else if(btnId == R.id.weight_bth){
-				weightDialog();
+				weightDialog(new WeightSurvey());
 			}else if(btnId == R.id.waist_bth){
-				waistDialog();
+				waistDialog(new WaistSurvey());
 			}else if(btnId == R.id.exam_bth){
-				examDialog();
+				examDialog(new ExerciseSurvey());
 			}else if(btnId == R.id.alchole_bth){
-				alcholeDialog();
+				alcholeDialog(new DrinkSurvey());
 			}else if(btnId == R.id.smoking_bth){
-				smokingDialog();
+				smokingDialog(new SmokeSurvey());
 			}else if(btnId == R.id.stress_btn){
-				stressDialog();
+				stressDialog(new StressSurvey());
 			}else if(btnId == R.id.habit_noti_bth){
 				
 				//adviceDialog();
@@ -128,8 +108,7 @@ public class HabitFragment extends Fragment{
 						.beginTransaction();
 				
 				HabitNotiFragment hn = new HabitNotiFragment();
-				hn.answer_salt = answer_salt;
-
+			
 				transaction.replace(R.id.frag_viewer, hn);
 				transaction.addToBackStack(null);
 				//				FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -158,30 +137,27 @@ public class HabitFragment extends Fragment{
 			builder.show();
 		}
 		
-		private void saltDialig() {
+		private void saltDialig(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_salt = new HashMap<Integer, Object>();
-			
-			answer_salt.put(0,0);
-			answer_salt.put(1,0);
-			answer_salt.put(2,0);
-			answer_salt.put(3,0);
-			answer_salt.put(4,0);
-			answer_salt.put(5,0);
-			answer_salt.put(6,0);
-			answer_salt.put(7,0);
-			answer_salt.put(8,0);
-			answer_salt.put(9,0);
-			answer_salt.put(10,0);
-		
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
+			answer.put(0,0);
+			answer.put(1,0);
+			answer.put(2,0);
+			answer.put(3,0);
+			answer.put(4,0);
+			answer.put(5,0);
+			answer.put(6,0);
+			answer.put(7,0);
+			answer.put(8,0);
+			answer.put(9,0);
+			answer.put(10,0);
 
-
-			builder.setMultiChoiceItems(saltSurvey.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
+			builder.setMultiChoiceItems(sv.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					if(isChecked) answer_salt.put(which, 1);
-					else answer_salt.put(which, 0);
+					if(isChecked) answer.put(which, 1);
+					else answer.put(which, 0);
 				}
 			});
 
@@ -189,18 +165,18 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if(saltSurvey.insertDatatoDB(answer_salt) == -1) 
-						Toast.makeText(getActivity(), "insert fail ", 300).show();;
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(saltSurvey , "소급 섭취량 평가");
+					AdviceReportDialog(sv , "소급 섭취량 평가");
 				}
 			});
 			builder.show();
 		}
 		
-		private void weightDialog() {
+		private void weightDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_weight = new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
 			builder.setMessage("현재 체중을 입력하세요.");
 			final EditText wText = new EditText(getActivity());
@@ -213,24 +189,27 @@ public class HabitFragment extends Fragment{
 
 					String inputText = wText.getText().toString();
 					try{
-						answer_weight.put(0,Float.parseFloat(inputText));
+						answer.put(0,Float.parseFloat(inputText));
 					}catch(NumberFormatException e){
 					}
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(weightSurvey , "체중 관리 평가");
+					AdviceReportDialog(sv , "체중 관리 평가");
 				}
 			}
 					);
 			builder.show();
 		}
 
-		private void waistDialog() {
+		private void waistDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_waist= new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 			
 			builder.setMessage("현재 허리둘레를 입력하세요.");
 			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			
 			builder.setView(wText);
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
@@ -239,36 +218,41 @@ public class HabitFragment extends Fragment{
 					
 					String inputText = wText.getText().toString();
 					try{
-						answer_waist.put(0,Float.parseFloat(inputText));
+						answer.put(0,Float.parseFloat(inputText));
 					}catch(NumberFormatException e){
 						
 					}
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(waistSurvey , "복부 둘레 관리 평가");
+					AdviceReportDialog(sv , "복부 둘레 관리 평가");
 				}
 			});
 			builder.show();
 		}
 		
-		private void examDialog() {
+		private void examDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_exer= new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 			
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 운동시간(분) : ");
 			TextView weekText = new TextView(getActivity());
 			weekText.setText("주간 운동 횟수 : ");
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("운동강도(가벼운 노력:1, 보통 노력2, 극도 노력3) : ");
+			hardText.setText("운동강도(가벼운 노력:1, 보통 2, 극도3): ");
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
 			final EditText day = new EditText(getActivity());
 			final EditText week = new EditText(getActivity());
 			final EditText hard = new EditText(getActivity());
-			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			hard.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			//day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			//week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			//hard.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			day.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+			week.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+			hard.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 			
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
@@ -306,15 +290,17 @@ public class HabitFragment extends Fragment{
 					String strength = hard.getText().toString();
 					
 					try{
-						answer_exer.put(0,Integer.parseInt(number));
-						answer_exer.put(1,Integer.parseInt(time));
-						answer_exer.put(2,Integer.parseInt(strength));
+						answer.put(0,Integer.parseInt(number));
+						answer.put(1,Integer.parseInt(time));
+						answer.put(2,Integer.parseInt(strength));
 						
 					}catch(NumberFormatException e){
 						
 					}
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(exerciseSurvey , "운동 관리 평가");
+					AdviceReportDialog(sv , "운동 관리 평가");
 				}
 			}
 					);
@@ -322,9 +308,9 @@ public class HabitFragment extends Fragment{
 
 		}
 		
-		private void alcholeDialog() {
+		private void alcholeDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_drink= new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 			
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 음주량(잔) : ");
@@ -335,8 +321,8 @@ public class HabitFragment extends Fragment{
 
 			final EditText day = new EditText(getActivity());
 			final EditText week = new EditText(getActivity());
-			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			day.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			week.setRawInputType(InputType.TYPE_CLASS_NUMBER);//setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
@@ -364,13 +350,15 @@ public class HabitFragment extends Fragment{
 					String time = week.getText().toString();
 					
 					try{
-						answer_drink.put(0,Integer.parseInt(number));
-						answer_drink.put(1,Integer.parseInt(time));
+						answer.put(0,Integer.parseInt(number));
+						answer.put(1,Integer.parseInt(time));
 					}catch(NumberFormatException e){
 						
 					}
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(drinkSurvey , "음주 관리 평가");
+					AdviceReportDialog(sv , "음주 관리 평가");
 
 				}
 			}
@@ -379,18 +367,20 @@ public class HabitFragment extends Fragment{
 
 		}
 	
-		private void smokingDialog() {
+		private void smokingDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_smoke= new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 			
 			builder.setMessage("현재 담배를 피우십니까?");
 			builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					answer_smoke.put(0,0);
+					answer.put(0,0);
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(smokeSurvey , "흡연 관리 평가");
+					AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			}
 					);
@@ -398,25 +388,27 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					answer_smoke.put(0,1);
+					answer.put(0,1);
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(smokeSurvey , "흡연 관리 평가");
+					AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			});
 			builder.show();
 
 		}
 		
-		private void stressDialog() {
+		private void stressDialog(final Survey sv) {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			answer_stress= new HashMap<Integer, Object>();
+			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 			
-			answer_stress.put(0,3);
-			answer_stress.put(1,3);
-			answer_stress.put(2,3);
-			answer_stress.put(3,3);
-			answer_stress.put(4,3);
+			answer.put(0,3);
+			answer.put(1,3);
+			answer.put(2,3);
+			answer.put(3,3);
+			answer.put(4,3);
 			
 			count = 0;
 			builder.setTitle("5(항상 있었다) ~ 1(전혀 없었다)");
@@ -444,7 +436,7 @@ public class HabitFragment extends Fragment{
 					}else if(id == R.id.q1_5){
 						q1v = 5;
 					}else q1v =3;
-					answer_stress.put(0,q1v);
+					answer.put(0,q1v);
 				}
 			});
 
@@ -465,7 +457,7 @@ public class HabitFragment extends Fragment{
 					}else if(id == R.id.q2_5){
 						q2v = 5;
 					}else q2v =3;
-					answer_stress.put(1,q2v);
+					answer.put(1,q2v);
 				}
 			});
 
@@ -485,7 +477,7 @@ public class HabitFragment extends Fragment{
 					}else if(id == R.id.q3_5){
 						q3v = 5;
 					}else q3v =3;
-					answer_stress.put(2,q3v);
+					answer.put(2,q3v);
 				}
 			});
 
@@ -505,7 +497,7 @@ public class HabitFragment extends Fragment{
 					}else if(id == R.id.q4_5){
 						q4v = 5;
 					}else q4v =3;
-					answer_stress.put(3,q4v);
+					answer.put(3,q4v);
 				}
 			});
 
@@ -525,7 +517,7 @@ public class HabitFragment extends Fragment{
 					}else if(id == R.id.q5_5){
 						q5v = 5;
 					}else q5v =3;
-					answer_stress.put(4,q5v);
+					answer.put(4,q5v);
 				}
 			});
 
@@ -536,8 +528,10 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					if(sv.insertDatatoDB(answer) == -1) 
+						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(stressSurvey , "스트레스 관리 평가");
+					AdviceReportDialog(sv , "스트레스 관리 평가");
 				}
 			}
 					);
