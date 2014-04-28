@@ -2,43 +2,22 @@ package com.example.bpmanager.Data;
 
 import java.util.Map;
 
-public class StressSurvey implements Survey {
-
-	public final static String[] question = {
-		"»ıÃ¤¼Òº¸´Ù´Â ±èÄ¡¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-		"º°¹Ì¹äÀÌ³ª µ¤¹ä Á¾·ù¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-		"¼­¾ç½Ä ¿ä¸®º¸´Ù Áß±¹½Ä, ÀÏº»½Ä ¿ä¸®¸¦ ´õ ÁÁ¾ÆÇÑ´Ù.",
-		"¸»¸° »ı¼±ÀÌ³ª °íµî¾î ÀÚ¹İ °°Àº °ÍÀ» ÁÁ¾ÆÇÑ´Ù.",
-		"¸í¶õÁ£ °°Àº Á£°¥·ù°¡ ½ÄÅ¹¿¡ ¾øÀ¸¸é ¼·¼·ÇÏ´Ù.",
-		"À½½Ä(³ª¹° ¶Ç´Â ÅÁ Á¾·ù)ÀÌ ½Ì°Å¿ì¸é ¼Ò±İÀÌ³ª °£ÀåÀ» ´õ ³Ö´Â´Ù.",
-		"±¹ÀÌ³ª Âî°³, ±¹¼ö Á¾·ùÀÇ ±¹¹°À» ³²±è¾øÀÌ ¸Ô´Â´Ù.",
-		"Æ¢±èÀÌ³ª Àü, »ı¼±È¸ µî¿¡ °£ÀåÀ» µë»Ò(À½½ÄÀÌ Àá±âµµ·Ï) Âï¾î ¸Ô´Â´Ù.",
-		"¿Ü½ÄÀ» ÇÏ°Å³ª ¹è´ŞÀ» ÀÚÁÖ ½ÃÄÑ ¸Ô´Â´Ù.","¿ä¸®¿¡ ¸¶¿ä³×Áî³ª µå·¹½ÌÀ» °ğÀß »ç¿ëÇÑ´Ù.",
-		"¶ó¸é±¹¹°Àº ³²±ä´Ù.",
-	"Á£°¥ Àå¾ÆÂî¸¦ Àß ¸ÔÁö ¾Ê´Â´Ù."};
-
-	@Override
-	public String[] getSurveyQuestion() {
-		return question;
-	}
+public class StressSurvey extends AbstractSurvey {
 
 	@Override
 	public String getSurveyReport(Map<Integer,Object> q) {
-		StringBuilder output = new StringBuilder();
 		int totalScore = getTotalScore(q);
-
-		if(totalScore < 5){
-			output.append("Àú¿°½ÄÀÌ¸¦ Àß À¯ÁöÇÏ°í ÀÖ½À´Ï´Ù.\nÀú¿°½ÄÀÌ´Â Á¤»ó ¹üÀ§·Î ³·¾ÆÁø Ç÷¾ĞÀ» À¯ÁöÇÏ´Â µ¥¿¡µµ µµ¿òÀÌ µË´Ï´Ù. Áö±İÃ³·³ Àú¿°½ÄÀÌ¸¦ À¯ÁöÇÏ¼¼¿ä.");
-			if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1 || 
-					getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 1 ||
-					getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("´Ù¸¸");
-		}else 
-			output.append("°í¿° ¼·Ãë±º¿¡ ÇØ´çÇÕ´Ï´Ù.\n¼Ò±İ ¼·Ãë¸¦ ÁÙÀÌ´Â °ÍÀº Ç÷¾ĞÀÇ »ó½ÂÇÒ À§ÇèÀ» °¨¼Ò½ÃÅ°´Â µ¿½Ã¿¡ ÀÌ¹Ì ³ô¾ÆÁø Ç÷¾ĞÀ» °¨¼Ò½ÃÅ°´Â È¿°ú°¡ ÀÖ½À´Ï´Ù.");	
-		if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1) output.append("¼Ò±İÀÌ³ª °£Àå Ãß°¡´Â »ï°¡¼¼¿ä.");
-		if(getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 1) output.append("±¹¹°Àº ³²±â½Ã´Â °Ô ÁÁ½À´Ï´Ù.");
-		if(getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("Á£°¥, Àå¾ÆÂî·ù´Â ÁÙ¿©º¸¼¼¿ä.");
-
-		return output.toString();
+		float  BEPSI = ((float)totalScore)/5;
+		
+		if(BEPSI >= 2.8 ){
+			return "ìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ê°€ "+ BEPSI +"ì ìœ¼ë¡œ, ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ëŠë¼ëŠ” ì •ë„ê°€ ê³ ìŠ¤íŠ¸ë ˆìŠ¤êµ°ì— í•´ë‹¹í•©ë‹ˆë‹¤.\n ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤."
+					+ "ìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ 1.6ë¯¸ë§Œìœ¼ë¡œ ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ê´€ë¦¬í•˜ëŠ” ê²ƒì´ ê¼­ í•„ìš”í•©ë‹ˆë‹¤. ìŠ¤íŠ¸ë ˆìŠ¤ê´€ë¦¬ë¥¼ ìœ„í•œ ìƒë‹´ì´ í•„ìš”í•©ë‹ˆë‹¤.";
+		}else if(BEPSI >= 1.8){
+			return "ìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ê°€ "+ BEPSI +"ì ìœ¼ë¡œ, ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ëŠë¼ëŠ” ì •ë„ê°€ ì¤‘ë“±ë„ ìŠ¤íŠ¸ë ˆìŠ¤êµ°ì— í•´ë‹¹í•©ë‹ˆë‹¤.\n ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤."; 
+		}else {
+			return "ìŠ¤íŠ¸ë ˆìŠ¤ ì§€ìˆ˜ê°€ "+ BEPSI +"ì ìœ¼ë¡œ, ìŠ¤íŠ¸ë ˆìŠ¤ë¥¼ ëŠë¼ëŠ” ì •ë„ê°€ ì €ìŠ¤íŠ¸ë ˆìŠ¤êµ°ì— í•´ë‹¹í•©ë‹ˆë‹¤.\n ìŠ¤íŠ¸ë ˆìŠ¤ëŠ” ì‹ ì²´ê¸°ëŠ¥ì´ë‚˜ ê±´ê°•ê²°ê³¼ì— ì§ì ‘ì ì¸ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤."; 
+		}
+	
 	}
 
 	private int getTotalScore(Map<Integer,Object> q){
@@ -51,12 +30,5 @@ public class StressSurvey implements Survey {
 		return score;
 	}
 
-	private int getAnswer( Map<Integer,Object> q, int i){
-		Object o = q.get(i);
-		if(o instanceof Integer) return (Integer)q.get(i);
-		else return 0;
-	}
-
-
-
 }
+

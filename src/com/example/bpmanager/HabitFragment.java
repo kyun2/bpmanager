@@ -37,14 +37,24 @@ public class HabitFragment extends Fragment{
 	UserData us = new UserData();
 	int count = 0;
 	LayoutInflater inf;
-	int q1v, q2v,q3v,q4v,q5v;
+	int q1v, q2v,q3v,q4v,q5v ;
 
 	Survey saltSurvey = new SaltIntakeSurvey();
 	Survey weightSurvey = new WeightSurvey();
 	Survey waistSurvey = new WaistSurvey();
+	Survey exerciseSurvey = new ExerciseSurvey();
+	Survey drinkSurvey = new DrinkSurvey();
+	Survey smokeSurvey = new SmokeSurvey();
+	Survey stressSurvey = new StressSurvey();
 
+	Map<Integer,Object> answer_salt;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_weight;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_waist;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_exer;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_drink;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_smoke;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_stress;// = new HashMap<Integer, Object>();
 
-	Map<Integer,Object> q1 = new HashMap<Integer, Object>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +90,6 @@ public class HabitFragment extends Fragment{
 		stress.setOnClickListener(click);
 		notification.setOnClickListener(click);
 
-
 		return view;
 	}
 
@@ -95,7 +104,6 @@ public class HabitFragment extends Fragment{
 			if(btnId == R.id.salt_btn){
 				saltDialig();
 			}else if(btnId == R.id.weight_bth){
-				//Toast.makeText(getActivity(), "weight btn click", 500).show();
 				weightDialog();
 			}else if(btnId == R.id.waist_bth){
 				waistDialog();
@@ -108,6 +116,7 @@ public class HabitFragment extends Fragment{
 			}else if(btnId == R.id.stress_btn){
 				stressDialog();
 			}else if(btnId == R.id.habit_noti_bth){
+				//adviceDialog();
 				final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
 						.beginTransaction();
 
@@ -120,111 +129,121 @@ public class HabitFragment extends Fragment{
 				//Commit the transaction
 				transaction.commit();
 			}
-
 		}
-
-
-
-		private void smokingDialog() {
-			// TODO Auto-generated method stub
+		
+		private void AdviceReportDialog(Survey sv , Map<Integer,Object> anwer, String strTitle ) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("ÌòÑÏ†ú Îã¥Î∞∞Î•º ÌîºÏö∞Ïã≠ÎãàÍπå?");
-			//			final EditText wText = new EditText(getActivity());
-			//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			//			builder.setView(wText);
-			builder.setPositiveButton("Ïòà", new DialogInterface.OnClickListener() {
+
+			builder.setTitle(strTitle);
+			builder.setMessage( sv.getSurveyReport(anwer));
+
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					dialog.dismiss();
-					Toast.makeText(getActivity(), "weight is : ", 500).show();
-
-				}
-			}
-					);
-			builder.setNegativeButton("ÏïÑÎãàÏò§", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
 					dialog.dismiss();
 				}
 			});
+
 			builder.show();
-
 		}
-		private void alcholeDialog() {
-			// TODO Auto-generated method stub
+		
+		private void saltDialig() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			TextView dayText = new TextView(getActivity());
-			dayText.setText("Ïùº ÏùåÏ£ºÎüâ(Ïûî) : ");
-			TextView weekText = new TextView(getActivity());
-			weekText.setText("Ï£ºÍ∞Ñ ÏùåÏ£º ÌöüÏàò");
+			answer_salt = new HashMap<Integer, Object>();
 
-			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+			builder.setMultiChoiceItems(saltSurvey.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
 
-			EditText day = new EditText(getActivity());
-			EditText week = new EditText(getActivity());
-			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+				@Override
+				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+					if(isChecked) answer_salt.put(which, 1);
+					else answer_salt.put(which, 0);
+				}
+			});
 
-
-			LinearLayout dayItem = new LinearLayout(getActivity());
-			dayItem.setOrientation(LinearLayout.HORIZONTAL);
-			dayItem.setLayoutParams(lparam);
-			dayItem.addView(dayText);
-			dayItem.addView(day);
-			LinearLayout weekItem = new LinearLayout(getActivity());
-			weekItem.setOrientation(LinearLayout.HORIZONTAL);
-			weekItem.setLayoutParams(lparam);
-			weekItem.addView(weekText);
-			weekItem.addView(week);
-
-			LinearLayout Items =  new LinearLayout(getActivity());
-			Items.setOrientation(LinearLayout.VERTICAL);
-			Items.setLayoutParams(lparam);
-			Items.addView(dayItem);
-			Items.addView(weekItem);
-
-
-			builder.setView(Items);
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-
 					dialog.dismiss();
-					Toast.makeText(getActivity(), "weight is : ".toString(), 500).show();
+					AdviceReportDialog(saltSurvey ,answer_salt, "º“±ﬁ º∑√Î∑Æ ∆Ú∞°");
+				}
+			});
+			builder.show();
+		}
+		
+		private void weightDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			answer_weight = new HashMap<Integer, Object>();
 
+			builder.setMessage("«ˆ¿Á √º¡ﬂ¿ª ¿‘∑¬«œººø‰.");
+			final EditText wText = new EditText(getActivity());
+			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			builder.setView(wText);
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+
+					String inputText = wText.getText().toString();
+					try{
+						answer_weight.put(0,Float.parseFloat(inputText));
+					}catch(NumberFormatException e){
+					}
+					dialog.dismiss();
+					AdviceReportDialog(weightSurvey ,answer_weight, "√º¡ﬂ ∞¸∏Æ ∆Ú∞°");
 				}
 			}
 					);
 			builder.show();
-
 		}
-		private void examDialog() {
-			// TODO Auto-generated method stub
+
+		private void waistDialog() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			//			builder.setMessage("ÌòÑÏ†ú ÌóàÎ¶¨ÎëòÎ†àÎ•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî.");
+			answer_waist= new HashMap<Integer, Object>();
+			
+			builder.setMessage("«ˆ¿Á «„∏Æµ—∑π∏¶ ¿‘∑¬«œººø‰.");
+			final EditText wText = new EditText(getActivity());
+			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			builder.setView(wText);
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+					String inputText = wText.getText().toString();
+					try{
+						answer_waist.put(0,Float.parseFloat(inputText));
+					}catch(NumberFormatException e){
+						
+					}
+					dialog.dismiss();
+					AdviceReportDialog(waistSurvey ,answer_waist, "∫π∫Œ µ—∑π ∞¸∏Æ ∆Ú∞°");
+				}
+			});
+			builder.show();
+		}
+		
+		private void examDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			answer_exer= new HashMap<Integer, Object>();
+			
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("Ïùº Ïö¥ÎèôÏãúÍ∞Ñ(Î∂Ñ) : ");
+			dayText.setText("¿œ øÓµøΩ√∞£(∫–) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("Ï£ºÍ∞Ñ Ïö¥Îèô ÌöüÏàò : ");
+			weekText.setText("¡÷∞£ øÓµø »Ωºˆ : ");
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("Ïö¥ÎèôÍ∞ïÎèÑÍ∞Ä ÎÜíÎã§Í≥† ÏÉùÍ∞ÅÌïòÏã≠ÎãàÍπå?");
+			hardText.setText("øÓµø∞≠µµ(∞°∫≠øÓ ≥Î∑¬:1, ∫∏≈Î ≥Î∑¬2, ±ÿµµ ≥Î∑¬3) : ");
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
-			EditText day = new EditText(getActivity());
-			EditText week = new EditText(getActivity());
+			final EditText day = new EditText(getActivity());
+			final EditText week = new EditText(getActivity());
+			final EditText hard = new EditText(getActivity());
 			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-
-			CheckBox hard = new CheckBox(getActivity());
-			hard.setText("");
-
+			week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			hard.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
 			dayItem.setLayoutParams(lparam);
@@ -249,171 +268,132 @@ public class HabitFragment extends Fragment{
 			Items.addView(weekItem);
 			Items.addView(hardItem);
 
+			builder.setView(Items);
+		
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+					String number = day.getText().toString();
+					String time = week.getText().toString();
+					String strength = hard.getText().toString();
+					
+					try{
+						answer_exer.put(0,Integer.parseInt(number));
+						answer_exer.put(1,Integer.parseInt(time));
+						answer_exer.put(2,Integer.parseInt(strength));
+						
+					}catch(NumberFormatException e){
+						
+					}
+					dialog.dismiss();
+					AdviceReportDialog(exerciseSurvey ,answer_exer, "øÓµø ∞¸∏Æ ∆Ú∞°");
+				}
+			}
+					);
+			builder.show();
+
+		}
+		
+		private void alcholeDialog() {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			answer_drink= new HashMap<Integer, Object>();
+			
+			TextView dayText = new TextView(getActivity());
+			dayText.setText("¿œ ¿Ω¡÷∑Æ(¿‹) : ");
+			TextView weekText = new TextView(getActivity());
+			weekText.setText("¡÷∞£ ¿Ω¡÷ »Ωºˆ");
+
+			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+
+			final EditText day = new EditText(getActivity());
+			final EditText week = new EditText(getActivity());
+			day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+
+			LinearLayout dayItem = new LinearLayout(getActivity());
+			dayItem.setOrientation(LinearLayout.HORIZONTAL);
+			dayItem.setLayoutParams(lparam);
+			dayItem.addView(dayText);
+			dayItem.addView(day);
+			LinearLayout weekItem = new LinearLayout(getActivity());
+			weekItem.setOrientation(LinearLayout.HORIZONTAL);
+			weekItem.setLayoutParams(lparam);
+			weekItem.addView(weekText);
+			weekItem.addView(week);
+
+			LinearLayout Items =  new LinearLayout(getActivity());
+			Items.setOrientation(LinearLayout.VERTICAL);
+			Items.setLayoutParams(lparam);
+			Items.addView(dayItem);
+			Items.addView(weekItem);
 
 			builder.setView(Items);
-
-			//			final EditText wText = new EditText(getActivity());
-			//			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			//			builder.setView(wText);
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					//us.setWaist(wText.getText().toString());
-					dialog.dismiss();
-					Toast.makeText(getActivity(), "waist is : ".toString(), 500).show();
-
-				}
-			}
-					);
-			builder.show();
-
-		}
-
-	
-		
-		
-
-
-		private void saltDialig() {
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			q1 = new HashMap<Integer, Object>();
-
-			builder.setMultiChoiceItems(saltSurvey.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					if(isChecked) q1.put(which, 1);
-					else q1.put(which, 0);
-				}
-			});
-
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					slatAdviceReportDialig();
-				}
-			});
-			builder.show();
-		}
-
-		private void slatAdviceReportDialig() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-			builder.setTitle("ÏÜåÍ∏â ÏÑ≠Ï∑®Îüâ ÌèâÍ∞Ä");
-			builder.setMessage( saltSurvey.getSurveyReport(q1));
-
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			}
-					);
-			builder.show();
-		}
-
-		private void weightDialog() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			q1 = new HashMap<Integer, Object>();
-
-			builder.setMessage("ÌòÑÏû¨ Ï≤¥Ï§ëÏùÑ ÏûÖÎ†•ÌïòÏÑ∏Ïöî!.");
-			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			builder.setView(wText);
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-
-					String inputText = wText.getText().toString();
-					try{
-						q1.put(0,Float.parseFloat(inputText));
-					}catch(NumberFormatException e){
-					}
-					dialog.dismiss();
-					weightAdviceReportDialog();
-				}
-			}
-					);
-			builder.show();
-		}
-
-		private void weightAdviceReportDialog() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-			builder.setTitle("Ï≤¥Ï§ë Í¥ÄÎ¶¨ ÌèâÍ∞Ä");
-			builder.setMessage( weightSurvey.getSurveyReport(q1));
-
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
-
-			builder.show();
-		}
-		
-		private void waistDialog() {
-			// TODO Auto-generated method stub
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setMessage("ÌòÑÏû¨ ÌóàÎ¶¨ÎëòÎ†àÎ•º ÏûÖÎ†•ÌïòÏÑ∏Ïöî.");
-			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			builder.setView(wText);
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					//us.setWaist(Float.parseFloat(wText.getText().toString()));
+					String number = day.getText().toString();
+					String time = week.getText().toString();
 					
-					String inputText = wText.getText().toString();
 					try{
-						q1.put(0,Float.parseFloat(inputText));
+						answer_drink.put(0,Integer.parseInt(number));
+						answer_drink.put(1,Integer.parseInt(time));
 					}catch(NumberFormatException e){
+						
 					}
-				
 					dialog.dismiss();
-					waistAdviceReportDialog();
+					AdviceReportDialog(drinkSurvey ,answer_drink, "¿Ω¡÷ ∞¸∏Æ ∆Ú∞°");
+
 				}
-			});
+			}
+					);
 			builder.show();
+
 		}
-		
-		private void waistAdviceReportDialog() {
+	
+		private void smokingDialog() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-			builder.setTitle("Î≥µÎ∂Ä ÎëòÎ†à Í¥ÄÎ¶¨ ÌèâÍ∞Ä");
-			builder.setMessage( waistSurvey.getSurveyReport(q1));
-
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
+			answer_smoke= new HashMap<Integer, Object>();
+			
+			builder.setMessage("«ˆ¿Á ¥„πË∏¶ ««øÏΩ ¥œ±Ó?");
+			builder.setPositiveButton("øπ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					answer_smoke.put(0,0);
 					dialog.dismiss();
+					AdviceReportDialog(smokeSurvey ,answer_smoke, "»Ìø¨ ∞¸∏Æ ∆Ú∞°");
+				}
+			}
+					);
+			builder.setNegativeButton("æ∆¥œø¿", new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					answer_smoke.put(0,1);
+					dialog.dismiss();
+					AdviceReportDialog(smokeSurvey ,answer_smoke, "»Ìø¨ ∞¸∏Æ ∆Ú∞°");
 				}
 			});
-
 			builder.show();
+
 		}
 		
-		
-
 		private void stressDialog() {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			answer_stress= new HashMap<Integer, Object>();
+			
+			answer_stress.put(0,3);
+			answer_stress.put(1,3);
+			answer_stress.put(2,3);
+			answer_stress.put(3,3);
+			answer_stress.put(4,3);
+			
 			count = 0;
-			builder.setTitle("5(Ìï≠ÏÉÅ ÏûàÏóàÎã§) ~ 1(Ï†ÑÌòÄ ÏóÜÏóàÎã§)");
+			builder.setTitle("5(«◊ªÛ ¿÷æ˙¥Ÿ) ~ 1(¿¸«Ù æ¯æ˙¥Ÿ)");
 			ScrollView stress = (ScrollView) inf.inflate(R.layout.stress_content, null);
 			RadioGroup q1Value = (RadioGroup) stress.findViewById(R.id.q1_value);
 			RadioGroup q2Value = (RadioGroup) stress.findViewById(R.id.q2_value);
@@ -437,7 +417,8 @@ public class HabitFragment extends Fragment{
 						q1v = 4;
 					}else if(id == R.id.q1_5){
 						q1v = 5;
-					}
+					}else q1v =3;
+					answer_stress.put(0,q1v);
 					//Toast.makeText(getActivity(), "q1 : "+q1v, 300).show();
 				}
 			});
@@ -458,7 +439,8 @@ public class HabitFragment extends Fragment{
 						q2v = 4;
 					}else if(id == R.id.q2_5){
 						q2v = 5;
-					}
+					}else q2v =3;
+					answer_stress.put(1,q2v);
 					//Toast.makeText(getActivity(), "q2 : "+q2v, 300).show();
 				}
 			});
@@ -479,7 +461,8 @@ public class HabitFragment extends Fragment{
 						q3v = 4;
 					}else if(id == R.id.q3_5){
 						q3v = 5;
-					}
+					}else q3v =3;
+					answer_stress.put(2,q3v);
 					//Toast.makeText(getActivity(), "q3 : "+q3v, 300).show();
 				}
 			});
@@ -500,7 +483,8 @@ public class HabitFragment extends Fragment{
 						q4v = 4;
 					}else if(id == R.id.q4_5){
 						q4v = 5;
-					}
+					}else q4v =3;
+					answer_stress.put(3,q4v);
 					//Toast.makeText(getActivity(), "q4 : "+q4v, 300).show();
 				}
 			});
@@ -521,52 +505,39 @@ public class HabitFragment extends Fragment{
 						q5v = 4;
 					}else if(id == R.id.q5_5){
 						q5v = 5;
-					}
+					}else q5v =3;
+					answer_stress.put(4,q5v);
 					//Toast.makeText(getActivity(), "q5 : "+q2v, 300).show();
 				}
 			});
 
 			builder.setView(stress);
 
-			builder.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					hpoint.setStress(getStressPoint());
 					dialog.dismiss();
-					Toast.makeText(getActivity(), "stress is : "+ hpoint.getStress(), 500).show();
-
-				}
-
-				private double getStressPoint() {
-					// TODO Auto-generated method stub
-					int sum = q1v + q2v + q3v + q4v + q5v; 
-					double retval = (double)sum/5L;
-					return retval;
+					AdviceReportDialog(stressSurvey ,answer_stress, "Ω∫∆Æ∑πΩ∫ ∞¸∏Æ ∆Ú∞°");
 				}
 			}
 					);
 			builder.show();
 
-		}
-
-
+		}	
 	};
 
 
-	public void onClick(View v) {
-
-		switch (v.getId()) {
-
-		//		case R.id.bt_ok:
-		//			Toast.makeText(getActivity(), "One Fragment", Toast.LENGTH_SHORT)
-		//					.show();
-		//			break;
-
-		}
-	}
+//	public void onClick(View v) {
+//
+//		switch (v.getId()) {
+//
+//		//		case R.id.bt_ok:
+//		//			Toast.makeText(getActivity(), "One Fragment", Toast.LENGTH_SHORT)
+//		//					.show();
+//		//			break;
+//
+//		}
+//	}
 
 }
-
-

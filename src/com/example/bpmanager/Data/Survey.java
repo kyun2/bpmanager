@@ -1,20 +1,25 @@
 package com.example.bpmanager.Data;
-import java.util.List;
 import java.util.Map;
 
 public interface Survey {
 
 	/**
-	 * ¼³¹®Á¶»ç¿¡ ¾²ÀÏ Áú¹®Áö¸¦ ¹İÈ¯ÇÑ´Ù.
-	 * @return Áú¹®ÁöµéÀÇ ¹è¿­
+	 * ì„¤ë¬¸ì¡°ì‚¬ì— ì“°ì¼ ì§ˆë¬¸ì§€ë¥¼ ë°˜í™˜í•œë‹¤.
+	 * @return ì§ˆë¬¸ì§€ë“¤ì˜ ë°°ì—´
 	 */
 	public String[] getSurveyQuestion();
 	
 	/**
-	 * ¼³¹®Á¶»ç °á°ú·Î ºÎÅÍ ·¹Æ÷Æ®¸¦ ÀÛ¼ºÇÑ´Ù.
-	 * @param q ¼³¹®Á¶»ç ´ä¾ÈÁö
-	 * @return ¼³¹®Á¶»ç °á°ú
+	 * ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ë¡œ ë¶€í„° ë ˆí¬íŠ¸ë¥¼ ì‘ì„±í•œë‹¤.
+	 * @param q ì„¤ë¬¸ì¡°ì‚¬ ë‹µì•ˆì§€
+	 * @return ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼
 	 */
 	public String getSurveyReport(Map<Integer,Object> q);
 	
+	/**
+	 * ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ë¥¼ ë””ë¹„ì— INSERT
+	 * @param q ì„¤ë¬¸ì¡°ì‚¬ ë‹µì•ˆ
+	 * @return ì„±ê³µ ì‹¤íŒ¨ ì—¬ë¶€
+	 */
+	public long insertDatatoDB(Map<Integer,Object> q);
 }

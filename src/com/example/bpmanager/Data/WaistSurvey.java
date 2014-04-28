@@ -4,14 +4,7 @@ import java.util.Map;
 
 import com.example.bpmanager.MainActivity;
 
-public class WaistSurvey implements Survey {
-
-	public final static String[] question = {""};
-	
-	@Override
-	public String[] getSurveyQuestion() {
-		return question;
-	}
+public class WaistSurvey extends AbstractSurvey {
 
 	@Override
 	public String getSurveyReport(Map<Integer, Object> q) {

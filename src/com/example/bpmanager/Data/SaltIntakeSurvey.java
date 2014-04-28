@@ -2,7 +2,7 @@ package com.example.bpmanager.Data;
 
 import java.util.Map;
 
-public class SaltIntakeSurvey implements Survey {
+public class SaltIntakeSurvey extends AbstractSurvey {
 
 	public final static String[] question = {"생채소보다는 김치를 더 좋아한다.",
 			"별미밥이나 덮밥 종류를 더 좋아한다.",
@@ -50,9 +50,4 @@ public class SaltIntakeSurvey implements Survey {
 		return score;
 	}
 	
-	private int getAnswer( Map<Integer,Object> q, int i){
-		Object o = q.get(i);
-		if(o instanceof Integer) return (Integer)o;
-		else return 0;
-	}
 }
