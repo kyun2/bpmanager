@@ -1,5 +1,6 @@
 package com.example.bpmanager.Data;
 
+import java.util.List;
 import java.util.Map;
 
 import com.example.bpmanager.MainActivity;
@@ -7,7 +8,10 @@ import com.example.bpmanager.MainActivity;
 public class DrinkSurvey extends AbstractSurvey {
 
 	@Override
-	public String getSurveyReport(Map<Integer, Object> q) {
+	public String getSurveyReport() {
+		
+		Map<Integer, Object> q = getLastAnswer();
+		
 		int dayconsum = getAnswer(q,0);
 		int weekconsum =  getAnswer(q,1);
 		
@@ -34,5 +38,53 @@ public class DrinkSurvey extends AbstractSurvey {
 			
 		}
 	}
+
+
+
+	@Override
+	public String[] getSurveyQuestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	protected int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	protected String getAnswer(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	protected int getResult(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	protected Map<Integer, Object> parseAnswer(String s) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
+
+
+
 }
 

@@ -2,11 +2,8 @@ package com.example.bpmanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.example.bpmanager.DB.DBhandler;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,11 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
+import com.example.bpmanager.DB.DBhandler;
+import com.example.bpmanager.Data.SaltIntakeSurvey;
 
 public class HabitNotiFragment extends Fragment {
 
@@ -31,6 +29,20 @@ public class HabitNotiFragment extends Fragment {
 	private ExpandableListView mListView;
 	DBhandler handle;
 
+	public Map<Integer,Object> answer_salt;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_weight;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_waist;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_exer;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_drink;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_smoke;// = new HashMap<Integer, Object>();
+	Map<Integer,Object> answer_stress;// = new HashMap<Integer, Object>();
+	
+	public HabitNotiFragment(){}
+//	
+//	public void setAnswer(Map<Integer,Object> answer_salt){
+//		this.answer_salt = answer_salt;
+//	}
+//	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -95,281 +107,31 @@ public class HabitNotiFragment extends Fragment {
 		Map<String, String> stressType = new HashMap<String, String>();
 		stressType.put("Type", "스트레스관리");
 		mGroupList.add(stressType);
-
-		if (hab == null) {
-			Toast.makeText(getActivity(), "check1", 300).show();
-			// errDialog("占쏙옙활占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙求占�.");
-		} else if (us == null) {
-			// errDialog("占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙求占�.");
-		} else {
-			int salt = hab.getSalt();
-
-			String eval;
-			String recm;
-			if (salt < 5) {
-				 eval = EvaText.E6;
-				 recm = RecomendText.R6;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				saltNoti.add(value);
-			} else {
-				 eval = EvaText.E7;
-				 recm = RecomendText.R7;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				saltNoti.add(value);
-			}
-
-			double tweight = ((Double.valueOf(us.getHeight()) - 100) / 0.9);
-			double gap = tweight - Double.valueOf(us.getHeight());
-			String t;
-			t = TargetText.T6;
-			t = t.replace("TARGET", String.valueOf(tweight));
-			if (gap > 0) {
-				eval = EvaText.E18;
-				eval = eval.replace("INPUT", Float.toString(us.getWeight()))
-						.replace("TARGET", String.valueOf(tweight))
-						.replace("GAP", String.valueOf(gap));
-				recm = RecomendText.R18;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", t);
-				value.put("E",eval);
-				value.put("R", recm);
-				weightNoti.add(value);
-			} else {
-				eval = EvaText.E17;
-				eval = eval.replace("INPUT", Float.toString(us.getWeight())).replace("TARGET",
-						String.valueOf(tweight));
-				recm = RecomendText.R17;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", t);
-				value.put("E",eval);
-				value.put("R", recm);
-				weightNoti.add(value);
-			}
-
-			int twaist;
-			if ((us.getSex() == 1)) {
-				t = TargetText.T7;
-				twaist = 102;
-				if (us.getWaist() > twaist) {
-
-					eval = EvaText.E19;
-					eval = eval
-							.replace("INPUT", Float.toString(us.getWaist()))
-							.replace("TARGET", "102")
-							.replace(
-									"GAP",
-									String.valueOf(us
-											.getWaist() - 102));
-					recm = RecomendText.R19;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					waistNoti.add(value);
-					
-				} else {
-					eval = EvaText.E20;
-
-					eval = eval.replace("INPUT", Float.toString(us.getWaist())).replace(
-							"TARGET", "102");
-					recm = RecomendText.R20;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					waistNoti.add(value);
-				}
-			} else {
-				t = TargetText.T7;
-				twaist = 88;
-				if (us.getWaist() > twaist) {
-
-					eval = EvaText.E19;
-					eval = eval
-							.replace("INPUT", Float.toString(us.getWaist()))
-							.replace("TARGET", "102")
-							.replace(
-									"GAP",
-									String.valueOf(us.getWaist() - 102));
-					recm = RecomendText.R19;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					waistNoti.add(value);
-				} else {
-					eval = EvaText.E20;
-
-					eval = eval.replace("INPUT", Float.toString(us.getWaist())).replace(
-							"TARGET", "102");
-					recm = RecomendText.R20;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					waistNoti.add(value);
-				}
-			}
-
-			if ((hab.getExamNum() > 4) && (hab.getExamTime() > 60)
-					&& (hab.getExamHard() == 1)) {
-				t = TargetText.T3;
-
-				eval = EvaText.E8;
-				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
-						.replace("MINITE", String.valueOf(hab.getExamTime()))
-						.replace("HARDNESS", "占쏙옙");
-				recm = RecomendText.R8;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", t);
-				value.put("E",eval);
-				value.put("R", recm);
-				examNoti.add(value);
-				
-
-			} else {
-				t = TargetText.T3;
-				String hard;
-				if (hab.getExamHard() == 1) {
-					hard = "강";
-				} else {
-					hard = "보통";
-				}
-				eval = EvaText.E8;
-				eval = eval.replace("COUNT", String.valueOf(hab.getExamNum()))
-						.replace("MINITE", String.valueOf(hab.getExamTime()))
-						.replace("HARDNESS", hard);
-				recm = RecomendText.R8;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", t);
-				value.put("E",eval);
-				value.put("R", recm);
-				examNoti.add(value);
-			}
-
-			if (us.getSex() == 1 && (Double.valueOf(us.getWeight()) > 60)) {
-				t = TargetText.T4;
-				int alDay = hab.getAlcholeDay();
-				int alWeek = hab.getAlcholeWeek();
-				if (alDay > 2 && (alDay * alWeek) > 14) {
-					eval = EvaText.E11;
-					eval = eval
-							.replace("INPUT", String.valueOf(alDay * alWeek));
-					recm = RecomendText.R11;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					alcholeNoti.add(value);
-				} else {
-					eval = EvaText.E10;
-					eval = eval
-							.replace("INPUT", String.valueOf(alDay * alWeek));
-					recm = RecomendText.R10;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					alcholeNoti.add(value);
-				}
-			} else {
-				t = TargetText.T5;
-				int alDay = hab.getAlcholeDay();
-				int alWeek = hab.getAlcholeWeek();
-				if (alDay > 1 && (alDay * alWeek) > 9) {
-					eval = EvaText.E11;
-					eval = eval
-							.replace("INPUT", String.valueOf(alDay * alWeek));
-					recm = RecomendText.R11;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					alcholeNoti.add(value);
-				} else {
-					eval = EvaText.E10;
-					eval = eval
-							.replace("INPUT", String.valueOf(alDay * alWeek));
-					recm = RecomendText.R10;
-					Map<String, String> value = new HashMap<String,String>();
-					value.put("T", t);
-					value.put("E",eval);
-					value.put("R", recm);
-					alcholeNoti.add(value);
-				}
-			}
-
-			if (hab.getSmoking() == 1) {
-				eval = EvaText.E13;
-				recm = RecomendText.R13;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				smokingNoti.add(value);
-			} else {
-				eval = EvaText.E12;
-				recm = RecomendText.R12;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				smokingNoti.add(value);
-			}
-
-			if (hab.getStress() >= 2.8) {
-				eval = EvaText.E14;
-				eval = eval.replace("INPUT", String.valueOf(hab.getStress()));
-				recm = RecomendText.R14;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				stressNoti.add(value);
-			} else if (hab.getStress() < 1.7) {
-				eval = EvaText.E16;
-				eval = eval.replace("INPUT", String.valueOf(hab.getStress()));
-				recm = RecomendText.R16;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				stressNoti.add(value);
-			} else {
-				eval = EvaText.E15;
-				eval = eval.replace("INPUT", String.valueOf(hab.getStress()));
-				recm = RecomendText.R15;
-				Map<String, String> value = new HashMap<String,String>();
-				value.put("T", "");
-				value.put("E",eval);
-				value.put("R", recm);
-				stressNoti.add(value);
-			}
-
-			
-
-		}
-		
+		 
 		// 여기 참고
 		Map<String, String> val2 = new HashMap<String, String>();
-		val2.put("T", "");
-		val2.put("E", "test");
-		val2.put("R", "test2");
+		
+		SaltIntakeSurvey sv = new SaltIntakeSurvey();
+		String aw = sv.getSurveyReport();
+		val2.put("T", aw); 
+		val2.put("E", ""); 
+		val2.put("R", "");
+		
 		saltNoti.add(val2);
+		
+		
+		
+		
 		
 		// saltNoti, weightNoti, waistNoti, examNoti, alcholeNoti, smokingNoti, stressNoti 에 값을 넣어주면 됨.
 		mChildList.add(saltNoti);
 		mChildList.add(weightNoti);
+		
 		mChildList.add(waistNoti);
 		mChildList.add(examNoti);
 		mChildList.add(alcholeNoti);
 		mChildList.add(smokingNoti);
+		
 		mChildList.add(stressNoti);
 		
 		

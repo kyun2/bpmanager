@@ -1,9 +1,11 @@
 package com.example.bpmanager.Data;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SaltIntakeSurvey extends AbstractSurvey {
 
+	private final static int TYPE = 0;
 	public final static String[] question = {"생채소보다는 김치를 더 좋아한다.",
 			"별미밥이나 덮밥 종류를 더 좋아한다.",
 			"서양식 요리보다 중국식, 일본식 요리를 더 좋아한다.",
@@ -22,8 +24,12 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 	}
 
 	@Override
-	public String getSurveyReport(Map<Integer,Object> q) {
+	public String getSurveyReport() {
+		Map<Integer, Object> q = getLastAnswer();
 		StringBuilder output = new StringBuilder();
+	
+		if(q == null) return "입력된 정보가 없습니다. 설문조사에 응해주세요";
+		
 		int totalScore = getTotalScore(q);
 		
 		if(totalScore < 5){
@@ -33,6 +39,7 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 					getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("다만");
 		}else 
 			output.append("고염 섭취군에 해당합니다.\n소금 섭취를 줄이는 것은 혈압의 상승할 위험을 감소시키는 동시에 이미 높아진 혈압을 감소시키는 효과가 있습니다.");	
+		
 		if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1) output.append("소금이나 간장 추가는 삼가세요.");
 		if(getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 1) output.append("국물은 남기시는 게 좋습니다.");
 		if(getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("젓갈, 장아찌류는 줄여보세요.");
@@ -49,5 +56,44 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 		}
 		return score;
 	}
+
+	@Override
+	protected int getType() {
+		return TYPE;
+	}
+	
+	@Override
+	protected int getResult(Map<Integer,Object> q) {
+		int totalScore = getTotalScore(q);
+		if(totalScore < 5)
+			return 1;
+		else 
+			return 0;
+	}
+
+	@Override
+	protected String getAnswer(Map<Integer,Object> q) {
+		StringBuilder answer = new StringBuilder();
+
+		for(int i = 0; i < q.size(); i++)
+			answer.append(q.get(i));
+		return answer.toString();
+	}
+
+	@Override
+	protected Map<Integer, Object> parseAnswer(String s) {
+		Map<Integer, Object> answer = new HashMap<Integer, Object>();
+		
+		for(int i = 0; i< s.length(); i++)
+			if(s.charAt(i) == '1')
+				answer.put(i,1);
+			else 
+				answer.put(i, 0);
+		
+		return answer;
+	}
+
+
+
 	
 }

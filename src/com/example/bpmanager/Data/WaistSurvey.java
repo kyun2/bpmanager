@@ -7,7 +7,10 @@ import com.example.bpmanager.MainActivity;
 public class WaistSurvey extends AbstractSurvey {
 
 	@Override
-	public String getSurveyReport(Map<Integer, Object> q) {
+	public String getSurveyReport() {
+		
+		Map<Integer, Object> q = getLastAnswer();
+		
 		float waist = getWaist(q);
 		if(waist < 0) return "정확한 값을 입력하세요";
 		float targetWaist = getTargetWaist(MainActivity.mUserData.getSex());
@@ -28,5 +31,35 @@ public class WaistSurvey extends AbstractSurvey {
 	private float getTargetWaist(int sex){	
 		if(sex == 2) return 88;
 		else return 102;
+	}
+
+	@Override
+	public String[] getSurveyQuestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected String getAnswer(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getResult(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected Map<Integer, Object> parseAnswer(String s) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

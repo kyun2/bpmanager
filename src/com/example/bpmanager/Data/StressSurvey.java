@@ -5,7 +5,9 @@ import java.util.Map;
 public class StressSurvey extends AbstractSurvey {
 
 	@Override
-	public String getSurveyReport(Map<Integer,Object> q) {
+	public String getSurveyReport() {
+		Map<Integer, Object> q = getLastAnswer();
+		
 		int totalScore = getTotalScore(q);
 		float  BEPSI = ((float)totalScore)/5;
 		
@@ -28,6 +30,36 @@ public class StressSurvey extends AbstractSurvey {
 			if(value instanceof Integer)  score += (Integer)value;
 		}
 		return score;
+	}
+
+	@Override
+	public String[] getSurveyQuestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getType() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected String getAnswer(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected int getResult(Map<Integer, Object> q) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected Map<Integer, Object> parseAnswer(String s) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

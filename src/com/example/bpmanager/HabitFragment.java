@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -22,7 +21,14 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bpmanager.Data.*;
+import com.example.bpmanager.Data.DrinkSurvey;
+import com.example.bpmanager.Data.ExerciseSurvey;
+import com.example.bpmanager.Data.SaltIntakeSurvey;
+import com.example.bpmanager.Data.SmokeSurvey;
+import com.example.bpmanager.Data.StressSurvey;
+import com.example.bpmanager.Data.Survey;
+import com.example.bpmanager.Data.WaistSurvey;
+import com.example.bpmanager.Data.WeightSurvey;
 
 public class HabitFragment extends Fragment{
 	Button slat;
@@ -116,11 +122,15 @@ public class HabitFragment extends Fragment{
 			}else if(btnId == R.id.stress_btn){
 				stressDialog();
 			}else if(btnId == R.id.habit_noti_bth){
+				
 				//adviceDialog();
 				final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
 						.beginTransaction();
+				
+				HabitNotiFragment hn = new HabitNotiFragment();
+				hn.answer_salt = answer_salt;
 
-				transaction.replace(R.id.frag_viewer, new HabitNotiFragment());
+				transaction.replace(R.id.frag_viewer, hn);
 				transaction.addToBackStack(null);
 				//				FragmentManager fm = getActivity().getSupportFragmentManager();
 				//				for(int i = 0; i < fm.getBackStackEntryCount(); i++){
@@ -131,11 +141,11 @@ public class HabitFragment extends Fragment{
 			}
 		}
 		
-		private void AdviceReportDialog(Survey sv , Map<Integer,Object> anwer, String strTitle ) {
+		private void AdviceReportDialog(Survey sv, String strTitle ) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
 			builder.setTitle(strTitle);
-			builder.setMessage( sv.getSurveyReport(anwer));
+			builder.setMessage( sv.getSurveyReport());
 
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
@@ -151,6 +161,20 @@ public class HabitFragment extends Fragment{
 		private void saltDialig() {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			answer_salt = new HashMap<Integer, Object>();
+			
+			answer_salt.put(0,0);
+			answer_salt.put(1,0);
+			answer_salt.put(2,0);
+			answer_salt.put(3,0);
+			answer_salt.put(4,0);
+			answer_salt.put(5,0);
+			answer_salt.put(6,0);
+			answer_salt.put(7,0);
+			answer_salt.put(8,0);
+			answer_salt.put(9,0);
+			answer_salt.put(10,0);
+		
+
 
 			builder.setMultiChoiceItems(saltSurvey.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
 
@@ -165,8 +189,10 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					if(saltSurvey.insertDatatoDB(answer_salt) == -1) 
+						Toast.makeText(getActivity(), "insert fail ", 300).show();;
 					dialog.dismiss();
-					AdviceReportDialog(saltSurvey ,answer_salt, "소급 섭취량 평가");
+					AdviceReportDialog(saltSurvey , "소급 섭취량 평가");
 				}
 			});
 			builder.show();
@@ -191,7 +217,7 @@ public class HabitFragment extends Fragment{
 					}catch(NumberFormatException e){
 					}
 					dialog.dismiss();
-					AdviceReportDialog(weightSurvey ,answer_weight, "체중 관리 평가");
+					AdviceReportDialog(weightSurvey , "체중 관리 평가");
 				}
 			}
 					);
@@ -218,7 +244,7 @@ public class HabitFragment extends Fragment{
 						
 					}
 					dialog.dismiss();
-					AdviceReportDialog(waistSurvey ,answer_waist, "복부 둘레 관리 평가");
+					AdviceReportDialog(waistSurvey , "복부 둘레 관리 평가");
 				}
 			});
 			builder.show();
@@ -288,7 +314,7 @@ public class HabitFragment extends Fragment{
 						
 					}
 					dialog.dismiss();
-					AdviceReportDialog(exerciseSurvey ,answer_exer, "운동 관리 평가");
+					AdviceReportDialog(exerciseSurvey , "운동 관리 평가");
 				}
 			}
 					);
@@ -344,7 +370,7 @@ public class HabitFragment extends Fragment{
 						
 					}
 					dialog.dismiss();
-					AdviceReportDialog(drinkSurvey ,answer_drink, "음주 관리 평가");
+					AdviceReportDialog(drinkSurvey , "음주 관리 평가");
 
 				}
 			}
@@ -364,7 +390,7 @@ public class HabitFragment extends Fragment{
 				public void onClick(DialogInterface dialog, int which) {
 					answer_smoke.put(0,0);
 					dialog.dismiss();
-					AdviceReportDialog(smokeSurvey ,answer_smoke, "흡연 관리 평가");
+					AdviceReportDialog(smokeSurvey , "흡연 관리 평가");
 				}
 			}
 					);
@@ -374,7 +400,7 @@ public class HabitFragment extends Fragment{
 				public void onClick(DialogInterface dialog, int which) {
 					answer_smoke.put(0,1);
 					dialog.dismiss();
-					AdviceReportDialog(smokeSurvey ,answer_smoke, "흡연 관리 평가");
+					AdviceReportDialog(smokeSurvey , "흡연 관리 평가");
 				}
 			});
 			builder.show();
@@ -419,7 +445,6 @@ public class HabitFragment extends Fragment{
 						q1v = 5;
 					}else q1v =3;
 					answer_stress.put(0,q1v);
-					//Toast.makeText(getActivity(), "q1 : "+q1v, 300).show();
 				}
 			});
 
@@ -441,7 +466,6 @@ public class HabitFragment extends Fragment{
 						q2v = 5;
 					}else q2v =3;
 					answer_stress.put(1,q2v);
-					//Toast.makeText(getActivity(), "q2 : "+q2v, 300).show();
 				}
 			});
 
@@ -449,7 +473,6 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					// TODO Auto-generated method stub
 					int id = group.getCheckedRadioButtonId();
 					if(id == R.id.q3_1){
 						q3v = 1;
@@ -463,7 +486,6 @@ public class HabitFragment extends Fragment{
 						q3v = 5;
 					}else q3v =3;
 					answer_stress.put(2,q3v);
-					//Toast.makeText(getActivity(), "q3 : "+q3v, 300).show();
 				}
 			});
 
@@ -471,7 +493,6 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					// TODO Auto-generated method stub
 					int id = group.getCheckedRadioButtonId();
 					if(id == R.id.q4_1){
 						q1v = 1;
@@ -485,7 +506,6 @@ public class HabitFragment extends Fragment{
 						q4v = 5;
 					}else q4v =3;
 					answer_stress.put(3,q4v);
-					//Toast.makeText(getActivity(), "q4 : "+q4v, 300).show();
 				}
 			});
 
@@ -493,7 +513,6 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					// TODO Auto-generated method stub
 					int id = group.getCheckedRadioButtonId();
 					if(id == R.id.q5_1){
 						q5v = 1;
@@ -507,10 +526,10 @@ public class HabitFragment extends Fragment{
 						q5v = 5;
 					}else q5v =3;
 					answer_stress.put(4,q5v);
-					//Toast.makeText(getActivity(), "q5 : "+q2v, 300).show();
 				}
 			});
 
+		
 			builder.setView(stress);
 
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -518,7 +537,7 @@ public class HabitFragment extends Fragment{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
-					AdviceReportDialog(stressSurvey ,answer_stress, "스트레스 관리 평가");
+					AdviceReportDialog(stressSurvey , "스트레스 관리 평가");
 				}
 			}
 					);
@@ -526,18 +545,5 @@ public class HabitFragment extends Fragment{
 
 		}	
 	};
-
-
-//	public void onClick(View v) {
-//
-//		switch (v.getId()) {
-//
-//		//		case R.id.bt_ok:
-//		//			Toast.makeText(getActivity(), "One Fragment", Toast.LENGTH_SHORT)
-//		//					.show();
-//		//			break;
-//
-//		}
-//	}
 
 }
