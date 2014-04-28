@@ -28,6 +28,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBLifestyle.SQL_CREATE);
 		// MedicationTook
 		db.execSQL(DBMedicationTook.SQL_CREATE);
+		//Habit
+		db.execSQL(DBHabit.SQL_CREATE);
 	}
 
 	@Override
@@ -43,6 +45,8 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBLifestyle.SQL_DROP);
 		// MedicationTook
 		db.execSQL(DBMedicationTook.SQL_DROP);
+		//Habit
+		db.execSQL(DBHabit.SQL_DROP);
 		
 		// Refresh
 		onCreate(db);
