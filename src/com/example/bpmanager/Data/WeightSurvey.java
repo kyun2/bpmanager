@@ -30,8 +30,8 @@ public class WeightSurvey extends AbstractSurvey {
 	}
 	
 	private float getTargetWeiht(float height){	
-		height /= 100;
-		return height * height * 25;
+		int tw = Math.round((height * height * 25)/100);
+		return tw/100;
 	}
 	
 	private float getHeight(){
@@ -65,12 +65,6 @@ public class WeightSurvey extends AbstractSurvey {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return null;
-	}
-
-	@Override
-	public String[] getSurveyQuestion() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

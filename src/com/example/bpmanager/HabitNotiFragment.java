@@ -3,7 +3,7 @@ package com.example.bpmanager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import android.annotation.SuppressLint;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -18,8 +18,16 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
+
 import com.example.bpmanager.DB.DBhandler;
+import com.example.bpmanager.Data.DrinkSurvey;
+import com.example.bpmanager.Data.ExerciseSurvey;
 import com.example.bpmanager.Data.SaltIntakeSurvey;
+import com.example.bpmanager.Data.SmokeSurvey;
+import com.example.bpmanager.Data.StressSurvey;
+import com.example.bpmanager.Data.Survey;
+import com.example.bpmanager.Data.WaistSurvey;
+import com.example.bpmanager.Data.WeightSurvey;
 
 public class HabitNotiFragment extends Fragment {
 
@@ -28,27 +36,30 @@ public class HabitNotiFragment extends Fragment {
 	private ArrayList<Map<String,String>> mChildListContent = null;
 	private ExpandableListView mListView;
 	DBhandler handle;
-
-	public Map<Integer,Object> answer_salt;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_weight;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_waist;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_exer;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_drink;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_smoke;// = new HashMap<Integer, Object>();
-	Map<Integer,Object> answer_stress;// = new HashMap<Integer, Object>();
 	
-	public HabitNotiFragment(){}
-//	
-//	public void setAnswer(Map<Integer,Object> answer_salt){
-//		this.answer_salt = answer_salt;
-//	}
-//	
+	//설문조사 결과 
+	public String getEval(Survey sv){
+		if(sv.getLastResult() == 1)
+			return "<Good>";
+		else return "<Bad>";
+	}
+	public void putDataToChile(Survey sv, ArrayList<Map<String,String>> noti){
+		
+		Map<String, String> m = new HashMap<String, String>();
+		m.put("T", sv.getSurveyReport()); 
+		m.put("E", ""); 
+		noti.add(m);
+		
+		mChildList.add(noti);
+		
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.habit_noti, container, false);
-
+		
 		// LinearLayout f = (LinearLayout)view.findViewById(R.id.bp_graph_view);
 		// ImageView img = new ImageView(view.getContext());
 		// BitmapDrawable dr = (BitmapDrawable)
@@ -87,67 +98,35 @@ public class HabitNotiFragment extends Fragment {
 		ArrayList<Map<String,String>> stressNoti = new ArrayList<Map<String,String>>();
 
 		Map<String, String> saltType = new HashMap<String, String>();
-		saltType.put("Type", "소금섭취관리");
+		saltType.put("Type", "소금섭취관리   \t" + getEval(new SaltIntakeSurvey()));
 		mGroupList.add(saltType);
 		Map<String, String> weightType = new HashMap<String, String>();
-		weightType.put("Type", "체중관리");
+		weightType.put("Type", "체중관리  \t" + getEval(new WeightSurvey()));
 		mGroupList.add(weightType);
 		Map<String, String> waistType = new HashMap<String, String>();
-		waistType.put("Type", "복부둘레관리");
+		waistType.put("Type", "복부둘레관리  \t" + getEval(new WaistSurvey()));
 		mGroupList.add(waistType);
 		Map<String, String> examType = new HashMap<String, String>();
-		examType.put("Type", "운동관리");
+		examType.put("Type", "운동관리  \t" + getEval(new ExerciseSurvey()));
 		mGroupList.add(examType);
 		Map<String, String> alcholeType = new HashMap<String, String>();
-		alcholeType.put("Type", "알콜섭취관리");
+		alcholeType.put("Type", "알콜섭취관리  \t" + getEval(new DrinkSurvey()));
 		mGroupList.add(alcholeType);
 		Map<String, String> smokingType = new HashMap<String, String>();
-		smokingType.put("Type", "금연관리");
+		smokingType.put("Type", "금연관리  \t" + getEval(new SmokeSurvey()));
 		mGroupList.add(smokingType);
 		Map<String, String> stressType = new HashMap<String, String>();
-		stressType.put("Type", "스트레스관리");
+		stressType.put("Type", "스트레스관리  \t" + getEval(new StressSurvey()));
 		mGroupList.add(stressType);
 		 
-		// 여기 참고
-		Map<String, String> val2 = new HashMap<String, String>();
 		
-		SaltIntakeSurvey sv = new SaltIntakeSurvey();
-		String aw = sv.getSurveyReport();
-		val2.put("T", aw); 
-		val2.put("E", ""); 
-		val2.put("R", "");
-		
-		saltNoti.add(val2);
-		
-		
-		
-		
-		
-		// saltNoti, weightNoti, waistNoti, examNoti, alcholeNoti, smokingNoti, stressNoti 에 값을 넣어주면 됨.
-		mChildList.add(saltNoti);
-		mChildList.add(weightNoti);
-		
-		mChildList.add(waistNoti);
-		mChildList.add(examNoti);
-		mChildList.add(alcholeNoti);
-		mChildList.add(smokingNoti);
-		
-		mChildList.add(stressNoti);
-		
-		
-
-		// mListView.setAdapter(new BaseExpandableAdapter(this, mGroupList,
-		// mChildList));
-		
-//		mListView.setOnGroupClickListener(new OnGroupClickListener() {
-//			@Override
-//			public boolean onGroupClick(ExpandableListView parent, View v,
-//					int groupPosition, long id) {
-//				Toast.makeText(getActivity(), "g click = " + groupPosition,
-//						Toast.LENGTH_SHORT).show();
-//				return false;
-//			}
-//		});
+		putDataToChile(new SaltIntakeSurvey(), saltNoti);
+		putDataToChile(new WeightSurvey(), weightNoti);
+		putDataToChile(new WaistSurvey(), waistNoti);
+		putDataToChile(new ExerciseSurvey(), examNoti);
+		putDataToChile(new DrinkSurvey(), alcholeNoti);
+		putDataToChile(new SmokeSurvey(), smokingNoti);
+		putDataToChile(new StressSurvey(), stressNoti);
 		
 		ExpandableListAdapter adapter = new SimpleExpandableListAdapter(
 				getActivity(),
@@ -176,19 +155,20 @@ public class HabitNotiFragment extends Fragment {
 		this.mListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 			@Override
 			public void onGroupCollapse(int groupPosition) {
-				Toast.makeText(getActivity(),
-						"g Collapse = " + groupPosition, Toast.LENGTH_SHORT)
-						.show();
-			}
+//				Toast.makeText(getActivity(),
+//						"g Collapse = " + groupPosition, Toast.LENGTH_SHORT)
+//						.show();
+//			
+				}
 		});
 
 		// 그룹 펼치기
 		this.mListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 			@Override
 			public void onGroupExpand(int groupPosition) {
-				Toast.makeText(getActivity(),
-						"g Expand = " + groupPosition, Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(getActivity(),
+//						"g Expand = " + groupPosition, Toast.LENGTH_SHORT)
+//						.show();
 			}
 		});
 
@@ -207,8 +187,8 @@ public class HabitNotiFragment extends Fragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				dialog.dismiss();
-				Toast.makeText(getActivity(), "weight is : ", 500).show();
+//				dialog.dismiss();
+//				Toast.makeText(getActivity(), "weight is : ", 500).show();
 
 			}
 		});

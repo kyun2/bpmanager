@@ -102,13 +102,13 @@ public class HabitFragment extends Fragment{
 			}else if(btnId == R.id.stress_btn){
 				stressDialog(new StressSurvey());
 			}else if(btnId == R.id.habit_noti_bth){
-				
+
 				//adviceDialog();
 				final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
 						.beginTransaction();
-				
+
 				HabitNotiFragment hn = new HabitNotiFragment();
-			
+
 				transaction.replace(R.id.frag_viewer, hn);
 				transaction.addToBackStack(null);
 				//				FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -119,7 +119,7 @@ public class HabitFragment extends Fragment{
 				transaction.commit();
 			}
 		}
-		
+
 		private void AdviceReportDialog(Survey sv, String strTitle ) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -136,7 +136,7 @@ public class HabitFragment extends Fragment{
 
 			builder.show();
 		}
-		
+
 		private void saltDialig(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
@@ -167,20 +167,20 @@ public class HabitFragment extends Fragment{
 				public void onClick(DialogInterface dialog, int which) {
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "소급 섭취량 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "소급 섭취량 평가");
 				}
 			});
 			builder.show();
 		}
-		
+
 		private void weightDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
 			builder.setMessage("현재 체중을 입력하세요.");
 			final EditText wText = new EditText(getActivity());
-			wText.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
@@ -194,8 +194,8 @@ public class HabitFragment extends Fragment{
 					}
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "체중 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "체중 관리 평가");
 				}
 			}
 					);
@@ -205,36 +205,36 @@ public class HabitFragment extends Fragment{
 		private void waistDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			
+
 			builder.setMessage("현재 허리둘레를 입력하세요.");
 			final EditText wText = new EditText(getActivity());
 			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			
+
 			builder.setView(wText);
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					
+
 					String inputText = wText.getText().toString();
 					try{
 						answer.put(0,Float.parseFloat(inputText));
 					}catch(NumberFormatException e){
-						
+
 					}
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "복부 둘레 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "복부 둘레 관리 평가");
 				}
 			});
 			builder.show();
 		}
-		
+
 		private void examDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			
+
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 운동시간(분) : ");
 			TextView weekText = new TextView(getActivity());
@@ -253,7 +253,7 @@ public class HabitFragment extends Fragment{
 			day.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 			week.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 			hard.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-			
+
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
 			dayItem.setLayoutParams(lparam);
@@ -279,39 +279,39 @@ public class HabitFragment extends Fragment{
 			Items.addView(hardItem);
 
 			builder.setView(Items);
-		
+
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					
+
 					String number = day.getText().toString();
 					String time = week.getText().toString();
 					String strength = hard.getText().toString();
-					
+
 					try{
 						answer.put(0,Integer.parseInt(number));
 						answer.put(1,Integer.parseInt(time));
 						answer.put(2,Integer.parseInt(strength));
-						
+
 					}catch(NumberFormatException e){
-						
+
 					}
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "운동 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "운동 관리 평가");
 				}
 			}
 					);
 			builder.show();
 
 		}
-		
+
 		private void alcholeDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			
+
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 음주량(잔) : ");
 			TextView weekText = new TextView(getActivity());
@@ -348,17 +348,17 @@ public class HabitFragment extends Fragment{
 				public void onClick(DialogInterface dialog, int which) {
 					String number = day.getText().toString();
 					String time = week.getText().toString();
-					
+
 					try{
 						answer.put(0,Integer.parseInt(number));
 						answer.put(1,Integer.parseInt(time));
 					}catch(NumberFormatException e){
-						
+
 					}
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "음주 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "음주 관리 평가");
 
 				}
 			}
@@ -366,11 +366,11 @@ public class HabitFragment extends Fragment{
 			builder.show();
 
 		}
-	
+
 		private void smokingDialog(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			
+
 			builder.setMessage("현재 담배를 피우십니까?");
 			builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
 
@@ -379,8 +379,8 @@ public class HabitFragment extends Fragment{
 					answer.put(0,0);
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "흡연 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			}
 					);
@@ -391,25 +391,25 @@ public class HabitFragment extends Fragment{
 					answer.put(0,1);
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "흡연 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			});
 			builder.show();
 
 		}
-		
+
 		private void stressDialog(final Survey sv) {
 			// TODO Auto-generated method stub
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			
+
 			answer.put(0,3);
 			answer.put(1,3);
 			answer.put(2,3);
 			answer.put(3,3);
 			answer.put(4,3);
-			
+
 			count = 0;
 			builder.setTitle("5(항상 있었다) ~ 1(전혀 없었다)");
 			ScrollView stress = (ScrollView) inf.inflate(R.layout.stress_content, null);
@@ -521,7 +521,7 @@ public class HabitFragment extends Fragment{
 				}
 			});
 
-		
+
 			builder.setView(stress);
 
 			builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -530,8 +530,8 @@ public class HabitFragment extends Fragment{
 				public void onClick(DialogInterface dialog, int which) {
 					if(sv.insertDatatoDB(answer) == -1) 
 						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-					dialog.dismiss();
-					AdviceReportDialog(sv , "스트레스 관리 평가");
+						dialog.dismiss();
+						AdviceReportDialog(sv , "스트레스 관리 평가");
 				}
 			}
 					);

@@ -1,7 +1,6 @@
 package com.example.bpmanager.Data;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.example.bpmanager.MainActivity;
@@ -73,7 +72,7 @@ public class DrinkSurvey extends AbstractSurvey {
 		Map<Integer, Object> map = new HashMap<Integer, Object> ();
 		try {
 			map.put(0, Integer.parseInt(s.split(":#:")[0]));
-			map.put(0, Integer.parseInt(s.split(":#:")[1]));
+			map.put(1, Integer.parseInt(s.split(":#:")[1]));
 			return map;
 		} catch (Exception e) {
 			// TODO: handle exception

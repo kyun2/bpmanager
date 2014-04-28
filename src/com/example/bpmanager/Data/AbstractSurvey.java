@@ -22,11 +22,11 @@ public abstract class AbstractSurvey implements Survey {
 		else return -1;
 	}
 	
-//	@Override
-//	public String[] getSurveyQuestion() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public String[] getSurveyQuestion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	final public long insertDatatoDB(Map<Integer, Object> q) {
