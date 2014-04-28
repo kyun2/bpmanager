@@ -47,7 +47,7 @@ public class MedicationAddFragment extends Fragment {
 		if (mListView == null)
 			return;
 		
-		// ¾î´ğÅÍ
+		// ì–´ëŒ‘í„°
 		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList);
 		
 		mListView.setAdapter(mListAdapter);

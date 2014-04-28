@@ -74,7 +74,7 @@ public class MainActivity extends ActionBarActivity {
 		{
 			initFragment = new HomeFragment();
 		}
-		mMedicationScheduleData = new MedicationScheduleData();
+		mMedicationScheduleData = new MedicationScheduleData(this);
 		mMedicationScheduleData.getData();		
 		
 		if (savedInstanceState == null) {

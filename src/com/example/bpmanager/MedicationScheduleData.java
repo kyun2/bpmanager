@@ -5,14 +5,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.example.bpmanager.DB.DBMedication;
+import com.example.bpmanager.DB.INFOMedication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 
 public class MedicationScheduleData {
 
+	private Context mContext;
 	ArrayList<MedicationSchedule> mData;
 	
 	public class MedicationSchedule
@@ -26,8 +32,9 @@ public class MedicationScheduleData {
 	boolean mLoaded;
 	boolean mAdded;
 	
-	public MedicationScheduleData()
+	public MedicationScheduleData(Context c)
 	{
+		mContext = c;
 		mData = new ArrayList<MedicationScheduleData.MedicationSchedule>();		
 		
 		mLoaded = false;
@@ -92,6 +99,21 @@ public class MedicationScheduleData {
 		{
 			MainActivity.mDBHelper.updateData(DBMedication.Medication.TB_NAME, values, " medicine_id = " + ms.mId, null);
 		}
+		// 알림설정
+		INFOMedication info = INFOMedication.getInfoMedicine(medicineID);
+		Intent alarmIntent = new Intent(mContext, AlarmReciever.class);
+		alarmIntent.putExtra("medicineId", info.mId);
+		alarmIntent.putExtra("medicineName", info.mName);
+		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(mContext, info.mId, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		
+		AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+		String[] times = ms.mInjectTime.split(":");
+		int hour = Integer.parseInt(times[0]);
+		int minute = Integer.parseInt(times[1]);
+		Calendar c = Calendar.getInstance();
+		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), hour, minute, 0);				
+		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, alarmPendingIntent);
+				
 		mData.clear();
 		this.getData();
 	}
