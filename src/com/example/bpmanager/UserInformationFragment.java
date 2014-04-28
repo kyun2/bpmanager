@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -158,8 +159,8 @@ public class UserInformationFragment extends Fragment
 				else
 				{
 					AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-					alert.setMessage("ªÁøÎ¿⁄¡§∫∏∏¶ ∏µŒ ¿‘∑¬«œø© ¡÷ººø‰.").setTitle("ø¿∑˘");
-					alert.setPositiveButton("»Æ¿Œ", new DialogInterface.OnClickListener() {
+					alert.setMessage("ÏûÖÎ†•ÌïòÏßÄ ÏïäÏùÄ Ï†ïÎ≥¥Í∞Ä ÏûàÏäµÎãàÎã§.").setTitle("Ïò§Î•ò");
+					alert.setPositiveButton("ÌôïÏù∏", new DialogInterface.OnClickListener() {
 
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -184,7 +185,7 @@ public class UserInformationFragment extends Fragment
 				return false;
 			
 			// birth date
-			if (birth.length() == 0 || !birth.getText().toString().matches("[0-9]{4}/[0-9]+/[0-9]+"))
+			if (birth.length() == 0 || !birth.getText().toString().matches("[0-9]{4}/[0-9]{2}/[0-9]{2}"))
 				return false;
 			
 			// height
@@ -241,117 +242,18 @@ public class UserInformationFragment extends Fragment
 			uData.setKidney(kidney.isChecked() ? 1 : 0);
 			//uData.setCoronary(coronary.isChecked() ? 1 : 0);
 		}
-		
-		/*
-
-		private void viewUpdate() {
-			// TODO Auto-generated method stub
-			handle = new DBhandler(getActivity());
-			handle = handle.open();
-			List<UserData> retval = handle.getUsers();
-			if(!retval.isEmpty()){
-				UserData us = retval.get(retval.size());
-				String text = "modifed user :\n"
-						//+DBhandler.KEY+"="+us.getKey()+"\n"
-						+DBhandler.NAME+"="+us.getName()+"\n"
-						+DBhandler.EMAIL+"="+us.getEmail()+"\n"
-						+DBhandler.GENDER+"="+us.getSex()+"\n"
-						+DBhandler.BIRTH+"="+us.getBirth()+"\n"
-						+DBhandler.HEIGHT+"="+us.getHeight()+"\n"
-						+DBhandler.WEIGHT+"="+us.getWeight()+"\n"
-						+DBhandler.WAIST+"="+us.getWaist()+"\n"
-						+DBhandler.HYPER+"="+us.getHypertension()+"\n"
-						+DBhandler.GLUCOSE+"="+us.getGlucose()+"\n"
-						+DBhandler.KIDNEY+"="+us.getKidney()+"\n"
-						+DBhandler.CORONARY+"="+us.getCoronary()+"\n";
-				Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
-				
-			}
-			
-			handle.close();
-			
-		}
-
-		private void insertDB() {
-			// TODO Auto-generated method stub
-			handle = new DBhandler(getActivity());
-			handle = handle.open();
-			UserData u = new UserData();
-			u.name = name.getText().toString();
-			u.email = email.getText().toString();
-			if(gender.getCheckedRadioButtonId() == R.id.radio_male){
-				u.gender = 1;
-			}else if(gender.getCheckedRadioButtonId() == R.id.radio_female){
-				u.gender = 0;
-			}
-			u.birth = birth.getText().toString();
-			u.height = height.getText().toString();
-			u.waist = waist.getText().toString();
-			u.weight = weight.getText().toString();
-			
-			if(hyper.isChecked()){
-				u.hypertension = 1;
-			}else{
-				u.hypertension = 0;
-			}
-			if(glucose.isChecked()){
-				u.glucose = 1;
-			}else{
-				u.glucose = 0;
-			}
-			if(kidney.isChecked()){
-				u.kidney = 1;
-			}else{
-				u.kidney = 0;
-			}
-			if(coronary.isChecked()){
-				u.coronary = 1;
-			}else{
-				u.coronary = 0;
-			}
-			
-			long retval =handle.insertUser(u);
-			List<UserData> value = handle.getUsers();
-			if(!value.isEmpty()){
-				UserData us =value.get(value.size() - 1);
-				String text = "modifed user :\n"
-						//+DBhandler.KEY+"="+us.getKey()+"\n"
-						+DBhandler.NAME+"="+us.getName()+"\n"
-						+DBhandler.EMAIL+"="+us.getEmail()+"\n"
-						+DBhandler.GENDER+"="+us.getSex()+"\n"
-						+DBhandler.BIRTH+"="+us.getBirth()+"\n"
-						+DBhandler.HEIGHT+"="+us.getHeight()+"\n"
-						+DBhandler.WEIGHT+"="+us.getWeight()+"\n"
-						+DBhandler.WAIST+"="+us.getWaist()+"\n"
-						+DBhandler.HYPER+"="+us.getHypertension()+"\n"
-						+DBhandler.GLUCOSE+"="+us.getGlucose()+"\n"
-						+DBhandler.KIDNEY+"="+us.getKidney()+"\n"
-						+DBhandler.CORONARY+"="+us.getCoronary()+"\n";
-				Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
-				
-			}
-			
-			handle.close();
-			
-		}
-		*/
 	};
 	
 	private void DialogDatePicker(int cyear, int cmonth, int cday){
-//	    Calendar c = Calendar.getInstance();
-//	    int cyear = c.get(Calendar.YEAR);
-//	    int cmonth = c.get(Calendar.MONTH);
-//	    int cday = c.get(Calendar.DAY_OF_MONTH);
 	     
 	    DatePickerDialog.OnDateSetListener mDateSetListener = 
 	    new DatePickerDialog.OnDateSetListener() {
 	    	// onDateSet method
 	    	@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-	    		String date_selected = String.valueOf(monthOfYear+1)+
-	                " /"+String.valueOf(dayOfMonth)+" /"+String.valueOf(year);
-	    		Toast.makeText(getActivity(), "Selected Date is ="+date_selected, Toast.LENGTH_SHORT).show();
-	    		String date = String.valueOf(year) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(dayOfMonth);
+	    		//String date_selected = String.valueOf(monthOfYear+1)+ " /"+String.valueOf(dayOfMonth)+" /"+String.valueOf(year);
+	    		//Toast.makeText(getActivity(), "Selected Date is ="+date_selected, Toast.LENGTH_SHORT).show();
+	    		String date = String.format("%04d", year) + "/" + String.format("%02d", monthOfYear+1) + "/" + String.format("%02d", dayOfMonth);
 	    		birth.setText(date);
 	    	}
 	    };

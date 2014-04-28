@@ -124,7 +124,7 @@ public class BloodPressure {
 		
 		c.add(Calendar.DATE, -1 * termday);
 		whereClause = "last_update_time > '" + sm.format(c.getTime()) + "'";
-		//Log.i("log: ", whereClause);
+		Log.i("log: ", whereClause);
 		return getBPsList(whereClause);
 	}
 	

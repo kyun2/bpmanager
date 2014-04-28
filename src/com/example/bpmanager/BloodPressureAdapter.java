@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class bpAdapter extends ArrayAdapter<BloodPressure> {
+public class BloodPressureAdapter extends ArrayAdapter<BloodPressure> {
 	
 	List<BloodPressure> value;
 	private final Context ctx;
@@ -18,7 +18,7 @@ public class bpAdapter extends ArrayAdapter<BloodPressure> {
 	final String TAG = "MainActivity";
 	private final FragmentManager manager;
 	
-	public bpAdapter(Context context, int resource, List<BloodPressure> objects, FragmentManager f) {
+	public BloodPressureAdapter(Context context, int resource, List<BloodPressure> objects, FragmentManager f) {
 		super(context, resource, objects);
 		value = objects;
 		
@@ -33,8 +33,7 @@ public class bpAdapter extends ArrayAdapter<BloodPressure> {
         View v = convertView;
 
         if (v == null) {
-            LayoutInflater vi = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.bpitem, parent, false);
+            v = mInflater.inflate(R.layout.bpitem, parent, false);
         }
         
         TextView sys = (TextView) v.findViewById(R.id.systolic_item);
@@ -43,8 +42,7 @@ public class bpAdapter extends ArrayAdapter<BloodPressure> {
         BloodPressure temp = value.get(position);
         sys.setText(String.valueOf(temp.getSystolic()));
         dia.setText(String.valueOf(temp.getDiastolic()));
-        time.setText(String.valueOf(temp.getDatetime()));
-        
+        time.setText(String.valueOf(temp.getDatetime()));        
         
 //        BitmapDrawable dr = (BitmapDrawable) ctx.getResources().getDrawable(R.drawable.ic_launcher);
 //        image.setImageDrawable(dr);

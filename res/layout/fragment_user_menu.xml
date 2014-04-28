@@ -2,68 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical" >
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="나의정보관리"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="나의정보관리"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="30dp" />
-
-        <LinearLayout
+        <Button
+            android:id="@+id/btn_user_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_margin="5dp"
-            android:orientation="vertical" >
+            android:layout_weight="1"
+            android:text="기본 정보" />
 
-            <Button
-                android:id="@+id/user_modi_bth"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="기본정보" />
+        <Button
+            android:id="@+id/btn_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="알림 설정" />
 
-            <Button
-                android:id="@+id/bp_view_bth"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="혈압정보" />
-
-            <Button
-                android:id="@+id/medical_bth"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="복약정보" />
-
-            <Button
-                android:id="@+id/habit_menu_btn"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:text="생활습관정보" />
-
-            <Button
-                android:id="@+id/alram_bth"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:text="알림설정" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btn_app_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="앱정보 보기" />
 
     </LinearLayout>
 

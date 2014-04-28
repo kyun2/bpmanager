@@ -1,5 +1,7 @@
 package com.example.bpmanager;
 
+import java.util.InvalidPropertiesFormatException;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -26,7 +28,7 @@ import com.example.bpmanager.DB.DBhandler;
  *4. 자료 화면(그래프, 표) 이동
  *5. 날짜 선택(측정일 눌렀을 때) //(완)
  */
-public class InputBPFragment extends Fragment{
+public class BloodPressureInputFragment extends Fragment{
 
 	DBhandler handle;
 	Button inputbth; 
@@ -88,7 +90,7 @@ public class InputBPFragment extends Fragment{
 				insertBloodPressure();
 				break;
 			case R.id.bpview_bth:
-				Fragment next = new BPViewFragment();
+				Fragment next = new BloodPressureViewFragment();
 				replaceFragment(next);
 				break;
 			}
@@ -96,13 +98,16 @@ public class InputBPFragment extends Fragment{
 
 		private void insertBloodPressure() {
 			try{
-				int isystolic = Integer.valueOf(diastolic.getText().toString());
-				int idiastolic = Integer.valueOf(systolic.getText().toString());
+				int isystolic = Integer.valueOf(systolic.getText().toString());
+				int idiastolic = Integer.valueOf(diastolic.getText().toString());
 				String date = bptime.getText().toString();
 
 				if(isystolic > 300 || isystolic < 30) throw new NumberFormatException(); 
 				if(idiastolic > 300 || idiastolic < 30) throw new NumberFormatException();
-				if(!date.matches("[0-9]{4}/[0-9]+/[0-9]+")) throw new NumberFormatException();
+				if(!date.matches("[0-9]{4}/[0-9]{2}/[0-9]{2}"))
+				{
+					throw new InvalidPropertiesFormatException("Invalid Format.");
+				}
 				
 				if(BloodPressure.insertToDB(new BloodPressure(isystolic, idiastolic, bptime.getText().toString())) > 0)
 				{
@@ -114,6 +119,8 @@ public class InputBPFragment extends Fragment{
 				}
 			}catch(NumberFormatException e){
 				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
+			}catch(InvalidPropertiesFormatException e){
+				Toast.makeText(getActivity(), "2001/01/01 형태로 입력하여 주세요.", Toast.LENGTH_LONG).show();
 			}catch(Exception e){}
 		}
 	};
@@ -149,7 +156,7 @@ public class InputBPFragment extends Fragment{
 						int day = dt.getDayOfMonth();
 						//int hour = dt.getCurrentHour();
 						//int minute = dt.getCurrentMinute();
-						String time =String.valueOf(year)+ "/" + String.valueOf(month)+ "/" + String.valueOf(day);
+						String time =String.format("%04d", year)+ "/" + String.format("%02d", month) + "/" + String.format("%02d", day);
 						bptime.setText(time);
 						dialog.dismiss();
 						// TODO Auto-generated method stub

@@ -24,48 +24,43 @@ import android.widget.Toast;
 public class UserMenuFragment extends Fragment {
 	DBhandler handle;
 	
-	Button basic;
-	Button bp;
-	Button medication;
-	Button habit;
-	Button alramMenu;
+	Button userInfo;
+	Button alarm;
+	Button appInfo;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user_menu, container, false);
 		
-		basic = (Button) view.findViewById(R.id.user_modi_bth);
-		bp = (Button) view.findViewById(R.id.bp_view_bth);
-		habit = (Button) view.findViewById(R.id.habit_menu_btn);
-		medication = (Button) view.findViewById(R.id.medical_bth);
-		alramMenu = (Button) view.findViewById(R.id.alram_bth);
+		userInfo = (Button) view.findViewById(R.id.btn_user_info);
+		alarm = (Button) view.findViewById(R.id.btn_alarm);
+		appInfo = (Button) view.findViewById(R.id.btn_app_info);
 		
-		basic.setOnClickListener(clickListen);
-		bp.setOnClickListener(clickListen);
-		medication.setOnClickListener(clickListen);
-		habit.setOnClickListener(clickListen);
-		alramMenu.setOnClickListener(clickListen);
+		userInfo.setOnClickListener(onClickListener);
+		alarm.setOnClickListener(onClickListener);
+		appInfo.setOnClickListener(onClickListener);
 		
 		return view;
 	}
 	
-	View.OnClickListener clickListen = new View.OnClickListener() {
+	View.OnClickListener onClickListener = new View.OnClickListener() {
 		
 		private OnItemSelectedListener selecListen;
 
 		@Override
 		public void onClick(View v) {
 			int id = v.getId();
-			if (id == R.id.user_modi_bth) {
-				changeFragment(new UserInformationFragment());
-			} else if (id == R.id.bp_view_bth) {
-				changeFragment(new InputBPFragment());
-			} else if (id == R.id.medical_bth) {
-				changeFragment(new UserInformationFragment());
-			} else if (id == R.id.habit_menu_btn) {
-				changeFragment(new HabitFragment());
-			} else if (id == R.id.alram_bth) {
-				popupAlarmDialog();
+			switch (v.getId())
+			{
+			case R.id.btn_user_info:
+				((MainActivity)getActivity()).changeFragment(new UserInformationFragment());
+				break;
+				
+			case R.id.btn_alarm:
+				break;
+				
+			case R.id.btn_app_info:
+				break;
 			}
 		}
 
@@ -105,7 +100,7 @@ public class UserMenuFragment extends Fragment {
 					case 0:
 					case 1:
 						Fragment f = new ClinicFragment();
-						changeFragment(f);
+						//changeFragment(f);
 					break;
 					}
 					
@@ -137,23 +132,6 @@ public class UserMenuFragment extends Fragment {
 //					
 //				}
 //			});
-		}
-		
-		
-
-		private void changeFragment(Fragment next) {
-			// TODO Auto-generated method stub
-			final FragmentTransaction transaction = getActivity().getSupportFragmentManager()
-					.beginTransaction();
-
-			transaction.replace(R.id.frag_viewer, next);
-			transaction.addToBackStack(null);
-//			FragmentManager fm = getActivity().getSupportFragmentManager();
-//			for(int i = 0; i < fm.getBackStackEntryCount(); i++){
-//				fm.popBackStack();
-//			}
-			 //Commit the transaction
-			transaction.commit();
 		}
 	};
 }
