@@ -98,13 +98,19 @@ public class InputBPFragment extends Fragment{
 			try{
 				int isystolic = Integer.valueOf(diastolic.getText().toString());
 				int idiastolic = Integer.valueOf(systolic.getText().toString());
+				String date = bptime.getText().toString();
 
 				if(isystolic > 300 || isystolic < 30) throw new NumberFormatException(); 
-				if(idiastolic > 300 || idiastolic < 30) throw new NumberFormatException(); 
+				if(idiastolic > 300 || idiastolic < 30) throw new NumberFormatException();
+				if(!date.matches("[0-9]{4}/[0-9]+/[0-9]+")) throw new NumberFormatException();
 				
-				if(BloodPressure.insertToDB(new BloodPressure(
-						isystolic, idiastolic, bptime.getText().toString())) > 0){
+				if(BloodPressure.insertToDB(new BloodPressure(isystolic, idiastolic, bptime.getText().toString())) > 0)
+				{
 					Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();
+					
+					systolic.setText("");
+					diastolic.setText("");
+					bptime.setText("");
 				}
 			}catch(NumberFormatException e){
 				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
@@ -134,16 +140,16 @@ public class InputBPFragment extends Fragment{
 				final DateTimePicker dt = new DateTimePicker(getActivity());
 
 				alert.setView(dt);
-				alert.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
+				alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						int year = dt.getYear();
 						int month = dt.getMonth() + 1;
 						int day = dt.getDayOfMonth();
-						int hour = dt.getCurrentHour();
-						int minute = dt.getCurrentMinute();
-						String time =String.valueOf(year)+String.valueOf(month)+String.valueOf(day)+String.valueOf(hour)+String.valueOf(minute);
+						//int hour = dt.getCurrentHour();
+						//int minute = dt.getCurrentMinute();
+						String time =String.valueOf(year)+ "/" + String.valueOf(month)+ "/" + String.valueOf(day);
 						bptime.setText(time);
 						dialog.dismiss();
 						// TODO Auto-generated method stub

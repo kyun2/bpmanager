@@ -24,7 +24,7 @@ public class ClinicFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		View view = inflater.inflate(R.layout.fragment_mydata, container, false);
+		View view = inflater.inflate(R.layout.fragment_mydata_old, container, false);
 
 //		LinearLayout f = (LinearLayout)view.findViewById(R.id.bp_graph_view);
 //		ImageView img = new ImageView(view.getContext());

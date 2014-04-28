@@ -90,11 +90,13 @@ public class BloodPressure {
 		List<BloodPressure> bps = new ArrayList<BloodPressure>();
 		
 		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + " where " + where;
+		//Log.i("log: ", strQry);
 		try
 		{
-			SQLiteDatabase db = MainActivity.mDBHelper.getWritableDatabase();
+			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
 			
 			Cursor cursor = db.rawQuery(strQry, null);
+			//Log.i("log: ", "" + cursor.getCount());
 			
 			while (cursor.moveToNext())
 			{
@@ -121,7 +123,8 @@ public class BloodPressure {
 		Calendar c = Calendar.getInstance();
 		
 		c.add(Calendar.DATE, -1 * termday);
-		whereClause = "last_update_time > " + sm.format(c.getTime());
+		whereClause = "last_update_time > '" + sm.format(c.getTime()) + "'";
+		//Log.i("log: ", whereClause);
 		return getBPsList(whereClause);
 	}
 	
@@ -133,7 +136,7 @@ public class BloodPressure {
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
 			
-			Cursor c1 = db.rawQuery("select * from " + DBBloodPressure.BloodPressure.TB_NAME + " where last_update_time = " + date, null);
+			Cursor c1 = db.rawQuery("select * from " + DBBloodPressure.BloodPressure.TB_NAME + " where last_update_time = '" + date + "'", null);
 			
 			ret = c1.getCount() > 0;
 			
