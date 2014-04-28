@@ -61,7 +61,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.medicineitem_add, null);
             
             infoHolder = new MedicineInfoHolder();
-            infoHolder.img = (ImageView)view.findViewById(R.id.medicine_img);
+            //infoHolder.img = (ImageView)view.findViewById(R.id.medicine_img);
             infoHolder.name = (TextView)view.findViewById(R.id.medicine_name);
             
             view.setTag(infoHolder);

@@ -1,6 +1,8 @@
 package com.example.bpmanager;
 
 import android.app.AlertDialog;
+import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,10 +11,13 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class MedicationScheduleFragment extends Fragment {
 	
@@ -20,6 +25,7 @@ public class MedicationScheduleFragment extends Fragment {
 	
 	EditText amount;
 	EditText count;
+	EditText time;
 	
 	Button submitBtn;
 
@@ -31,6 +37,7 @@ public class MedicationScheduleFragment extends Fragment {
 		
 		amount = (EditText) view.findViewById(R.id.medischedule_amount);
 		count = (EditText) view.findViewById(R.id.medischedule_count);
+		time = (EditText) view.findViewById(R.id.medischedule_time);
 		
 		submitBtn = (Button) view.findViewById(R.id.medischedule_submit);
 		submitBtn.setOnClickListener(new OnClickListener() {
@@ -66,6 +73,24 @@ public class MedicationScheduleFragment extends Fragment {
 				}
 			}
 		});
+		
+		time.setOnFocusChangeListener(new OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				if (hasFocus)
+				{
+					TimePickerDialog dialog = new TimePickerDialog(getActivity(), new OnTimeSetListener() {
+						
+						@Override
+						public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+							time.setText(String.format("%02d:%02d", hourOfDay, minute));
+						}
+					}, 0, 0, true);
+					dialog.show();
+				}
+			}
+		});
 
 		return view;
 	}
@@ -88,6 +113,9 @@ public class MedicationScheduleFragment extends Fragment {
 		if (count.length() == 0)
 			return false;
 		
+		if (time.length() == 0)
+			return false;
+		
 		return true;
 	}
 	
@@ -96,6 +124,7 @@ public class MedicationScheduleFragment extends Fragment {
 		MedicationScheduleData msData = MainActivity.mMedicationScheduleData;
 		int amount = 0;
 		int count = 0;
+		String time = "";
 		
 		try 
 		{
@@ -113,10 +142,18 @@ public class MedicationScheduleFragment extends Fragment {
 		{
 			count = 0;
 		}
-		
-		if (amount > 0 && count > 0)
+		try
 		{
-			msData.addSchedule(medicine_id, amount, count);
+			time = this.time.getText().toString();
+		}
+		catch (NumberFormatException e)
+		{
+			time = "";
+		}
+		
+		if (amount > 0 && count > 0 && time != "")
+		{
+			msData.addSchedule(medicine_id, amount, count, time);
 		}
 	}
 	

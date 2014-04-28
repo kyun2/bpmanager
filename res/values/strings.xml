@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">BPManager</string>
+    <string name="app_name">나의 혈압관리 도우미</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="MainTitle">나의 혈압관리 도우미 (가제)</string>
+    <string name="MainTitle">나의 혈압관리 도우미</string>
     <string name="mydata_btn">My\nData</string>
     <string name="home_btn">HOME</string>
     <string name="mymedicin_btn">My\nMed</string>

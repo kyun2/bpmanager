@@ -3,7 +3,6 @@ package com.example.bpmanager.DB;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.bpmanager.bp;
 import com.example.bpmanager.clinicAlram;
 import com.example.bpmanager.Habit;
 import com.example.bpmanager.UserData;
@@ -276,7 +275,7 @@ public class DBhandler
 
 		return db.update(usertable, value, strWhere, null);
 	}
-
+/*
 	public long insertBP(bp args) {
 		ContentValues value = new ContentValues();
 
@@ -345,7 +344,7 @@ public class DBhandler
 
 		return db.update(bptable, value, strWhere, null);
 	}
-
+*/
 	
 	
 	///////////////////////////////////////////////////////////////////////
@@ -516,7 +515,7 @@ public class DBhandler
 
 		return db.update(DBhandler.clinictable, value, strWhere, null);
 	}
-
+/*
 	public List<bp> getBPsByTime(String befor, String now) {
 		List<bp> retval = new ArrayList<bp>();
 		String where = this.BPTIME+" >= "+befor+" and "+ this.BPTIME+" <= "+now;
@@ -534,5 +533,5 @@ public class DBhandler
 		}
 		return retval;
 	}
-
+*/
 }

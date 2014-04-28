@@ -1,6 +1,18 @@
 package com.example.bpmanager;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.achartengine.ChartFactory;
+import org.achartengine.chart.PointStyle;
+import org.achartengine.renderer.SimpleSeriesRenderer;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +31,6 @@ public class HomeFragment extends Fragment{
 		TextView sysMax = (TextView) view.findViewById(R.id.systolic_max);
 		TextView diaMax = (TextView) view.findViewById(R.id.diastolic_max);
 		
-		//목표 혈압 출력 -> 없으면 경고창후 정보 입력부분으로 이동
 		BloodPressure recommendBloodPressure = BloodPressure.getRecommendBloodPressure();
 		if(recommendBloodPressure != null)
 		{
@@ -42,4 +53,5 @@ public class HomeFragment extends Fragment{
 		}
 
 	}
+	
 }

@@ -189,7 +189,7 @@ public class MainActivity extends ActionBarActivity {
 			newFragment = new HomeFragment();
 			break;
 		case FRAGMENT_DATA:
-			newFragment = new DataFragment();
+			newFragment = new MyInfoFragment();
 			break;
 		case FRAGMENT_BP:
 			newFragment = new BloodPressureInputFragment();

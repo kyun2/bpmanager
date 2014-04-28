@@ -20,7 +20,7 @@ public class MedicationScheduleData {
 		public int mId;
 		public int mAmount;
 		public int mCount;
-		//public String mInjectTime;
+		public String mInjectTime;
 	}		
 	
 	boolean mLoaded;
@@ -55,7 +55,7 @@ public class MedicationScheduleData {
 				ms.mId = c1.getInt(c1.getColumnIndex(DBMedication.Medication.COLUMN_MEDID));
 				ms.mAmount = c1.getInt(c1.getColumnIndex(DBMedication.Medication.COLUMN_AMOUNT));
 				ms.mCount = c1.getInt(c1.getColumnIndex(DBMedication.Medication.COLUMN_COUNT));
-				//ms.mInjectTime = c1.getString(c1.getColumnIndex(DBMedication.Medication.COLUMN_INJECT_TIME));
+				ms.mInjectTime = c1.getString(c1.getColumnIndex(DBMedication.Medication.COLUMN_INJECT_TIME));
 				
 				mData.add(ms);
 			}
@@ -81,7 +81,7 @@ public class MedicationScheduleData {
 		values.put(DBMedication.Medication.COLUMN_MEDID, ms.mId);
 		values.put(DBMedication.Medication.COLUMN_AMOUNT, ms.mAmount);
 		values.put(DBMedication.Medication.COLUMN_COUNT, ms.mCount);
-		//values.put(DBMedication.Medication.COLUMN_INJECT_TIME, (new SimpleDateFormat("yyyy/MM/dd")).format(Calendar.getInstance().getTime()));
+		values.put(DBMedication.Medication.COLUMN_INJECT_TIME, ms.mInjectTime);
 		
 		if (mAdded)
 		{
@@ -96,12 +96,12 @@ public class MedicationScheduleData {
 		this.getData();
 	}
 	
-	public boolean addSchedule(int medicineID, int amount, int count)
+	public boolean addSchedule(int medicineID, int amount, int count, String time)
 	{
 		MedicationSchedule ms = getSchedule(medicineID);
 		if (ms != null)
 		{
-			updateSchedule(medicineID, amount, count);
+			updateSchedule(medicineID, amount, count, time);
 			return true;
 		}
 		
@@ -109,6 +109,7 @@ public class MedicationScheduleData {
 		ms.mId = medicineID;
 		ms.mAmount = amount;
 		ms.mCount = count;
+		ms.mInjectTime = time;
 		
 		mData.add(ms);
 		mAdded = true;
@@ -116,7 +117,7 @@ public class MedicationScheduleData {
 		return true;
 	}
 	
-	public boolean updateSchedule(int medicineID, int amount, int count)
+	public boolean updateSchedule(int medicineID, int amount, int count, String time)
 	{
 		MedicationSchedule ms = getSchedule(medicineID);
 		if (ms == null)
@@ -124,6 +125,7 @@ public class MedicationScheduleData {
 		
 		ms.mAmount = amount;
 		ms.mCount = count;
+		ms.mInjectTime = time;
 		
 		return true;
 	}

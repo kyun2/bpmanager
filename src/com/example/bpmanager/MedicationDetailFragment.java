@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,8 +28,10 @@ public class MedicationDetailFragment extends Fragment {
 	
 	private int medicine_id;
 	
-	ImageView img;
+	//ImageView img;
 	TextView name;
+	
+	EditText alarmTime;
 	
 	Button btnOpenWebInfo;
 	Button btnTook;
@@ -38,13 +41,13 @@ public class MedicationDetailFragment extends Fragment {
 			Bundle savedInstanceState) {
 		
 		View view = inflater.inflate(R.layout.fragment_med_detail, container, false);
-		INFOMedication info = INFOMedication.getInfoMedicine(medicine_id);
+		final INFOMedication info = INFOMedication.getInfoMedicine(medicine_id);
 		
-		img = (ImageView) view.findViewById(R.id.medicine_img);
+		//img = (ImageView) view.findViewById(R.id.medicine_img);
 		name = (TextView) view.findViewById(R.id.medicine_name);
 		
 		// Image
-		//
+		
 		// name
 		name.setText(info.mName);
 		
@@ -54,7 +57,7 @@ public class MedicationDetailFragment extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				((MainActivity)getActivity()).OpenBrowser("http://www.kimsonline.co.kr");
+				((MainActivity)getActivity()).OpenBrowser(info.mWebLink);
 			}
 		});
 		
@@ -103,6 +106,9 @@ public class MedicationDetailFragment extends Fragment {
 				}
 			});
 		}
+		
+		// 알람시간
+		
 		
 		return view;
 	}
