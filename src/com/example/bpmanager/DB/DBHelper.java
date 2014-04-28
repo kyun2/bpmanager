@@ -71,8 +71,9 @@ public class DBHelper extends SQLiteOpenHelper
 		return rID;
 	}
 	
-	public void updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
+	public long updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
 	{
+		long rID = -1;
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
@@ -81,8 +82,9 @@ public class DBHelper extends SQLiteOpenHelper
 		}
 		catch (SQLiteException e)
 		{
-			
+			rID = -1;
 		}
+		return rID;
 	}
 	
 	public void deleteData(String tableName, String whereClause, String[] whereArgs)
