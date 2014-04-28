@@ -82,8 +82,8 @@ public class MedicationDetailFragment extends Fragment {
 					btnTook.setAlpha(0.5f);
 					// 알림
 					AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-					alert.setMessage("���� �Ϸ�!").setTitle("");
-					alert.setPositiveButton("Ȯ��", new DialogInterface.OnClickListener() {
+					alert.setMessage("복용 완료").setTitle("");
+					alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 	
 						@Override
 						public void onClick(DialogInterface dialog, int which) {

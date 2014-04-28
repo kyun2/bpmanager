@@ -27,7 +27,7 @@ public class MedicationScheduleFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		
-		View view = inflater.inflate(R.layout.fragment_medi_schedule, container, false);
+		View view = inflater.inflate(R.layout.fragment_med_schedule, container, false);
 		
 		amount = (EditText) view.findViewById(R.id.medischedule_amount);
 		count = (EditText) view.findViewById(R.id.medischedule_count);

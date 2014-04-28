@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-package com.example.bpmanager;
-/**
- * 
- * @author Kyun
- *
- * * Ç÷¾Ð Á¤º¸
- */
-public class BloodPressure {
-	
-	
-}
-=======
 package com.example.bpmanager;
 
 import java.util.ArrayList;
@@ -28,11 +15,11 @@ import com.example.bpmanager.DB.DBhandler;
  * 
  * @author Kyun
  *
- * Á¦°ø ÇÔ¼ö
- * 1. Ç÷¾ÐÀ» µðºñ¿¡ »ðÀÔ
- * 2. ¿øÇÏ´Â ³¯Â¥±îÁö µðºñ¿¡¼­ Ç÷¾ÐµéÀ» Á¶È¸
- * 3. ¸ñÇ¥ Ç÷¾Ð Ãâ·Â
- * 4. ¸¶Áö¸· ÀÔ·Â°ª Ãâ·Â
+ * ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
+ * 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ * 2. ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ñ¿¡¼ï¿½ ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ ï¿½ï¿½È¸
+ * 3. ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+ * 4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â°ï¿½ ï¿½ï¿½ï¿½
  * 
  */
 public class BloodPressure {
@@ -78,7 +65,7 @@ public class BloodPressure {
 		this.datetime = datetime;
 	}
 	
-	//DB¿¡ Ç÷¾ÐÀ» Ãß°¡
+	//DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 	public static long insertToDB(BloodPressure bp){
 		ContentValues values = new ContentValues();
 		values.put(DBBloodPressure.BloodPressure.COLUMN_SYS, bp.getSystolic());
@@ -88,7 +75,7 @@ public class BloodPressure {
 		return MainActivity.mDBHelper.insertData(DBBloodPressure.BloodPressure.TB_NAME, values);
 	}
 	
-	//¿øÇÏ´Â ³¯Â¥±îÁö µðºñ¿¡¼­ Ç÷¾ÐµéÀ» Á¶È¸
+	//ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Â¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ñ¿¡¼ï¿½ ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public static List<BloodPressure> getLastBPsList(int termday){
 		List<BloodPressure> bps = new ArrayList<BloodPressure>();
 		
@@ -112,7 +99,7 @@ public class BloodPressure {
 		return bps;
 	}
 	
-	//¸ñÇ¥ Ç÷¾Ð Á¶È¸
+	//ï¿½ï¿½Ç¥ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸
 	public static BloodPressure getRecommendBloodPressure(){
 		//**if(!MainActivity.mUserData.IsLoaded()) return null;
 		
@@ -128,11 +115,11 @@ public class BloodPressure {
 		return new BloodPressure(recommendSystolic,recommendDiastolic);
 	}
 	
-	//ÃÖÁ¾ Ç÷¾Ð ÀÔ·ÂÀÏ ÀÌ ÇÑ´ÞÀÌ Áö³µ´ÂÁö È®ÀÎ
+	//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ñ´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
 	public static boolean IsExpiredBPData(){
 		if(getLastBPsList(30).size() > 0) return false;
 		else return true;
 	}
 	
 }
->>>>>>> e9584c0a1ababd62aa3ac58a8314200297d8a254
+

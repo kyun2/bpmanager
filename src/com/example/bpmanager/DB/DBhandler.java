@@ -6,7 +6,6 @@ import java.util.List;
 import com.example.bpmanager.bp;
 import com.example.bpmanager.clinicAlram;
 import com.example.bpmanager.Habit;
-import com.example.bpmanager.medalram;
 import com.example.bpmanager.UserData;
 
 import android.content.ContentValues;
@@ -348,84 +347,6 @@ public class DBhandler
 	}
 
 	
-	public long insertMedAlram(medalram args) {
-		ContentValues value = new ContentValues();
-
-		value.put(DBhandler.IMG, args.getImglocation());
-		value.put(DBhandler.LABEL, args.getMedlabel());
-		value.put(DBhandler.MEDTIME, args.getMedtime());
-		value.put(DBhandler.MEDCHECK, args.getCheck());
-
-		return db.insert(medalramtable, null, value);
-
-	}
-
-	public boolean removeMedalram(long index) {
-		return (db.delete(medalramtable, KEY + " = " + index, null) > 0);
-	}
-
-	public List<medalram> getMedalrams() {
-		List<medalram> retval = new ArrayList<medalram>();
-		Cursor cu = db.query(medalramtable, new String[] { 
-				DBhandler.KEY, 
-				DBhandler.IMG, 
-				DBhandler.LABEL,
-				DBhandler.MEDTIME,
-				DBhandler.MEDCHECK }, null, null, null, null, null);
-		if (cu.getCount() == 0 || (!cu.moveToFirst())) {
-			Log.w("mybpapp", "No items found for rows ");
-		} else {
-			if (cu.moveToFirst()) {
-				for (int i = 0; i < cu.getCount(); i++) {
-					retval.add(setMedalram(cu));
-					cu.moveToNext();
-				}
-			}
-		}
-		return retval;
-
-	}
-
-	private medalram setMedalram(Cursor cu) {
-		medalram retval = new medalram();
-		retval.setId(cu.getLong(0));
-		retval.setImglocation(cu.getString(1));
-		retval.setMedlabel(cu.getString(2));
-		retval.setMedtime(cu.getString(3));
-		retval.setCheck(cu.getInt(4));
-		// TODO Auto-generated method stub
-		return retval;
-	}
-
-	public medalram getMedalram(long index) {
-		medalram retval = new medalram();
-		Cursor cu = db.query(medalramtable, new String[] { 
-				DBhandler.KEY, 
-				DBhandler.IMG, 
-				DBhandler.LABEL,
-				DBhandler.MEDTIME,
-				DBhandler.MEDCHECK }, DBhandler.KEY+" = "+index, null, null, null, null);
-		if (cu.getCount() == 0 || (!cu.moveToFirst())) {
-			Log.w("mybpapp", "No items found for rows ");
-		} else {
-			cu.moveToPosition(cu.getCount() - 1);
-			retval = setMedalram(cu);
-		}
-		return retval;
-
-	}
-
-	public int updateMedalram(long index, medalram args) {
-		String strWhere = KEY + " = " + index;
-		ContentValues value = new ContentValues();
-
-		value.put(DBhandler.IMG, args.getImglocation());
-		value.put(DBhandler.LABEL, args.getMedlabel());
-		value.put(DBhandler.MEDTIME, args.getMedtime());
-		value.put(DBhandler.MEDCHECK, args.getCheck());
-
-		return db.update(medalramtable, value, strWhere, null);
-	}
 	
 	///////////////////////////////////////////////////////////////////////
 
