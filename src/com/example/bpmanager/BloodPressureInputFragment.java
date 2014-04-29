@@ -20,7 +20,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.bpmanager.DB.DBhandler;
 import com.example.bpmanager.Data.DrinkSurvey;
 import com.example.bpmanager.Data.ExerciseSurvey;
 import com.example.bpmanager.Data.SaltIntakeSurvey;
@@ -43,7 +42,6 @@ import com.example.bpmanager.Data.WeightSurvey;
  */
 public class BloodPressureInputFragment extends Fragment{
 
-	DBhandler handle;
 	Button inputbth; 
 	Button bpviewbth;
 

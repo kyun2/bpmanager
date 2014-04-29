@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,8 +27,8 @@ public class MedicationHistoryFragment extends Fragment {
 	
 	public enum PeriodType
 	{
-		week,
-		month
+		WEEK,
+		MONTH
 	}
 	
 	RadioButton mWeeklyBtn;
@@ -38,10 +39,6 @@ public class MedicationHistoryFragment extends Fragment {
 	RatingBar mAccomplishBar;
 	
 	GridView mData;
-	ArrayList<Float> mDataList;
-	
-	ArrayList<Integer> mTookData;
-	int mScheduledCount;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,74 +54,40 @@ public class MedicationHistoryFragment extends Fragment {
 		mAccomplishBar = (RatingBar) view.findViewById(R.id.ratingbar_accomplish);
 		
 		mData = (GridView) view.findViewById(R.id.grid_history_data);
-		mDataList = new ArrayList<Float>();
 		
 		// click bind
 		mWeeklyBtn.setOnClickListener(clickListener);
 		mMonthlyBtn.setOnClickListener(clickListener);
 		
-		mTookData = new ArrayList<Integer>();
-		mScheduledCount = 0;
-		
-		// get data
-		getScheduleData();
-		getTookData();
-		
 		// Init
-		setPeriod(PeriodType.week);
+		setPeriod(PeriodType.WEEK);
 
 		return view;
 	}
 	
 	public void setPeriod(PeriodType pt)
 	{
-		int tookCount = 0;
-		int scheduledCount = 0;
+		Pair<Integer, Integer> counts = null;
 		switch (pt)
 		{
-		case week:
-			mDataList.clear();
-			for (int i = 0; i < 7; i++)
-			{
-				if (i < mTookData.size())
-				{
-					mDataList.add((float)mTookData.get(i) / (float)mScheduledCount);
-					
-					tookCount += mTookData.get(i);
-					scheduledCount += mScheduledCount;
-				}
-				else
-				{
-					mDataList.add(-1f);
-				}
-			}
-			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), mDataList));
+		case WEEK:
+			counts = MainActivity.mMediHistData.setTookRatioDataList(7);
+			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), MainActivity.mMediHistData.getDataList()));
 			break;
 			
-		case month:
-			mDataList.clear();
-			for (int i = 0; i < 28; i++)
-			{
-				if (i < mTookData.size())
-				{
-					mDataList.add((float)mTookData.get(i) / (float)mScheduledCount);
-					
-					tookCount += mTookData.get(i);
-					scheduledCount += mScheduledCount;
-				}
-				else
-				{
-					mDataList.add(-1f);
-				}
-			}
-			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), mDataList));
+		case MONTH:
+			counts = MainActivity.mMediHistData.setTookRatioDataList(30);
+			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), MainActivity.mMediHistData.getDataList()));
 			break;
 		}
 		
 		// 퍼센트
-		float percent = (float)tookCount / (float)scheduledCount;
-		mAccomplish.setText(Integer.toString(Math.round(percent * 100f)));
-		mAccomplishBar.setRating(percent * (float)mAccomplishBar.getNumStars());
+		if (counts != null)
+		{
+			float percent = (float)counts.first / (float)counts.second;
+			mAccomplish.setText(Integer.toString(Math.round(percent * 100f)));
+			mAccomplishBar.setRating(percent * (float)mAccomplishBar.getNumStars());
+		}
 	}
 	
 	View.OnClickListener clickListener = new OnClickListener() {
@@ -134,82 +97,13 @@ public class MedicationHistoryFragment extends Fragment {
 			switch (v.getId())
 			{
 			case R.id.radio_period_weekly:
-				setPeriod(PeriodType.week);
+				setPeriod(PeriodType.WEEK);
 				break;
 				
 			case R.id.radio_period_monthly:
-				setPeriod(PeriodType.month);
+				setPeriod(PeriodType.MONTH);
 				break;
 			}
 		}
 	};
-	
-	void getTookData()
-	{
-		mTookData.clear();
-		Calendar fromDay = Calendar.getInstance();
-		Calendar toDay = Calendar.getInstance();
-		
-		try
-		{
-			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
-			
-			String[] projection = {
-				DBMedicationTook.SCHEMA.COLUMN_MEDID,
-				DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME
-			};
-			
-			Cursor c1 = db.query(DBMedicationTook.SCHEMA.TB_NAME, projection, null, null, null, null, null);
-			
-			while (c1.moveToNext())
-			{
-				//int id = c1.getInt(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_MEDID));
-				String[] times = c1.getString(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME)).split("/");
-				int timeYear = Integer.parseInt(times[0]);
-				int timeMonth = Integer.parseInt(times[1]) - 1;
-				int timeDay = Integer.parseInt(times[2]);
-				
-				fromDay.set(timeYear, timeMonth, timeDay);
-				
-				long diffSec = (toDay.getTimeInMillis() - fromDay.getTimeInMillis()) / 1000;
-				int diffDay = (int)(diffSec / (60 * 60 * 24));
-				
-				if (diffDay < mTookData.size())
-				{
-					mTookData.set(diffDay, mTookData.get(diffDay)+1);
-				}
-				else
-				{
-					mTookData.add(1);
-				}
-			}
-			
-			c1.close();
-		}
-		catch (SQLiteException e)
-		{
-		}
-	}
-	
-	void getScheduleData()
-	{
-		mScheduledCount = 0;
-		
-		try
-		{
-			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
-			
-			String[] projection = {
-				DBMedication.Medication.COLUMN_MEDID
-			};
-			
-			Cursor c1 = db.query(DBMedication.Medication.TB_NAME, projection, null, null, null, null, null);
-			mScheduledCount = c1.getCount();
-			
-			c1.close();			
-		}
-		catch (SQLiteException e)
-		{			
-		}
-	}
 }

@@ -19,7 +19,6 @@ import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.SimpleExpandableListAdapter;
 import android.widget.Toast;
 
-import com.example.bpmanager.DB.DBhandler;
 import com.example.bpmanager.Data.DrinkSurvey;
 import com.example.bpmanager.Data.ExerciseSurvey;
 import com.example.bpmanager.Data.SaltIntakeSurvey;
@@ -35,7 +34,6 @@ public class HabitNotiFragment extends Fragment {
 	private ArrayList<ArrayList<Map<String, String>>> mChildList = null;
 	private ArrayList<Map<String,String>> mChildListContent = null;
 	private ExpandableListView mListView;
-	DBhandler handle;
 	
 	//설문조사 결과 
 	public String getEval(Survey sv){

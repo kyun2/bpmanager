@@ -56,7 +56,7 @@ public class HabitFragment extends Fragment{
 		ScrollView scrollView;
 
 
-		scrollView = (ScrollView) view.findViewById(R.id.scrollView1);
+		scrollView = (ScrollView) view.findViewById(R.id.scrview_habit);
 		scrollView.setVerticalScrollBarEnabled(true);
 
 		slat = (Button) view.findViewById(R.id.salt_btn);

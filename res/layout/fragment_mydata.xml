@@ -10,6 +10,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_weight="1"
+	    android:padding="5dp"
+	    android:background="@color/btn_indigo"
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>
@@ -19,6 +21,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_weight="1"
+	    android:padding="5dp"
+	    android:background="@color/btn_indigo"
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>
@@ -28,6 +32,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_weight="1"
+	    android:padding="5dp"
+	    android:background="@color/btn_indigo"
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>

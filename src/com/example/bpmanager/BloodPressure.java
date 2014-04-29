@@ -13,7 +13,6 @@ import android.util.Log;
 
 import com.example.bpmanager.DB.DBBloodPressure;
 import com.example.bpmanager.DB.DBUser;
-import com.example.bpmanager.DB.DBhandler;
 /**
  * 
  * @author Kyun
@@ -86,10 +85,12 @@ public class BloodPressure {
 	}
 	
 	// where문으로 혈압 조회
-	public static List<BloodPressure> getBPsList(String where){
+	public static List<BloodPressure> getBPsList(String where, int limit){
 		List<BloodPressure> bps = new ArrayList<BloodPressure>();
+		String whereClause = where.length() > 0 ? " where " + where : "";
+		String limitClause = limit > 0 ? " LIMIT " + limit : "";
 		
-		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + " where " + where;
+		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + limitClause;
 		//Log.i("log: ", strQry);
 		try
 		{
@@ -125,7 +126,7 @@ public class BloodPressure {
 		c.add(Calendar.DATE, -1 * termday);
 		whereClause = "last_update_time > '" + sm.format(c.getTime()) + "'";
 		Log.i("log: ", whereClause);
-		return getBPsList(whereClause);
+		return getBPsList(whereClause, 0);
 	}
 	
 	// 오늘 혈압 입력값이 있는지?

@@ -3,8 +3,6 @@ package com.example.bpmanager;
 import java.util.Calendar;
 import java.util.List;
 
-import com.example.bpmanager.DB.DBhandler;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

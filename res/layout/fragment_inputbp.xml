@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/btn_indigo"
+            android:background="@drawable/basic_button"
             android:textColor="@color/btn_text"
             android:text="데이터보기" />
 
@@ -167,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/btn_indigo"
+                android:background="@drawable/basic_button"
                 android:textColor="@color/btn_text"
                 android:text="입력" />
 

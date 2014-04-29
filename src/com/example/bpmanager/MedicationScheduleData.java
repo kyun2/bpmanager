@@ -117,6 +117,9 @@ public class MedicationScheduleData {
 				
 		mData.clear();
 		this.getData();
+		
+		// history data
+		MainActivity.mMediHistData.resetData();
 	}
 	
 	public boolean addSchedule(int medicineID, int amount, int count, String time)

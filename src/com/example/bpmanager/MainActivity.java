@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
 	public static DBHelper mDBHelper;
 	public static UserData mUserData;
 	public static MedicationScheduleData mMedicationScheduleData;
+	public static MedicationHistoryData mMediHistData;
 	
 	//private static Button home;
 	private static LinearLayout footer;
@@ -79,7 +80,8 @@ public class MainActivity extends ActionBarActivity {
 			initFragment = new HomeFragment();
 		}
 		mMedicationScheduleData = new MedicationScheduleData(this);
-		mMedicationScheduleData.getData();		
+		mMedicationScheduleData.getData();
+		mMediHistData = new MedicationHistoryData();
 		
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()

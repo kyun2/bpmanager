@@ -15,6 +15,8 @@ import android.content.Context;
 import android.graphics.Color;
 
 public class BloodPressureGraph extends AbstractDemoChart {
+	
+	private final int SAMPLE_COUNT = 30;
 
 	public String getName() {
 		return "혈압 기록";
@@ -29,20 +31,18 @@ public class BloodPressureGraph extends AbstractDemoChart {
 		String[] titles = new String[] { "수축기", "이완기" };
 		List<Date[]> dates = new ArrayList<Date[]>();
 		List<double[]> values = new ArrayList<double[]>();		
-		List<BloodPressure> bplist = BloodPressure.getLastBPsList(7);
+		// 최대 30개까지.
+		List<BloodPressure> bplist = BloodPressure.getBPsList("", 30);
 		
 		int bpsize = bplist.size();
+		if (bpsize == 0)
+			return null;
+		
 		int length = titles.length;
 	    for (int i = 0; i < length; i++) {
 	    	dates.add(new Date[bpsize]);
 	    	for (int i2 = 0; i2 < bpsize; i2++)
 	    	{
-	    		//String[] times = bplist.get(i2).getDatetime().split("/");
-	    		//int year = Integer.parseInt(times[0]);
-	    		//int month = Integer.parseInt(times[1]) - 1;
-	    		//int day = Integer.parseInt(times[2]);
-	    		//Calendar c = Calendar.getInstance();
-	    		//c.set(year, month, day);
 	    		dates.get(i)[i2] = new Date(100, 0, i2 + 1);
 	    	}
 	    }
@@ -71,9 +71,12 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	        dates.get(0)[Math.min(bpsize-1, 4)].getTime(), 30, 300, Color.BLACK, Color.BLACK);
 	    renderer.setXLabels(0);
 	    renderer.setYLabels(0);
+	    renderer.setApplyBackgroundColor(true);
 	    renderer.setMarginsColor(Color.WHITE);
+	    renderer.setBackgroundColor(Color.LTGRAY);
 	    renderer.setZoomEnabled(false, false);
 	    renderer.setPanEnabled(true, false);
+	    renderer.setShowAxes(true);
 	    
 	    BloodPressure recommendBP = BloodPressure.getRecommendBloodPressure();
 	    renderer.addYTextLabel(recommendBP.getSystolic(), "목표수축혈압");

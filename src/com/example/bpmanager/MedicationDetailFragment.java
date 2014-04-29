@@ -46,6 +46,7 @@ public class MedicationDetailFragment extends Fragment {
 	
 	//ImageView img;
 	TextView name;
+	TextView ingredient;
 	
 	EditText alarmTime;
 	
@@ -67,6 +68,7 @@ public class MedicationDetailFragment extends Fragment {
 		// 컴포넌트들
 		//img = (ImageView) view.findViewById(R.id.medicine_img);
 		name = (TextView) view.findViewById(R.id.medicine_name);
+		ingredient = (TextView) view.findViewById(R.id.medicine_ingredient);
 		alarmTime = (EditText) view.findViewById(R.id.edit_alarm_time);
 		btnOpenWebInfo = (ImageButton) view.findViewById(R.id.medicine_web_open);
 		btnTook = (Button) view.findViewById(R.id.med_btn_took_it);		
@@ -76,6 +78,9 @@ public class MedicationDetailFragment extends Fragment {
 		
 		// name
 		name.setText(info.mName);
+		
+		// ingredient
+		ingredient.setText(info.mIngredient);
 		
 		// 자세히 보기 버튼		
 		btnOpenWebInfo.setOnClickListener(new OnClickListener() {
@@ -91,8 +96,7 @@ public class MedicationDetailFragment extends Fragment {
 		{
 			btnTook.setEnabled(false);
 			btnTook.setClickable(false);
-			btnTook.setTextColor(Color.BLACK);
-			btnTook.setAlpha(0.5f);
+			btnTook.setBackgroundResource(R.drawable.basic_button_dis);
 		}
 		else
 		{
@@ -105,8 +109,7 @@ public class MedicationDetailFragment extends Fragment {
 					// Disable button
 					btnTook.setEnabled(false);
 					btnTook.setClickable(false);
-					btnTook.setTextColor(Color.BLACK);
-					btnTook.setAlpha(0.5f);
+					btnTook.setBackgroundResource(R.drawable.basic_button_dis);
 					// 알림
 					AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
 					alert.setMessage("복용 완료").setTitle("");
@@ -127,6 +130,7 @@ public class MedicationDetailFragment extends Fragment {
 					values.put(DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME, (new SimpleDateFormat("yyyy/MM/dd")).format(Calendar.getInstance().getTime()));
 					
 					MainActivity.mDBHelper.insertData(DBMedicationTook.SCHEMA.TB_NAME, values);
+					MainActivity.mMediHistData.resetData();
 				}
 			});
 		}

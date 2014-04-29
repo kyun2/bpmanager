@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">나의 혈압관리 도우미</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="MainTitle">나의 혈압관리 도우미</string>
-    <string name="mydata_btn">My\nData</string>
-    <string name="home_btn">HOME</string>
-    <string name="mymedicin_btn">My\nMed</string>
-    <string name="mybp_btn">My\nBP</string>
-    <string name="myhabit_btn">My\nHabit</string>
-    <string name="usuer_bth">USER</string>
-    <string name="noti_bp_pre">나이와 임상정보를 고려한 당신의 관리 목표는 수축기 혈압 </string>
-    <string name="noti_bp_post">mmHg 입니다.</string>
-    <string name="activity_alarm_reciever">AlarmReciever</string>
+    <string translatable="false" name="app_name">나의 혈압관리 도우미</string>
+    <string translatable="false" name="action_settings">Settings</string>
+    <string translatable="false" name="activity_alarm_reciever">AlarmReciever</string>
 
 </resources>

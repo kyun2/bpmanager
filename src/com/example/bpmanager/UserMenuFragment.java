@@ -1,7 +1,5 @@
 package com.example.bpmanager;
 
-import com.example.bpmanager.DB.DBhandler;
-
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -22,8 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class UserMenuFragment extends Fragment {
-	DBhandler handle;
-	
+
 	Button userInfo;
 	Button alarm;
 	Button appInfo;

@@ -75,20 +75,6 @@ public class Habit {
 	public void setStress(double stress) {
 		this.stress = stress;
 	}
-
-	public String getSlatAdvice(){
-		
-		//점수 지표  < 5 E6 ,R6
-		
-		
-		StringBuilder result = new StringBuilder();
-		
-		result.append(EvaText.E6);
-		result.append("\n");
-		result.append(RecomendText.R6);
-		
-		return result.toString();
-	}
 }
 
 
