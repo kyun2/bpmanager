@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.example.bpmanager.DB.DBHelper;
 //import com.example.bpmanager.DB.DBhandler;
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity {
 	public static MedicationScheduleData mMedicationScheduleData;
 	
 	//private static Button home;
+	private static LinearLayout footer;
 	private static Button data;
 	private static Button bp;
 	private static Button med;
@@ -46,18 +48,19 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		
+		footer = (LinearLayout) findViewById(R.id.footer);		
 		//home = (Button) findViewById(R.id.home_menu);
-		//home.setOnClickListener(clickListener);
 		data = (Button) findViewById(R.id.mydata_menu);
-		data.setOnClickListener(clickListener);
 		bp = (Button) findViewById(R.id.mybp_menu);
-		bp.setOnClickListener(clickListener);
 		med = (Button) findViewById(R.id.mymedicin_menu);
-		med.setOnClickListener(clickListener);
 		habit = (Button) findViewById(R.id.myhabit_menu);
-		habit.setOnClickListener(clickListener);
 		user = (Button) findViewById(R.id.user_menu);
+
+		//home.setOnClickListener(clickListener);
+		data.setOnClickListener(clickListener);
+		bp.setOnClickListener(clickListener);
+		med.setOnClickListener(clickListener);
+		habit.setOnClickListener(clickListener);		
 		user.setOnClickListener(clickListener);
 		
 		Fragment initFragment = null;
@@ -84,41 +87,14 @@ public class MainActivity extends ActionBarActivity {
 		
 		// 의약품 정보 만들기
 		INFOMedication.Make();
-		
-		
-		//Toast.makeText(this, "activity start", 3000).show();
-		//DBhandler handle = new DBhandler(this);
-		//handle.readOpen();
-		//List<user> retval = handle.getUsers();
-		//if(retval.isEmpty()){
-			//Toast.makeText(this, "user not found", 3000).show();
-			//handle.close();
-			//showNewUserDialog();
-			
-		//}else {
-			//cu.moveToPosition(cu.getCount() - 1);
-			//Toast.makeText(this, "user found : "+cu.getInt(0)+" "+cu.getString(1), 3000).show();
-			//handle.close();
-		//}
-		
 	}
 	
 	public static void showFooter() {
-		//home.setVisibility(View.VISIBLE);
-		data.setVisibility(View.VISIBLE);
-		bp.setVisibility(View.VISIBLE);
-		med.setVisibility(View.VISIBLE);
-		habit.setVisibility(View.VISIBLE);
-		user.setVisibility(View.VISIBLE);	
+		footer.setVisibility(View.VISIBLE);
 	}
 	
 	public static void hideFooter() {
-		//home.setVisibility(View.INVISIBLE);
-		data.setVisibility(View.INVISIBLE);
-		bp.setVisibility(View.INVISIBLE);
-		med.setVisibility(View.INVISIBLE);
-		habit.setVisibility(View.INVISIBLE);
-		user.setVisibility(View.INVISIBLE);	
+		footer.setVisibility(View.GONE);
 	}
 	
 	private void showNewUserDialog() {

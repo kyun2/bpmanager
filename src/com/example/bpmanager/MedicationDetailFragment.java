@@ -147,6 +147,7 @@ public class MedicationDetailFragment extends Fragment {
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				
 				Intent alarmIntent = new Intent(getActivity(), AlarmReciever.class);
+				alarmIntent.putExtra("type", "MEDICINE");
 				alarmIntent.putExtra("medicineId", info.mId);
 				alarmIntent.putExtra("medicineName", info.mName);
 								

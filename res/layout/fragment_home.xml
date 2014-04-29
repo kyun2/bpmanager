@@ -2,15 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.bpmanager.MainActivity$PlaceholderFragment" >
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
     
     <LinearLayout
+        android:id="@+id/ll_home_recombp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
         
         <LinearLayout
@@ -22,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                android:text="목표\n혈압"
+                android:text="목표혈압"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <TextView
@@ -47,65 +45,92 @@
                 android:textSize="25dp" />
 
         </LinearLayout>
-        
+
     </LinearLayout>
 
-    <!-- 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
+	<LinearLayout 
+	    android:id="@+id/ll_home_alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_home_recombp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:orientation="vertical" >
+        
+	    <TextView
+	        android:id="@+id/tv_home_title"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="병원방문예정일 알림"
+	        android:textSize="20dp"
+	        />
+	    
+	</LinearLayout>
+	
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/ll_home_alarm"
+	    android:layout_marginTop="@dimen/activity_vertical_margin" >
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	       
+	        <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="알림설정"
+	            android:textSize="18dp" />
 
-        <View
-            android:id="@+id/bp_graph_view"
-            android:layout_width="fill_parent"
-            android:layout_height="99dp"
-            android:layout_gravity="" />
+	        <RadioGroup 
+	            android:id="@+id/radiogrp_home_alarm"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="3"
+	            android:orientation="horizontal" >
+	            
+	            <RadioButton 
+	                android:id="@+id/radio_home_set"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+	                android:text="설정"
+	                />
+	            
+	            <RadioButton 
+	                android:id="@+id/radio_home_unset"
+	                android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_weight="1"
+					android:text="해제"
+	                />
+	            
+	        </RadioGroup>
+	        
+	    </TableRow>
+	    
+	    <TableRow
+	        android:padding="5dp"
+	        android:background="#ffffbb">
+	        
+	         <TextView
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1" 
+	            android:text="알림시간"
+	            android:textSize="18dp" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="72dp" >
-
-            <Button
-                android:id="@+id/mydata_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mydata_btn"
-                android:textSize="@dimen/TitleSize" />
-
-            <Button
-                android:id="@+id/mybp_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mybp_btn"
-                android:textSize="@dimen/TitleSize" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            >
-            <Button
-                android:id="@+id/mymedicin_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mymedicin_btn"
-                android:textSize="@dimen/TitleSize" />
-
-            <Button
-                android:id="@+id/myhabit_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/myhabit_btn"
-                android:textSize="@dimen/TitleSize" />
-        </LinearLayout>
-
-    </LinearLayout>
-    -->
+	         <EditText
+	             android:id="@+id/edit_home_alarm_time"
+	             android:layout_width="wrap_content"
+	             android:layout_height="wrap_content"
+	             android:layout_weight="3"
+	             android:inputType="time" >
+	         </EditText>
+	        
+	    </TableRow>	 
+	    
+	</TableLayout>
 
 </RelativeLayout>

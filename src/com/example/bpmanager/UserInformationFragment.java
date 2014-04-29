@@ -39,14 +39,16 @@ public class UserInformationFragment extends Fragment
 	CheckBox kidney;
 	//CheckBox coronary;
 	
+	EditText lastVisitDate;
+	EditText nextVisitDate;
+	
 	Calendar c = Calendar.getInstance();
     int cyear = c.get(Calendar.YEAR);
     int cmonth = c.get(Calendar.MONTH);
     int cday = c.get(Calendar.DAY_OF_MONTH);
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		
@@ -60,12 +62,20 @@ public class UserInformationFragment extends Fragment
 		weight = (EditText)view.findViewById(R.id.edit_bodyweight);
 		waist = (EditText)view.findViewById(R.id.edit_waist);
 		birth = (EditText)view.findViewById(R.id.edit_birth);
-		birth.setOnFocusChangeListener(focus);
+		
 //		birth.setOnClickListener(click);
 		//hyper = (CheckBox)view.findViewById(R.id.high_check);
 		glucose = (CheckBox)view.findViewById(R.id.glucos_check);
 		kidney = (CheckBox)view.findViewById(R.id.kidney_check);
 		//coronary = (CheckBox)view.findViewById(R.id.coronary_check);
+		
+		lastVisitDate = (EditText)view.findViewById(R.id.edit_lastvisitdate);
+		nextVisitDate = (EditText)view.findViewById(R.id.edit_nextvisitdate);
+		
+		// listener
+		birth.setOnFocusChangeListener(focus);
+		lastVisitDate.setOnFocusChangeListener(focus);
+		nextVisitDate.setOnFocusChangeListener(focus);
 		
 		setView();
 
@@ -91,11 +101,9 @@ public class UserInformationFragment extends Fragment
 		//hyper.setChecked(uData.getHypertension() == 1);
 		glucose.setChecked(uData.getGlucose() == 1);
 		kidney.setChecked(uData.getKidney() == 1);
-		//coronary.setChecked(uData.getCoronary() == 1);
-	}
-	
-	private void viewToast(String text) {
-		Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
+		//coronary.setChecked(uData.getCoronary() == 1);		
+		lastVisitDate.setText(uData.getLastVisitDate());
+		nextVisitDate.setText(uData.getNextVisitDate());
 	}
 	
 	View.OnFocusChangeListener focus = new View.OnFocusChangeListener() {
@@ -103,23 +111,39 @@ public class UserInformationFragment extends Fragment
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
 			// TODO Auto-generated method stub
-			if(v.getId() == R.id.edit_birth && hasFocus == true){
-				String[] arr = birth.getText().toString().split("/");
-				
-				try
+			if(hasFocus == true && (v.getId() == R.id.edit_birth || v.getId() == R.id.edit_lastvisitdate || v.getId() == R.id.edit_nextvisitdate)){
+				EditText text = null;
+				switch (v.getId())
 				{
-					int year = Integer.parseInt(arr[0]);
-					int month = Integer.parseInt(arr[1]) - 1;
-					int day = Integer.parseInt(arr[2]);
-					
-					DialogDatePicker(year, month, day);
+				case R.id.edit_birth:
+					text = birth;
+					break;
+				case R.id.edit_lastvisitdate:
+					text = lastVisitDate;
+					break;
+				case R.id.edit_nextvisitdate:
+					text = nextVisitDate;
+					break;
 				}
-				catch (NumberFormatException e)
+				
+				if (text != null)
 				{
-					DialogDatePicker(0, 0, 0);
+					String[] arr = text.getText().toString().split("/");
+					
+					try
+					{
+						int year = Integer.parseInt(arr[0]);
+						int month = Integer.parseInt(arr[1]) - 1;
+						int day = Integer.parseInt(arr[2]);
+						
+						DialogDatePicker(year, month, day, text);
+					}
+					catch (NumberFormatException e)
+					{
+						DialogDatePicker(0, 0, 0, text);
+					}
 				}
 			}
-			
 		}
 	};
 	
@@ -127,16 +151,18 @@ public class UserInformationFragment extends Fragment
 		
 		@Override
 		public void onClick(View v) {
-			// TODO Auto-generated method stub
-			switch(v.getId()){
+			final Context context = getActivity();
+			
+			switch(v.getId())
+			{
 			case R.id.user_commit:
 				// Hide keyboard
-				InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+				InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 				if (getActivity().getCurrentFocus() != null)
 					imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
 				if (checkInputData())
 				{
-					UserData uData = MainActivity.mUserData;
+					final UserData uData = MainActivity.mUserData;
 					// modify
 					if (uData.IsLoaded())
 					{
@@ -155,6 +181,27 @@ public class UserInformationFragment extends Fragment
 					// Store Data to DB				
 					updateUserData();
 					uData.submitData();
+					uData.setAlarm(context);
+					// Set Alarm
+					/*
+					AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
+					confirm.setMessage("병원방문 전날 19:00시 알림을 설정할까요?").setTitle("알림설정확인");
+					confirm.setPositiveButton("예", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							uData.setAlarm(context);
+						}
+					});
+					confirm.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							uData.unsetAlarm(context);
+						}
+					});
+					confirm.show();
+					*/
 				}
 				else
 				{
@@ -170,8 +217,7 @@ public class UserInformationFragment extends Fragment
 					alert.show();
 				}							
 				break;
-			}
-			
+			}			
 		}
 		
 		private boolean checkInputData()
@@ -198,6 +244,14 @@ public class UserInformationFragment extends Fragment
 			
 			// waist
 			if (waist.length() == 0)
+				return false;
+			
+			// last
+			if (lastVisitDate.length() == 0)
+				return false;
+			
+			// next
+			if (nextVisitDate.length() == 0)
 				return false;
 			
 			return true;
@@ -241,24 +295,42 @@ public class UserInformationFragment extends Fragment
 			uData.setGlucose(glucose.isChecked() ? 1 : 0);
 			uData.setKidney(kidney.isChecked() ? 1 : 0);
 			//uData.setCoronary(coronary.isChecked() ? 1 : 0);
+			uData.setLastVisitDate(lastVisitDate.getText().toString());
+			uData.setNextVisitDate(nextVisitDate.getText().toString());
+			uData.setNextAlarmTime(19, 0);
 		}
 	};
 	
-	private void DialogDatePicker(int cyear, int cmonth, int cday){
-	     
-	    DatePickerDialog.OnDateSetListener mDateSetListener = 
-	    new DatePickerDialog.OnDateSetListener() {
-	    	// onDateSet method
-	    	@Override
+	private void DialogDatePicker(int cyear, int cmonth, int cday, final EditText target){
+
+	    DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-	    		//String date_selected = String.valueOf(monthOfYear+1)+ " /"+String.valueOf(dayOfMonth)+" /"+String.valueOf(year);
-	    		//Toast.makeText(getActivity(), "Selected Date is ="+date_selected, Toast.LENGTH_SHORT).show();
-	    		String date = String.format("%04d", year) + "/" + String.format("%02d", monthOfYear+1) + "/" + String.format("%02d", dayOfMonth);
-	    		birth.setText(date);
-	    	}
-	    };
-	    DatePickerDialog dialog = new DatePickerDialog(getActivity(),  mDateSetListener,  
-	    		cyear > 0 ? cyear : 2014, cmonth > 0 ? cmonth : 0, cday > 0 ? cday : 1);
+				String date = String.format("%04d/%02d/%02d", year, monthOfYear+1, dayOfMonth);
+	    		target.setText(date);
+			}
+		}, cyear > 0 ? cyear : 2014, cmonth > 0 ? cmonth : 0, cday > 0 ? cday : 1);
+	    dialog.setOnDismissListener(new DatePickerDialog.OnDismissListener() {
+			
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				View nextFocusView = null;
+				switch (target.getId())
+				{
+				case R.id.edit_birth:
+					nextFocusView = height;
+					break;
+				case R.id.edit_lastvisitdate:
+					nextFocusView = nextVisitDate;
+					break;
+				case R.id.edit_nextvisitdate:
+					nextFocusView = name;
+					break;
+				}
+				if (nextFocusView != null)
+					nextFocusView.requestFocus();				
+			}
+		});
 	    dialog.show();
 	}
 
