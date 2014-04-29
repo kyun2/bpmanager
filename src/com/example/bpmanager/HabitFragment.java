@@ -126,7 +126,7 @@ public class HabitFragment extends Fragment{
 			builder.setTitle(strTitle);
 			builder.setMessage( sv.getSurveyReport());
 
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -141,7 +141,7 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage(string);
 
-			builder.setPositiveButton("È® ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™• ì¸", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					dialog.dismiss();
@@ -175,16 +175,16 @@ public class HabitFragment extends Fragment{
 				}
 			});
 
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(sv.insertDatatoDB(answer) == -1) {
-						Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();
+						Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();
 						return;
 					}
 					dialog.dismiss();
-					AdviceReportDialog(sv , "¼Ò±Ş ¼·Ãë·® Æò°¡");
+					AdviceReportDialog(sv , "ì†Œê¸‰ ì„­ì·¨ëŸ‰ í‰ê°€");
 				}
 			});
 			builder.show();
@@ -194,11 +194,11 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
-			builder.setMessage("ÇöÀç Ã¼ÁßÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
+			builder.setMessage("í˜„ì¬ ì²´ì¤‘ì„ ì…ë ¥í•˜ì„¸ìš”.");
 			final EditText wText = new EditText(getActivity());
 			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 			builder.setView(wText);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -209,13 +209,13 @@ public class HabitFragment extends Fragment{
 							throw new NumberFormatException();
 						answer.put(0,value);
 						if(sv.insertDatatoDB(answer) == -1) {
-							Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+							Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 							return;
 						}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "Ã¼Áß °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "ì²´ì¤‘ ê´€ë¦¬ í‰ê°€");
 					}catch(NumberFormatException e){
-						errDialog("ÀÔ·Â°ªÀÌ Çã¿ë¹üÀ§¸¦ ¹ş¾î³µ½À´Ï´Ù");
+						errDialog("ì…ë ¥ê°’ì´ í—ˆìš©ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤");
 					}
 				}
 			}
@@ -227,12 +227,12 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
-			builder.setMessage("ÇöÀç Çã¸®µÑ·¹¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+			builder.setMessage("í˜„ì¬ í—ˆë¦¬ë‘˜ë ˆë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 			final EditText wText = new EditText(getActivity());
 			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 			builder.setView(wText);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -244,13 +244,13 @@ public class HabitFragment extends Fragment{
 							throw new NumberFormatException();
 						answer.put(0,Float.parseFloat(inputText));
 						if(sv.insertDatatoDB(answer) == -1) {
-							Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+							Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 							return;
 						}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "º¹ºÎ °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "ë³µë¶€ ê´€ë¦¬ í‰ê°€");
 					}catch(NumberFormatException e){
-						errDialog("ÀÔ·Â°ªÀÌ Çã¿ë¹üÀ§¸¦ ¹ş¾î³µ½À´Ï´Ù");
+						errDialog("ì…ë ¥ê°’ì´ í—ˆìš©ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤");
 					}
 				}
 			});
@@ -262,11 +262,11 @@ public class HabitFragment extends Fragment{
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("ÀÏ ¿îµ¿½Ã°£(ºĞ) : ");
+			dayText.setText("ì¼ ìš´ë™ì‹œê°„(ë¶„) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("ÁÖ°£ ¿îµ¿ È½¼ö : ");
+			weekText.setText("ì£¼ê°„ ìš´ë™ íšŸìˆ˜ : ");
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("¿îµ¿°­µµ(°¡º­¿î ³ë·Â:1, º¸Åë 2, ±Øµµ3): ");
+			hardText.setText("ìš´ë™ê°•ë„(ê°€ë²¼ìš´ ë…¸ë ¥:1, ë³´í†µ 2, ê·¹ë„3): ");
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -303,7 +303,7 @@ public class HabitFragment extends Fragment{
 
 			builder.setView(Items);
 
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -323,13 +323,13 @@ public class HabitFragment extends Fragment{
 						answer.put(1,v2);
 						answer.put(2,v3);
 						if(sv.insertDatatoDB(answer) == -1) {
-							Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+							Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 							return;
 						}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "¿îµ¿ °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "ìš´ë™ ê´€ë¦¬ í‰ê°€");
 					}catch(NumberFormatException e){
-						errDialog("ÀÔ·Â°ªÀÌ Çã¿ë¹üÀ§¸¦ ¹ş¾î³µ½À´Ï´Ù");
+						errDialog("ì…ë ¥ê°’ì´ í—ˆìš©ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤");
 					}
 				}
 			}
@@ -343,9 +343,9 @@ public class HabitFragment extends Fragment{
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
 			TextView dayText = new TextView(getActivity());
-			dayText.setText("ÀÏ À½ÁÖ·®(ÀÜ) : ");
+			dayText.setText("ì¼ ìŒì£¼ëŸ‰(ì”) : ");
 			TextView weekText = new TextView(getActivity());
-			weekText.setText("ÁÖ°£ À½ÁÖ È½¼ö");
+			weekText.setText("ì£¼ê°„ ìŒì£¼ íšŸìˆ˜");
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -372,7 +372,7 @@ public class HabitFragment extends Fragment{
 			Items.addView(weekItem);
 
 			builder.setView(Items);
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -386,13 +386,13 @@ public class HabitFragment extends Fragment{
 						answer.put(0,v1);
 						answer.put(1,v2);
 						if(sv.insertDatatoDB(answer) == -1) {
-							Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+							Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 							return;
 						}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "À½ÁÖ °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "ìŒì£¼ ê´€ë¦¬ í‰ê°€");
 					}catch(NumberFormatException e){
-						errDialog("ÀÔ·Â°ªÀÌ Çã¿ë¹üÀ§¸¦ ¹ş¾î³µ½À´Ï´Ù");
+						errDialog("ì…ë ¥ê°’ì´ í—ˆìš©ë²”ìœ„ë¥¼ ë²—ì–´ë‚¬ìŠµë‹ˆë‹¤");
 					}
 				}
 			}
@@ -405,32 +405,32 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
-			builder.setMessage("ÇöÀç ´ã¹è¸¦ ÇÇ¿ì½Ê´Ï±î?");
-			builder.setPositiveButton("¿¹", new DialogInterface.OnClickListener() {
+			builder.setMessage("í˜„ì¬ ë‹´ë°°ë¥¼ í”¼ìš°ì‹­ë‹ˆê¹Œ?");
+			builder.setPositiveButton("ì˜ˆ", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					answer.put(0,0);
 					if(sv.insertDatatoDB(answer) == -1) {
-						Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+						Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 						return;
 					}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "Èí¿¬ °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "í¡ì—° ê´€ë¦¬ í‰ê°€");
 				}
 			}
 					);
-			builder.setNegativeButton("¾Æ´Ï¿À", new DialogInterface.OnClickListener() {
+			builder.setNegativeButton("ì•„ë‹ˆì˜¤", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					answer.put(0,1);
 					if(sv.insertDatatoDB(answer) == -1) {
-						Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+						Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 						return;
 					}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "Èí¿¬ °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "í¡ì—° ê´€ë¦¬ í‰ê°€");
 				}
 			});
 			builder.show();
@@ -449,7 +449,7 @@ public class HabitFragment extends Fragment{
 			answer.put(4,3);
 
 			count = 0;
-			builder.setTitle("5(Ç×»ó ÀÖ¾ú´Ù) ~ 1(ÀüÇô ¾ø¾ú´Ù)");
+			builder.setTitle("5(í•­ìƒ ìˆì—ˆë‹¤) ~ 1(ì „í˜€ ì—†ì—ˆë‹¤)");
 			ScrollView stress = (ScrollView) inf.inflate(R.layout.stress_content, null);
 			RadioGroup q1Value = (RadioGroup) stress.findViewById(R.id.q1_value);
 			RadioGroup q2Value = (RadioGroup) stress.findViewById(R.id.q2_value);
@@ -562,16 +562,16 @@ public class HabitFragment extends Fragment{
 
 			builder.setView(stress);
 
-			builder.setPositiveButton("È®ÀÎ", new DialogInterface.OnClickListener() {
+			builder.setPositiveButton("í™•ì¸", new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(sv.insertDatatoDB(answer) == -1) {
-						Toast.makeText(getActivity(), "ÀúÀå ½ÇÆĞ¿¡ ½ÇÆĞÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇÏ¼¼¿ä .", 1000).show();;
+						Toast.makeText(getActivity(), "ì €ì¥ ì‹¤íŒ¨ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•˜ì„¸ìš” .", 1000).show();;
 						return;
 					}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "½ºÆ®·¹½º °ü¸® Æò°¡");
+						AdviceReportDialog(sv , "ìŠ¤íŠ¸ë ˆìŠ¤ ê´€ë¦¬ í‰ê°€");
 				}
 			}
 					);

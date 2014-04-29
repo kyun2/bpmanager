@@ -138,7 +138,7 @@ public class HabitNotiFragment extends Fragment {
 				new String[] { "Type" }, //뿌려줄 값의 Hash의 key를 적어준다.
 				new int[] { android.R.id.text1 }, //뿌려줄 TextView를 불러온다.
 				this.mChildList, 				//사용할 보조 데이터를 호출한다.
-				R.layout.simple_expandable_list_item_2,	//배열을 사용하여 호출 할 수 있다. 이 경우 View의 수와 꼭 맞게 적용해야 한다.
+				R.layout.habit_advice,	//배열을 사용하여 호출 할 수 있다. 이 경우 View의 수와 꼭 맞게 적용해야 한다.
 				new String[] { "T"},//, "E", "R" },	//String의 수와 View의 수가 1:1이어야 한다.
 				new int[] {R.id.advice1}//, R.id.advice2, R.id.advice3 }
 			);
