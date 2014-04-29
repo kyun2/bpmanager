@@ -1,7 +1,9 @@
 package com.example.bpmanager;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
+import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -19,6 +21,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.bpmanager.DB.DBhandler;
+import com.example.bpmanager.Data.DrinkSurvey;
+import com.example.bpmanager.Data.ExerciseSurvey;
+import com.example.bpmanager.Data.SaltIntakeSurvey;
+import com.example.bpmanager.Data.SmokeSurvey;
+import com.example.bpmanager.Data.StressSurvey;
+import com.example.bpmanager.Data.Survey;
+import com.example.bpmanager.Data.WaistSurvey;
+import com.example.bpmanager.Data.WeightSurvey;
 
 /**
  * 
@@ -116,9 +126,13 @@ public class BloodPressureInputFragment extends Fragment{
 				{
 					Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();
 					
+					
+					
 					systolic.setText("");
 					diastolic.setText("");
 					bptime.setText("");
+					
+					bloodPressureAdvice(isystolic);
 				}
 			}catch(NumberFormatException e){
 				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
@@ -127,6 +141,117 @@ public class BloodPressureInputFragment extends Fragment{
 			}catch(Exception e){}
 		}
 	};
+	
+	private String getAdvice(boolean isGood){
+		
+		StringBuilder sb = new StringBuilder();
+		boolean isFirst = true; //처음 bad인지 확인
+		boolean isNull = true; //모두 null이면 true
+		
+		Survey sv = new SaltIntakeSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("소금섭취");
+			else sb.append("/소금섭취");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new ExerciseSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("운동");
+			else sb.append("/운동");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new DrinkSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("음주");
+			else sb.append("/음주");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new SmokeSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("흡연");
+			else sb.append("/흡연");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new StressSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("스트레스");
+			else sb.append("/스트레스");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new WeightSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("체중");
+			else sb.append("/체중");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		sv = new WaistSurvey();
+		if(sv.getLastResult() != 1) {
+			if(isFirst) sb.append("복부둘레");
+			else sb.append("/복부둘레");
+			isFirst = false;
+			if(sv.getLastResult() != -1) isNull = false;
+		}
+		
+		if(isNull || isFirst) 
+			return "복약관리와 생활습관 관리는 장기적인 혈압관리에 매우 중요한 요인입니다. 복약관리 및 생활습관 관리를 위한 메뉴가 있으니 꾸준히 이용해보세요.";
+		else if(isGood) return "지금처럼 관리를 유지하되 " + sb.toString() + " 관리에 더 유의하세요. 해당 메뉴를 이용하면 상세 권고를 볼 수 있습니다.";
+		else return sb.toString() + " 관리에 더 유의하세요. 해당 메뉴를 이용하면 상세 권고를 볼 수 있습니다.";
+	}
+	
+	private void bloodPressureAdvice(int isystolic) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		
+		int tSystolic = BloodPressure.getRecommendBloodPressure().getSystolic();
+		StringBuilder str = new StringBuilder();
+		
+		boolean isGood = false;
+		
+		str.append("당신의 평균 수축기 혈압은 "+isystolic+"mmHg로, 목표 수축기 혈압 "+tSystolic+"mmHg");
+		if( isystolic <= tSystolic){
+			str.append("이 잘 유지되고 있습니다." + getAdvice(isGood));
+			isGood = true;
+		}else{ 
+			str.append("보다 혈압이 높습니다." + getAdvice(isGood));	
+			isGood = false;
+		}
+		
+		builder.setMessage(str.toString());
+		builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {				
+				dialog.dismiss();
+			}
+		}
+				);
+//		builder.setNegativeButton("생활습관이동", new DialogInterface.OnClickListener() {
+//
+//			@Override
+//			public void onClick(DialogInterface dialog, int which) {
+//				answer.put(0,1);
+//				if(sv.insertDatatoDB(answer) == -1) {
+//					Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+//					return;
+//				}
+//				dialog.dismiss();
+//				AdviceReportDialog(sv , "흡연 관리 평가");
+//			}
+//		});
+		builder.show();
+
+	}
+	
 
 	private void replaceFragment(Fragment next) {	
 		// TODO Auto-generated method stub

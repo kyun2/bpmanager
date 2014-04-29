@@ -32,25 +32,39 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 		if(totalScore < 5){
 			output.append("저염식이를 잘 유지하고 있습니다.\n저염식이는 정상 범위로 낮아진 혈압을 유지하는 데에도 도움이 됩니다. 지금처럼 저염식이를 유지하세요.");
 			if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1 || 
-					getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 1 ||
-					getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("다만");
+					getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 0 ||
+					getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 0) output.append("다만 ");
 		}else 
 			output.append("고염 섭취군에 해당합니다.\n소금 섭취를 줄이는 것은 혈압의 상승할 위험을 감소시키는 동시에 이미 높아진 혈압을 감소시키는 효과가 있습니다.");	
 		
-		if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1) output.append("소금이나 간장 추가는 삼가세요.");
-		if(getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 1) output.append("국물은 남기시는 게 좋습니다.");
-		if(getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 1) output.append("젓갈, 장아찌류는 줄여보세요.");
+		if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1) 
+			output.append("소금이나 간장 추가는 삼가세요. ");
+		if(getAnswer(q, 6)  == 1 || getAnswer(q, 10) == 0)
+			output.append("국물은 남기시는 게 좋습니다. ");
+		if(getAnswer(q, 0)  == 1 || getAnswer(q, 11) == 0) 
+			output.append("젓갈, 장아찌류는 줄여보세요. ");
 		
 		return output.toString();
 	}
 	
 	private int getTotalScore(Map<Integer,Object> q){
 		int score = 0;
-
-		for( Map.Entry<Integer, Object> entry : q.entrySet() ){
-            Object value = entry.getValue();
-			if(value instanceof Integer)  score += (Integer)value;
+		
+		for(int i = 0; i < 12; i++ )
+		{
+			int j = getAnswer(q, i);
+			
+			if((i < 9) && (j == 1))
+				score ++;
+			else if((i >=9) && (j ==0))
+				score++;
+			
 		}
+
+//		for( Map.Entry<Integer, Object> entry : q.entrySet() ){
+//            Object value = entry.getValue();
+//			if(value instanceof Integer)  score += (Integer)value;
+//		}
 		return score;
 	}
 

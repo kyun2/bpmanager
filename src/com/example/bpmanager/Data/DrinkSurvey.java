@@ -16,17 +16,16 @@ public class DrinkSurvey extends AbstractSurvey {
 		if(q == null) return null;
 
 		int dayconsum = getAnswer(q,0);
-		int weekconsum =  getAnswer(q,1);
+		int weekconsum =  getAnswer(q,1) * dayconsum;
 
 		if(dayconsum < 0 || weekconsum < 0) return null;
 
 		if(!isExcessiveDrinking(dayconsum, weekconsum))
-			return "당신의 알코올 섭취량은 하루 "+dayconsum+"잔 일주일에 "+ weekconsum +"잔으로 제한량을 잘 지키고 있습니다.\n 제한량 미만의 알코올 섭취는 혈압조절에 큰 영향이 없습니다. 지금처럼 알콜섭취 제한량을 지키세요.";
-		else return "당신의 알코올 섭취량은 하루 "+dayconsum+"잔 일주일에 "+ weekconsum +"잔으로 제한량을 초과했습니다.\n 과도한 알코올 섭취는 혈압을 상승시킵니다. 당신의 알코올 섭취 제한량을 지키세요.";
+			return "당신의 알코올 섭취량은 하루 "+dayconsum+"잔 일주일에 "+ weekconsum +"잔으로 제한량을 잘 지키고 있습니다."+getAdviceDrinking() + "\n 제한량 미만의 알코올 섭취는 혈압조절에 큰 영향이 없습니다. 지금처럼 알콜섭취 제한량을 지키세요.";
+		else return "당신의 알코올 섭취량은 하루 "+dayconsum+"잔 일주일에 "+ weekconsum +"잔으로 제한량을 초과했습니다."+getAdviceDrinking() + "\n 과도한 알코올 섭취는 혈압을 상승시킵니다. 당신의 알코올 섭취 제한량을 지키세요.";
 	}
 
 	private boolean isExcessiveDrinking(int day, int week){
-
 		int sex =  MainActivity.mUserData.getSex(); 	
 		float weight = MainActivity.mUserData.getWeight();
 
@@ -36,8 +35,17 @@ public class DrinkSurvey extends AbstractSurvey {
 		}else{
 			if(day > 1 || week > 9) return true;
 			else return false;
-
 		}
+	}
+	
+	private String getAdviceDrinking(){
+		
+		int sex =  MainActivity.mUserData.getSex(); 	
+		float weight = MainActivity.mUserData.getWeight();
+
+		if(sex == 1 && weight > 60)
+			return "당신의 알코올 섭취 제한량은 하루에 두잔, 일주일에 14잔 입니다.";
+		else return "당신의 알코올 섭취 제한량은 하루에 한잔, 일주일에 9잔 입니다.";
 	}
 
 	@Override

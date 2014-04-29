@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -154,17 +155,18 @@ public class HabitFragment extends Fragment{
 		private void saltDialig(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			//			answer.put(0,0);
-			//			answer.put(1,0);
-			//			answer.put(2,0);
-			//			answer.put(3,0);
-			//			answer.put(4,0);
-			//			answer.put(5,0);
-			//			answer.put(6,0);
-			//			answer.put(7,0);
-			//			answer.put(8,0);
-			//			answer.put(9,0);
-			//			answer.put(10,0);
+			answer.put(0,0);
+			answer.put(1,0);
+			answer.put(2,0);
+			answer.put(3,0);
+			answer.put(4,0);
+			answer.put(5,0);
+			answer.put(6,0);
+			answer.put(7,0);
+			answer.put(8,0);
+			answer.put(9,1);
+			answer.put(10,1);
+			answer.put(11,1);
 
 			builder.setMultiChoiceItems(sv.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
 
@@ -263,10 +265,16 @@ public class HabitFragment extends Fragment{
 
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 운동시간(분) : ");
+			dayText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 			TextView weekText = new TextView(getActivity());
 			weekText.setText("주간 운동 횟수 : ");
+			weekText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 			TextView hardText = new TextView(getActivity());
-			hardText.setText("운동강도(가벼운 노력:1, 보통 2, 극도3): ");
+			hardText.setText("운동강도 : ");
+			hardText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
+			TextView hardText2 = new TextView(getActivity());
+			hardText2.setText("(가벼운 노력:1, 보통 노력 2, 극도 노력3) ");
+			hardText2.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -282,6 +290,7 @@ public class HabitFragment extends Fragment{
 			dayItem.setLayoutParams(lparam);
 			dayItem.addView(dayText);
 			dayItem.addView(day);
+
 			LinearLayout weekItem = new LinearLayout(getActivity());
 			weekItem.setOrientation(LinearLayout.HORIZONTAL);
 			weekItem.setLayoutParams(lparam);
@@ -294,12 +303,18 @@ public class HabitFragment extends Fragment{
 			hardItem.addView(hardText);
 			hardItem.addView(hard);
 
+			LinearLayout hardItem2 = new LinearLayout(getActivity());
+			hardItem2.setOrientation(LinearLayout.HORIZONTAL);
+			hardItem2.setLayoutParams(lparam);
+			hardItem2.addView(hardText2);
+
 			LinearLayout Items =  new LinearLayout(getActivity());
 			Items.setOrientation(LinearLayout.VERTICAL);
 			Items.setLayoutParams(lparam);
 			Items.addView(dayItem);
 			Items.addView(weekItem);
 			Items.addView(hardItem);
+			Items.addView(hardItem2);
 
 			builder.setView(Items);
 
@@ -316,7 +331,7 @@ public class HabitFragment extends Fragment{
 						int v1 = Integer.parseInt(number);
 						int v2 = Integer.parseInt(time);
 						int v3 = Integer.parseInt(strength);
-						
+
 						if((v3 <= 0 || v3 >= 4 )) 
 							throw new NumberFormatException();
 						answer.put(0,v1);
@@ -344,8 +359,10 @@ public class HabitFragment extends Fragment{
 
 			TextView dayText = new TextView(getActivity());
 			dayText.setText("일 음주량(잔) : ");
+			dayText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 			TextView weekText = new TextView(getActivity());
 			weekText.setText("주간 음주 횟수");
+			weekText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 
 			LinearLayout.LayoutParams lparam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -382,7 +399,7 @@ public class HabitFragment extends Fragment{
 					try{
 						int v1 = Integer.parseInt(number);
 						int v2 = Integer.parseInt(time);
-						
+
 						answer.put(0,v1);
 						answer.put(1,v2);
 						if(sv.insertDatatoDB(answer) == -1) {
@@ -415,8 +432,8 @@ public class HabitFragment extends Fragment{
 						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
 						return;
 					}
-						dialog.dismiss();
-						AdviceReportDialog(sv , "흡연 관리 평가");
+					dialog.dismiss();
+					AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			}
 					);
@@ -429,8 +446,8 @@ public class HabitFragment extends Fragment{
 						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
 						return;
 					}
-						dialog.dismiss();
-						AdviceReportDialog(sv , "흡연 관리 평가");
+					dialog.dismiss();
+					AdviceReportDialog(sv , "흡연 관리 평가");
 				}
 			});
 			builder.show();
@@ -570,8 +587,8 @@ public class HabitFragment extends Fragment{
 						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
 						return;
 					}
-						dialog.dismiss();
-						AdviceReportDialog(sv , "스트레스 관리 평가");
+					dialog.dismiss();
+					AdviceReportDialog(sv , "스트레스 관리 평가");
 				}
 			}
 					);
