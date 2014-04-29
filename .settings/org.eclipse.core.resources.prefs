@@ -1,2 +1,17 @@
 eclipse.preferences.version=1
+encoding//src/com/example/bpmanager/BloodPressure.java=UTF-8
+encoding//src/com/example/bpmanager/BloodPressureGraph.java=UTF-8
+encoding//src/com/example/bpmanager/BloodPressureInputFragment.java=UTF-8
+encoding//src/com/example/bpmanager/DB/DBHabit.java=UTF-8
+encoding//src/com/example/bpmanager/Data/DrinkSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/ExerciseSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/SaltIntakeSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/SmokeSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/StressSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/Survey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/WaistSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/Data/WeightSurvey.java=UTF-8
+encoding//src/com/example/bpmanager/HabitFragment.java=UTF-8
+encoding//src/com/example/bpmanager/HabitNotiFragment.java=UTF-8
 encoding//src/com/example/bpmanager/InputBPFragment.java=UTF-8
+encoding//src/com/example/bpmanager/MyInfoFragment.java=UTF-8
