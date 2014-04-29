@@ -2,6 +2,7 @@ package com.example.bpmanager;
 
 import org.achartengine.GraphicalView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -40,6 +41,7 @@ public class MyInfoFragment extends Fragment
 			tv.setGravity(Gravity.CENTER);
 			tv.setText("혈압측정 기록 없음");
 			tv.setTextAppearance(getActivity(), android.R.attr.textAppearanceLarge);
+			tv.setBackgroundColor(Color.WHITE);
 			lLayoutBPChart.addView(tv);
 		}
 		
@@ -57,6 +59,7 @@ public class MyInfoFragment extends Fragment
 			tv.setGravity(Gravity.CENTER);
 			tv.setText("복용 기록 없음");
 			tv.setTextAppearance(getActivity(), android.R.attr.textAppearanceLarge);
+			tv.setBackgroundColor(Color.WHITE);
 			lLayoutInjectionChart.addView(tv);
 		}
 		
