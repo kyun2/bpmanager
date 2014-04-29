@@ -78,7 +78,7 @@ public class AlarmReciever extends BroadcastReceiver
 	
 	private void showHospitalMessage(Context context, Intent intent)
 	{
-		Toast.makeText(context, "내일은 병원에 방문하는 날 입니다.", Toast.LENGTH_LONG).show();
+		Toast.makeText(context, "내일은 병원 방문일입니다. 고혈압 치료에는 정기적인 진료를 통한 꾸준한 추적관리가 필요합니다. 꼭 정해진 시간에 진료를 받으세요.", Toast.LENGTH_LONG).show();
 		
 		Vibrator alarmVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 		alarmVibrator.vibrate(2000);

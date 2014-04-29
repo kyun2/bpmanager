@@ -7,26 +7,30 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/bg_gray" >
         
 	    <TextView
-	    	android:id="@+id/medicine_name"
+	        android:id="@+id/medicine_name"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
 	        android:layout_margin="5dp"
 	        android:layout_weight="0.5"
+	        android:background="@color/bg_white"
+	        android:gravity="center_vertical"
+	        android:lines="1"
 	        android:text="name"
 	        android:textSize="24dp"
-	        android:textStyle="bold" />		
+	        android:textStyle="bold" />
 	    
-		<Button 
-	        android:id="@+id/medicine_web_open"
-	        android:layout_width="match_parent"
-	        android:layout_height="match_parent"
-	        android:layout_weight="1"
-	        android:text="자세히"
-	        android:textSize="12dp" />
+		<ImageButton
+		    android:id="@+id/medicine_web_open"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:adjustViewBounds="true"
+		    android:scaleType="fitCenter"
+		    android:src="@drawable/kims" />
 		
 	</LinearLayout>
 	
@@ -39,68 +43,24 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:gravity="center"
-	        android:padding="5sp"
 	        android:text="복용하기"
 	        android:textSize="24dp"
 	        android:textStyle="bold"
-	        android:layout_span="2" />	    
+	        android:layout_margin="10dp"
+	        android:background="@drawable/basic_button"
+	        android:textColor="@color/btn_text" />	    
 	    
 	</LinearLayout>
-    
-	<!-- 
+    	
 	<TableLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="@dimen/activity_vertical_margin" >
+	    android:layout_height="match_parent"
+	    android:background="@color/bg_gray">
 	    
 	    <TableRow
+	        android:layout_margin="10dp"
 	        android:padding="5dp"
-	        android:background="#ffffbb">
-	       
-	        <TextView
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" 
-	            android:text="종류"
-	            android:textSize="18dp" />
-	        <TextView 
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="3"
-	            android:text=""
-	            android:textSize="18dp" />
-	        
-	    </TableRow>
-	    
-	    <TableRow
-	        android:padding="5dp"
-	        android:background="#ffffbb">
-	        
-	         <TextView
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" 
-	            android:text="사용법"
-	            android:textSize="18dp" />
-	        <TextView 
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="3"
-	            android:text=""
-	            android:textSize="18dp" />
-	        
-	    </TableRow>	    
-	</TableLayout>
-	-->
-	
-	<TableLayout 
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_marginTop="@dimen/activity_vertical_margin">
-	    
-	    <TableRow
-	        android:padding="5dp"
-	        android:background="#ffffbb">
+	        android:background="@color/bg_white">
 	       
 	        <TextView
 	            android:layout_width="match_parent"
@@ -109,14 +69,6 @@
 	            android:text="알림설정"
 	            android:textSize="18dp" />
 
-	        <!-- 
-	        <ToggleButton
-	            android:id="@+id/togglebtn_med_alarm"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="ToggleButton" />
-	        -->
-	        
 	        <RadioGroup 
 	            android:id="@+id/radiogrp_med_alarm"
 	            android:layout_width="wrap_content"
@@ -145,8 +97,12 @@
 	    </TableRow>
 	    
 	    <TableRow
+	        android:layout_marginTop="0dp"
+	        android:layout_marginBottom="10dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
 	        android:padding="5dp"
-	        android:background="#ffffbb">
+	        android:background="@color/bg_white">
 	        
 	         <TextView
 	            android:layout_width="match_parent"

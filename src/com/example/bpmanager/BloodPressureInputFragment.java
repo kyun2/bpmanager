@@ -1,8 +1,10 @@
 package com.example.bpmanager;
 
+import java.util.Calendar;
 import java.util.InvalidPropertiesFormatException;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -140,29 +143,28 @@ public class BloodPressureInputFragment extends Fragment{
 
 		@Override
 		public void onFocusChange(View v, boolean hasFocus) {
-			// TODO Auto-generated method stub
-			if(v.getId() == R.id.edit_bpinput_time && hasFocus){
-				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-				alert.setTitle("혈압 측정일을 선택하세요.");
-				final DateTimePicker dt = new DateTimePicker(getActivity());
-
-				alert.setView(dt);
-				alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-
+			
+			final EditText et = (EditText)v;
+			
+			if (hasFocus)
+			{
+				Calendar c = Calendar.getInstance();
+				DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+					
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						int year = dt.getYear();
-						int month = dt.getMonth() + 1;
-						int day = dt.getDayOfMonth();
-						//int hour = dt.getCurrentHour();
-						//int minute = dt.getCurrentMinute();
-						String time =String.format("%04d", year)+ "/" + String.format("%02d", month) + "/" + String.format("%02d", day);
-						bptime.setText(time);
-						dialog.dismiss();
-						// TODO Auto-generated method stub
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						String time = String.format("%04d/%02d/%02d", year, monthOfYear+1, dayOfMonth);
+						et.setText(time);
+					}
+				}, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
+				dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					
+					@Override
+					public void onDismiss(DialogInterface di) {
+						et.clearFocus();
 					}
 				});
-				alert.show();
+				dialog.show();
 			}
 
 		}

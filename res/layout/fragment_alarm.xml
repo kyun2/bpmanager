@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+        
+		<LinearLayout 
+		    android:id="@+id/ll_alarm"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+	        
+		    <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="병원방문예정일 알림 설정"
+		        android:textSize="20dp"
+		        android:layout_margin="5dp"
+		        />
+		    
+		</LinearLayout>
+		
+		<TableLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:layout_below="@+id/ll_alarm"
+		    android:background="@color/bg_gray" >
+		    
+		    <TableRow
+		        android:layout_margin="10dp"
+		        android:background="@color/bg_white"
+		        android:padding="5dp" >
+		       
+		        <TextView
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_gravity="center_vertical"
+		            android:layout_weight="1"
+		            android:text="알림설정"
+		            android:textSize="18dp" />
+	
+		        <RadioGroup 
+		            android:id="@+id/radiogrp_alarm_hospital"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="3"
+		            android:orientation="horizontal" >
+		            
+		            <RadioButton 
+		                android:id="@+id/radio_alarm_hospital_set"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+		                android:text="설정"
+		                />
+		            
+		            <RadioButton 
+		                android:id="@+id/radio_alarm_hospital_unset"
+		                android:layout_width="match_parent"
+		                android:layout_height="wrap_content"
+		                android:layout_weight="1"
+						android:text="해제"
+		                />
+		            
+		        </RadioGroup>
+		        
+		    </TableRow>
+		    
+		    <TableRow
+		        android:layout_marginTop="0dp"
+		        android:layout_marginBottom="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:background="@color/bg_white"
+		        android:padding="5dp" >
+		        
+		         <TextView
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1" 
+		            android:text="알림시간"
+		            android:textSize="18dp" />
+	
+		         <EditText
+		             android:id="@+id/edit_alarm_hospital_time"
+		             android:layout_width="wrap_content"
+		             android:layout_height="wrap_content"
+		             android:layout_weight="3"
+		             android:inputType="time" >
+		         </EditText>
+		        
+		    </TableRow>	 
+		    
+		</TableLayout>        
+        
+    </LinearLayout>
+    
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_weight="1"
+	    android:orientation="vertical">
+		
+     
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="복용 알림 설정"
+	        android:textSize="20dp"
+	        android:layout_margin="5dp"
+	        />
+	    
+	    <Button
+	        android:id="@+id/btn_alarm_medicine"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="약물관리로 가기"
+	        android:layout_margin="10dp"
+	        android:textColor="@color/btn_text"
+	        android:background="@drawable/basic_button" />
+	    
+	</LinearLayout>
+    
+</LinearLayout>

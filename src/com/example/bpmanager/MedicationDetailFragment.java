@@ -29,6 +29,7 @@ import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -48,7 +49,7 @@ public class MedicationDetailFragment extends Fragment {
 	
 	EditText alarmTime;
 	
-	Button btnOpenWebInfo;
+	ImageButton btnOpenWebInfo;
 	Button btnTook;
 	
 	RadioGroup alarm;
@@ -67,7 +68,7 @@ public class MedicationDetailFragment extends Fragment {
 		//img = (ImageView) view.findViewById(R.id.medicine_img);
 		name = (TextView) view.findViewById(R.id.medicine_name);
 		alarmTime = (EditText) view.findViewById(R.id.edit_alarm_time);
-		btnOpenWebInfo = (Button) view.findViewById(R.id.medicine_web_open);
+		btnOpenWebInfo = (ImageButton) view.findViewById(R.id.medicine_web_open);
 		btnTook = (Button) view.findViewById(R.id.med_btn_took_it);		
 		alarm = (RadioGroup) view.findViewById(R.id.radiogrp_med_alarm);
 		

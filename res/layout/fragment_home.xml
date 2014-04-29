@@ -6,131 +6,46 @@
     android:focusableInTouchMode="true">
     
     <LinearLayout
-        android:id="@+id/ll_home_recombp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical" >
-        
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="목표혈압"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:gravity="right"
+            android:paddingRight="20dp" >
+            
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:text="목표혈압"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+	            android:id="@+id/systolic_max"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="bottom|right"
+	            android:text="150/"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:textColor="#FF0000"
+	            android:textSize="50dp" />
 
-            <TextView
-                android:id="@+id/systolic_max"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:text="150/"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#FF0000"
-                android:textSize="50dp" />
-
-            <TextView
-                android:id="@+id/diastolic_max"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|bottom"
-                android:layout_weight="1"
-                android:text="80"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#0000ff"
-                android:textSize="25dp" />
-
+	        <TextView
+	            android:id="@+id/diastolic_max"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="right|bottom"
+	            android:text="80"
+	            android:textAppearance="?android:attr/textAppearanceLarge"
+	            android:textColor="#0000ff"
+	            android:textSize="25dp" />
+            
         </LinearLayout>
 
     </LinearLayout>
-
-	<LinearLayout 
-	    android:id="@+id/ll_home_alarm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/ll_home_recombp"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical" >
-        
-	    <TextView
-	        android:id="@+id/tv_home_title"
-	        android:layout_width="match_parent"
-	        android:layout_height="wrap_content"
-	        android:text="병원방문예정일 알림"
-	        android:textSize="20dp"
-	        />
-	    
-	</LinearLayout>
-	
-	<TableLayout
-	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content"
-	    android:layout_below="@+id/ll_home_alarm"
-	    android:layout_marginTop="@dimen/activity_vertical_margin" >
-	    
-	    <TableRow
-	        android:padding="5dp"
-	        android:background="#ffffbb">
-	       
-	        <TextView
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" 
-	            android:text="알림설정"
-	            android:textSize="18dp" />
-
-	        <RadioGroup 
-	            android:id="@+id/radiogrp_home_alarm"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="3"
-	            android:orientation="horizontal" >
-	            
-	            <RadioButton 
-	                android:id="@+id/radio_home_set"
-	                android:layout_width="match_parent"
-	                android:layout_height="wrap_content"
-	                android:layout_weight="1"
-	                android:text="설정"
-	                />
-	            
-	            <RadioButton 
-	                android:id="@+id/radio_home_unset"
-	                android:layout_width="match_parent"
-	                android:layout_height="wrap_content"
-	                android:layout_weight="1"
-					android:text="해제"
-	                />
-	            
-	        </RadioGroup>
-	        
-	    </TableRow>
-	    
-	    <TableRow
-	        android:padding="5dp"
-	        android:background="#ffffbb">
-	        
-	         <TextView
-	            android:layout_width="match_parent"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1" 
-	            android:text="알림시간"
-	            android:textSize="18dp" />
-
-	         <EditText
-	             android:id="@+id/edit_home_alarm_time"
-	             android:layout_width="wrap_content"
-	             android:layout_height="wrap_content"
-	             android:layout_weight="3"
-	             android:inputType="time" >
-	         </EditText>
-	        
-	    </TableRow>	 
-	    
-	</TableLayout>
 
 </RelativeLayout>
