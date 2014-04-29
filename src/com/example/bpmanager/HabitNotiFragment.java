@@ -49,8 +49,8 @@ public class HabitNotiFragment extends Fragment {
 		Map<String, String> m = new HashMap<String, String>();
 		String text= sv.getSurveyReport();
 		if(text == null) text = "저장된 값이 없습니다. 먼저 설문조사를 진행해 주세요";
-		m.put("T", text); 
-		m.put("E", ""); 
+		m.put("T", " " +text); 
+		//m.put("E", ""); 
 		noti.add(m);
 		
 		mChildList.add(noti);
@@ -138,9 +138,9 @@ public class HabitNotiFragment extends Fragment {
 				new String[] { "Type" }, //뿌려줄 값의 Hash의 key를 적어준다.
 				new int[] { android.R.id.text1 }, //뿌려줄 TextView를 불러온다.
 				this.mChildList, 				//사용할 보조 데이터를 호출한다.
-				android.R.layout.simple_expandable_list_item_2,	//배열을 사용하여 호출 할 수 있다. 이 경우 View의 수와 꼭 맞게 적용해야 한다.
-				new String[] { "T", "E", "R" },	//String의 수와 View의 수가 1:1이어야 한다.
-				new int[] { android.R.id.text1, android.R.id.text2, android.R.id.text2 }
+				R.layout.simple_expandable_list_item_2,	//배열을 사용하여 호출 할 수 있다. 이 경우 View의 수와 꼭 맞게 적용해야 한다.
+				new String[] { "T"},//, "E", "R" },	//String의 수와 View의 수가 1:1이어야 한다.
+				new int[] {R.id.advice1}//, R.id.advice2, R.id.advice3 }
 			);
 		this.mListView.setAdapter(adapter);
 		// 차일드 클릭 했을 경우 이벤트
