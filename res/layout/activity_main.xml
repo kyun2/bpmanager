@@ -1,18 +1,18 @@
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools"
-    	android:id="@+id/container"
-    	android:layout_width="match_parent"
-    	android:layout_height="match_parent"
-    	tools:context="com.example.bpmanager.MainActivity"
-    	tools:ignore="MergeRootFrame" 
-        android:orientation="vertical" >
+                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.example.bpmanager.MainActivity"
+            tools:ignore="MergeRootFrame" >
 
         <FrameLayout
             android:id="@+id/frag_viewer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
+
         </FrameLayout>
 
         <LinearLayout
@@ -21,55 +21,51 @@
             android:layout_height="wrap_content"
             android:gravity="bottom"
             android:orientation="horizontal" >
+            
+			<ImageView
+			    android:id="@+id/iv_go_mydata"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitXY"
+			    android:src="@drawable/footer_mydata" />
 			
-            <!-- 
-            <Button
-                android:id="@+id/home_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="홈"
-                android:textSize="@dimen/menu_btn_size" />
-            -->
-
-            <Button
-                android:id="@+id/mydata_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="나의 기록"
-                android:textSize="@dimen/menu_btn_size" />
-
-            <Button
-                android:id="@+id/mybp_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="혈압관리"
-                android:textSize="@dimen/menu_btn_size" />
-
-            <Button
-                android:id="@+id/mymedicin_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="복약관리"
-                android:textSize="@dimen/menu_btn_size" />
-
-            <Button
-                android:id="@+id/myhabit_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="생활습관관리"
-                android:textSize="@dimen/menu_btn_size" />
-
-            <Button
-                android:id="@+id/user_menu"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="나의 정보"
-                android:textSize="@dimen/menu_btn_size" />
+			<ImageView
+			    android:id="@+id/iv_go_bp"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitXY"
+			    android:src="@drawable/footer_bp" />
+			
+			<ImageView
+			    android:id="@+id/iv_go_medicine"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitXY"
+			    android:src="@drawable/footer_medicine" />
+			
+			<ImageView
+			    android:id="@+id/iv_go_habit"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitXY"
+			    android:src="@drawable/footer_habit" />
+			
+			<ImageView
+			    android:id="@+id/iv_go_conf"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    android:layout_weight="1"
+			    android:adjustViewBounds="true"
+			    android:scaleType="fitXY"
+			    android:src="@drawable/footer_conf" />
+            
         </LinearLayout>
     </LinearLayout>

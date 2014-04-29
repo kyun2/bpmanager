@@ -12,20 +12,23 @@
 
         <TextView
             android:id="@+id/htmlview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:layout_marginBottom="10dp"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:text="사용자 정보"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
             android:id="@+id/user_commit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="확인" />
+            android:text="확인"
+            android:layout_margin="5dp"
+            android:background="@drawable/basic_button"
+            android:textColor="@color/btn_text" />
     </LinearLayout>
 
     <ScrollView
@@ -33,13 +36,16 @@
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:scrollbars="vertical"
-        android:fadeScrollbars="false" >
+        android:fadeScrollbars="false"
+        android:padding="10dp"
+        android:background="@color/bg_gray" >
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbarStyle="insideInset"
-            android:scrollbars="vertical" >
+            android:scrollbars="vertical"
+            android:background="@color/bg_white" >
 
             <TableRow
                 android:id="@+id/tableRow1"

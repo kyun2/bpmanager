@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.bpmanager.DB.DBHelper;
@@ -37,11 +38,11 @@ public class MainActivity extends ActionBarActivity {
 	
 	//private static Button home;
 	private static LinearLayout footer;
-	private static Button data;
-	private static Button bp;
-	private static Button med;
-	private static Button habit;
-	private static Button user;
+	private static ImageView data;
+	private static ImageView bp;
+	private static ImageView med;
+	private static ImageView habit;
+	private static ImageView user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +51,11 @@ public class MainActivity extends ActionBarActivity {
 		
 		footer = (LinearLayout) findViewById(R.id.footer);		
 		//home = (Button) findViewById(R.id.home_menu);
-		data = (Button) findViewById(R.id.mydata_menu);
-		bp = (Button) findViewById(R.id.mybp_menu);
-		med = (Button) findViewById(R.id.mymedicin_menu);
-		habit = (Button) findViewById(R.id.myhabit_menu);
-		user = (Button) findViewById(R.id.user_menu);
+		data = (ImageView) findViewById(R.id.iv_go_mydata);
+		bp = (ImageView) findViewById(R.id.iv_go_bp);
+		med = (ImageView) findViewById(R.id.iv_go_medicine);
+		habit = (ImageView) findViewById(R.id.iv_go_habit);
+		user = (ImageView) findViewById(R.id.iv_go_conf);
 
 		//home.setOnClickListener(clickListener);
 		data.setOnClickListener(clickListener);
@@ -198,19 +199,19 @@ public class MainActivity extends ActionBarActivity {
 			//	mCurrentFragmentIndex = FRAGMENT_HOME;
 			//	fragmentReplace(mCurrentFragmentIndex);
 			//	break;
-			case R.id.mydata_menu:
+			case R.id.iv_go_mydata:
 				fragmentReplace(FRAGMENT_DATA);
 				break;
-			case R.id.mybp_menu:
+			case R.id.iv_go_bp:
 				fragmentReplace(FRAGMENT_BP);
 				break;
-			case R.id.myhabit_menu:
+			case R.id.iv_go_habit:
 				fragmentReplace(FRAGMENT_HABIT);
 				break;
-			case R.id.user_menu:
+			case R.id.iv_go_conf:
 				fragmentReplace(FRAGMENT_USER);
 				break;
-			case R.id.mymedicin_menu:
+			case R.id.iv_go_medicine:
 				fragmentReplace(FRAGMENT_MED);
 				break;
 			}

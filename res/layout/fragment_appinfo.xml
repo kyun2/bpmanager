@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10sp"
+    android:orientation="vertical" >
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="연구 기관"
+        />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="서울대학교 간호대학 간호정보학 연구실"
+        />
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="프로젝트명 : Semantic Self -생체 기능 정보와 개인 건강 정보의 온톨로지 기반 지식표현 및 추론엔진 개발"
+        />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="연구 담당자 연락처 : "
+        />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="besthannah@naver.com"
+        android:autoLink="email"
+        />
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="약물정보"
+        />
+    
+    <TextView
+    	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="킴스 온라인"
+        />
+    
+    <TextView
+        android:id="@+id/tv_appinfo_kims"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:text="http://www.kimsonline.co.kr"
+        android:textSize="16sp" />
+    
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="소금섭취관리를 위한 식행동 점수지표"
+        />
+    
+	<TextView
+    	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="대국민저염섭취영양사업을위한사전조사\n(2006,손숙미 외)"
+        />
+	
+    <TextView 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="스트레스지표"
+        />
+    
+	<TextView
+    	android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="외래용 스트레스량 측정도구 개발연구\n(1992,배종면)"
+        />	
+
+</LinearLayout>

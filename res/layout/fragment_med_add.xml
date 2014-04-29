@@ -4,12 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin" >
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@color/bg_gray" >
     
     <ListView
 	    android:id="@+id/list_medicine"
 	    android:layout_width="match_parent"
-	    android:layout_height="match_parent">
+	    android:layout_height="match_parent"
+	    android:background="@color/bg_white" >
 	</ListView>
 
 </RelativeLayout>

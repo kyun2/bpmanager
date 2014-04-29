@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="systolic_color">#FF0000</color>
+    <color name="bg_white">#FFFFFF</color>
+    <color name="bg_gray">#B5B5B5</color>
+    <color name="btn_indigo">#0F0F6A</color>
+    <color name="btn_indigo_tap">#4f64e0</color>
+    <color name="btn_text">#CCCCCC</color>
+    
 </resources>

@@ -44,8 +44,6 @@ public class UserMenuFragment extends Fragment {
 	}
 	
 	View.OnClickListener onClickListener = new View.OnClickListener() {
-		
-		private OnItemSelectedListener selecListen;
 
 		@Override
 		public void onClick(View v) {
@@ -57,9 +55,11 @@ public class UserMenuFragment extends Fragment {
 				break;
 				
 			case R.id.btn_alarm:
+				((MainActivity)getActivity()).changeFragment(new AlarmFragment());
 				break;
 				
 			case R.id.btn_app_info:
+				((MainActivity)getActivity()).changeFragment(new AppInformationFragment());
 				break;
 			}
 		}
@@ -99,7 +99,7 @@ public class UserMenuFragment extends Fragment {
 					switch(which){
 					case 0:
 					case 1:
-						Fragment f = new ClinicFragment();
+						//Fragment f = new ClinicFragment();
 						//changeFragment(f);
 					break;
 					}
