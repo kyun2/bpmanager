@@ -26,12 +26,9 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 	@Override
 	public String getSurveyReport() {
 		Map<Integer, Object> q = getLastAnswer();
+		if(q == null) return null;
 		StringBuilder output = new StringBuilder();
-	
-		if(q == null) return "입력된 정보가 없습니다. 설문조사에 응해주세요";
-		
 		int totalScore = getTotalScore(q);
-		
 		if(totalScore < 5){
 			output.append("저염식이를 잘 유지하고 있습니다.\n저염식이는 정상 범위로 낮아진 혈압을 유지하는 데에도 도움이 됩니다. 지금처럼 저염식이를 유지하세요.");
 			if(getAnswer(q, 5)  == 1 || getAnswer(q, 7) == 1 || 
@@ -74,9 +71,10 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 	@Override
 	protected String getAnswer(Map<Integer,Object> q) {
 		StringBuilder answer = new StringBuilder();
-
 		for(int i = 0; i < q.size(); i++)
-			answer.append(q.get(i));
+			if(q.get(i) == null)
+				answer.append(0);
+			else answer.append(q.get(i));
 		return answer.toString();
 	}
 
@@ -91,9 +89,5 @@ public class SaltIntakeSurvey extends AbstractSurvey {
 				answer.put(i, 0);
 		
 		return answer;
-	}
-
-
-
-	
+	}	
 }

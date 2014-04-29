@@ -12,9 +12,9 @@ public class WaistSurvey extends AbstractSurvey {
 	public String getSurveyReport() {
 		
 		Map<Integer, Object> q = getLastAnswer();
-		
+		if(q == null) return null;
 		float waist = getWaist(q);
-		if(waist < 0) return "정확한 값을 입력하세요";
+		if(waist < 0) return null;
 		float targetWaist = getTargetWaist(MainActivity.mUserData.getSex());
 		
 		if(waist < targetWaist) 

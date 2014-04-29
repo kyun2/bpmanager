@@ -13,11 +13,12 @@ public class DrinkSurvey extends AbstractSurvey {
 	public String getSurveyReport() {
 
 		Map<Integer, Object> q = getLastAnswer();
+		if(q == null) return null;
 
 		int dayconsum = getAnswer(q,0);
 		int weekconsum =  getAnswer(q,1);
 
-		if(dayconsum < 0 || weekconsum < 0) return "정확한 값을 입력하세요";
+		if(dayconsum < 0 || weekconsum < 0) return null;
 
 		if(!isExcessiveDrinking(dayconsum, weekconsum))
 			return "당신의 알코올 섭취량은 하루 "+dayconsum+"잔 일주일에 "+ weekconsum +"잔으로 제한량을 잘 지키고 있습니다.\n 제한량 미만의 알코올 섭취는 혈압조절에 큰 영향이 없습니다. 지금처럼 알콜섭취 제한량을 지키세요.";

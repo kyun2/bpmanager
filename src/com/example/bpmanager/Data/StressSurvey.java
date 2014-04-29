@@ -9,6 +9,7 @@ public class StressSurvey extends AbstractSurvey {
 	@Override
 	public String getSurveyReport() {
 		Map<Integer, Object> q = getLastAnswer();
+		if(q == null) return null;
 
 		int totalScore = getTotalScore(q);
 		float  BEPSI = ((float)totalScore)/5;
@@ -30,6 +31,7 @@ public class StressSurvey extends AbstractSurvey {
 		for( Map.Entry<Integer, Object> entry : q.entrySet() ){
 			Object value = entry.getValue();
 			if(value instanceof Integer)  score += (Integer)value;
+			else score +=3;
 		}
 		return score;
 	}

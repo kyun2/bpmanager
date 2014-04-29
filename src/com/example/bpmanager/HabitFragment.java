@@ -137,20 +137,34 @@ public class HabitFragment extends Fragment{
 			builder.show();
 		}
 
+		private void errDialog(String string) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setMessage(string);
+
+			builder.setPositiveButton("확 인", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.dismiss();
+					//					Toast.makeText(getActivity(), "weight is : ", 500).show();
+				}
+			});
+			builder.show();
+		}
+
 		private void saltDialig(final Survey sv) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
-			answer.put(0,0);
-			answer.put(1,0);
-			answer.put(2,0);
-			answer.put(3,0);
-			answer.put(4,0);
-			answer.put(5,0);
-			answer.put(6,0);
-			answer.put(7,0);
-			answer.put(8,0);
-			answer.put(9,0);
-			answer.put(10,0);
+			//			answer.put(0,0);
+			//			answer.put(1,0);
+			//			answer.put(2,0);
+			//			answer.put(3,0);
+			//			answer.put(4,0);
+			//			answer.put(5,0);
+			//			answer.put(6,0);
+			//			answer.put(7,0);
+			//			answer.put(8,0);
+			//			answer.put(9,0);
+			//			answer.put(10,0);
 
 			builder.setMultiChoiceItems(sv.getSurveyQuestion(), null, new DialogInterface.OnMultiChoiceClickListener() {
 
@@ -165,10 +179,12 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
-						dialog.dismiss();
-						AdviceReportDialog(sv , "소급 섭취량 평가");
+					if(sv.insertDatatoDB(answer) == -1) {
+						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();
+						return;
+					}
+					dialog.dismiss();
+					AdviceReportDialog(sv , "소급 섭취량 평가");
 				}
 			});
 			builder.show();
@@ -186,16 +202,21 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-
 					String inputText = wText.getText().toString();
 					try{
-						answer.put(0,Float.parseFloat(inputText));
-					}catch(NumberFormatException e){
-					}
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+						float value = Float.parseFloat(inputText);
+						if(value <= 0 || value >= 500 ) 
+							throw new NumberFormatException();
+						answer.put(0,value);
+						if(sv.insertDatatoDB(answer) == -1) {
+							Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+							return;
+						}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "체중 관리 평가");
+					}catch(NumberFormatException e){
+						errDialog("입력값이 허용범위를 벗어났습니다");
+					}
 				}
 			}
 					);
@@ -218,14 +239,19 @@ public class HabitFragment extends Fragment{
 
 					String inputText = wText.getText().toString();
 					try{
+						float value = Float.parseFloat(inputText);
+						if(value <= 0 || value >= 500 ) 
+							throw new NumberFormatException();
 						answer.put(0,Float.parseFloat(inputText));
-					}catch(NumberFormatException e){
-
-					}
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+						if(sv.insertDatatoDB(answer) == -1) {
+							Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+							return;
+						}
 						dialog.dismiss();
-						AdviceReportDialog(sv , "복부 둘레 관리 평가");
+						AdviceReportDialog(sv , "복부 관리 평가");
+					}catch(NumberFormatException e){
+						errDialog("입력값이 허용범위를 벗어났습니다");
+					}
 				}
 			});
 			builder.show();
@@ -247,12 +273,9 @@ public class HabitFragment extends Fragment{
 			final EditText day = new EditText(getActivity());
 			final EditText week = new EditText(getActivity());
 			final EditText hard = new EditText(getActivity());
-			//day.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			//week.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			//hard.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
-			day.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-			week.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
-			hard.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+			day.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+			week.setRawInputType(InputType.TYPE_CLASS_NUMBER);
+			hard.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 
 			LinearLayout dayItem = new LinearLayout(getActivity());
 			dayItem.setOrientation(LinearLayout.HORIZONTAL);
@@ -290,17 +313,24 @@ public class HabitFragment extends Fragment{
 					String strength = hard.getText().toString();
 
 					try{
-						answer.put(0,Integer.parseInt(number));
-						answer.put(1,Integer.parseInt(time));
-						answer.put(2,Integer.parseInt(strength));
-
-					}catch(NumberFormatException e){
-
-					}
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+						int v1 = Integer.parseInt(number);
+						int v2 = Integer.parseInt(time);
+						int v3 = Integer.parseInt(strength);
+						
+						if((v3 <= 0 || v3 >= 4 )) 
+							throw new NumberFormatException();
+						answer.put(0,v1);
+						answer.put(1,v2);
+						answer.put(2,v3);
+						if(sv.insertDatatoDB(answer) == -1) {
+							Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+							return;
+						}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "운동 관리 평가");
+					}catch(NumberFormatException e){
+						errDialog("입력값이 허용범위를 벗어났습니다");
+					}
 				}
 			}
 					);
@@ -350,16 +380,20 @@ public class HabitFragment extends Fragment{
 					String time = week.getText().toString();
 
 					try{
-						answer.put(0,Integer.parseInt(number));
-						answer.put(1,Integer.parseInt(time));
-					}catch(NumberFormatException e){
-
-					}
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+						int v1 = Integer.parseInt(number);
+						int v2 = Integer.parseInt(time);
+						
+						answer.put(0,v1);
+						answer.put(1,v2);
+						if(sv.insertDatatoDB(answer) == -1) {
+							Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+							return;
+						}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "음주 관리 평가");
-
+					}catch(NumberFormatException e){
+						errDialog("입력값이 허용범위를 벗어났습니다");
+					}
 				}
 			}
 					);
@@ -377,8 +411,10 @@ public class HabitFragment extends Fragment{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					answer.put(0,0);
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+					if(sv.insertDatatoDB(answer) == -1) {
+						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+						return;
+					}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "흡연 관리 평가");
 				}
@@ -389,8 +425,10 @@ public class HabitFragment extends Fragment{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					answer.put(0,1);
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+					if(sv.insertDatatoDB(answer) == -1) {
+						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+						return;
+					}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "흡연 관리 평가");
 				}
@@ -528,8 +566,10 @@ public class HabitFragment extends Fragment{
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					if(sv.insertDatatoDB(answer) == -1) 
-						Toast.makeText(getActivity(), "저장 실패 ", 300).show();;
+					if(sv.insertDatatoDB(answer) == -1) {
+						Toast.makeText(getActivity(), "저장 실패에 실패했습니다. 다시 시도하세요 .", 1000).show();;
+						return;
+					}
 						dialog.dismiss();
 						AdviceReportDialog(sv , "스트레스 관리 평가");
 				}

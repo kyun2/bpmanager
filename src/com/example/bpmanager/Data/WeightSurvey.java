@@ -12,9 +12,9 @@ public class WeightSurvey extends AbstractSurvey {
 	public String getSurveyReport() {
 		
 		Map<Integer, Object> q = getLastAnswer();
-		
+		if(q == null) return null;
 		float weiht = getWeiht(q);
-		if(weiht < 0) return "정확한 값을 입력하세요";
+		if(weiht < 0) return null;
 		float targetWeiht = getTargetWeiht(getHeight());
 		
 		if(weiht < targetWeiht) 
@@ -59,13 +59,15 @@ public class WeightSurvey extends AbstractSurvey {
 	@Override
 	protected Map<Integer, Object> parseAnswer(String s) {
 		try {
+			if(s == null) return null;
 			Map<Integer, Object> map = new HashMap<Integer, Object>();
 			map.put(0, Float.parseFloat(s));
 			return  map;
 		} catch (Exception e) {
+			return null;
 			// TODO: handle exception
 		}
-		return null;
+		//return null;
 	}
 
 }

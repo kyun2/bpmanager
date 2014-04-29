@@ -41,12 +41,15 @@ public class HabitNotiFragment extends Fragment {
 	public String getEval(Survey sv){
 		if(sv.getLastResult() == 1)
 			return "<Good>";
-		else return "<Bad>";
+		else if(sv.getLastResult() == 0) return "<Bad>";
+		else return "";
 	}
 	public void putDataToChile(Survey sv, ArrayList<Map<String,String>> noti){
 		
 		Map<String, String> m = new HashMap<String, String>();
-		m.put("T", sv.getSurveyReport()); 
+		String text= sv.getSurveyReport();
+		if(text == null) text = "저장된 값이 없습니다. 먼저 설문조사를 진행해 주세요";
+		m.put("T", text); 
 		m.put("E", ""); 
 		noti.add(m);
 		
