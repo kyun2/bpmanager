@@ -4,7 +4,11 @@ import java.util.Calendar;
 
 import com.example.bpmanager.DB.DBUser;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -25,6 +29,11 @@ public class UserData {
 	int mKidney;
 	int mCoronary;
 	
+	String mLastVisitDate;
+	String mNextVisitDate;	
+	long mNextVisitAlarmTime;
+	public static final int ALARM_ID = 10000;
+	
 	boolean mLoaded;
 	
 	
@@ -41,6 +50,10 @@ public class UserData {
 		mGlucose = 0;
 		mKidney = 0;
 		mCoronary = 0;
+		
+		mLastVisitDate = "";
+		mNextVisitDate = "";
+		mNextVisitAlarmTime = 0;		
 		
 		mLoaded = false;
 	}
@@ -62,7 +75,10 @@ public class UserData {
 				DBUser.User.COLUMN_HYPER,
 				DBUser.User.COLUMN_GLUCOSE,
 				DBUser.User.COLUMN_KIDNEY,
-				DBUser.User.COLUMN_CORONARY
+				DBUser.User.COLUMN_CORONARY,
+				DBUser.User.COLUMN_LASTVISIT,
+				DBUser.User.COLUMN_NEXTVISIT,
+				DBUser.User.COLUMN_NEXTVISIT_ALARMTIME
 			};
 			
 			Cursor c1 = db.query(DBUser.User.TB_NAME, projection, null, null, null, null, null);
@@ -83,6 +99,9 @@ public class UserData {
 				mGlucose = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_GLUCOSE));
 				mKidney = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_KIDNEY));
 				mCoronary = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_CORONARY));
+				mLastVisitDate = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_LASTVISIT));
+				mNextVisitDate = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_NEXTVISIT));
+				mNextVisitAlarmTime = c1.getLong(c1.getColumnIndex(DBUser.User.COLUMN_NEXTVISIT_ALARMTIME));
 			}
 			
 			c1.close();
@@ -108,6 +127,9 @@ public class UserData {
 		values.put(DBUser.User.COLUMN_GLUCOSE, mGlucose);
 		values.put(DBUser.User.COLUMN_KIDNEY, mKidney);
 		values.put(DBUser.User.COLUMN_CORONARY, mCoronary);
+		values.put(DBUser.User.COLUMN_LASTVISIT, mLastVisitDate);
+		values.put(DBUser.User.COLUMN_NEXTVISIT, mNextVisitDate);
+		values.put(DBUser.User.COLUMN_NEXTVISIT_ALARMTIME, mNextVisitAlarmTime);
 
 		if (IsLoaded())
 			MainActivity.mDBHelper.updateData(DBUser.User.TB_NAME, values, null, null);
@@ -146,7 +168,60 @@ public class UserData {
 	public boolean hasKidneyDisease()
 	{
 		return (mKidney == 1);
-	}	
+	}
+	
+	public void setNextAlarmTime(int hour, int minute)
+	{
+		mNextVisitAlarmTime = getNextAlarmTime(hour, minute);
+	}
+	
+	public long getNextAlarmTime(int hour, int minute)
+	{
+		String[] date = mNextVisitDate.split("/");
+		int year = Integer.parseInt(date[0]);
+		int month = Integer.parseInt(date[1]) - 1;
+		int day = Integer.parseInt(date[2]);		
+		Calendar c = Calendar.getInstance();
+		c.set(year, month, day, hour, minute, 0);
+		// 전날
+		c.add(Calendar.DAY_OF_MONTH, -1);
+		
+		return c.getTimeInMillis();
+	}
+	
+	public String getAlarmData()
+	{
+		Calendar c = Calendar.getInstance();
+		c.setTimeInMillis(mNextVisitAlarmTime);
+		
+		return String.format("%02d:%02d", c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+	}
+	
+	public void setAlarm(Context context)
+	{
+		// 앞으로 시간이 남은 경우
+		if (mNextVisitAlarmTime - Calendar.getInstance().getTimeInMillis() > 0)
+		{
+			Intent alarmIntent = new Intent(context, AlarmReciever.class);
+			alarmIntent.putExtra("type", "HOSPITAL");
+			AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+			
+			PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, ALARM_ID, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			alarmManager.set(AlarmManager.RTC_WAKEUP, mNextVisitAlarmTime, alarmPendingIntent);
+		}
+	}
+	
+	public void unsetAlarm(Context context)
+	{
+		Intent alarmIntent = new Intent(context, AlarmReciever.class);
+		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, ALARM_ID, alarmIntent, PendingIntent.FLAG_NO_CREATE);
+		if (alarmPendingIntent != null)
+		{
+			AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+			alarmManager.cancel(alarmPendingIntent);
+			alarmPendingIntent.cancel();
+		}
+	}
 	
 	// getter/setter
 	public String getName() 
@@ -241,5 +316,20 @@ public class UserData {
 	public void setCoronary(int coronary) {
 		this.mCoronary = coronary;
 	}
-
+	
+	public String getLastVisitDate() {
+		return this.mLastVisitDate;
+	}
+	
+	public void setLastVisitDate(String date) {
+		this.mLastVisitDate = date;
+	}
+	
+	public String getNextVisitDate() {
+		return this.mNextVisitDate;
+	}
+	
+	public void setNextVisitDate(String date) {
+		this.mNextVisitDate = date;
+	}
 }

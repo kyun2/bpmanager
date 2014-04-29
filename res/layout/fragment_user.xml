@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:scrollbarStyle="insideOverlay"
-    android:scrollbars="vertical" >
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,8 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:scrollbars="none" >
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false" >
 
         <TableLayout
             android:layout_width="match_parent"
@@ -313,10 +314,67 @@
             </TableRow>
 
             <TableRow
-                android:id="@+id/tableRow9"
+                android:id="@+id/tableRow10"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:text="병원에 방문하신 최근 날짜"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+               
             </TableRow>
+            
+            <TableRow
+                android:id="@+id/tableRow11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+                
+				<EditText
+					android:id="@+id/edit_lastvisitdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:ems="10"
+                    android:inputType="date" />
+                 
+            </TableRow>
+            
+            <TableRow
+                android:id="@+id/tableRow12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:text="병원에 방문하실 다음 날짜"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+               
+            </TableRow>
+            
+            <TableRow
+                android:id="@+id/tableRow13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" >
+                
+				<EditText
+					android:id="@+id/edit_nextvisitdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="3"
+                    android:ems="10"
+                    android:inputType="date" />
+                 
+            </TableRow>
+            
         </TableLayout>
     </ScrollView>
 

@@ -102,6 +102,7 @@ public class MedicationScheduleData {
 		// 알림설정
 		INFOMedication info = INFOMedication.getInfoMedicine(medicineID);
 		Intent alarmIntent = new Intent(mContext, AlarmReciever.class);
+		alarmIntent.putExtra("type", "MEDICINE");
 		alarmIntent.putExtra("medicineId", info.mId);
 		alarmIntent.putExtra("medicineName", info.mName);
 		PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(mContext, info.mId, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
