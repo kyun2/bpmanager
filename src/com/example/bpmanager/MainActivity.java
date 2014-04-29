@@ -1,5 +1,11 @@
 package com.example.bpmanager;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.bpmanager.DB.DBHelper;
 //import com.example.bpmanager.DB.DBhandler;
@@ -263,5 +270,110 @@ public class MainActivity extends ActionBarActivity {
 	{
 		Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(url));
 		startActivity(viewIntent);
+	}	
+	
+	public void sendEmail()
+	{
+		String to = "csyong715@gmail.com";
+		String subject = "데이터[" + mUserData.getName() + mUserData.getBirth() + "]";
+		String body = "고혈압 관리 프로그램의 데이터를 전송합니다.";
+		//body = Html.fromHtml(body).toString();
+
+		//File attach = new File( "/mnt/sdcard/Download/a1.jpg" );
+		
+		// 유저정보
+		File userData = null;
+		String userDataString = mUserData.buildDataString();
+		try
+		{
+			userData = File.createTempFile("UserData_", ".txt");
+			FileWriter fileWriter = new FileWriter(userData);
+			BufferedWriter out = new BufferedWriter(fileWriter);
+			out.write(userDataString);
+			out.close();
+			fileWriter.close();
+		}
+		catch( IOException e )
+		{
+			Toast.makeText(this, "유저 데이터 생성 실패", Toast.LENGTH_LONG).show();
+			return;
+		}
+		// 혈압정보/변동내역
+		File bpData = null;
+		String bpDataString = BloodPressure.buildDataString();
+		try
+		{
+			bpData = File.createTempFile("BPData_", ".txt");
+			FileWriter fileWriter = new FileWriter(bpData);
+			BufferedWriter out = new BufferedWriter(fileWriter);
+			out.write(bpDataString);
+			out.close();
+			fileWriter.close();
+		}
+		catch( IOException e )
+		{
+			Toast.makeText(this, "혈압 데이터 생성 실패", Toast.LENGTH_LONG).show();
+			return;
+		}
+		// 복용정보
+		File medScheduleData = null;
+		String medScheduleDataString = mMedicationScheduleData.buildDataString();
+		try
+		{
+			medScheduleData = File.createTempFile("MedScheduleData_", ".txt");
+			FileWriter fileWriter = new FileWriter(medScheduleData);
+			BufferedWriter out = new BufferedWriter(fileWriter);
+			out.write(medScheduleDataString);
+			out.close();
+			fileWriter.close();
+		}
+		catch(IOException e)
+		{
+			Toast.makeText(this, "복약관리 데이터 생성 실패", Toast.LENGTH_LONG).show();
+			return;
+		}
+		// 복용기록
+		File medTookData = null;
+		String medTookDataString = mMedicationScheduleData.buildDataString();
+		try
+		{
+			medTookData = File.createTempFile("MedTookData_", ".txt");
+			FileWriter fileWriter = new FileWriter(medTookData);
+			BufferedWriter out = new BufferedWriter(fileWriter);
+			out.write(medTookDataString);
+			out.close();
+			fileWriter.close();
+		}
+		catch( IOException e )
+		{
+			Toast.makeText(this, "복용기록 데이터 생성 실패", Toast.LENGTH_LONG).show();
+			return;
+		}		
+
+		//Uri uri = Uri.fromFile(habitData);
+		ArrayList<Uri> uris = new ArrayList<Uri>();
+		uris.add(Uri.fromFile(userData));
+		uris.add(Uri.fromFile(bpData));
+		uris.add(Uri.fromFile(medScheduleData));
+		uris.add(Uri.fromFile(medTookData));
+		
+		Uri uri = Uri.fromFile(userData);
+		
+		Intent email = new Intent(Intent.ACTION_SEND);
+		email.setData(Uri.parse( "matilto:" ));
+		//email.setType( "text/plain" );
+		email.setType("message/rfc822");
+		email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+
+		email.putExtra(Intent.EXTRA_SUBJECT, subject);
+		email.putExtra(Intent.EXTRA_TEXT, body);
+		//email.putExtra(Intent.EXTRA_STREAM, uris);
+		email.putExtra(Intent.EXTRA_STREAM, uri);
+		
+		try {
+		    startActivity(Intent.createChooser(email, "Send Email"));
+		} catch ( android.content.ActivityNotFoundException ex ) {
+		    Toast.makeText( this, "메일 전송을 할 수 없습니다.", Toast.LENGTH_LONG).show();
+		}
 	}	
 }

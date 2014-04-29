@@ -223,6 +223,25 @@ public class UserData {
 		}
 	}
 	
+	public String buildDataString()
+	{
+		String ret = "";
+		
+		ret += "Name: " + mName + "\n";
+		ret += "Email: " + mEmail + "\n";
+		ret += "Sex: " + mSex + "\n";
+		ret += "Birthdate: " + mBirth + "\n";
+		ret += "Height: " + mHeight + "\n";
+		ret += "Weight: " + mWeight + "\n";
+		ret += "Waist: " + mWaist + "\n";
+		ret += "Glucose: " + mGlucose + "\n";
+		ret += "Kidney: " + mKidney + "\n";
+		ret += "Last Visit Date: " + mLastVisitDate + "\n";
+		ret += "Next Visit Date: " + mNextVisitDate + "\n";
+		
+		return ret;
+	}	
+	
 	// getter/setter
 	public String getName() 
 	{

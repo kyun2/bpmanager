@@ -24,6 +24,7 @@ public class UserMenuFragment extends Fragment {
 	Button userInfo;
 	Button alarm;
 	Button appInfo;
+	Button dataTransfer;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -32,10 +33,12 @@ public class UserMenuFragment extends Fragment {
 		userInfo = (Button) view.findViewById(R.id.btn_user_info);
 		alarm = (Button) view.findViewById(R.id.btn_alarm);
 		appInfo = (Button) view.findViewById(R.id.btn_app_info);
+		dataTransfer = (Button) view.findViewById(R.id.btn_data_transfer);
 		
 		userInfo.setOnClickListener(onClickListener);
 		alarm.setOnClickListener(onClickListener);
 		appInfo.setOnClickListener(onClickListener);
+		dataTransfer.setOnClickListener(onClickListener);
 		
 		return view;
 	}
@@ -57,6 +60,10 @@ public class UserMenuFragment extends Fragment {
 				
 			case R.id.btn_app_info:
 				((MainActivity)getActivity()).changeFragment(new AppInformationFragment());
+				break;
+				
+			case R.id.btn_data_transfer:
+				((MainActivity)getActivity()).sendEmail();
 				break;
 			}
 		}

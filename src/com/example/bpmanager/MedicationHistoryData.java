@@ -10,11 +10,15 @@ import android.util.Pair;
 
 import com.example.bpmanager.DB.DBMedication;
 import com.example.bpmanager.DB.DBMedicationTook;
+import com.example.bpmanager.DB.INFOMedication;
 
 public class MedicationHistoryData {
 	
-	ArrayList<Float> mDataList;	
+	// 섭취율
+	ArrayList<Float> mDataList;
+	// 먹은 갯수
 	ArrayList<Integer> mTookData;
+	// 먹어야 하는 갯수
 	int mScheduledCount;
 	
 	boolean mLoaded;
@@ -132,6 +136,41 @@ public class MedicationHistoryData {
 	{
 		getDataList();
 		getScheduleData();
+	}	
+	
+	public String buildDataString()
+	{
+		String ret = "";
+		
+		ret += "약물ID/약물이름/복용시간\n";
+		
+		try
+		{
+			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
+			
+			String[] projection = {
+				DBMedicationTook.SCHEMA.COLUMN_MEDID,
+				DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME
+			};
+			
+			Cursor c1 = db.query(DBMedicationTook.SCHEMA.TB_NAME, projection, null, null, null, null, null);
+			
+			while (c1.moveToNext())
+			{
+				int id = c1.getInt(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_MEDID));
+				String time = c1.getString(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME));
+				INFOMedication info = INFOMedication.getInfoMedicine(id);
+				
+				ret += id + "/" + info.mName + "/" + time + "\n";
+			}
+			
+			c1.close();
+		}
+		catch(SQLiteException e)
+		{
+		}
+		
+		return ret;
 	}	
 	
 	// getter & setter

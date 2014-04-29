@@ -174,4 +174,18 @@ public class MedicationScheduleData {
 	{
 		return mData;
 	}
+	
+	public String buildDataString()
+	{
+		String ret = "";
+		
+		ret += "ID/Amount/Count/InjectionTime\n";
+		for (int i = 0; i < mData.size(); i++)
+		{
+			MedicationSchedule ms = mData.get(i);
+			ret += ms.mId + "/" + ms.mAmount + "/" + ms.mCount + "/" + ms.mInjectTime + "\n";
+		}		
+		
+		return ret;
+	}
 }
