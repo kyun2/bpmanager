@@ -29,11 +29,11 @@ public class DrinkSurvey extends AbstractSurvey {
 		int sex =  MainActivity.mUserData.getSex(); 	
 		float weight = MainActivity.mUserData.getWeight();
 
-		if(sex == 1 && weight > 60){
-			if(day > 2 || week > 14) return true;
+		if(sex == 1 && weight >= 60){
+			if(day >= 2 || week >= 14) return true;
 			else return false;
 		}else{
-			if(day > 1 || week > 9) return true;
+			if(day >= 1 || week >= 9) return true;
 			else return false;
 		}
 	}

@@ -26,7 +26,7 @@ public class SmokeSurvey extends AbstractSurvey {
 	protected int getResult(Map<Integer, Object> q) {
 		int unsmoking = getAnswer(q, 0);
 		if(unsmoking > 0) return 1;
-		else return -1;
+		else return 0;
 	}
 
 	@Override

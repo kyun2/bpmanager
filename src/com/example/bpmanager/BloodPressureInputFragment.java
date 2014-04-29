@@ -1,9 +1,7 @@
 package com.example.bpmanager;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.InvalidPropertiesFormatException;
-import java.util.Map;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -11,6 +9,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -124,8 +123,6 @@ public class BloodPressureInputFragment extends Fragment{
 				{
 					Toast.makeText(getActivity(), "입력 완료", Toast.LENGTH_SHORT).show();
 					
-					
-					
 					systolic.setText("");
 					diastolic.setText("");
 					bptime.setText("");
@@ -146,9 +143,18 @@ public class BloodPressureInputFragment extends Fragment{
 		boolean isFirst = true; //처음 bad인지 확인
 		boolean isNull = true; //모두 null이면 true
 		
+		Pair<Integer, Integer>  i = MainActivity.mMediHistData.setTookRatioDataList(30) ;
+		
+		if(i.first != i.second || i.second <= 0){
+			if(isFirst) sb.append(" 복용");
+			else sb.append("/복용");
+			isFirst = false;
+			if(i.second > 0) isNull = false;
+		}
+		
 		Survey sv = new SaltIntakeSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("소금섭취");
+			if(isFirst) sb.append(" 소금섭취");
 			else sb.append("/소금섭취");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -156,7 +162,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new ExerciseSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("운동");
+			if(isFirst) sb.append(" 운동");
 			else sb.append("/운동");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -164,7 +170,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new DrinkSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("음주");
+			if(isFirst) sb.append(" 음주");
 			else sb.append("/음주");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -172,7 +178,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new SmokeSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("흡연");
+			if(isFirst) sb.append(" 흡연");
 			else sb.append("/흡연");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -180,7 +186,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new StressSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("스트레스");
+			if(isFirst) sb.append(" 스트레스");
 			else sb.append("/스트레스");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -188,7 +194,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new WeightSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("체중");
+			if(isFirst) sb.append(" 체중");
 			else sb.append("/체중");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
@@ -196,7 +202,7 @@ public class BloodPressureInputFragment extends Fragment{
 		
 		sv = new WaistSurvey();
 		if(sv.getLastResult() != 1) {
-			if(isFirst) sb.append("복부둘레");
+			if(isFirst) sb.append(" 복부둘레");
 			else sb.append("/복부둘레");
 			isFirst = false;
 			if(sv.getLastResult() != -1) isNull = false;
