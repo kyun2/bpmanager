@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper 
 {
-	public static final int DATABASE_VERSION = 5;
+	public static final int DATABASE_VERSION = 6;
 	public static final String DATABASE_NAME = "BPManager.db";
 	
 	public DBHelper(Context context)
@@ -75,33 +75,35 @@ public class DBHelper extends SQLiteOpenHelper
 		return rID;
 	}
 	
-	public long updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
+	public int updateData(String tableName, ContentValues values, String whereClause, String[] whereArgs)
 	{
-		long rID = -1;
+		int affectedCnt = -1;
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
 			
-			db.update(tableName, values, whereClause, whereArgs);
+			affectedCnt = db.update(tableName, values, whereClause, whereArgs);
 		}
 		catch (SQLiteException e)
 		{
-			rID = -1;
+			affectedCnt = -1;
 		}
-		return rID;
+		return affectedCnt;
 	}
 	
-	public void deleteData(String tableName, String whereClause, String[] whereArgs)
+	public int deleteData(String tableName, String whereClause, String[] whereArgs)
 	{
+		int affectedCnt = -1;
 		try
 		{
 			SQLiteDatabase db = getWritableDatabase();
 			
-			db.delete(tableName, whereClause, whereArgs);
+			affectedCnt = db.delete(tableName, whereClause, whereArgs);
 		}
 		catch (SQLiteException e)
 		{
-			
+			affectedCnt = -1;
 		}
+		return affectedCnt;
 	}
 }

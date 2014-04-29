@@ -13,13 +13,17 @@ import org.achartengine.renderer.XYSeriesRenderer;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Pair;
 
 public class MedicationInjectionGraph {
 	
 	public GraphicalView excute(Context context)
 	{
 		// 복약기록 정리
-		MainActivity.mMediHistData.setTookRatioDataList(30);
+		Pair<Integer, Integer> counts = MainActivity.mMediHistData.setTookRatioDataList(30);
+		if (counts.second == 0)
+			return null;
+		
 		ArrayList<Float> data = MainActivity.mMediHistData.getDataList();
 		ArrayList<Integer> parsedData = new ArrayList<Integer>();
 		
@@ -31,7 +35,7 @@ public class MedicationInjectionGraph {
 		CategorySeries series = new CategorySeries("Bar Graph");
 		for (int i = 0; i < parsedData.size(); i++)
 		{
-			series.add( parsedData.get(i));
+			series.add(parsedData.get(i));
 		}
 
 		XYMultipleSeriesDataset dataset = new XYMultipleSeriesDataset();

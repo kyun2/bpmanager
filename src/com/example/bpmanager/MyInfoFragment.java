@@ -46,7 +46,19 @@ public class MyInfoFragment extends Fragment
 		// 투약성취율 그래프
 		MedicationInjectionGraph medInjGrph = new MedicationInjectionGraph();
 		GraphicalView medInjGrphView = medInjGrph.excute(getActivity());
-		lLayoutInjectionChart.addView(medInjGrphView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		if (medInjGrphView != null)
+		{
+			lLayoutInjectionChart.addView(medInjGrphView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		}
+		else
+		{
+			TextView tv = new TextView(getActivity());
+			tv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+			tv.setGravity(Gravity.CENTER);
+			tv.setText("복용 기록 없음");
+			tv.setTextAppearance(getActivity(), android.R.attr.textAppearanceLarge);
+			lLayoutInjectionChart.addView(tv);
+		}
 		
 		return view;
 	}

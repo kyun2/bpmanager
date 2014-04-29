@@ -76,7 +76,7 @@ public class BloodPressure {
 		
 		if (IsTodayInputDone(bp.getDatetime()))
 		{
-			return MainActivity.mDBHelper.updateData(DBBloodPressure.BloodPressure.TB_NAME, values, " last_update_time = " + bp.getDatetime(), null);
+			return MainActivity.mDBHelper.updateData(DBBloodPressure.BloodPressure.TB_NAME, values, " " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " = '" + bp.getDatetime() + "'", null);
 		}
 		else
 		{
@@ -90,8 +90,8 @@ public class BloodPressure {
 		String whereClause = where.length() > 0 ? " where " + where : "";
 		String limitClause = limit > 0 ? " LIMIT " + limit : "";
 		
-		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + limitClause;
-		//Log.i("log: ", strQry);
+		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + " order by " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " desc " + limitClause;
+		Log.i("log: ", strQry);
 		try
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
@@ -137,7 +137,7 @@ public class BloodPressure {
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
 			
-			Cursor c1 = db.rawQuery("select * from " + DBBloodPressure.BloodPressure.TB_NAME + " where last_update_time = '" + date + "'", null);
+			Cursor c1 = db.rawQuery("select * from " + DBBloodPressure.BloodPressure.TB_NAME + " where " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " = '" + date + "'", null);
 			
 			ret = c1.getCount() > 0;
 			
