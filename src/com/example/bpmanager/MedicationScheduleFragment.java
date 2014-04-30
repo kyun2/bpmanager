@@ -54,6 +54,7 @@ public class MedicationScheduleFragment extends Fragment {
 					// Go back
 					FragmentManager fm = getActivity().getSupportFragmentManager();
 					fm.popBackStack();
+					((MainActivity)getActivity()).changeFragment(new MedicationTopFragment());
 					// Store Data to DB				
 					updateData();
 					msData.submitData(medicine_id);

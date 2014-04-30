@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string translatable="false" name="app_name">나의 혈압관리 도우미</string>
+    <string translatable="false" name="app_name">고혈압 관리 도우미</string>
     <string translatable="false" name="action_settings">Settings</string>
     <string translatable="false" name="activity_alarm_reciever">AlarmReciever</string>
 

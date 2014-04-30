@@ -25,7 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.bpmanager.DB.DBHelper;
-//import com.example.bpmanager.DB.DBhandler;
 import com.example.bpmanager.DB.INFOMedication;
 
 public class MainActivity extends ActionBarActivity {
@@ -274,19 +273,25 @@ public class MainActivity extends ActionBarActivity {
 	
 	public void sendEmail()
 	{
-		String to = "csyong715@gmail.com";
+		String[] to = new String[] { "besthannah@naver.com", "csyong715@gmail.com" };
 		String subject = "데이터[" + mUserData.getName() + mUserData.getBirth() + "]";
 		String body = "고혈압 관리 프로그램의 데이터를 전송합니다.";
 		//body = Html.fromHtml(body).toString();
 
-		//File attach = new File( "/mnt/sdcard/Download/a1.jpg" );
+		// 디렉토리
+		File cacheDir = this.getExternalCacheDir();
+		if (!cacheDir.exists())
+		{
+			Toast.makeText(this, "파일 쓰기에 실패하였습니다.", Toast.LENGTH_LONG).show();
+			return;
+		}
 		
 		// 유저정보
 		File userData = null;
 		String userDataString = mUserData.buildDataString();
 		try
 		{
-			userData = File.createTempFile("UserData_", ".txt");
+			userData = new File(cacheDir, "UserData.txt");;
 			FileWriter fileWriter = new FileWriter(userData);
 			BufferedWriter out = new BufferedWriter(fileWriter);
 			out.write(userDataString);
@@ -303,7 +308,7 @@ public class MainActivity extends ActionBarActivity {
 		String bpDataString = BloodPressure.buildDataString();
 		try
 		{
-			bpData = File.createTempFile("BPData_", ".txt");
+			bpData = new File(cacheDir, "BPData.txt");
 			FileWriter fileWriter = new FileWriter(bpData);
 			BufferedWriter out = new BufferedWriter(fileWriter);
 			out.write(bpDataString);
@@ -320,7 +325,7 @@ public class MainActivity extends ActionBarActivity {
 		String medScheduleDataString = mMedicationScheduleData.buildDataString();
 		try
 		{
-			medScheduleData = File.createTempFile("MedScheduleData_", ".txt");
+			medScheduleData = new File(cacheDir, "medScheduleData.txt");
 			FileWriter fileWriter = new FileWriter(medScheduleData);
 			BufferedWriter out = new BufferedWriter(fileWriter);
 			out.write(medScheduleDataString);
@@ -334,10 +339,10 @@ public class MainActivity extends ActionBarActivity {
 		}
 		// 복용기록
 		File medTookData = null;
-		String medTookDataString = mMedicationScheduleData.buildDataString();
+		String medTookDataString = mMediHistData.buildDataString();
 		try
 		{
-			medTookData = File.createTempFile("MedTookData_", ".txt");
+			medTookData = new File(cacheDir, "MedTookData.txt");
 			FileWriter fileWriter = new FileWriter(medTookData);
 			BufferedWriter out = new BufferedWriter(fileWriter);
 			out.write(medTookDataString);
@@ -357,19 +362,17 @@ public class MainActivity extends ActionBarActivity {
 		uris.add(Uri.fromFile(medScheduleData));
 		uris.add(Uri.fromFile(medTookData));
 		
-		Uri uri = Uri.fromFile(userData);
-		
-		Intent email = new Intent(Intent.ACTION_SEND);
+		Intent email = new Intent(Intent.ACTION_SEND_MULTIPLE);
 		email.setData(Uri.parse( "matilto:" ));
 		//email.setType( "text/plain" );
 		email.setType("message/rfc822");
-		email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+		email.putExtra(Intent.EXTRA_EMAIL, to);
 
 		email.putExtra(Intent.EXTRA_SUBJECT, subject);
 		email.putExtra(Intent.EXTRA_TEXT, body);
 		//email.putExtra(Intent.EXTRA_STREAM, uris);
-		email.putExtra(Intent.EXTRA_STREAM, uri);
-		
+		email.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
+				
 		try {
 		    startActivity(Intent.createChooser(email, "Send Email"));
 		} catch ( android.content.ActivityNotFoundException ex ) {

@@ -90,7 +90,7 @@ public class BloodPressure {
 		String whereClause = where.length() > 0 ? " where " + where : "";
 		String limitClause = limit > 0 ? " LIMIT " + limit : "";
 		
-		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + " order by " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " desc " + limitClause;
+		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + " order by " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " asc " + limitClause;
 		Log.i("log: ", strQry);
 		try
 		{

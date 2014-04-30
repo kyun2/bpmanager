@@ -6,6 +6,7 @@ import java.util.Calendar;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.util.Log;
 import android.util.Pair;
 
 import com.example.bpmanager.DB.DBMedication;
@@ -134,8 +135,8 @@ public class MedicationHistoryData {
 	
 	public void resetData()
 	{
-		getDataList();
 		getScheduleData();
+		getTookData();
 	}	
 	
 	public String buildDataString()
