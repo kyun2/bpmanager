@@ -54,6 +54,9 @@ public class AlarmFragment extends Fragment {
 		if (alarmPendingIntent != null)
 			isAlarmed = true;
 		
+		if (uData.getNextVisitDate().length() == 0)
+			isAlarmed = false;			
+		
 		if (isAlarmed)
 		{
 			alarm.check(R.id.radio_alarm_hospital_set);

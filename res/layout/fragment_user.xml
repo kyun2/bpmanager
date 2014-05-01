@@ -58,7 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="이름"
+                    android:text="*이름"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
@@ -80,14 +80,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="이메일"
+                    android:text="*이메일"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="5"
                     android:inputType="textEmailAddress" />
             </TableRow>
 
@@ -102,7 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="성별         "
+                    android:text="*성별"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <RadioGroup
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="생일"
+                    android:text="*생일"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <EditText
@@ -164,7 +164,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="키"
+                    android:text="*키"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
 
                 <LinearLayout

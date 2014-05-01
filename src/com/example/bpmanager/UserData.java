@@ -177,6 +177,9 @@ public class UserData {
 	
 	public long getNextAlarmTime(int hour, int minute)
 	{
+		if (mNextVisitDate == "")
+			return 0;
+		
 		String[] date = mNextVisitDate.split("/");
 		int year = Integer.parseInt(date[0]);
 		int month = Integer.parseInt(date[1]) - 1;

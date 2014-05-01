@@ -67,7 +67,7 @@ public class BloodPressureGraph extends AbstractDemoChart {
 		PointStyle[] styles = new PointStyle[] { PointStyle.POINT, PointStyle.POINT };
 	    XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);	    
 	    
-	    setChartSettings(renderer, getName(), "월별", "혈압수치", dates.get(0)[0].getTime() - 24 * 60 * 60 * 1000,
+	    setChartSettings(renderer, getName(), "", "혈압수치", dates.get(0)[0].getTime() - 24 * 60 * 60 * 1000,
 	    		dates.get(0)[0].getTime() + 5 * 24 * 60 * 60 * 1000/*dates.get(0)[Math.min(bpsize-1, 4)].getTime()*/, 50, 200, Color.BLACK, Color.BLACK);
 	    renderer.setXLabels(0);
 	    renderer.setYLabels(0);

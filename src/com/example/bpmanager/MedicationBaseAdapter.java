@@ -92,6 +92,9 @@ public class MedicationBaseAdapter extends BaseAdapter {
 		
 		//Log.i("ID: ", getCount() + " : " + position);
 		
+		// ID
+		infoHolder.medicine_id = getItem(position).mId;
+		
 		// Image
 		//infoHolder.img.setBackgroundResource(resid);
 		

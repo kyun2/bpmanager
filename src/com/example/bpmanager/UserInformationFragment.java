@@ -246,12 +246,12 @@ public class UserInformationFragment extends Fragment
 			//	return false;
 			
 			// last
-			if (lastVisitDate.length() == 0)
-				return false;
+			//if (lastVisitDate.length() == 0)
+			//	return false;
 			
 			// next
-			if (nextVisitDate.length() == 0)
-				return false;
+			//if (nextVisitDate.length() == 0)
+			//	return false;
 			
 			return true;
 		}
@@ -296,7 +296,10 @@ public class UserInformationFragment extends Fragment
 			//uData.setCoronary(coronary.isChecked() ? 1 : 0);
 			uData.setLastVisitDate(lastVisitDate.getText().toString());
 			uData.setNextVisitDate(nextVisitDate.getText().toString());
-			uData.setNextAlarmTime(19, 0);
+			if (nextVisitDate.getText().toString().matches("[0-9]{4}/[0-9]{2}/[0-9]{2}"))
+			{
+				uData.setNextAlarmTime(19, 0);
+			}
 		}
 	};
 	
