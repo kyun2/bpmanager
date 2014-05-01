@@ -229,7 +229,7 @@ public class HabitFragment extends Fragment{
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			final Map<Integer,Object> answer = new HashMap<Integer, Object>();
 
-			builder.setMessage("현재 허리둘레를 입력하세요.");
+			builder.setMessage("현재 허리둘레를 입력하세요.(inch)");
 			final EditText wText = new EditText(getActivity());
 			wText.setRawInputType(InputType.TYPE_CLASS_NUMBER);//.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
@@ -542,7 +542,7 @@ public class HabitFragment extends Fragment{
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
 					int id = group.getCheckedRadioButtonId();
 					if(id == R.id.q4_1){
-						q1v = 1;
+						q4v = 1;
 					}else if(id == R.id.q4_2){
 						q4v = 2;
 					}else if(id == R.id.q4_3){

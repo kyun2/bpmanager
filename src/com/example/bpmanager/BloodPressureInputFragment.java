@@ -112,8 +112,8 @@ public class BloodPressureInputFragment extends Fragment{
 				int idiastolic = Integer.valueOf(diastolic.getText().toString());
 				String date = bptime.getText().toString();
 
-				if(isystolic > 300 || isystolic < 30) throw new NumberFormatException(); 
-				if(idiastolic > 300 || idiastolic < 30) throw new NumberFormatException();
+				if(isystolic > 200 || isystolic < 70) throw new NumberFormatException(); 
+				if(idiastolic > 120 || idiastolic < 50) throw new NumberFormatException();
 				if(!date.matches("[0-9]{4}/[0-9]{2}/[0-9]{2}"))
 				{
 					throw new InvalidPropertiesFormatException("Invalid Format.");

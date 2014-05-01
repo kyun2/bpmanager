@@ -18,12 +18,14 @@ public class WaistSurvey extends AbstractSurvey {
 		float targetWaist = getTargetWaist(MainActivity.mUserData.getSex());
 		
 		if(waist < targetWaist) 
-			return "당신의 복부둘레는 "+ waist+"cm로, 적정 복부둘레 "+targetWaist+"cm미만을 잘 유지하고 있습니다.\n 고혈압 환자들은 혈압 감소를 위해 적절한 복부둘레를 유지하는 것이 필요합니다. 지금처럼 적정 복부둘레를 유지하세요.";
+			return "당신의 복부둘레는 "+ waist+"inch로, 적정 복부둘레 "+targetWaist+"inch미만을 잘 유지하고 있습니다.\n 고혈압 환자들은 혈압 감소를 위해 적절한 복부둘레를 유지하는 것이 필요합니다. 지금처럼 적정 복부둘레를 유지하세요.";
 		else 
-			return "당신의 복부둘레는" +waist+ "cm로, 적정 복부둘레"+targetWaist+"cm를  "+(waist - targetWaist)+"cm 초과하였습니다.\n 고혈압 환자들은 혈압 감소를 위해 적절한 복부둘레를 유지하는 것이 필요합니다. "
-					+ "복부둘레를 적정 복부둘레" + targetWaist +"cm까지 줄이세요.";
+			return "당신의 복부둘레는" +waist+ "inch로, 적정 복부둘레"+targetWaist+"inch를  "+ (float)(Math.round((waist - targetWaist) * 10))/10+"inch 초과하였습니다.\n 고혈압 환자들은 혈압 감소를 위해 적절한 복부둘레를 유지하는 것이 필요합니다. "
+					+ "복부둘레를 적정 복부둘레" + targetWaist +"inch까지 줄이세요.";
 	}
 	
+	
+	 
 	private float getWaist(Map<Integer, Object> q){
 		Object o = q.get(0);
 		if(o instanceof Float) return (Float)o;
@@ -31,8 +33,8 @@ public class WaistSurvey extends AbstractSurvey {
 	}
 	
 	private float getTargetWaist(int sex){	
-		if(sex == 2) return 88;
-		else return 102;
+		if(sex == 2) return (float)34.6;
+		else return (float)40.1;
 	}
 
 	@Override
