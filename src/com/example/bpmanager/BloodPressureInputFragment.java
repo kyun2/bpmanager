@@ -2,6 +2,7 @@ package com.example.bpmanager;
 
 import java.util.Calendar;
 import java.util.InvalidPropertiesFormatException;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -127,7 +128,7 @@ public class BloodPressureInputFragment extends Fragment{
 					diastolic.setText("");
 					bptime.setText("");
 					
-					bloodPressureAdvice(isystolic);
+					bloodPressureAdvice();
 				}
 			}catch(NumberFormatException e){
 				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
@@ -214,15 +215,24 @@ public class BloodPressureInputFragment extends Fragment{
 		else return sb.toString() + " 관리에 더 유의하세요. 해당 메뉴를 이용하면 상세 권고를 볼 수 있습니다.";
 	}
 	
-	private void bloodPressureAdvice(int isystolic) {
+	private void bloodPressureAdvice() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		
-		int tSystolic = BloodPressure.getRecommendBloodPressure().getSystolic();
 		StringBuilder str = new StringBuilder();
 		
+		int tSystolic = BloodPressure.getRecommendBloodPressure().getSystolic();
+		
+		List<BloodPressure> bps = BloodPressure.getBPsList("", 10, false);
+		
+		int isystolic = 0;
+		for( BloodPressure b : bps)
+			isystolic += b.getSystolic();
+		
+		isystolic /= bps.size();
 		boolean isGood = false;
 		
 		str.append("당신의 평균 수축기 혈압은 "+isystolic+"mmHg로, 목표 수축기 혈압 "+tSystolic+"mmHg");
+		
+		
 		if( isystolic <= tSystolic){
 			str.append("이 잘 유지되고 있습니다." + getAdvice(isGood));
 			isGood = true;
