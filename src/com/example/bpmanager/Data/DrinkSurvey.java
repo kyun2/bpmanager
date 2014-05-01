@@ -27,7 +27,7 @@ public class DrinkSurvey extends AbstractSurvey {
 
 	private boolean isExcessiveDrinking(int day, int week){
 		int sex =  MainActivity.mUserData.getSex(); 	
-		float weight = MainActivity.mUserData.getWeight();
+		/*float weight = MainActivity.mUserData.getWeight();
 
 		if(sex == 1 && weight >= 60){
 			if(day >= 2 || week >= 14) return true;
@@ -36,16 +36,20 @@ public class DrinkSurvey extends AbstractSurvey {
 			if(day >= 1 || week >= 9) return true;
 			else return false;
 		}
+		*/
+		return true;
 	}
 	
 	private String getAdviceDrinking(){
 		
 		int sex =  MainActivity.mUserData.getSex(); 	
-		float weight = MainActivity.mUserData.getWeight();
+		/*float weight = MainActivity.mUserData.getWeight();
 
 		if(sex == 1 && weight > 60)
 			return "당신의 알코올 섭취 제한량은 하루에 두잔, 일주일에 14잔 입니다.";
 		else return "당신의 알코올 섭취 제한량은 하루에 한잔, 일주일에 9잔 입니다.";
+		*/
+		return "";
 	}
 
 	@Override

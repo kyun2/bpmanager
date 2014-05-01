@@ -27,6 +27,7 @@
 	    
 	</LinearLayout>
 	
+	<!-- 
 	<LinearLayout
 	    android:id="@+id/ll_mydata_habit_chart"
 	    android:layout_width="match_parent"
@@ -37,5 +38,6 @@
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>
-
+	-->
+	
 </LinearLayout>

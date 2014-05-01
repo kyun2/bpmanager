@@ -48,7 +48,7 @@ public class MedicationAddFragment extends Fragment {
 			return;
 		
 		// 어댑터
-		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList);
+		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList, R.layout.medicineitem_add);
 		
 		mListView.setAdapter(mListAdapter);
 		//mListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);

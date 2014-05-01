@@ -29,8 +29,8 @@ public class UserInformationFragment extends Fragment
 	EditText name;
 	EditText email;
 	EditText height;
-	EditText waist;
-	EditText weight;
+	//EditText waist;
+	//EditText weight;
 	EditText birth;
 	RadioGroup gender;
 	
@@ -59,11 +59,10 @@ public class UserInformationFragment extends Fragment
 		email = (EditText)view.findViewById(R.id.edit_email);
 		gender = (RadioGroup)view.findViewById(R.id.gender_radio);
 		height = (EditText)view.findViewById(R.id.edit_bodyheight);
-		weight = (EditText)view.findViewById(R.id.edit_bodyweight);
-		waist = (EditText)view.findViewById(R.id.edit_waist);
+		//weight = (EditText)view.findViewById(R.id.edit_bodyweight);
+		//waist = (EditText)view.findViewById(R.id.edit_waist);
 		birth = (EditText)view.findViewById(R.id.edit_birth);
 		
-//		birth.setOnClickListener(click);
 		//hyper = (CheckBox)view.findViewById(R.id.high_check);
 		glucose = (CheckBox)view.findViewById(R.id.glucos_check);
 		kidney = (CheckBox)view.findViewById(R.id.kidney_check);
@@ -96,8 +95,8 @@ public class UserInformationFragment extends Fragment
 			gender.check(R.id.radio_female);
 		birth.setText(uData.getBirth());
 		height.setText(Float.toString(uData.getHeight()));
-		weight.setText(Float.toString(uData.getWeight()));
-		waist.setText(Float.toString(uData.getWaist()));
+		//weight.setText(Float.toString(uData.getWeight()));
+		//waist.setText(Float.toString(uData.getWaist()));
 		//hyper.setChecked(uData.getHypertension() == 1);
 		glucose.setChecked(uData.getGlucose() == 1);
 		kidney.setChecked(uData.getKidney() == 1);
@@ -239,12 +238,12 @@ public class UserInformationFragment extends Fragment
 				return false;
 			
 			// weight
-			if (weight.length() == 0)
-				return false;
+			//if (weight.length() == 0)
+			//	return false;
 			
 			// waist
-			if (waist.length() == 0)
-				return false;
+			//if (waist.length() == 0)
+			//	return false;
 			
 			// last
 			if (lastVisitDate.length() == 0)
@@ -275,22 +274,22 @@ public class UserInformationFragment extends Fragment
 			{
 				uData.setHeight(0f);
 			}
-			try
-			{
-				uData.setWeight(Float.parseFloat(weight.getText().toString()));
-			}
-			catch (NumberFormatException e)
-			{
-				uData.setWeight(0f);
-			}
-			try
-			{
-				uData.setWaist(Float.parseFloat(waist.getText().toString()));
-			}
-			catch (NumberFormatException e)
-			{
-				uData.setWaist(0f);
-			}
+			//try
+			//{
+			//	uData.setWeight(Float.parseFloat(weight.getText().toString()));
+			//}
+			//catch (NumberFormatException e)
+			//{
+			//	uData.setWeight(0f);
+			//}
+			//try
+			//{
+			//	uData.setWaist(Float.parseFloat(waist.getText().toString()));
+			//}
+			//catch (NumberFormatException e)
+			//{
+			//	uData.setWaist(0f);
+			//}
 			//uData.setHypertension(hyper.isChecked() ? 1 : 0);
 			uData.setGlucose(glucose.isChecked() ? 1 : 0);
 			uData.setKidney(kidney.isChecked() ? 1 : 0);

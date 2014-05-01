@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -96,6 +97,28 @@ public class MainActivity extends ActionBarActivity {
 		
 		// 의약품 정보 만들기
 		INFOMedication.Make();
+		
+		// Intent 전달 확인
+		Intent intent = getIntent();
+		if (intent != null)
+		{
+			Bundle extras = intent.getExtras();
+			if (extras != null)
+			{
+				String from = extras.getString("from");
+				if (from.equals("MEDI_ALARM"))
+				{
+					int medicine_id = extras.getInt("medicine_id");
+					MedicationDetailFragment next = new MedicationDetailFragment();
+					next.setMedicineId(medicine_id);
+					changeFragment(next);
+				}
+				else if (from.equals("HOSPITAL_ALARM"))
+				{
+					// stuff
+				}
+			}
+		}
 	}
 	
 	public static void showFooter() {

@@ -85,12 +85,12 @@ public class BloodPressure {
 	}
 	
 	// where문으로 혈압 조회
-	public static List<BloodPressure> getBPsList(String where, int limit){
+	public static List<BloodPressure> getBPsList(String where, int limit, boolean ascend){
 		List<BloodPressure> bps = new ArrayList<BloodPressure>();
 		String whereClause = where.length() > 0 ? " where " + where : "";
 		String limitClause = limit > 0 ? " LIMIT " + limit : "";
 		
-		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + " order by " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " asc " + limitClause;
+		String strQry = "Select * FROM " + DBBloodPressure.BloodPressure.TB_NAME + whereClause + " order by " + DBBloodPressure.BloodPressure.COLUMN_LAST_UPDATETIME + " " + (ascend ? "asc" : "desc") + " " + limitClause;
 		Log.i("log: ", strQry);
 		try
 		{
@@ -118,7 +118,7 @@ public class BloodPressure {
 	}
 	
 	// 원하는 날짜까지 디비에서 혈압들을 조회
-	public static List<BloodPressure> getLastBPsList(int termday){
+	public static List<BloodPressure> getLastBPsList(int termday, boolean ascend){
 		
 		String whereClause;
 		Calendar c = Calendar.getInstance();
@@ -126,7 +126,7 @@ public class BloodPressure {
 		c.add(Calendar.DATE, -1 * termday);
 		whereClause = "last_update_time > '" + sm.format(c.getTime()) + "'";
 		Log.i("log: ", whereClause);
-		return getBPsList(whereClause, 0);
+		return getBPsList(whereClause, 0, ascend);
 	}
 	
 	// 오늘 혈압 입력값이 있는지?
@@ -168,7 +168,7 @@ public class BloodPressure {
 	
 	// 최종혈압 입력일이 한 달이 지났는지 확인
 	public static boolean IsExpiredBPData(){
-		if(getLastBPsList(30).size() > 0) return false;
+		if(getLastBPsList(30, true).size() > 0) return false;
 		else return true;
 	}
 	
@@ -176,7 +176,7 @@ public class BloodPressure {
 	{
 		String ret = "";
 		
-		List<BloodPressure> data = getBPsList("",  0);
+		List<BloodPressure> data = getBPsList("",  0, true);
 		BloodPressure recom_bp = BloodPressure.getRecommendBloodPressure();
 		
 		ret += "[날짜] SYS/DIA\n";

@@ -31,7 +31,7 @@ public class MedicationMyDataFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_med_mine, container, false);
 		
 		mListView = (ListView) view.findViewById(R.id.list_medicine);
-		mMedicineList = MainActivity.mMedicationScheduleData.getDataList();	
+		mMedicineList = MainActivity.mMedicationScheduleData.getDataList();
 		
 		setupList();		
 		
@@ -52,9 +52,10 @@ public class MedicationMyDataFragment extends Fragment {
 		if (mListView == null)
 			return;
 		
-		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList);
+		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList, R.layout.medicineitem_mine);
 		
 		mListView.setAdapter(mListAdapter);
+		/*
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -64,6 +65,7 @@ public class MedicationMyDataFragment extends Fragment {
 				((MainActivity)getActivity()).changeFragment(next);
 			}
 		});
+		*/
 	}
 
 }

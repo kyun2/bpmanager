@@ -25,7 +25,7 @@ public class MyInfoFragment extends Fragment
 		
 		LinearLayout lLayoutBPChart = (LinearLayout) view.findViewById(R.id.ll_mydata_bp_chart);
 		LinearLayout lLayoutInjectionChart = (LinearLayout) view.findViewById(R.id.ll_mydata_inject_chart);
-		LinearLayout lLayoutHabitChart = (LinearLayout) view.findViewById(R.id.ll_mydata_habit_chart);
+		//LinearLayout lLayoutHabitChart = (LinearLayout) view.findViewById(R.id.ll_mydata_habit_chart);
 		
 		// 혈압추이 그래프
 		BloodPressureGraph bpgrph = new BloodPressureGraph();

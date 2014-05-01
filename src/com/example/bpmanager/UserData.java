@@ -22,8 +22,8 @@ public class UserData {
 	int mSex;
 	String mBirth;
 	float mHeight;
-	float mWeight;
-	float mWaist;
+	//float mWeight;
+	//float mWaist;
 	int mHypertension;
 	int mGlucose;
 	int mKidney;
@@ -44,8 +44,8 @@ public class UserData {
 		mSex = 0;
 		mBirth = "";
 		mHeight = 0f;
-		mWeight = 0f;
-		mWaist = 0f;
+		//mWeight = 0f;
+		//mWaist = 0f;
 		mHypertension = 0;
 		mGlucose = 0;
 		mKidney = 0;
@@ -70,8 +70,8 @@ public class UserData {
 				DBUser.User.COLUMN_SEX,
 				DBUser.User.COLUMN_BIRTH,
 				DBUser.User.COLUMN_HEIGHT,
-				DBUser.User.COLUMN_WEIGHT,
-				DBUser.User.COLUMN_WAIST,
+				//DBUser.User.COLUMN_WEIGHT,
+				//DBUser.User.COLUMN_WAIST,
 				DBUser.User.COLUMN_HYPER,
 				DBUser.User.COLUMN_GLUCOSE,
 				DBUser.User.COLUMN_KIDNEY,
@@ -93,8 +93,8 @@ public class UserData {
 				mSex = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_SEX));
 				mBirth = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_BIRTH));
 				mHeight = c1.getFloat(c1.getColumnIndex(DBUser.User.COLUMN_HEIGHT));
-				mWeight = c1.getFloat(c1.getColumnIndex(DBUser.User.COLUMN_WEIGHT));
-				mWaist = c1.getFloat(c1.getColumnIndex(DBUser.User.COLUMN_WAIST));
+				//mWeight = c1.getFloat(c1.getColumnIndex(DBUser.User.COLUMN_WEIGHT));
+				//mWaist = c1.getFloat(c1.getColumnIndex(DBUser.User.COLUMN_WAIST));
 				mHypertension = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_HYPER));
 				mGlucose = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_GLUCOSE));
 				mKidney = c1.getInt(c1.getColumnIndex(DBUser.User.COLUMN_KIDNEY));
@@ -121,8 +121,8 @@ public class UserData {
 		values.put(DBUser.User.COLUMN_SEX, mSex);
 		values.put(DBUser.User.COLUMN_BIRTH, mBirth);
 		values.put(DBUser.User.COLUMN_HEIGHT, mHeight);
-		values.put(DBUser.User.COLUMN_WEIGHT, mWeight);
-		values.put(DBUser.User.COLUMN_WAIST, mWaist);
+		//values.put(DBUser.User.COLUMN_WEIGHT, mWeight);
+		//values.put(DBUser.User.COLUMN_WAIST, mWaist);
 		values.put(DBUser.User.COLUMN_HYPER, mHypertension);
 		values.put(DBUser.User.COLUMN_GLUCOSE, mGlucose);
 		values.put(DBUser.User.COLUMN_KIDNEY, mKidney);
@@ -232,8 +232,8 @@ public class UserData {
 		ret += "Sex: " + mSex + "\n";
 		ret += "Birthdate: " + mBirth + "\n";
 		ret += "Height: " + mHeight + "\n";
-		ret += "Weight: " + mWeight + "\n";
-		ret += "Waist: " + mWaist + "\n";
+		//ret += "Weight: " + mWeight + "\n";
+		//ret += "Waist: " + mWaist + "\n";
 		ret += "Glucose: " + mGlucose + "\n";
 		ret += "Kidney: " + mKidney + "\n";
 		ret += "Last Visit Date: " + mLastVisitDate + "\n";
@@ -288,21 +288,21 @@ public class UserData {
 		this.mHeight = height;
 	}
 
-	public float getWeight() {
-		return mWeight;
-	}
+	//public float getWeight() {
+	//	return mWeight;
+	//}
 
-	public void setWeight(float weight) {
-		this.mWeight = weight;
-	}
+	//public void setWeight(float weight) {
+	//	this.mWeight = weight;
+	//}
 
-	public float getWaist() {
-		return mWaist;
-	}
+	//public float getWaist() {
+	//	return mWaist;
+	//}
 
-	public void setWaist(float waist) {
-		this.mWaist = waist;
-	}
+	//public void setWaist(float waist) {
+	//	this.mWaist = waist;
+	//}
 
 	public int getHypertension() {
 		return mHypertension;

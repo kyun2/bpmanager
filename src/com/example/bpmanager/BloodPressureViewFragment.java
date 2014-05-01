@@ -38,7 +38,7 @@ public class BloodPressureViewFragment extends Fragment{
 	
 	private void setList(int i)
 	{		
-		List<BloodPressure> bps = BloodPressure.getLastBPsList(i);
+		List<BloodPressure> bps = BloodPressure.getLastBPsList(i, false);
 		Log.i("count: ", ""+bps.size());
 		BloodPressureAdapter adapter = new BloodPressureAdapter(getActivity(), R.layout.bpitem, bps, getActivity().getSupportFragmentManager());
 		

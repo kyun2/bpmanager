@@ -32,7 +32,7 @@ public class BloodPressureGraph extends AbstractDemoChart {
 		List<Date[]> dates = new ArrayList<Date[]>();
 		List<double[]> values = new ArrayList<double[]>();		
 		// 최대 30개까지.
-		List<BloodPressure> bplist = BloodPressure.getBPsList("", 30);
+		List<BloodPressure> bplist = BloodPressure.getBPsList("", 30, true);
 		
 		int bpsize = bplist.size();
 		if (bpsize == 0)
@@ -67,8 +67,8 @@ public class BloodPressureGraph extends AbstractDemoChart {
 		PointStyle[] styles = new PointStyle[] { PointStyle.POINT, PointStyle.POINT };
 	    XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);	    
 	    
-	    setChartSettings(renderer, getName(), "월별", "혈압수치", dates.get(0)[0].getTime(),
-	        dates.get(0)[Math.min(bpsize-1, 4)].getTime(), 30, 300, Color.BLACK, Color.BLACK);
+	    setChartSettings(renderer, getName(), "월별", "혈압수치", dates.get(0)[0].getTime() - 24 * 60 * 60 * 1000,
+	    		dates.get(0)[0].getTime() + 5 * 24 * 60 * 60 * 1000/*dates.get(0)[Math.min(bpsize-1, 4)].getTime()*/, 50, 200, Color.BLACK, Color.BLACK);
 	    renderer.setXLabels(0);
 	    renderer.setYLabels(0);
 	    renderer.setApplyBackgroundColor(true);
@@ -77,6 +77,9 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    renderer.setZoomEnabled(false, false);
 	    renderer.setPanEnabled(true, false);
 	    renderer.setShowAxes(true);
+	    renderer.setAxisTitleTextSize(20f);
+	    renderer.setChartTitleTextSize(30f);
+	    renderer.setLegendTextSize(24f);
 	    
 	    BloodPressure recommendBP = BloodPressure.getRecommendBloodPressure();
 	    renderer.addYTextLabel(recommendBP.getSystolic(), "목표수축혈압");
@@ -87,11 +90,8 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    for (int i = 0; i < length; i++) {
 	      SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
 	      seriesRenderer.setDisplayChartValues(true);
-	      seriesRenderer.setChartValuesTextSize(20f);
+	      seriesRenderer.setChartValuesTextSize(40f);
 	    }
 	    return ChartFactory.getTimeChartView(context, buildDateDataset(titles, dates, values), renderer, "yyyy/MM/dd");
 	}
-	
-	
-	  
 }

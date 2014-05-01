@@ -48,6 +48,7 @@ public class AlarmReciever extends BroadcastReceiver
 		Vibrator alarmVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 		alarmVibrator.vibrate(2000);
 		
+		/*
 		Uri alarmAlert = RingtoneManager.getDefaultUri( RingtoneManager.TYPE_ALARM );
 		if (alarmAlert == null)
 		{
@@ -59,20 +60,24 @@ public class AlarmReciever extends BroadcastReceiver
 		}
 		Ringtone alarmRingtone = RingtoneManager.getRingtone(context, alarmAlert);
 		alarmRingtone.play();
+		*/
 		
 		NotificationCompat.Builder notiBuilder =
 		        new NotificationCompat.Builder(context)
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle(context.getText(R.string.app_name))
-		        .setContentText(medicineName);
+		        .setContentText(medicineName)
+		        .setAutoCancel(true);
 		
 		// Creates an explicit intent for an Activity in your app
 		Intent notiIntent = new Intent(context, MainActivity.class);
+		notiIntent.putExtra("from", "MEDI_ALARM");
+		notiIntent.putExtra("medicine_id", medicineId);
+		
 		PendingIntent notiPendingIntent = PendingIntent.getActivity(context, medicineId, notiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		notiBuilder.setContentIntent(notiPendingIntent);
 		
 		NotificationManager notiManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		// mId allows you to update the notification later on.
 		notiManager.notify(medicineId, notiBuilder.build());
 	}
 	
@@ -83,6 +88,7 @@ public class AlarmReciever extends BroadcastReceiver
 		Vibrator alarmVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
 		alarmVibrator.vibrate(2000);
 		
+		/*
 		Uri alarmAlert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 		if (alarmAlert == null)
 		{
@@ -94,15 +100,19 @@ public class AlarmReciever extends BroadcastReceiver
 		}
 		Ringtone alarmRingtone = RingtoneManager.getRingtone(context, alarmAlert);
 		alarmRingtone.play();
+		*/
 		
 		NotificationCompat.Builder notiBuilder =
 		        new NotificationCompat.Builder(context)
 		        .setSmallIcon(R.drawable.ic_launcher)
 		        .setContentTitle(context.getText(R.string.app_name))
-		        .setContentText("내일은 병원에 방문하는 날 입니다.");
+		        .setContentText("내일은 병원에 방문하는 날 입니다.")
+		        .setAutoCancel(true);
 		
 		// Creates an explicit intent for an Activity in your app
 		Intent notiIntent = new Intent(context, MainActivity.class);
+		notiIntent.putExtra("from", "HOSPITAL_ALARM");
+		
 		PendingIntent notiPendingIntent = PendingIntent.getActivity(context, UserData.ALARM_ID, notiIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		notiBuilder.setContentIntent(notiPendingIntent);
 		

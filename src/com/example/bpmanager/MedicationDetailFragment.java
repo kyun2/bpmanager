@@ -66,7 +66,7 @@ public class MedicationDetailFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_med_detail, container, false);
 		final INFOMedication info = INFOMedication.getInfoMedicine(medicine_id);
 		
-		medicine_inject_time = loadInjectionTime();
+		medicine_inject_time = MedicationData.loadInjectionTime(medicine_id);
 		
 		// 컴포넌트들
 		//img = (ImageView) view.findViewById(R.id.medicine_img);
@@ -96,7 +96,7 @@ public class MedicationDetailFragment extends Fragment {
 		});
 		
 		// 복용하기 버튼		
-		if (hasTookToday())
+		if (MedicationData.hasTookToday(medicine_id))
 		{
 			btnTook.setEnabled(false);
 			btnTook.setClickable(false);
@@ -209,12 +209,21 @@ public class MedicationDetailFragment extends Fragment {
 						c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), hour, minute, 0);
 						
 						PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getActivity(), info.mId, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-						alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, alarmPendingIntent);
+						if (Calendar.getInstance().getTimeInMillis() > c.getTimeInMillis())
+						{
+							alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, alarmPendingIntent);
+						}
+						else
+						{
+							alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 1000 * 60 * 60 * 24, 1000 * 60 * 60 * 24, alarmPendingIntent);
+						}
 						
 						// DB에 저장
-						saveInjectionTime(time);
+						MedicationData.saveInjectionTime(medicine_id, time);
 						
-						Toast.makeText(getActivity(), "알림설정이 완료되었습니다.", Toast.LENGTH_LONG).show();
+						alarmTime.setEnabled(false);
+						
+						Toast.makeText(getActivity(), "알림설정이 완료되었습니다. 재설정을 하실 때는 먼저 해제후 다시 진행해주세요.", Toast.LENGTH_LONG).show();
 					}
 					else
 					{
@@ -236,14 +245,16 @@ public class MedicationDetailFragment extends Fragment {
 				}
 				else
 				{
+					alarmTime.setEnabled(true);
+					alarmTime.setText("");
+					alarmTime.clearFocus();
+					
 					// 알림해제
 					PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getActivity(), info.mId, alarmIntent, PendingIntent.FLAG_NO_CREATE);
 					if (alarmPendingIntent != null)
 					{
 						alarmManager.cancel(alarmPendingIntent);
 						alarmPendingIntent.cancel();
-						
-						alarmTime.setText("");
 						
 						Toast.makeText(getActivity(), "알림설정이 취소되었습니다.", Toast.LENGTH_LONG).show();
 					}					
@@ -273,6 +284,13 @@ public class MedicationDetailFragment extends Fragment {
 							alarmTime.setText(String.format("%02d:%02d", hourOfDay, minute));
 						}
 					}, 0, 0, true);
+					timePickerDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+						
+						@Override
+						public void onDismiss(DialogInterface dialog) {
+							alarmTime.clearFocus();
+						}
+					});
 					timePickerDialog.show();
 				}
 			}
@@ -286,87 +304,5 @@ public class MedicationDetailFragment extends Fragment {
 		this.medicine_id = id;
 	}
 	
-	public boolean hasTookToday()
-	{
-		boolean ret = false;
-		try
-		{
-			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
-			
-			String[] projection = {
-				DBMedicationTook.SCHEMA.COLUMN_MEDID,
-				DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME
-			};
-			
-			Cursor c1 = db.query(DBMedicationTook.SCHEMA.TB_NAME, projection, " medicine_id = " + this.medicine_id, null, null, null, " inject_time desc");
-			
-			if (c1.moveToFirst())
-			{
-				String[] times = c1.getString(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME)).split("/");
-				
-				try
-				{
-					int day = Integer.parseInt(times[2]);
-					int cday = Integer.parseInt((new SimpleDateFormat("dd")).format(Calendar.getInstance().getTime()));
-					
-					if (Math.abs(day - cday) == 0)
-						ret = true;
-					else
-						ret = false;
-				}
-				catch (NumberFormatException e)
-				{
-				}
-			}
-			else
-			{
-				ret = false;
-			}
-			
-			c1.close();
-		}
-		catch (SQLiteException e)
-		{
-			ret = false;
-		}
-		return ret;
-	}
-	
-	public String loadInjectionTime()
-	{
-		String time = "";
-		try
-		{
-			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
-			
-			String[] projection = {
-				DBMedication.Medication.COLUMN_MEDID,
-				DBMedication.Medication.COLUMN_INJECT_TIME
-			};
-			
-			Cursor c1 = db.query(DBMedication.Medication.TB_NAME, projection, " medicine_id = " + this.medicine_id, null, null, null, null);
-			
-			if (c1.moveToFirst())
-			{
-				time = c1.getString(c1.getColumnIndex(DBMedication.Medication.COLUMN_INJECT_TIME));
-			}
-			
-			c1.close();
-		}
-		catch (SQLiteException e)
-		{
-		}
-		return time;
-	}
-	
-	public void saveInjectionTime(String time)
-	{
-		if (!time.matches("[0-9]{2}:[0-9]{2}"))
-			return;
-		
-		ContentValues values = new ContentValues();
-		values.put(DBMedication.Medication.COLUMN_INJECT_TIME, time);
-		
-		MainActivity.mDBHelper.updateData(DBMedication.Medication.TB_NAME, values, " medicine_id = " + medicine_id, null);
-	}
+
 }
