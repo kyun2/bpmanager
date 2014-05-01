@@ -161,7 +161,7 @@
             android:id="@+id/q4_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="지난 한 달 동안, 한 인간으로서 기본적인 요구가 충족되지 않았다고 느낀 적이 있습니까?" />
+            android:text="지난 한 달 동안, 미래에 대해 불확실하게 느끼거나 불안해 한 적이 있습니까?" />
 
         <RadioGroup
             android:id="@+id/q4_value"
