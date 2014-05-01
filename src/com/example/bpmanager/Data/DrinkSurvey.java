@@ -32,9 +32,12 @@ public class DrinkSurvey extends AbstractSurvey {
 		WeightSurvey ws = new WeightSurvey();
 		Map<Integer, Object> q =ws.getLastAnswer();
 		float weight = 0;
-		Object o = q.get(0);
-		if(o instanceof Float) weight =  (Float)o;
-		
+		if(q != null) {
+
+			Object o = q.get(0);
+			if(o instanceof Float) weight =  (Float)o;
+
+		}
 		if(sex == 1 && weight > 60){
 			if(day > 2 || week > 14) return true;
 			else return false;
@@ -42,23 +45,24 @@ public class DrinkSurvey extends AbstractSurvey {
 			if(day > 1 || week > 9) return true;
 			else return false;
 		}
-		
-	//	return true;
+
+		//	return true;
 	}
-	
+
 	private String getAdviceDrinking(){
-		
+
 		int sex =  MainActivity.mUserData.getSex(); 	
 		WeightSurvey ws = new WeightSurvey();
 		Map<Integer, Object> q =ws.getLastAnswer();
 		float weight = 0;
-		Object o = q.get(0);
-		if(o instanceof Float) weight =  (Float)o;
-
+		if(q != null) {
+			Object o = q.get(0);
+			if(o instanceof Float) weight =  (Float)o;
+		}
 		if(sex == 1 && weight > 60)
 			return "당신의 알코올 섭취 제한량은 하루에 두잔, 일주일에 14잔 입니다.";
 		else return "당신의 알코올 섭취 제한량은 하루에 한잔, 일주일에 9잔 입니다.";
-		
+
 	}
 
 	@Override
