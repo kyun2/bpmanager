@@ -48,7 +48,8 @@
 	
 	<LinearLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="wrap_content" >
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
 		
 	    <Button
 	        android:id="@+id/med_btn_took_it"
@@ -60,7 +61,21 @@
 	        android:textStyle="bold"
 	        android:layout_margin="10dp"
 	        android:background="@drawable/basic_button"
-	        android:textColor="@color/btn_text" />	    
+	        android:textColor="@color/btn_text"
+	        android:layout_weight="0.5" />
+	    
+	    <Button
+	        android:id="@+id/med_btn_delete_it"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:text="중단"
+	        android:textSize="24dp"
+	        android:textStyle="bold"
+	        android:layout_margin="10dp"
+	        android:background="@drawable/red_button"
+	        android:textColor="@color/btn_text"
+	        android:layout_weight="1" />	    
 	    
 	</LinearLayout>
     	

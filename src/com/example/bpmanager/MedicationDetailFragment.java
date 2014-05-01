@@ -22,6 +22,8 @@ import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -52,6 +54,7 @@ public class MedicationDetailFragment extends Fragment {
 	
 	ImageButton btnOpenWebInfo;
 	Button btnTook;
+	Button btnDelete;
 	
 	RadioGroup alarm;
 
@@ -71,7 +74,8 @@ public class MedicationDetailFragment extends Fragment {
 		ingredient = (TextView) view.findViewById(R.id.medicine_ingredient);
 		alarmTime = (EditText) view.findViewById(R.id.edit_alarm_time);
 		btnOpenWebInfo = (ImageButton) view.findViewById(R.id.medicine_web_open);
-		btnTook = (Button) view.findViewById(R.id.med_btn_took_it);		
+		btnTook = (Button) view.findViewById(R.id.med_btn_took_it);
+		btnDelete = (Button) view.findViewById(R.id.med_btn_delete_it);
 		alarm = (RadioGroup) view.findViewById(R.id.radiogrp_med_alarm);
 		
 		// Image
@@ -112,7 +116,7 @@ public class MedicationDetailFragment extends Fragment {
 					btnTook.setBackgroundResource(R.drawable.basic_button_dis);
 					// 알림
 					AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-					alert.setMessage("복용 완료").setTitle("");
+					alert.setMessage("복용 완료").setTitle("복용완료");
 					alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
 	
 						@Override
@@ -134,6 +138,40 @@ public class MedicationDetailFragment extends Fragment {
 				}
 			});
 		}
+		
+		btnDelete.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// 삭제 확인팝업
+				AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+				alert.setMessage("복용을 중단하시겠습니까?").setTitle("복용중단");
+				alert.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						delete();
+					}
+				});
+				alert.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {						
+					}
+				});
+				
+				alert.show();
+			}
+			
+			private void delete()
+			{
+				MainActivity.mDBHelper.deleteData(DBMedication.Medication.TB_NAME, " medicine_id = " + medicine_id, null);
+				MainActivity.mMedicationScheduleData.getData();				
+				// 뒤로 가기
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				fm.popBackStack();
+			}
+		});
 		
 		// 알람
 		boolean isAlarmed = false;

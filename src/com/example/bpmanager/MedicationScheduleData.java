@@ -43,6 +43,7 @@ public class MedicationScheduleData {
 	
 	public boolean getData()
 	{
+		mData.clear();
 		try
 		{
 			SQLiteDatabase db = MainActivity.mDBHelper.getReadableDatabase();
@@ -112,8 +113,16 @@ public class MedicationScheduleData {
 		int hour = Integer.parseInt(times[0]);
 		int minute = Integer.parseInt(times[1]);
 		Calendar c = Calendar.getInstance();
-		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), hour, minute, 0);				
-		alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, alarmPendingIntent);
+		c.set(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), hour, minute, 0);
+		
+		if (Calendar.getInstance().getTimeInMillis() < c.getTimeInMillis())
+		{
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), 1000 * 60 * 60 * 24, alarmPendingIntent);
+		}
+		else
+		{
+			alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis() + 1000 * 60 * 60 * 24, 1000 * 60 * 60 * 24, alarmPendingIntent);
+		}
 				
 		mData.clear();
 		this.getData();
