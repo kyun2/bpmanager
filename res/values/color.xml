@@ -5,7 +5,10 @@
     <color name="bg_gray">#B5B5B5</color>
     <color name="btn_indigo">#141488</color>
     <color name="btn_indigo_tap">#4f64e0</color>
-    <color name="btn_text">#CCCCCC</color>
+    <color name="btn_red">#db2222</color>
+    <color name="btn_red_tap">#820e0e</color>
+    <color name="btn_text">#eeeeee</color>
+    <color name="btn_text2">#ffffff</color>
     <color name="btn_dis">#444444</color>
     
 </resources>
