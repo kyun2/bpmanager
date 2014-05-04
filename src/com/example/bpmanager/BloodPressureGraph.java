@@ -90,7 +90,7 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    for (int i = 0; i < length; i++) {
 	      SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
 	      seriesRenderer.setDisplayChartValues(true);
-	      seriesRenderer.setChartValuesTextSize(40f);
+	      seriesRenderer.setChartValuesTextSize(30f);
 	    }
 	    return ChartFactory.getTimeChartView(context, buildDateDataset(titles, dates, values), renderer, "yyyy/MM/dd");
 	}

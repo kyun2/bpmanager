@@ -13,6 +13,8 @@ public final class DBMedication
 		public static final String COLUMN_AMOUNT = "amount";
 		public static final String COLUMN_COUNT = "count";
 		public static final String COLUMN_INJECT_TIME = "inject_time";
+		public static final String COLUMN_START_TIME = "start_time";
+		public static final String COLUMN_END_TIME = "end_time";
 	}
 	
 	public static final String SQL_CREATE = "create table " + Medication.TB_NAME +
@@ -20,7 +22,9 @@ public final class DBMedication
 			Medication.COLUMN_MEDID + " integer, " + 
 			Medication.COLUMN_AMOUNT + " integer, " +
 			Medication.COLUMN_COUNT + " integer, " +
-			Medication.COLUMN_INJECT_TIME + " text " +
+			Medication.COLUMN_INJECT_TIME + " text, " +
+			Medication.COLUMN_START_TIME + " text, " +
+			Medication.COLUMN_END_TIME + " text " + 
 			");";
 		
 	public static final String SQL_DROP = "drop table if exists " + Medication.TB_NAME;

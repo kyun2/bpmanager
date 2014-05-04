@@ -28,7 +28,7 @@ public class MedicationInjectionGraph {
 		ArrayList<Float> data = MainActivity.mMediHistData.getDataList();
 		ArrayList<Integer> parsedData = new ArrayList<Integer>();
 		
-		for (int i = 0; i < data.size(); i++)
+		for (int i = data.size() - 1; i >= 0; i--)
 		{
 			parsedData.add(Math.round(data.get(i) * 100f));
 		}
@@ -47,7 +47,7 @@ public class MedicationInjectionGraph {
 		renderer.setChartValuesSpacing((float)1); // gap between bar and number
 		renderer.setColor(Color.YELLOW);
 		renderer.setChartValuesTextAlign(Align.CENTER);
-		renderer.setChartValuesTextSize(40f);
+		renderer.setChartValuesTextSize(30f);
 
 		XYMultipleSeriesRenderer mRenderer = new XYMultipleSeriesRenderer();
 		mRenderer.addSeriesRenderer(renderer);

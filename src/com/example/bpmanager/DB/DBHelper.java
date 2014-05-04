@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DBHelper extends SQLiteOpenHelper 
 {
-	public static final int DATABASE_VERSION = 7;
+	public static final int DATABASE_VERSION = 8;
 	public static final String DATABASE_NAME = "BPManager.db";
 	
 	public DBHelper(Context context)
@@ -24,8 +24,6 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBBloodPressure.SQL_CREATE);
 		// Medication
 		db.execSQL(DBMedication.SQL_CREATE);
-		// Lifestyle
-		db.execSQL(DBLifestyle.SQL_CREATE);
 		// MedicationTook
 		db.execSQL(DBMedicationTook.SQL_CREATE);
 		//Habit
@@ -41,8 +39,6 @@ public class DBHelper extends SQLiteOpenHelper
 		db.execSQL(DBBloodPressure.SQL_DROP);
 		// Medication
 		db.execSQL(DBMedication.SQL_DROP);
-		// Lifestyle
-		db.execSQL(DBLifestyle.SQL_DROP);
 		// MedicationTook
 		db.execSQL(DBMedicationTook.SQL_DROP);
 		//Habit
