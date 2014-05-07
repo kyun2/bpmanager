@@ -28,8 +28,23 @@ public class MedicationInjectionGraph {
 		ArrayList<Float> data = MainActivity.mMediHistData.getDataList();
 		ArrayList<Integer> parsedData = new ArrayList<Integer>();
 		
-		for (int i = data.size() - 1; i >= 0; i--)
+		for (int i = 0; i < data.size(); i++)
 		{
+			if (data.get(i) == 0)
+			{
+				// trim check
+				boolean no_value = true;
+				for (int i2 = i + 1; i2 < data.size(); i2++)
+				{
+					if (data.get(i2) != 0)
+					{
+						no_value = false;
+						break;
+					}
+				}
+				if (no_value)
+					break;
+			}
 			parsedData.add(Math.round(data.get(i) * 100f));
 		}
 		
@@ -54,14 +69,14 @@ public class MedicationInjectionGraph {
 		mRenderer.setLabelsColor(Color.BLACK);
 		mRenderer.setChartTitle("복용성취율 현황");		
 		mRenderer.setChartTitleTextSize(30f);
-		mRenderer.setXTitle("기간");
+		mRenderer.setXTitle("");
 		mRenderer.setYTitle("복용성취율");
 		mRenderer.setXLabels(0);
 		mRenderer.setYLabels(20);
 		mRenderer.setLabelsColor(Color.BLACK);
 		mRenderer.setLabelsTextSize(20f);
 		mRenderer.setXAxisMin(0.0);
-		mRenderer.setXAxisMax(10.0);
+		mRenderer.setXAxisMax(4.0);
 		mRenderer.setYAxisMin(0.0);
 		mRenderer.setYAxisMax(120.0);
 		mRenderer.setAxisTitleTextSize(20f);
@@ -70,7 +85,7 @@ public class MedicationInjectionGraph {
 		mRenderer.setShowGrid(true);
 		mRenderer.setShowGridY(true);
 		mRenderer.setShowGridX(true);
-		mRenderer.setBarSpacing(0.5);
+		mRenderer.setBarWidth(20f);
 		mRenderer.setShowLegend(false);
 		mRenderer.setApplyBackgroundColor(true);
 		mRenderer.setMarginsColor(Color.WHITE);

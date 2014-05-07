@@ -76,9 +76,7 @@ public class MedicationAddFragment extends Fragment {
 				continue;
 			
 			data = MainActivity.mMedicationScheduleData.new MedicationSchedule();
-			data.mId = info.mId;
-			data.mAmount = 0;
-			data.mCount = 0;
+			data.mMedicineId = info.mId;
 			
 			mMedicineList.add(data);
 		}

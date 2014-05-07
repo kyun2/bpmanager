@@ -1,6 +1,7 @@
 package com.example.bpmanager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.example.bpmanager.DB.INFOMedication;
 import com.example.bpmanager.MedicationScheduleData.MedicationSchedule;
@@ -31,8 +32,15 @@ public class MedicationMyDataFragment extends Fragment {
 		View view = inflater.inflate(R.layout.fragment_med_mine, container, false);
 		
 		mListView = (ListView) view.findViewById(R.id.list_medicine);
-		mMedicineList = MainActivity.mMedicationScheduleData.getDataList();
-		
+		mMedicineList = new ArrayList<MedicationScheduleData.MedicationSchedule>();
+		ArrayList<MedicationScheduleData.MedicationSchedule> mData = MainActivity.mMedicationScheduleData.getDataList();
+		for (int i = 0; i < mData.size(); i++)
+		{
+			MedicationScheduleData.MedicationSchedule ms = MainActivity.mMedicationScheduleData.getSchedule(mData.get(i).mMedicineId);
+			if (ms != null)
+				mMedicineList.add(ms);
+		}
+
 		setupList();		
 		
 		Button add = (Button) view.findViewById(R.id.med_btn_add_medicine);

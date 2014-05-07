@@ -89,17 +89,25 @@
         android:layout_below="@+id/med_dashboard"
         android:layout_above="@+id/btns" >
         
+        <!-- 
         <GridView 
             android:id="@+id/grid_history_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="7"
             android:verticalSpacing="10dp"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="2dp"
             android:stretchMode="columnWidth"
-            android:gravity="center" >            
-            
+            android:gravity="center" >
         </GridView>
+        -->
+        
+        <CalendarView 
+            android:id="@+id/calenv_history_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            
+            />
         
     </RelativeLayout>
 

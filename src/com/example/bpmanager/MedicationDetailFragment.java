@@ -3,6 +3,7 @@ package com.example.bpmanager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import com.example.bpmanager.MedicationScheduleData.MedicationSchedule;
 import com.example.bpmanager.DB.DBMedication;
 import com.example.bpmanager.DB.DBMedicationTook;
 import com.example.bpmanager.DB.INFOMedication;
@@ -165,11 +166,24 @@ public class MedicationDetailFragment extends Fragment {
 			
 			private void delete()
 			{
-				MainActivity.mDBHelper.deleteData(DBMedication.Medication.TB_NAME, " medicine_id = " + medicine_id, null);
-				MainActivity.mMedicationScheduleData.getData();				
+				//MainActivity.mDBHelper.deleteData(DBMedication.Medication.TB_NAME, " medicine_id = " + medicine_id, null);
+				MedicationSchedule ms = MainActivity.mMedicationScheduleData.getSchedule(medicine_id);
+				if (MainActivity.mMedicationScheduleData.deleteSchedule(ms))
+				{
+					MainActivity.mMedicationScheduleData.submitData(ms);
+				}
 				// 뒤로 가기
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				fm.popBackStack();
+				// 알림해제
+				Intent alarmIntent = new Intent(getActivity(), AlarmReciever.class);
+				PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(getActivity(), info.mId, alarmIntent, PendingIntent.FLAG_NO_CREATE);
+				if (alarmPendingIntent != null)
+				{
+					AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+					alarmManager.cancel(alarmPendingIntent);
+					alarmPendingIntent.cancel();
+				}	
 			}
 		});
 		

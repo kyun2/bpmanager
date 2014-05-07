@@ -71,7 +71,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
             view = inflater.inflate(resId, null);
             
             infoHolder = new MedicineInfoHolder();
-            infoHolder.medicine_id = getItem(position).mId;
+            infoHolder.medicine_id = getItem(position).mMedicineId;
             //infoHolder.img = (ImageView)view.findViewById(R.id.medicine_img);
             infoHolder.name = (TextView)view.findViewById(R.id.medicine_name);
             switch (resId)
@@ -93,7 +93,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
 		//Log.i("ID: ", getCount() + " : " + position);
 		
 		// ID
-		infoHolder.medicine_id = getItem(position).mId;
+		infoHolder.medicine_id = getItem(position).mMedicineId;
 		
 		// Image
 		//infoHolder.img.setBackgroundResource(resid);

@@ -53,14 +53,14 @@ public class MedicationHistoryFragment extends Fragment {
 		mAccomplish = (TextView) view.findViewById(R.id.text_accomplish);
 		mAccomplishBar = (RatingBar) view.findViewById(R.id.ratingbar_accomplish);
 		
-		mData = (GridView) view.findViewById(R.id.grid_history_data);
+		//mData = (GridView) view.findViewById(R.id.grid_history_data);
 		
 		// click bind
 		mWeeklyBtn.setOnClickListener(clickListener);
 		mMonthlyBtn.setOnClickListener(clickListener);
 		
 		// Init
-		setPeriod(PeriodType.WEEK);
+		//setPeriod(PeriodType.WEEK);
 
 		return view;
 	}
