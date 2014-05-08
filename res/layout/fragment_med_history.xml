@@ -89,7 +89,6 @@
         android:layout_below="@+id/med_dashboard"
         android:layout_above="@+id/btns" >
         
-        <!-- 
         <GridView 
             android:id="@+id/grid_history_data"
             android:layout_width="match_parent"
@@ -100,14 +99,16 @@
             android:stretchMode="columnWidth"
             android:gravity="center" >
         </GridView>
-        -->
         
+        <!-- 
         <CalendarView 
             android:id="@+id/calenv_history_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            
+            android:minDate="01/01/2014"
+            android:maxDate="12/31/2014"
             />
+        -->
         
     </RelativeLayout>
 

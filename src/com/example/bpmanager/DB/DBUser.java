@@ -23,6 +23,7 @@ public final class DBUser
 		public static final String COLUMN_LASTVISIT = "last_visit_date";
 		public static final String COLUMN_NEXTVISIT = "next_visit_date";
 		public static final String COLUMN_NEXTVISIT_ALARMTIME = "next_visit_alarmtime";
+		public static final String COLUMN_PASSWORD = "password";
 	}
 	
 	public static final String SQL_CREATE = "create table " + User.TB_NAME +
@@ -40,7 +41,8 @@ public final class DBUser
 		User.COLUMN_CORONARY + " integer, " +
 		User.COLUMN_LASTVISIT + " text, " +
 		User.COLUMN_NEXTVISIT + " text, " +
-		User.COLUMN_NEXTVISIT_ALARMTIME + " integer " +
+		User.COLUMN_NEXTVISIT_ALARMTIME + " integer, " +
+		User.COLUMN_PASSWORD + " text " +
 		");";
 	
 	public static final String SQL_DROP = "drop table if exists " + User.TB_NAME;

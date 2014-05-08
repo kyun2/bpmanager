@@ -25,6 +25,7 @@ public class UserMenuFragment extends Fragment {
 	Button alarm;
 	Button appInfo;
 	Button dataTransfer;
+	Button password;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class UserMenuFragment extends Fragment {
 		alarm.setOnClickListener(onClickListener);
 		appInfo.setOnClickListener(onClickListener);
 		dataTransfer.setOnClickListener(onClickListener);
+		password.setOnClickListener(onClickListener);
 		
 		return view;
 	}
@@ -64,6 +66,9 @@ public class UserMenuFragment extends Fragment {
 				
 			case R.id.btn_data_transfer:
 				((MainActivity)getActivity()).sendEmail();
+				break;
+				
+			case R.id.btn_password:
 				break;
 			}
 		}

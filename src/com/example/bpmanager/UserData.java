@@ -34,6 +34,8 @@ public class UserData {
 	long mNextVisitAlarmTime;
 	public static final int ALARM_ID = 10000;
 	
+	String mPassword;
+	
 	boolean mLoaded;
 	
 	
@@ -53,7 +55,9 @@ public class UserData {
 		
 		mLastVisitDate = "";
 		mNextVisitDate = "";
-		mNextVisitAlarmTime = 0;		
+		mNextVisitAlarmTime = 0;
+		
+		mPassword = "";
 		
 		mLoaded = false;
 	}
