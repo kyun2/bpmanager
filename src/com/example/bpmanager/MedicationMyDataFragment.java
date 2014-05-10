@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -37,13 +38,13 @@ public class MedicationMyDataFragment extends Fragment {
 		for (int i = 0; i < mData.size(); i++)
 		{
 			MedicationScheduleData.MedicationSchedule ms = MainActivity.mMedicationScheduleData.getSchedule(mData.get(i).mMedicineId);
-			if (ms != null)
+			if (ms != null && !mMedicineList.contains(ms))
 				mMedicineList.add(ms);
 		}
 
-		setupList();		
+		setupList();
 		
-		Button add = (Button) view.findViewById(R.id.med_btn_add_medicine);
+		ImageButton add = (ImageButton) view.findViewById(R.id.med_btn_add_medicine);
 		add.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -63,17 +64,6 @@ public class MedicationMyDataFragment extends Fragment {
 		mListAdapter = new MedicationBaseAdapter(getActivity(), mMedicineList, R.layout.medicineitem_mine);
 		
 		mListView.setAdapter(mListAdapter);
-		/*
-		mListView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				MedicationDetailFragment next = new MedicationDetailFragment();
-				next.setMedicineId(mListAdapter.getItem(position).mId);
-				Log.i("ID: ", Integer.toString(mListAdapter.getItem(position).mId));
-				((MainActivity)getActivity()).changeFragment(next);
-			}
-		});
-		*/
 	}
 
 }

@@ -11,7 +11,7 @@
 	    android:layout_height="match_parent"
 	    android:layout_weight="1"
 	    android:padding="5dp"
-	    android:background="@color/btn_indigo"
+	    android:background="#4d4d4d"
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>
@@ -22,7 +22,7 @@
 	    android:layout_height="match_parent"
 	    android:layout_weight="1"
 	    android:padding="5dp"
-	    android:background="@color/btn_indigo"
+	    android:background="#4d4d4d"
 	    android:orientation="horizontal" >
 	    
 	</LinearLayout>

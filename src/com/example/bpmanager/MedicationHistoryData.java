@@ -158,7 +158,8 @@ public class MedicationHistoryData {
 				long e_diffSec = (today.getTimeInMillis() - e_c.getTimeInMillis()) / 1000;
 				int e_diffDay = (int)(e_diffSec / (60 * 60 * 24));
 				
-				firstIndex = e_diffDay;
+				// 종료일이 오늘이면 포함하지 않는다.
+				firstIndex = e_diffDay + 1;
 			}
 
 			// last index

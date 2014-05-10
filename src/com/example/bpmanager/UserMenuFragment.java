@@ -15,26 +15,28 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 public class UserMenuFragment extends Fragment {
 
-	Button userInfo;
-	Button alarm;
-	Button appInfo;
-	Button dataTransfer;
-	Button password;
+	ImageButton userInfo;
+	ImageButton alarm;
+	ImageButton appInfo;
+	ImageButton dataTransfer;
+	ImageButton password;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_user_menu, container, false);
 		
-		userInfo = (Button) view.findViewById(R.id.btn_user_info);
-		alarm = (Button) view.findViewById(R.id.btn_alarm);
-		appInfo = (Button) view.findViewById(R.id.btn_app_info);
-		dataTransfer = (Button) view.findViewById(R.id.btn_data_transfer);
+		userInfo = (ImageButton) view.findViewById(R.id.btn_user_info);
+		alarm = (ImageButton) view.findViewById(R.id.btn_alarm);
+		appInfo = (ImageButton) view.findViewById(R.id.btn_app_info);
+		dataTransfer = (ImageButton) view.findViewById(R.id.btn_data_transfer);
+		password = (ImageButton) view.findViewById(R.id.btn_password);
 		
 		userInfo.setOnClickListener(onClickListener);
 		alarm.setOnClickListener(onClickListener);
@@ -69,6 +71,7 @@ public class UserMenuFragment extends Fragment {
 				break;
 				
 			case R.id.btn_password:
+				((MainActivity)getActivity()).changeFragment(new PasswordFragment());
 				break;
 			}
 		}

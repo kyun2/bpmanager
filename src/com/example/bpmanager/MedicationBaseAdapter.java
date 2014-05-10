@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
     	public int medicine_id = 0;
     	public ImageView img = null;
     	public TextView name = null;
-    	public Button button = null;
+    	public ImageButton button = null;
     }
     
     public MedicationBaseAdapter(Context c, ArrayList<MedicationScheduleData.MedicationSchedule> items, int itemResId)
@@ -77,7 +78,7 @@ public class MedicationBaseAdapter extends BaseAdapter {
             switch (resId)
             {
             case R.layout.medicineitem_mine:
-            	infoHolder.button = (Button) view.findViewById(R.id.medicine_took);
+            	infoHolder.button = (ImageButton) view.findViewById(R.id.medicine_took);
             	break;
             case R.layout.medicineitem_add:
             	break;
@@ -107,15 +108,14 @@ public class MedicationBaseAdapter extends BaseAdapter {
 		case R.layout.medicineitem_mine:
 			if (MedicationData.hasTookToday(infoHolder.medicine_id))
 			{
+				infoHolder.button.setVisibility(View.INVISIBLE);
 				infoHolder.button.setEnabled(false);
 				infoHolder.button.setClickable(false);
-				infoHolder.button.setBackgroundResource(R.drawable.basic_button_dis);
 			}
 			else
 			{
 				infoHolder.button.setEnabled(true);
 				infoHolder.button.setClickable(true);
-				infoHolder.button.setBackgroundResource(R.drawable.basic_button);
 			}
 			infoHolder.button.setOnClickListener(buttonClickListener);
 			infoHolder.name.setOnClickListener(buttonClickListener2);
@@ -140,9 +140,9 @@ public class MedicationBaseAdapter extends BaseAdapter {
 			MainActivity.mDBHelper.insertData(DBMedicationTook.SCHEMA.TB_NAME, values);
 			MainActivity.mMediHistData.resetData();
 			
+			infoHolder.button.setVisibility(View.INVISIBLE);
 			infoHolder.button.setEnabled(false);
 			infoHolder.button.setClickable(false);
-			infoHolder.button.setBackgroundResource(R.drawable.basic_button_dis);
         }
     };
     

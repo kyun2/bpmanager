@@ -32,94 +32,110 @@
 	            android:layout_gravity="center_vertical"
 	            android:orientation="vertical" >
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/salt_btn"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="소금섭취관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_salt"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true"
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/weight_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="체중관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_weight"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/waist_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="복부둘레관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_waist"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/exam_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="운동관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_exercise"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true"
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/alchole_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="음주관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_alcohol"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/smoking_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="금연관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_smoking"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/stress_btn"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="스트레스관리"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+			        android:background="@null"
+			        android:src="@drawable/button_habit_stress"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	
-	            <Button
+	            <ImageButton
 	                android:id="@+id/habit_noti_bth"
 	                android:layout_width="match_parent"
 	                android:layout_height="wrap_content"
-	                android:text="권고안"
 	                android:layout_marginLeft="10dp"
 	                android:layout_marginRight="10dp"
 	                android:layout_marginTop="10dp"
-	                android:layout_marginBottom="10dp"
-			        android:textColor="@color/btn_text"
-			        android:background="@drawable/basic_button" />
+	                android:layout_marginBottom="20dp"
+			        android:background="@null"
+			        android:src="@drawable/button_habit_recommendation"
+			        android:scaleType="centerInside"
+			        android:adjustViewBounds="true" 
+			        />
 	        </LinearLayout>
 	
 	    </LinearLayout>

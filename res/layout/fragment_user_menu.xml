@@ -16,65 +16,75 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_user_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="기본 정보"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text" />
+            android:background="@null"
+            android:src="@drawable/button_conf_user"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="알림 설정"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text" />
+            android:background="@null"
+            android:src="@drawable/button_conf_alarm"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_app_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="앱 정보 보기"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text" />
+            android:background="@null"
+            android:src="@drawable/button_conf_appinfo"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            />
         
-        <Button
+        <ImageButton
             android:id="@+id/btn_data_transfer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="데이터 메일 전송"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text" />
+            android:background="@null"
+            android:src="@drawable/button_conf_data"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            />
         
-        <Button 
+        <ImageButton 
             android:id="@+id/btn_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="비밀번호 설정"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text" />
+            android:background="@null"
+            android:src="@drawable/button_conf_password"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            />
 
     </LinearLayout>
 

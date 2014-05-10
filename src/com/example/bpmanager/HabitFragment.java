@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -32,14 +34,14 @@ import com.example.bpmanager.Data.WaistSurvey;
 import com.example.bpmanager.Data.WeightSurvey;
 
 public class HabitFragment extends Fragment{
-	Button slat;
-	Button weight;
-	Button waist;
-	Button exam;
-	Button alchole;
-	Button smoking;
-	Button stress;
-	Button notification;
+	ImageButton slat;
+	ImageButton weight;
+	ImageButton waist;
+	ImageButton exam;
+	ImageButton alchole;
+	ImageButton smoking;
+	ImageButton stress;
+	ImageButton notification;
 	Habit hpoint = new Habit();
 	UserData us = new UserData();
 	int count = 0;
@@ -59,14 +61,14 @@ public class HabitFragment extends Fragment{
 		scrollView = (ScrollView) view.findViewById(R.id.scrview_habit);
 		scrollView.setVerticalScrollBarEnabled(true);
 
-		slat = (Button) view.findViewById(R.id.salt_btn);
-		weight = (Button) view.findViewById(R.id.weight_bth);
-		waist = (Button) view.findViewById(R.id.waist_bth);
-		exam = (Button) view.findViewById(R.id.exam_bth);
-		alchole = (Button) view.findViewById(R.id.alchole_bth);
-		smoking = (Button) view.findViewById(R.id.smoking_bth);
-		stress = (Button) view.findViewById(R.id.stress_btn);
-		notification = (Button) view.findViewById(R.id.habit_noti_bth);
+		slat = (ImageButton) view.findViewById(R.id.salt_btn);
+		weight = (ImageButton) view.findViewById(R.id.weight_bth);
+		waist = (ImageButton) view.findViewById(R.id.waist_bth);
+		exam = (ImageButton) view.findViewById(R.id.exam_bth);
+		alchole = (ImageButton) view.findViewById(R.id.alchole_bth);
+		smoking = (ImageButton) view.findViewById(R.id.smoking_bth);
+		stress = (ImageButton) view.findViewById(R.id.stress_btn);
+		notification = (ImageButton) view.findViewById(R.id.habit_noti_bth);
 
 		slat.setOnClickListener(click);
 		weight.setOnClickListener(click);

@@ -56,7 +56,7 @@ public class MedicationAddFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				MedicationScheduleFragment next = new MedicationScheduleFragment();
-				next.setMedicineId(mListAdapter.getItem(position).mId);
+				next.setMedicineId(mListAdapter.getItem(position).mMedicineId);
 				Log.i("ID: ", Integer.toString(next.getMedicineId()));
 				((MainActivity)getActivity()).changeFragment(next);
 			}

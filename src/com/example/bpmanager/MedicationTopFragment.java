@@ -21,7 +21,6 @@ public class MedicationTopFragment extends Fragment {
 		mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
 		mTabHost.addTab(mTabHost.newTabSpec("tab1").setIndicator("나의 약물관리"), MedicationMyDataFragment.class, null);
-		//mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("���� Ȯ��/�˸�"), HomeFragment.class, null);
 		mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("나의 복약기록"), MedicationHistoryFragment.class, null);
 		
 		return view;

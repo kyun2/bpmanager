@@ -54,8 +54,8 @@ public class MedicationDetailFragment extends Fragment {
 	EditText alarmTime;
 	
 	ImageButton btnOpenWebInfo;
-	Button btnTook;
-	Button btnDelete;
+	ImageButton btnTook;
+	ImageButton btnDelete;
 	
 	RadioGroup alarm;
 
@@ -75,8 +75,8 @@ public class MedicationDetailFragment extends Fragment {
 		ingredient = (TextView) view.findViewById(R.id.medicine_ingredient);
 		alarmTime = (EditText) view.findViewById(R.id.edit_alarm_time);
 		btnOpenWebInfo = (ImageButton) view.findViewById(R.id.medicine_web_open);
-		btnTook = (Button) view.findViewById(R.id.med_btn_took_it);
-		btnDelete = (Button) view.findViewById(R.id.med_btn_delete_it);
+		btnTook = (ImageButton) view.findViewById(R.id.med_btn_took_it);
+		btnDelete = (ImageButton) view.findViewById(R.id.med_btn_delete_it);
 		alarm = (RadioGroup) view.findViewById(R.id.radiogrp_med_alarm);
 		
 		// Image
@@ -101,7 +101,7 @@ public class MedicationDetailFragment extends Fragment {
 		{
 			btnTook.setEnabled(false);
 			btnTook.setClickable(false);
-			btnTook.setBackgroundResource(R.drawable.basic_button_dis);
+			btnTook.setImageResource(R.drawable.btn_med_inject_2_tap);
 		}
 		else
 		{

@@ -68,15 +68,19 @@ public class MedicationHistoryFragment extends Fragment {
 	public void setPeriod(PeriodType pt)
 	{
 		Pair<Integer, Integer> counts = null;
+		Calendar c = Calendar.getInstance();
+		int days = 0;
 		switch (pt)
 		{
 		case WEEK:
-			counts = MainActivity.mMediHistData.setTookRatioDataList(7);
+			days = c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY ? 7 : c.get(Calendar.DAY_OF_WEEK) - 1;			
+			counts = MainActivity.mMediHistData.setTookRatioDataList(days);
 			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), MainActivity.mMediHistData.getDataList(), MainActivity.mMediHistData.getScheduledCount()));
 			break;
 			
 		case MONTH:
-			counts = MainActivity.mMediHistData.setTookRatioDataList(30);
+			days = c.get(Calendar.DAY_OF_MONTH);
+			counts = MainActivity.mMediHistData.setTookRatioDataList(days);
 			mData.setAdapter(new MedicationHistoryAdapter(getActivity(), MainActivity.mMediHistData.getDataList(), MainActivity.mMediHistData.getScheduledCount()));
 			break;
 		}

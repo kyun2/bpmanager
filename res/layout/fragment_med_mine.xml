@@ -29,14 +29,14 @@
 	    android:layout_centerHorizontal="true"
 	    android:background="@color/bg_white">
 	
-	    <Button
+	    <ImageButton
 	        android:id="@+id/med_btn_add_medicine"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="복용약물 추가하기"
 	        android:layout_margin="10dp"
-	        android:background="@drawable/basic_button"
-	        android:textColor="@color/btn_text" />
+	        android:background="@null"
+	        android:scaleType="centerInside"
+	        android:src="@drawable/button_medicine_add" />
 	    
 	</LinearLayout>    
 

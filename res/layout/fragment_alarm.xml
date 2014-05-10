@@ -118,14 +118,16 @@
 	        android:layout_margin="5dp"
 	        />
 	    
-	    <Button
+	    <ImageButton
 	        android:id="@+id/btn_alarm_medicine"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="약물관리로 가기"
 	        android:layout_margin="10dp"
-	        android:textColor="@color/btn_text"
-	        android:background="@drawable/basic_button" />
+	        android:background="@null"
+	        android:src="@drawable/button_alarm_med"
+	        android:scaleType="centerInside"
+	        android:adjustViewBounds="true"
+	        />
 	    
 	</LinearLayout>
     

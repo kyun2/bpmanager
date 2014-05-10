@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -28,13 +29,13 @@ public class AlarmFragment extends Fragment {
 	EditText alarmTime;	
 	RadioGroup alarm;
 	
-	Button btnGoMedication;
+	ImageButton btnGoMedication;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_alarm, container, false);
 		
-		btnGoMedication = (Button) view.findViewById(R.id.btn_alarm_medicine);
+		btnGoMedication = (ImageButton) view.findViewById(R.id.btn_alarm_medicine);
 		btnGoMedication.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

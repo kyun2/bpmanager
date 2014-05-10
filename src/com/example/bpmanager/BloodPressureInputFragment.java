@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +43,8 @@ import com.example.bpmanager.Data.WeightSurvey;
  */
 public class BloodPressureInputFragment extends Fragment{
 
-	Button inputbth; 
-	Button bpviewbth;
+	ImageButton inputbth; 
+	ImageButton bpviewbth;
 
 	EditText systolic;
 	EditText diastolic;
@@ -54,8 +55,8 @@ public class BloodPressureInputFragment extends Fragment{
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.fragment_inputbp, container, false);
-		inputbth = (Button) view.findViewById(R.id.inputbp_btn);
-		bpviewbth = (Button) view.findViewById(R.id.bpview_bth);
+		inputbth = (ImageButton) view.findViewById(R.id.inputbp_btn);
+		bpviewbth = (ImageButton) view.findViewById(R.id.bpview_bth);
 
 		systolic = (EditText) view.findViewById(R.id.edit_sys);
 		diastolic= (EditText) view.findViewById(R.id.edit_dia);
@@ -117,8 +118,26 @@ public class BloodPressureInputFragment extends Fragment{
 				if(idiastolic > 120 || idiastolic < 50) throw new NumberFormatException();
 				if(!date.matches("[0-9]{4}/[0-9]{2}/[0-9]{2}"))
 				{
-					throw new InvalidPropertiesFormatException("Invalid Format.");
+					throw new InvalidPropertiesFormatException("E1");
 				}
+				
+				Calendar now = Calendar.getInstance();
+				int n_y = now.get(Calendar.YEAR);
+				int n_m = now.get(Calendar.MONTH);
+				int n_d = now.get(Calendar.DAY_OF_MONTH);
+				now.clear();
+				now.set(n_y, n_m, n_d);
+				
+				String[] s = date.split("/");
+				Calendar c = Calendar.getInstance();
+				int c_y = Integer.parseInt(s[0]);
+				int c_m = Integer.parseInt(s[1]) - 1;
+				int c_d = Integer.parseInt(s[2]);
+				c.clear();
+				c.set(c_y, c_m, c_d);
+				
+				if (now.getTimeInMillis() < c.getTimeInMillis())
+					throw new InvalidPropertiesFormatException("E2");
 				
 				if(BloodPressure.insertToDB(new BloodPressure(isystolic, idiastolic, bptime.getText().toString())) > 0)
 				{
@@ -133,7 +152,10 @@ public class BloodPressureInputFragment extends Fragment{
 			}catch(NumberFormatException e){
 				Toast.makeText(getActivity(), "입력 값이 허용 범위를 벗어났습니다.", Toast.LENGTH_SHORT).show();
 			}catch(InvalidPropertiesFormatException e){
-				Toast.makeText(getActivity(), "2001/01/01 형태로 입력하여 주세요.", Toast.LENGTH_LONG).show();
+				if (e.getMessage().equals("E1"))
+					Toast.makeText(getActivity(), "2001/01/01 형태로 입력하여 주세요.", Toast.LENGTH_LONG).show();
+				else if (e.getMessage().equals("E2"))
+					Toast.makeText(getActivity(), "오늘 이전 날짜만 입력해 주세요.", Toast.LENGTH_LONG).show();
 			}catch(Exception e){}
 		}
 	};

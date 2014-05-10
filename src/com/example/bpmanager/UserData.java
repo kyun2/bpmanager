@@ -82,7 +82,8 @@ public class UserData {
 				DBUser.User.COLUMN_CORONARY,
 				DBUser.User.COLUMN_LASTVISIT,
 				DBUser.User.COLUMN_NEXTVISIT,
-				DBUser.User.COLUMN_NEXTVISIT_ALARMTIME
+				DBUser.User.COLUMN_NEXTVISIT_ALARMTIME,
+				DBUser.User.COLUMN_PASSWORD
 			};
 			
 			Cursor c1 = db.query(DBUser.User.TB_NAME, projection, null, null, null, null, null);
@@ -106,6 +107,7 @@ public class UserData {
 				mLastVisitDate = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_LASTVISIT));
 				mNextVisitDate = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_NEXTVISIT));
 				mNextVisitAlarmTime = c1.getLong(c1.getColumnIndex(DBUser.User.COLUMN_NEXTVISIT_ALARMTIME));
+				mPassword = c1.getString(c1.getColumnIndex(DBUser.User.COLUMN_PASSWORD));
 			}
 			
 			c1.close();
@@ -134,6 +136,7 @@ public class UserData {
 		values.put(DBUser.User.COLUMN_LASTVISIT, mLastVisitDate);
 		values.put(DBUser.User.COLUMN_NEXTVISIT, mNextVisitDate);
 		values.put(DBUser.User.COLUMN_NEXTVISIT_ALARMTIME, mNextVisitAlarmTime);
+		values.put(DBUser.User.COLUMN_PASSWORD, mPassword);
 
 		if (IsLoaded())
 			MainActivity.mDBHelper.updateData(DBUser.User.TB_NAME, values, null, null);
@@ -145,6 +148,11 @@ public class UserData {
 	public boolean IsLoaded()
 	{
 		return mLoaded;
+	}
+	
+	public boolean hasPassword()
+	{
+		return mPassword.length() > 0;
 	}
 	
 	public int getAge()
@@ -357,5 +365,13 @@ public class UserData {
 	
 	public void setNextVisitDate(String date) {
 		this.mNextVisitDate = date;
+	}
+	
+	public String getPassword() {
+		return this.mPassword;
+	}
+	
+	public void setPassword(String password) {
+		this.mPassword = password;
 	}
 }

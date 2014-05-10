@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +53,7 @@ public class UserInformationFragment extends Fragment
 
 		View view = inflater.inflate(R.layout.fragment_user, container, false);
 		
-		Button modify = (Button)view.findViewById(R.id.user_commit);
+		ImageButton modify = (ImageButton)view.findViewById(R.id.user_commit);
 		modify.setOnClickListener(click);
 		
 		name = (EditText)view.findViewById(R.id.edit_name);

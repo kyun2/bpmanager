@@ -66,14 +66,16 @@
 
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/bpview_bth"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/basic_button"
-            android:textColor="@color/btn_text"
-            android:text="데이터보기" />
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:src="@drawable/button_bp_view"
+            android:scaleType="centerInside"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,6 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="수축기"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="24dp"
@@ -95,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="5dp"
                 android:ems="10"
                 android:inputType="number"
                 android:background="@color/bg_white"
@@ -111,6 +115,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="이완기"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="24dp"
@@ -121,6 +126,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="5dp"
                 android:ems="10"
                 android:inputType="number"
                 android:background="@color/bg_white"
@@ -137,6 +143,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="측정일"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="24dp"
@@ -147,6 +154,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginRight="5dp"
                 android:ems="10"
                 android:inputType="date"
                 android:background="@color/bg_white"
@@ -154,25 +162,18 @@
             </EditText>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        
+        <ImageButton
+            android:id="@+id/inputbp_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_weight="1"
-            android:orientation="horizontal" >
-
-            <Button
-                android:id="@+id/inputbp_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/basic_button"
-                android:textColor="@color/btn_text"
-                android:text="입력" />
-
-        </LinearLayout>
-
+            android:layout_margin="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@null"
+            android:src="@drawable/button_bp_add"
+            android:scaleType="centerInside"
+            />
+        
     </LinearLayout>
 
 </RelativeLayout>

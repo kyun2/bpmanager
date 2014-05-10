@@ -78,25 +78,33 @@ public class MainActivity extends ActionBarActivity {
 		mUserData = new UserData();
 		if (!mUserData.getData())
 		{
-			//showNewUserDialog();
-			MainActivity.hideFooter();
+			hideFooter();
 			initFragment = new PrivacyFragment();
 		}
 		else
 		{
-			initFragment = new HomeFragment();
+			if (mUserData.hasPassword())
+			{
+				hideFooter();
+				initFragment = new LoginFragment();
+			}
+			else
+				initFragment = new HomeFragment();
+			
+			//Log.i("", mUserData.getPassword());
 		}
 		mMedicationScheduleData = new MedicationScheduleData(this);
 		mMedicationScheduleData.getData();
 		mMediHistData = new MedicationHistoryData();
 		
-		if (savedInstanceState == null) {
+		// 의약품 정보 만들기
+		INFOMedication.Make();
+		
+		if (savedInstanceState == null) 
+		{
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.frag_viewer, initFragment).commit();
 		}
-		
-		// 의약품 정보 만들기
-		INFOMedication.Make();
 		
 		// Intent 전달 확인
 		Intent intent = getIntent();

@@ -53,6 +53,9 @@ public class BloodPressureGraph extends AbstractDemoChart {
 			c.set(year, month, day);
 			
 			long diffSec = (now.getTimeInMillis() - c.getTimeInMillis()) / 1000;
+			if (diffSec < 0)
+				continue;
+			
 			int diffDay = (int)(diffSec / (60 * 60 * 24));
 			
 			list.set(diffDay, data.get(i));
@@ -182,7 +185,7 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    length = values.get(0).length;
 
 	    // 렌더러 세팅
-		int[] colors = new int[] { Color.BLUE, Color.GREEN };
+		int[] colors = new int[] { Color.BLUE, Color.rgb(40, 155, 118) };
 		PointStyle[] styles = new PointStyle[] { PointStyle.POINT, PointStyle.POINT };
 	    XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);	    
 	    
