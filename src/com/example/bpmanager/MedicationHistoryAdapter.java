@@ -21,17 +21,27 @@ public class MedicationHistoryAdapter extends BaseAdapter {
 	private Calendar mCalendar = null;
 	private int mDays = 0;
 	private int mDummys = 0;
+	MedicationHistoryFragment.PeriodType mPeriodType;
 		
-	public MedicationHistoryAdapter(Context c, ArrayList<Float> items, ArrayList<Integer> schedule)
+	public MedicationHistoryAdapter(Context c, MedicationHistoryFragment.PeriodType type, ArrayList<Float> items, ArrayList<Integer> schedule)
 	{
 		mContext = c;
-		
 		mCalendar = Calendar.getInstance();
-		mDays = mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		mPeriodType = type;
 		
-		Calendar firstDate = Calendar.getInstance();
-		firstDate.set(Calendar.DAY_OF_MONTH, 1);
-		mDummys = firstDate.get(Calendar.DAY_OF_WEEK) - 1;		
+		if (type == MedicationHistoryFragment.PeriodType.WEEK)
+		{
+			mDays = 7;
+			mDummys = 0;
+		}
+		else
+		{
+			mDays = mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+			
+			Calendar firstDate = Calendar.getInstance();
+			firstDate.set(Calendar.DAY_OF_MONTH, 1);
+			mDummys = firstDate.get(Calendar.DAY_OF_WEEK) - 1;
+		}
 		
 		int today = mCalendar.get(Calendar.DAY_OF_MONTH);
 		mList = new ArrayList<Float>(mDays + mDummys);
@@ -40,8 +50,22 @@ public class MedicationHistoryAdapter extends BaseAdapter {
 		{
 			mList.add(0f);
 			mScheduleData.add(-2);
-		}		
-		for (int i = 1; i <= mDays; i++)
+		}
+		
+		int beginIndex = 0;
+		int endIndex = 0;		
+		if (type == MedicationHistoryFragment.PeriodType.WEEK)
+		{
+			beginIndex = today + 1 - items.size();
+			endIndex = today + 1 - items.size() + mDays - 1;
+		}
+		else
+		{
+			beginIndex = 1;
+			endIndex = mDays;
+		}
+		
+		for (int i = beginIndex; i <= endIndex; i++)
 		{
 			if (i <= today - items.size() || i > today)
 			{
@@ -100,9 +124,14 @@ public class MedicationHistoryAdapter extends BaseAdapter {
 			tv_rate = (TextView) view.findViewById(R.id.tv_medhist_rate);
 			
 			// date
-			Calendar c = Calendar.getInstance();
-			//c.add(Calendar.DAY_OF_MONTH, -1 * (mList.size() - 1 - position));
-			tv_date.setText(String.format("%d/%d", c.get(Calendar.MONTH) + 1, position + 1 - mDummys));
+			if (mPeriodType == MedicationHistoryFragment.PeriodType.WEEK)
+			{
+				tv_date.setText(String.format("%d/%d", mCalendar.get(Calendar.MONTH) + 1, mCalendar.get(Calendar.DAY_OF_MONTH) + 1 - mCalendar.get(Calendar.DAY_OF_WEEK) + position));
+			}
+			else
+			{
+				tv_date.setText(String.format("%d/%d", mCalendar.get(Calendar.MONTH) + 1, position + 1 - mDummys));
+			}
 			
 			// rate
 			//int scheduleCount = mScheduleData.get(mList.size() - 1 - position);		

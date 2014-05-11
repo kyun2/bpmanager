@@ -13,6 +13,7 @@ import org.achartengine.renderer.XYMultipleSeriesRenderer;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint.Align;
 
 public class BloodPressureGraph extends AbstractDemoChart {
 	
@@ -120,20 +121,11 @@ public class BloodPressureGraph extends AbstractDemoChart {
 			pre_sys = list.get(i).getSystolic();
 			pre_dia = list.get(i).getDiastolic();
 		}
-/*
-		if (abort_index > 0)
-		{
-			for (int i = abort_index; i < SAMPLE_COUNT; i++)
-			{
-				list.remove(i);
-			}
-		}
-		*/
 		
 		List<BloodPressure> ret = new ArrayList<BloodPressure>(abort_index);
 		for (int i = 0; i < abort_index; i++)
 		{
-			ret.add(list.get(i));
+			ret.add(list.get(abort_index - 1 - i));
 		}
 		
 		return ret;
@@ -165,6 +157,7 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    		c.clear();
 	    		c.set(year, month, day);
 	    		c.add(Calendar.DAY_OF_MONTH, i2 - bpsize + 1);
+
 	    		dates.get(i)[i2] = c.getTime();
 	    	}
 	    }
@@ -189,13 +182,12 @@ public class BloodPressureGraph extends AbstractDemoChart {
 		PointStyle[] styles = new PointStyle[] { PointStyle.POINT, PointStyle.POINT };
 	    XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);	    
 	    
-	    setChartSettings(renderer, getName(), "", "혈압수치", dates.get(0)[0].getTime() - 1 * 24 * 60 * 60 * 1000,
-	    		dates.get(0)[0].getTime() + 3 * 24 * 60 * 60 * 1000, 50, 200, Color.BLACK, Color.BLACK);
-	    renderer.setXLabels(0);
-	    renderer.setYLabels(0);
+	    setChartSettings(renderer, getName(), "날짜", "혈압수치", dates.get(0)[bpsize-1].getTime() - 2 * 24 * 60 * 60 * 1000,
+	    		dates.get(0)[bpsize-1].getTime() + 2 * 24 * 60 * 60 * 1000, 50, 200, Color.BLACK, Color.BLACK);
+
 	    renderer.setApplyBackgroundColor(true);
 	    renderer.setMarginsColor(Color.WHITE);
-	    renderer.setBackgroundColor(Color.LTGRAY);
+	    renderer.setBackgroundColor(Color.WHITE);
 	    renderer.setZoomEnabled(false, false);
 	    renderer.setPanEnabled(true, false);
 	    renderer.setShowAxes(true);
@@ -203,16 +195,25 @@ public class BloodPressureGraph extends AbstractDemoChart {
 	    renderer.setChartTitleTextSize(30f);
 	    renderer.setLegendTextSize(24f);
 	    
-	    BloodPressure recommendBP = BloodPressure.getRecommendBloodPressure();
-	    renderer.addYTextLabel(recommendBP.getSystolic(), "목표수축혈압");
-	    renderer.addYTextLabel(recommendBP.getDiastolic(), "목표이완혈압");
-	    
+	    renderer.setXLabelsColor(Color.BLACK);
 	    renderer.setXRoundedLabels(false);
+	    
+	    // 목표혈압 표시
+	    BloodPressure recommendBP = BloodPressure.getRecommendBloodPressure();
+	    renderer.addYTextLabel(recommendBP.getSystolic(), "목표혈압\n수축:" + recommendBP.getSystolic());
+	    renderer.addYTextLabel(recommendBP.getDiastolic(), "목표혈압\n이완:" + recommendBP.getDiastolic());
+	    renderer.setYLabelsColor(0, Color.BLACK);
+	    renderer.setYLabelsAlign(Align.LEFT, 0);
+	    renderer.setShowCustomTextGrid(true);
+	    //renderer.setShowGridX(true);
+	    renderer.setGridColor(Color.GREEN);
+
+	    
 	    length = renderer.getSeriesRendererCount();
 	    for (int i = 0; i < length; i++) {
-	      SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
-	      seriesRenderer.setDisplayChartValues(true);
-	      seriesRenderer.setChartValuesTextSize(30f);
+	    	SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
+	    	seriesRenderer.setDisplayChartValues(true);
+	    	seriesRenderer.setChartValuesTextSize(30f);
 	    }
 	    return ChartFactory.getTimeChartView(context, buildDateDataset(titles, dates, values), renderer, "yyyy/MM/dd");
 	}
