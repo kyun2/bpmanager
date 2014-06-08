@@ -159,7 +159,9 @@
 	        android:layout_weight="1"
 	        android:adjustViewBounds="true"
 	        android:scaleType="fitCenter"
-	        android:src="@drawable/kims" />
+	        android:src="@drawable/button_kims"
+	        android:background="@android:color/transparent"
+	        />
 	    
 	</TableLayout>
 

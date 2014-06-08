@@ -118,6 +118,14 @@ public class MedicationHistoryData {
 		}
 	}
 	
+	public void removeTookData(int medicine_id)
+	{
+		Calendar today = Calendar.getInstance();
+		String date = String.format("%04d/%02d/%02d", today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 1, today.get(Calendar.DAY_OF_MONTH));
+		MainActivity.mDBHelper.deleteData(DBMedicationTook.SCHEMA.TB_NAME, " medicine_id = " + medicine_id + " and inject_time = '" + date + "'", null);
+		this.getTookData();
+	}
+	
 	void getScheduleData()
 	{
 		mScheduledCount.clear();
@@ -193,7 +201,7 @@ public class MedicationHistoryData {
 	{
 		String ret = "";
 		
-		ret += "약물ID/약물이름/복용시간\n";
+		ret += "약물ID / 약물이름 / 복용시간\n";
 		
 		try
 		{
@@ -212,7 +220,7 @@ public class MedicationHistoryData {
 				String time = c1.getString(c1.getColumnIndex(DBMedicationTook.SCHEMA.COLUMN_INJECT_TIME));
 				INFOMedication info = INFOMedication.getInfoMedicine(id);
 				
-				ret += id + "/" + info.mName + "/" + time + "\n";
+				ret += id + " / " + info.mName + " / " + time + "\n";
 			}
 			
 			c1.close();

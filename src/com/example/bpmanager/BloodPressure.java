@@ -179,13 +179,13 @@ public class BloodPressure {
 		List<BloodPressure> data = getBPsList("",  0, true);
 		BloodPressure recom_bp = BloodPressure.getRecommendBloodPressure();
 		
-		ret += "[날짜] SYS/DIA\n";
-		ret += "[Recommend] " + recom_bp.getSystolic() + "/" + recom_bp.getDiastolic() + "\n";
+		ret += "[날짜] SYS / DIA\n";
+		ret += "[Recommend] " + recom_bp.getSystolic() + " / " + recom_bp.getDiastolic() + "\n";
 		
 		for (int i = 0; i < data.size(); i++)
 		{
 			BloodPressure bp = data.get(i);
-			ret += "[" + bp.getDatetime() + "] " + bp.getSystolic() + "/" + bp.getDiastolic() + "\n";
+			ret += "[" + bp.getDatetime() + "] " + bp.getSystolic() + " / " + bp.getDiastolic() + "\n";
 		}
 		
 		return ret;

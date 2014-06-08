@@ -167,11 +167,14 @@ public class MedicationDetailFragment extends Fragment {
 			private void delete()
 			{
 				//MainActivity.mDBHelper.deleteData(DBMedication.Medication.TB_NAME, " medicine_id = " + medicine_id, null);
+				// 스케쥴 삭제
 				MedicationSchedule ms = MainActivity.mMedicationScheduleData.getSchedule(medicine_id);
 				if (MainActivity.mMedicationScheduleData.deleteSchedule(ms))
 				{
 					MainActivity.mMedicationScheduleData.submitData(ms);
 				}
+				// 오늘 복용기록 삭제
+				MainActivity.mMediHistData.removeTookData(medicine_id);				
 				// 뒤로 가기
 				FragmentManager fm = getActivity().getSupportFragmentManager();
 				fm.popBackStack();

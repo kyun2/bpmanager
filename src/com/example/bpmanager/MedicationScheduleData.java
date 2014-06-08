@@ -238,11 +238,11 @@ public class MedicationScheduleData {
 	{
 		String ret = "";
 		
-		ret += "ID/Amount/Count/InjectionTime/StartTime/EndTime\n";
+		ret += "ID / Amount / Count / InjectionTime / StartTime / EndTime\n";
 		for (int i = 0; i < mData.size(); i++)
 		{
 			MedicationSchedule ms = mData.get(i);
-			ret += ms.mMedicineId + "/" + ms.mAmount + "/" + ms.mCount + "/" + ms.mInjectTime + "/" + ms.mStartTime + "/" + ms.mEndTime + "\n";
+			ret += ms.mMedicineId + " / " + ms.mAmount + " / " + ms.mCount + " / " + ms.mInjectTime + " / " + ms.mStartTime + " / " + ms.mEndTime + "\n";
 		}		
 		
 		return ret;
